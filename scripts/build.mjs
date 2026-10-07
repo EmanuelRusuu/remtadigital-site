@@ -100,7 +100,7 @@ const shared = index;
 const head = shared.slice(0, shared.indexOf('<title>'));
 const headerHtml = shared.slice(shared.indexOf('<header class="site-header"'), shared.indexOf('</header>') + 9)
   .replace(/href="#(services|work|about|faq|contact)"/g, 'href="/#$1"')
-  .replace('href="#top" aria-label="REMTA Digital, home"', 'href="/" aria-label="REMTA Digital, home"');
+  .replace('href="#top" aria-label="REMTA Digital, back to top"', 'href="/" aria-label="REMTA Digital, home"');
 const footerHtml = shared.slice(shared.indexOf('<footer>'), shared.indexOf('</footer>') + 9);
 const favicon = (shared.match(/<link rel="icon" href="([^"]*)"/) || [])[1];
 
@@ -160,10 +160,11 @@ function page(p, i) {
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${ogImage}">
 <link rel="canonical" href="${url}">
-<link rel="icon" href="${favicon}">
+<link rel="icon" href="${favicon}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/style.css">
 </head>
-<body class="project-page">
+<body class="project-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
 
 ${headerHtml}
