@@ -31,7 +31,9 @@ for (const d of domains) {
   await sleep(2500);
 }
 
+// Keep the other sections (markets, categories, regional ranks from regional.mjs).
 writeFileSync(path, JSON.stringify({
+  ...prev,
   source: 'Tranco list (tranco-list.eu), latest daily rank of the registrable domain',
   date, ranks, aliases,
 }, null, 2) + '\n');

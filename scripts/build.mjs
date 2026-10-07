@@ -1,5 +1,6 @@
 // Build the project cards on the homepage and one page per project from data/projects.json,
-// data/media.json (written by capture.mjs) and data/popularity.json (Tranco ranks).
+// data/media.json (written by capture.mjs) and data/popularity.json (Tranco ranks from popularity.mjs,
+// country bands from regional.mjs, hand-checked category placings).
 // Output is committed; the deploy has no build step.
 // Usage: node build.mjs
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
@@ -24,12 +25,49 @@ const hostLabel = p => p.urlLabel || (p.url ? new URL(p.url).host.replace(/^www\
 const fmt = n => n.toLocaleString('en-US');
 
 // Tranco ranks registrable domains (example.ch), so map shop.example.ch to example.ch.
+const registrable = p => p.url ? new URL(p.url).host.replace(/^www\./, '').split('.').slice(-2).join('.') : null;
 function rankOf(p) {
   if (!p.url) return null;
-  let d = new URL(p.url).host.replace(/^www\./, '').split('.').slice(-2).join('.');
+  let d = registrable(p);
   d = (popularity.aliases || {})[d] || d;
   return popularity.ranks[d] || null;
 }
+
+// Country rank bands from the Chrome UX Report (regional.mjs), merged over every domain the
+// project's stores run on. The home market is the store's main country.
+const EUROPE = new Set('ad al at ba be bg by ch cy cz de dk ee es fi fr gb gr hr hu ie is it li lt lu lv mc md me mk mt nl no pl pt ro rs se si sk sm ua xk'.split(' '));
+const regionNames = new Intl.DisplayNames(['en'], { type: 'region' });
+const country = cc => (['us', 'gb', 'nl', 'ae'].includes(cc) ? 'the ' : '') + regionNames.of(cc.toUpperCase()).replace(' & ', ' and ');
+const regional = popularity.regional || { sites: {} };
+const crMonth = regional.month ? new Date(regional.month + '-01').toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }) : '';
+const trancoMonth = popularity.date ? new Date(popularity.date).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }) : '';
+
+function domainsOf(p) {
+  const d = registrable(p);
+  if (!d) return [];
+  const alias = (popularity.aliases || {})[d];
+  return [d, ...(alias ? [alias] : []), ...((popularity.extraDomains || {})[p.slug] || [])];
+}
+function bandsOf(p) {
+  const out = {};
+  for (const d of domainsOf(p)) for (const [cc, b] of Object.entries(regional.sites[d] || {})) out[cc] = Math.min(out[cc] || Infinity, b);
+  return out;
+}
+const homeOf = p => { const d = registrable(p); return d ? ((popularity.markets || {})[d] || d.split('.').pop()) : null; };
+const homeBand = p => bandsOf(p)[homeOf(p)] || null;
+const categoryOf = p => (popularity.categories || {})[p.slug] || null;
+function badgeOf(p) {
+  const cat = categoryOf(p);
+  if (cat && cat.badge) return cat.badge;
+  const b = homeBand(p);
+  return b && b <= 1000 ? `Top ${fmt(b)} site in ${country(homeOf(p))}` : '';
+}
+
+// "Most visited" order: rank band in the home market first, then the worldwide Tranco rank.
+const popOrder = new Map(projects.slice().sort((a, b) =>
+  ((homeBand(a) || Infinity) - (homeBand(b) || Infinity)) ||
+  ((rankOf(a) || Infinity) - (rankOf(b) || Infinity)) ||
+  strip(a.title).localeCompare(strip(b.title))).map((p, i) => [p.slug, i + 1]));
 
 // Short label for cards: who I did the work with, and my role.
 function metaLine(p) {
@@ -68,9 +106,12 @@ function card(p) {
   const rank = rankOf(p);
   const tags = p.tech.map(t => `<li>${t}</li>`).join('');
   const live = p.url ? `<a class="out" href="${p.url}" target="_blank" rel="noopener noreferrer">${hostLabel(p)}</a>` : '';
-  const rankLine = rank ? `#${fmt(rank)} most visited site worldwide` : (p.url ? 'Not in the Tranco list' : 'Internal tool, no public site');
+  const band = homeBand(p);
+  const parts = [band ? `Top ${fmt(band)} in ${country(homeOf(p))}` : '', rank ? `#${fmt(rank)} worldwide` : ''].filter(Boolean);
+  const rankLine = parts.length ? parts.join(' &middot; ') : (p.url ? 'Not in public traffic rankings' : 'Internal tool, no public site');
+  const badge = badgeOf(p);
   return `
-        <article class="work" data-tags="${p.filters.join(' ')}" data-title="${attr(p.title)}"${rank ? ` data-rank="${rank}"` : ''}>
+        <article class="work" data-tags="${p.filters.join(' ')}" data-title="${attr(p.title)}" data-pop="${popOrder.get(p.slug)}">
           ${thumb(p, 'projects/')}
           <div class="work-head">
             ${brand(p, 'projects/')}
@@ -78,7 +119,8 @@ function card(p) {
               <h3><a href="projects/${p.slug}/">${p.title}</a></h3>
               <p class="meta">${metaLine(p)}</p>
             </div>
-          </div>
+          </div>${badge ? `
+          <p class="badge">${badge}</p>` : ''}
           <p class="rank">${rankLine}</p>
           <p>${p.summary}</p>
           <ul class="tags">${tags}</ul>
@@ -160,9 +202,43 @@ function page(p, i) {
     p.company ? `<div><dt>Company</dt><dd>${p.company}</dd></div>` : '',
     `<div><dt>My role</dt><dd>${p.role}</dd></div>`,
     p.url ? `<div><dt>Live site</dt><dd><a class="out" href="${p.url}" target="_blank" rel="noopener noreferrer">${hostLabel(p)}</a></dd></div>` : '',
-    rank ? `<div><dt>Site traffic</dt><dd>#${fmt(rank)} worldwide <a href="https://tranco-list.eu/" target="_blank" rel="noopener noreferrer" title="Tranco list of the most visited websites, ${popularity.date || ''}">(Tranco)</a></dd></div>` : '',
     `<div><dt>Stack</dt><dd>${p.tech.join(', ')}</dd></div>`,
   ].filter(Boolean).join('\n            ');
+
+  // Site popularity: home market first, then other countries outside Europe, then Europe,
+  // countries with the same band grouped on one row, and the worldwide rank last.
+  const bands = bandsOf(p);
+  const home = homeOf(p);
+  const cat = categoryOf(p);
+  const group = ccs => {
+    const byBand = new Map();
+    ccs.sort((a, b) => bands[a] - bands[b]).forEach(cc => byBand.set(bands[cc], [...(byBand.get(bands[cc]) || []), cc]));
+    return [...byBand].map(([b, list]) => `<div><dt>${list.map(cc => country(cc).replace(/^the /, '')).join(', ')}</dt><dd>Top ${fmt(b)}</dd></div>`);
+  };
+  const europe = Object.keys(bands).filter(cc => cc !== home && EUROPE.has(cc));
+  const others = Object.keys(bands).filter(cc => cc !== home && !EUROPE.has(cc));
+  const counted = Object.keys(bands).filter(cc => EUROPE.has(cc)).length;
+  const rows = [
+    bands[home] ? `<div><dt>${country(home).replace(/^the /, '')}</dt><dd>Top ${fmt(bands[home])}</dd></div>` : '',
+    ...group(others),
+    counted > 1 ? `<div class="sum"><dt>Europe</dt><dd>Ranked in ${counted} countries</dd></div>` : '',
+    ...group(europe),
+    rank ? `<div><dt>Worldwide</dt><dd>#${fmt(rank)}</dd></div>` : '',
+  ].filter(Boolean);
+  const sources = [
+    Object.keys(bands).length ? `Country bands: <a href="https://developer.chrome.com/docs/crux" target="_blank" rel="noopener noreferrer">Chrome UX Report</a>, ${crMonth}, counted for ${domainsOf(p).filter(d => regional.sites[d]).join(' and ')}. It ranks sites by Chrome page loads in each country and publishes bands such as top 1,000.` : '',
+    rank ? `Worldwide: <a href="https://tranco-list.eu/" target="_blank" rel="noopener noreferrer">Tranco list</a>, ${trancoMonth}.` : '',
+  ].filter(Boolean).join(' ');
+  const reach = rows.length || cat ? `
+          <div class="reach">
+            <h2>Site popularity</h2>${cat ? `
+            <p class="badge">${cat.badge}</p>
+            <p class="reach-cat">${cat.text} <span>(<a href="${cat.url}" target="_blank" rel="noopener noreferrer">${cat.source}</a>, ${cat.month})</span></p>` : ''}
+            <dl>
+              ${rows.join('\n              ')}
+            </dl>
+            <p class="note">${sources}</p>
+          </div>` : '';
 
   return `${head}<title>${strip(p.title)} | Emanuel Rusu, REMTA Digital</title>
 <meta name="description" content="${attr(p.summary)}">
@@ -202,7 +278,7 @@ ${headerHtml}
           ${logo ? `<div class="logo-plate">${logo}</div>` : ''}
           <dl>
             ${facts}
-          </dl>
+          </dl>${reach}
         </aside>
       </div>
     </div>
@@ -255,4 +331,7 @@ ${urls.map(u => `  <url>\n    <loc>${u}</loc>\n  </url>`).join('\n')}
 const withShots = projects.filter(p => shots(p).length).length;
 const withIcon = projects.filter(p => hasFile(p.slug, m(p).icon)).length;
 const ranked = projects.filter(rankOf).length;
-console.log(`built ${projects.length} project pages (${withShots} with screenshots, ${withIcon} with brand icons, ${ranked} with a Tranco rank), sitemap with ${urls.length} URLs`);
+const banded = projects.filter(homeBand).length;
+const badged = projects.filter(badgeOf).map(p => strip(p.title));
+console.log(`built ${projects.length} project pages (${withShots} with screenshots, ${withIcon} with brand icons, ${ranked} with a Tranco rank, ${banded} with a home-country band), sitemap with ${urls.length} URLs`);
+console.log(`badges: ${badged.join('; ') || 'none'}`);

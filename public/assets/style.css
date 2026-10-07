@@ -113,6 +113,8 @@ section{padding:32px 0}
 .work h3 a:hover{color:var(--blue);text-decoration:underline}
 .work .rank{display:none;font-size:.85rem;font-weight:600;color:var(--green)}
 .show-rank .work .rank{display:block}
+.badge{align-self:flex-start;display:inline-block;margin:0;padding:3px 10px;border-radius:999px;background:var(--blue-tint);color:var(--blue-dark);font-size:.8rem;font-weight:600;line-height:1.4}
+.work p.badge{color:var(--blue-dark);font-size:.8rem}
 .brand{flex:none;display:grid;place-items:center;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:8px}
 .brand-sm{width:48px;height:48px}
 .brand-lg{width:72px;height:72px}
@@ -194,6 +196,16 @@ footer p{margin:4px 0}
 .project-facts dl div:first-child{border-top:0}
 .project-facts dt{color:var(--muted)}
 .project-facts dd{margin:0;text-align:right;font-weight:600}
+.reach{padding:16px 20px 18px;border-top:1px solid var(--line);background:var(--tint)}
+.reach h2{font-size:1rem;margin:0 0 10px}
+.reach .badge{margin-bottom:8px}
+.reach-cat{font-size:.9rem;margin:0 0 6px}
+.reach-cat span{color:var(--muted)}
+.project-facts .reach dl{padding:0}
+.reach dl div{padding:8px 0}
+.reach dd{white-space:nowrap}
+.reach dl .sum dd{color:var(--green)}
+.reach .note{font-size:.78rem;margin-top:8px}
 .gallery-sec{padding:8px 0 16px}
 .shots{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .frame{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}

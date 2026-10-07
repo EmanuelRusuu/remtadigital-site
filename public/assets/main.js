@@ -39,13 +39,14 @@
     });
   });
 
-  // Project sorting: featured (original order), most visited site (Tranco rank), name
+  // Project sorting: featured (original order), most visited (order computed by build.mjs:
+  // home-country rank band, then worldwide rank), name
   var grid = document.querySelector('.work-grid');
   var sort = document.getElementById('sort');
   var sortNote = document.getElementById('sort-note');
   if (grid && sort) {
     var original = Array.prototype.slice.call(grid.querySelectorAll('.work'));
-    var rank = function (el) { var r = parseInt(el.getAttribute('data-rank'), 10); return isNaN(r) ? Infinity : r; };
+    var rank = function (el) { var r = parseInt(el.getAttribute('data-pop'), 10); return isNaN(r) ? Infinity : r; };
     var name = function (el) { return el.getAttribute('data-title') || ''; };
     sort.addEventListener('change', function () {
       var list = original.slice();

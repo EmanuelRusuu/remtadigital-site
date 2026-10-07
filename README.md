@@ -13,7 +13,8 @@ public/robots.txt
 public/sitemap.xml             generated
 data/projects.json             the projects: title, role, summary, details, stack, filters, live URL
 data/media.json                what capture found per project (Shopify or not, icon, logo, screenshots)
-data/popularity.json           Tranco traffic ranks used by the "Most visited site" sort
+data/popularity.json           traffic data for the "Most visited" sort and the project pages:
+                               Tranco ranks, Chrome UX Report country bands, category placings
 scripts/                       local tooling, not used by the deploy
 wrangler.jsonc                 Cloudflare Worker config (serves public/ as static assets)
 ```
@@ -34,11 +35,13 @@ To refresh a project's icon, logo and screenshots (uses the local Chrome with a 
 cd scripts && node capture.mjs curaprox nile
 ```
 
-To refresh the traffic ranks behind the "Most visited site" sort (from the [Tranco list](https://tranco-list.eu/)):
+To refresh the traffic data behind the "Most visited" sort, the badges and each project's "Site popularity" box:
 
 ```bash
-cd scripts && node popularity.mjs && node build.mjs
+cd scripts && node popularity.mjs && node regional.mjs && node build.mjs
 ```
+
+`popularity.mjs` fetches worldwide ranks from the [Tranco list](https://tranco-list.eu/). `regional.mjs` downloads the latest [Chrome UX Report](https://developer.chrome.com/docs/crux) country lists (via [zakird/crux-top-lists](https://github.com/zakird/crux-top-lists)) for every European country plus each store's home market, and records each domain's best rank band per country. In `data/popularity.json`, `markets` sets a store's home country when its domain doesn't say (`.com`), `extraDomains` adds a project's other stores, and `categories` holds hand-checked placings with their source (for example Curaprox's Similarweb category rank); a category `badge`, or a top-1,000 band in the home country, shows as a badge on the homepage card.
 
 Run `node capture.mjs` without arguments to refresh every project. Screenshots are only taken for sites that still run on Shopify, so a store that has moved to another platform never shows work that isn't mine. Commit the generated files; the deploy itself has no build step.
 

@@ -40,5 +40,202 @@
   },
   "aliases": {
     "nikin.ch": "nikin.com"
+  },
+  "markets": {
+    "inuikii.com": "ch",
+    "nikin.com": "ch",
+    "americanstationery.com": "us",
+    "branddepot.com": "us",
+    "cosmicclothing.co": "us",
+    "tshirts.com": "us",
+    "photography.com": "us",
+    "topformdata.com": "us"
+  },
+  "extraDomains": {
+    "curaprox": [
+      "curaprox.ae"
+    ]
+  },
+  "categories": {
+    "curaprox": {
+      "badge": "#7 dental site in Switzerland",
+      "text": "#7 in Dentist and Dental Services in Switzerland",
+      "source": "Similarweb",
+      "url": "https://www.similarweb.com/website/curaprox.ch/",
+      "month": "September 2026"
+    },
+    "fc-basel-1893": {
+      "badge": "Top 2 football club site in Switzerland",
+      "text": "One of only two Swiss football clubs with an official site in Switzerland’s top 1,000. The other is FC St. Gallen, which I also worked on.",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    },
+    "fc-st-gallen-1879": {
+      "badge": "Top 2 football club site in Switzerland",
+      "text": "One of only two Swiss football clubs with an official site in Switzerland’s top 1,000. The other is FC Basel 1893, which I also worked on.",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    }
+  },
+  "regional": {
+    "source": "Chrome UX Report country top lists (github.com/zakird/crux-top-lists), best rank bucket per country across the domain's origins",
+    "month": "2026-08",
+    "sites": {
+      "americanstationery.com": {
+        "us": 500000
+      },
+      "artoffire.ch": {
+        "ch": 500000
+      },
+      "bruderer.ch": {
+        "ch": 500000
+      },
+      "chrueterhuesli.ch": {
+        "ch": 50000
+      },
+      "cosmicclothing.co": {
+        "us": 1000000
+      },
+      "curaprox.ae": {
+        "ae": 50000
+      },
+      "curaprox.ch": {
+        "at": 100000,
+        "ch": 10000,
+        "de": 500000,
+        "fr": 500000,
+        "it": 500000
+      },
+      "ecofort.ch": {
+        "ch": 5000,
+        "de": 500000,
+        "fr": 500000
+      },
+      "evz.ch": {
+        "at": 500000,
+        "ch": 10000,
+        "de": 1000000,
+        "it": 500000
+      },
+      "fcb.ch": {
+        "at": 50000,
+        "ch": 1000,
+        "de": 50000,
+        "es": 500000,
+        "fr": 100000,
+        "gb": 500000,
+        "it": 500000,
+        "nl": 500000,
+        "pl": 500000
+      },
+      "fcsg.ch": {
+        "at": 100000,
+        "ch": 1000,
+        "de": 500000,
+        "dk": 100000,
+        "es": 500000,
+        "fr": 1000000,
+        "gb": 1000000,
+        "it": 500000,
+        "li": 1000,
+        "nl": 500000
+      },
+      "fcz.ch": {
+        "at": 500000,
+        "ch": 5000,
+        "de": 500000,
+        "es": 500000,
+        "fr": 500000,
+        "it": 500000
+      },
+      "houseofjeans.ch": {
+        "ch": 100000
+      },
+      "infrarotheizung-shop.ch": {
+        "ch": 500000
+      },
+      "inuikii.com": {
+        "at": 500000,
+        "ba": 50000,
+        "ch": 100000,
+        "de": 500000,
+        "fr": 1000000,
+        "hr": 10000,
+        "it": 500000,
+        "no": 100000,
+        "pl": 500000,
+        "rs": 50000,
+        "se": 50000
+      },
+      "ittihadclub.sa": {
+        "sa": 10000
+      },
+      "konigs.ch": {
+        "ch": 50000,
+        "de": 1000000
+      },
+      "luftentfeuchter-shop.ch": {
+        "ch": 100000
+      },
+      "lush.ch": {
+        "ch": 10000,
+        "de": 1000000,
+        "fr": 500000
+      },
+      "mediconsult.ch": {
+        "ch": 100000,
+        "de": 1000000
+      },
+      "nikin.ch": {
+        "ch": 10000
+      },
+      "nikin.com": {
+        "ch": 10000,
+        "de": 500000
+      },
+      "nile.ch": {
+        "at": 100000,
+        "ch": 5000,
+        "de": 10000,
+        "gb": 500000
+      },
+      "oscarwash.ch": {
+        "ch": 50000
+      },
+      "pyrostar.ch": {
+        "ch": 50000,
+        "de": 1000000,
+        "it": 500000
+      },
+      "revendo.ch": {
+        "ch": 5000,
+        "de": 500000,
+        "fr": 500000,
+        "it": 500000
+      },
+      "signvision.ch": {
+        "ch": 500000
+      },
+      "skypergola.ch": {
+        "ch": 10000,
+        "fr": 1000000
+      },
+      "spa-solutions.ch": {
+        "ch": 50000,
+        "de": 1000000
+      },
+      "spruengli.ch": {
+        "at": 500000,
+        "ch": 5000,
+        "de": 500000,
+        "es": 500000,
+        "fr": 500000,
+        "gb": 1000000,
+        "it": 500000,
+        "us": 1000000
+      }
+    }
   }
 }
