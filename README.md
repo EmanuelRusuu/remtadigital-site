@@ -5,24 +5,31 @@ Static one-page site for [remtadigital.com](https://remtadigital.com). Plain HTM
 ## Structure
 
 ```
-index.html          page content
-assets/style.css    styles (dark by default, light via prefers-color-scheme)
-assets/main.js      mobile menu, project filters, reveal-on-scroll
-robots.txt
-sitemap.xml
+public/index.html          page content
+public/assets/style.css    styles (dark by default, light via prefers-color-scheme)
+public/assets/main.js      mobile menu, project filters, reveal-on-scroll
+public/robots.txt
+public/sitemap.xml
+wrangler.jsonc             Cloudflare Worker config (serves public/ as static assets)
 ```
+
+Only `public/` is published. Everything else in the repository stays private.
 
 ## Run locally
 
 ```bash
-python3 -m http.server 8080
-# open http://localhost:8080
+npx wrangler@4.86.0 dev
+# open http://localhost:8787
 ```
 
-## Deploy (Cloudflare Pages)
+Or without Wrangler: `cd public && python3 -m http.server 8080`.
 
-1. Cloudflare dashboard, Workers & Pages, Create, Pages, connect this repository.
-2. Build command: none. Build output directory: `/` (the repository root).
-3. Add the custom domain `remtadigital.com` in the project's Custom domains tab.
+## Deploy (Cloudflare Workers Builds)
 
-Every push to the default branch redeploys the site.
+The site is served by the Worker `first`. The `name` in `wrangler.jsonc` must match that Worker's name.
+
+1. Cloudflare dashboard, Workers & Pages, `first`, Settings, Builds, Connect, and choose this repository.
+2. Build command: none. Deploy command: `npx wrangler deploy` (the default).
+3. Custom domain `remtadigital.com` under Settings, Domains & Routes.
+
+Every push to `main` redeploys the site.

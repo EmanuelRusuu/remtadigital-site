@@ -1,0 +1,8 @@
+{
+  // Static site served by the "first" Worker (remtadigital.com). No build step.
+  "name": "first",
+  "compatibility_date": "2026-05-01",
+  "assets": {
+    "directory": "./public"
+  }
+}
