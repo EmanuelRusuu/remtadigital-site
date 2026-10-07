@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PrestaShop to Shopify migration app | REMTA Digital</title>
+<meta name="description" content="An admin app that migrates customers and historical orders from PrestaShop into Shopify through the Admin GraphQL API. Built once and run per market, first Switzerland and then the UAE.">
+<meta name="theme-color" content="#0f1115">
+<meta property="og:title" content="PrestaShop to Shopify migration app | REMTA Digital">
+<meta property="og:description" content="An admin app that migrates customers and historical orders from PrestaShop into Shopify through the Admin GraphQL API. Built once and run per market, first Switzerland and then the UAE.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://remtadigital.com/projects/prestashop-to-shopify-migration-app/">
+<link rel="canonical" href="https://remtadigital.com/projects/prestashop-to-shopify-migration-app/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230f1115'/%3E%3Ctext x='32' y='43' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%236ee7b7'%3ER%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body class="project-page">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="REMTA Digital, home">REMTA <span>DIGITAL</span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Main">
+      <a href="/#services">Services</a>
+      <a href="/#work">Work</a>
+      <a href="/#process">Process</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="project-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/#work">Work</a> <span aria-hidden="true">/</span> <span>PrestaShop to Shopify migration app</span></nav>
+      <div class="project-intro">
+        <div>
+          <div class="project-id">
+            <span class="brand brand-lg brand-initials" aria-hidden="true">PT</span>
+            <p class="meta">Built at aiconomy AG &middot; internal app</p>
+          </div>
+          <h1>PrestaShop to Shopify migration app</h1>
+          <p class="lead">An admin app that migrates customers and historical orders from PrestaShop into Shopify through the Admin GraphQL API. Built once and run per market, first Switzerland and then the UAE.</p>
+          <div class="cta-row"><a class="btn ghost" href="/#contact">Start a similar project</a></div>
+        </div>
+        <aside class="project-facts" aria-label="Project facts">
+          
+          <dl>
+            <div><dt>Role</dt><dd>Built at aiconomy AG &middot; internal app</dd></div>
+            
+            <div><dt>Stack</dt><dd>React Router, TypeScript, Prisma, Admin GraphQL API, Polaris, Vitest</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="project-body">
+    <div class="wrap narrow">
+      <div>
+        <h2>What was built</h2>
+        <ul class="built"><li><strong>The hard requirement was silence.</strong> Importing tens of thousands of historical customers and backdated orders into a live store would, by default, email every customer an account invitation and an order receipt.</li><li>The guarantee is enforced by the build: order creation is reachable through a single function that hardcodes the receipt options to false and bypasses inventory, customers are created without a password or invited state, and a guard test fails the build if the invite mutations are ever referenced.</li><li>A three-file upload stepper for the PrestaShop exports, with a <strong>dry run by default</strong>: parsed counts, per-file previews, unmatched customers, missing SKUs and blocked rows, all before anything is written.</li><li>Import is a separate action behind a confirmation that restates the no-email guarantee and the target shop domain. It runs customers then orders oldest first, reports live progress and can be cancelled.</li><li>Idempotent and resumable, so a failed run can be re-run safely, with a downloadable CSV report of every source row.</li></ul>
+        <ul class="tags"><li>React Router</li><li>TypeScript</li><li>Prisma</li><li>Admin GraphQL API</li><li>Polaris</li><li>Vitest</li></ul>
+      </div>
+      
+    </div>
+  </section>
+
+  <nav class="pager wrap" aria-label="More projects">
+    <a href="/projects/multi-store-content-sync/"><span>Previous</span>Multi-store content sync</a>
+    <a class="all" href="/#work">All projects</a>
+    <a href="/projects/american-stationery/"><span>Next</span>American Stationery</a>
+  </nav>
+
+  <section id="contact" class="alt">
+    <div class="wrap narrow center">
+      <p class="eyebrow">Contact</p>
+      <h2>Have a project in mind?</h2>
+      <p class="lead">Send a short message about your store and what you want to build.</p>
+      <p><a class="mail" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>&copy; <span id="year">2026</span> REMTA S.R.L. Cluj-Napoca, Romania.</p>
+    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; we are not affiliated with or endorsed by Shopify. Other names are trademarks of their respective owners.</p>
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>

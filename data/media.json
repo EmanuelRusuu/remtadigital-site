@@ -1,0 +1,885 @@
+{
+  "curaprox": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Zahnpflege aus der Schweiz | CURAPROX Shop Schweiz",
+    "capturedAt": "2026-10-07",
+    "themeColor": "rgb(255 255 255)",
+    "iconTone": "dark"
+  },
+  "ev-zug": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Offizieller EVZ Fanshop | Trikots, Fanartikel, Accessoires & mehr",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "inuikii": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "INUIKII Offizieller Online-Store — Summer Sale",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "nile": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "NILE Online Store",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "ecofort": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "ecofort – Da fühl ich mich zuhause | Raumklima & Haushalt | ecofort.ch",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "light"
+  },
+  "confiserie-sprungli": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Confiserie Sprüngli | Confiserie Sprüngli",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "fc-basel-1893": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Offizielle Website des FC Basel 1893",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "chruterhusli": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Chrüterhüsli – Chrüterhüsli AG",
+    "capturedAt": "2026-10-07",
+    "themeColor": "rgb(238, 231, 219)",
+    "iconTone": "dark"
+  },
+  "bruderer": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "W. Bruderer AG – Schokoladen Halbfabrikate & Confiserie Grosshandel",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "spa-solutions": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Whirlpool & Swimspa kaufen in der Schweiz | Spa Solutions",
+    "capturedAt": "2026-10-07",
+    "themeColor": "#1e2d7d",
+    "iconTone": "dark"
+  },
+  "al-ittihad": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Al-Ittihad Official Store | Authentic Jerseys & Merchandise – Al Ittihad Club - نادي الاتحاد",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "fc-zurich": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Willkommen beim FCZ - #NieUsenandGah – FC Zürich",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "art-of-fire": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Art of Fire, die Kunst des Feuers, Ofenbau, Kaminbau, Cheminéebau",
+    "capturedAt": "2026-10-07",
+    "themeColor": "#d0011b",
+    "iconTone": "dark"
+  },
+  "oscarwash": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "OSCAR Wash & Care AG – OSCAR Wash & Care AG",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "fc-st-gallen-1879": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "FC St.Gallen 1879",
+    "capturedAt": "2026-10-07",
+    "themeColor": "#007c3e",
+    "iconTone": "dark"
+  },
+  "revendo": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Refurbished Geräte kaufen, verkaufen & reparieren – Revendo",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "house-of-jeans": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "House of Jeans | Jeans & Mode für Frauen und Männer | Schweiz",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "sorenos": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "SORENOS.CH - Fensterfolien Fachhandel Schweiz | 3M & mehr",
+    "capturedAt": "2026-10-07",
+    "themeColor": "#01598e",
+    "iconTone": "dark"
+  },
+  "glory-bomb": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "GLORY BOMB® – DIE FRUCHTIGE MANGOSTAN BOMBE: frech & funktional!",
+    "capturedAt": "2026-10-07",
+    "themeColor": "#ffffff",
+    "iconTone": "dark"
+  },
+  "mediconsult": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Homepage | Mediconsult Schweiz",
+    "capturedAt": "2026-10-07",
+    "themeColor": "#ffffff",
+    "iconTone": "dark"
+  },
+  "nikin": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "NIKIN: Nachhaltige Mode 🌲 Together for Nature. Tree by Tree.",
+    "capturedAt": "2026-10-07",
+    "themeColor": "rgb(51 51 51)",
+    "iconTone": "dark"
+  },
+  "signvision": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "signvision.ch",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "luftentfeuchter": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Luftentfeuchter & Wäschetrockner für ein perfektes Raumklima!",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "infrarotheizung": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Infrarotheizungen & moderne Heizsysteme online kaufen",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "lush-switzerland": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "LUSH (Switzerland) AG",
+    "capturedAt": "2026-10-07",
+    "themeColor": "#ffffff",
+    "iconTone": "dark"
+  },
+  "brand-depot": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "BrandDepot – Brand Depot",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "cosmic-clothing": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Cosmic Clothing Co.",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "tshirts-com": {
+    "shopify": false,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [],
+    "title": "Custom T-Shirts — A Better Shirt to Print On",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "topform-data": {
+    "shopify": false,
+    "status": 200,
+    "icon": null,
+    "logo": null,
+    "shots": [],
+    "title": "",
+    "capturedAt": "2026-10-07",
+    "themeColor": null
+  },
+  "photography-com": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": null,
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Photography.com",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  },
+  "pyrostar-bugano-and-weco": {
+    "shopify": false,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [],
+    "title": "Feuerwerk und Pyrotechnik Online-Shop",
+    "capturedAt": "2026-10-07",
+    "themeColor": "#000000",
+    "iconTone": "dark"
+  },
+  "konigs": {
+    "shopify": false,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [],
+    "title": "Lampen und Beleuchtungszubehör kaufen | Konigs",
+    "capturedAt": "2026-10-07",
+    "themeColor": "#ffffff",
+    "iconTone": "dark"
+  },
+  "skypergola": {
+    "shopify": true,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": "logo.png",
+    "shots": [
+      {
+        "file": "home.webp",
+        "label": "Homepage"
+      },
+      {
+        "file": "collection.webp",
+        "label": "Collection page"
+      },
+      {
+        "file": "product.webp",
+        "label": "Product page"
+      },
+      {
+        "file": "home-mobile.webp",
+        "label": "Mobile",
+        "mobile": true
+      }
+    ],
+    "title": "Premium Aluminium-Pergola mit Lamellendach – Sky Pergola Schweiz",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "light"
+  },
+  "american-stationery": {
+    "shopify": false,
+    "status": 200,
+    "icon": "icon.png",
+    "logo": null,
+    "shots": [],
+    "title": "Stationery & Personalized Gifts From American Stationery",
+    "capturedAt": "2026-10-07",
+    "themeColor": null,
+    "iconTone": "dark"
+  }
+}

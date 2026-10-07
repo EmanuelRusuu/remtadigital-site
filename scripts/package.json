@@ -1,0 +1,13 @@
+{
+  "name": "remtadigital-site-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Local tooling: capture project screenshots and build project pages. Not used by the deploy.",
+  "scripts": {
+    "capture": "node capture.mjs",
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "puppeteer-core": "^24.43.1"
+  }
+}

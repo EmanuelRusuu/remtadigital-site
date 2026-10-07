@@ -156,490 +156,513 @@
       </div>
 
       <div class="work-grid">
+        <!-- projects:start -->
 
         <article class="work reveal" data-tags="theme functionality integration">
-          <p class="meta">Built at aiconomy AG &middot; lead contributor</p>
-          <h3>Curaprox (CURADEN AG)</h3>
+          <a class="thumb" href="projects/curaprox/" tabindex="-1" aria-hidden="true"><img src="projects/curaprox/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/curaprox/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG &middot; lead contributor</p>
+              <h3><a href="projects/curaprox/">Curaprox (CURADEN AG)</a></h3>
+            </div>
+          </div>
           <p>A full redesign of the Swiss and UAE Curaprox stores: two separate Shopify stores running from one shared base theme on Horizon.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li><strong>Multi-store content system:</strong> blocks resolve their own content from the shop domain and from PIM metafields, so the same block renders UAE shipping copy on one store and Swiss copy on the other, and removes itself entirely when the backing metafield is empty.</li>
-              <li>A merchant-configurable product page accordion whose body is chosen by a source setting: rich text, a structured specification set from the PIM, ingredients or store-specific shipping information, with empty-value gating at every level.</li>
-              <li>Expert box block and the HubSpot newsletter integration, including a single language-independent form for the UAE store.</li>
-              <li>Store-aware social links, client-side blog filtering with OR-within-group logic and pagination, and a product card rating component.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>Horizon</li><li>PIM metafields</li><li>HubSpot</li></ul>
-          <a class="out" href="https://www.curaprox.ch" target="_blank" rel="noopener noreferrer">curaprox.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/curaprox/">View project</a><a class="out" href="https://www.curaprox.ch" target="_blank" rel="noopener noreferrer">curaprox.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme functionality app integration">
-          <p class="meta">Built at aiconomy AG &middot; lead contributor</p>
-          <h3>EV Zug</h3>
+          <a class="thumb" href="projects/ev-zug/" tabindex="-1" aria-hidden="true"><img src="projects/ev-zug/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/ev-zug/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG &middot; lead contributor</p>
+              <h3><a href="projects/ev-zug/">EV Zug</a></h3>
+            </div>
+          </div>
           <p>The official Shopify storefront of EV Zug, a Swiss National League hockey club: personalised jerseys, checkout bundling, live auctions and ERP-driven pricing.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li><strong>Checkout bundling:</strong> a Cart Transform Function in TypeScript, compiled to WebAssembly, that merges personalised jersey components into a single bundle line in cart and checkout, keeping every component attached for fulfilment with no change to the total. Plus its admin page in the companion app.</li>
-              <li><strong>Jersey personalisation:</strong> optical centering of jersey numbers using canvas-based glyph analysis, recalculated after the webfont loads, personalisation pricing, brand fonts and state that survives switching jerseys.</li>
-              <li><strong>Live auction page</strong> with bidding interactions, modal flows and guest login.</li>
-              <li><strong>Customer-specific pricing:</strong> aico ERP discount groups applied across product pages, product cards, quick add and cart, including Swiss Rappen rounding.</li>
-              <li>Bilingual DE/EN order confirmation emails in Outlook-safe Liquid.</li>
-              <li>Separate development and production themes on a branch-based workflow, with matching environments for the app.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>TypeScript</li><li>Shopify Functions</li><li>WebAssembly</li><li>React Router</li></ul>
-          <a class="out" href="https://www.evz.ch" target="_blank" rel="noopener noreferrer">evz.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/ev-zug/">View project</a><a class="out" href="https://shop.evz.ch/" target="_blank" rel="noopener noreferrer">shop.evz.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme functionality app integration">
-          <p class="meta">Built at aiconomy AG &middot; lead contributor</p>
-          <h3>Inuikii</h3>
+          <a class="thumb" href="projects/inuikii/" tabindex="-1" aria-hidden="true"><img src="projects/inuikii/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/inuikii/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG &middot; lead contributor</p>
+              <h3><a href="projects/inuikii/">Inuikii</a></h3>
+            </div>
+          </div>
           <p>Four connected Shopify builds for the footwear brand: the main Swiss store, a private B2B showroom, an influencer store and a checkout app.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li><strong>Search:</strong> Shopify's native search replaced with a Meilisearch storefront layer across search and collection pages, with colour grouping, market-aware pricing and instant results.</li>
-              <li>A back-in-stock and notify-me flow that replaced a paid third-party app, a size guide with per-product size scales, storewide sale pricing and a returns and refund-request flow driven by order tags and fulfilment status.</li>
-              <li><strong>Virtual Showroom:</strong> a private B2B catalogue with prices, cart and checkout removed, and article numbers, size ranges and buyer-focused navigation added.</li>
-              <li><strong>Influencer store:</strong> a private storefront with a Klaviyo integration that tags subscribers by store source.</li>
-              <li><strong>Checkout app:</strong> a TypeScript Shopify app with an unsubscribe API and a Checkout UI extension showing editorial story cards in checkout and on the thank-you page.</li>
-              <li>Full DE/EN localisation.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>TypeScript</li><li>Meilisearch</li><li>Klaviyo</li><li>Checkout UI extensions</li></ul>
-          <a class="out" href="https://inuikii.com" target="_blank" rel="noopener noreferrer">inuikii.com</a>
+          <div class="work-links"><a class="case-link" href="projects/inuikii/">View project</a><a class="out" href="https://inuikii.com" target="_blank" rel="noopener noreferrer">inuikii.com</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme functionality integration">
-          <p class="meta">Built at aiconomy AG &middot; lead contributor</p>
-          <h3>Nile</h3>
+          <a class="thumb" href="projects/nile/" tabindex="-1" aria-hidden="true"><img src="projects/nile/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/nile/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG &middot; lead contributor</p>
+              <h3><a href="projects/nile/">Nile</a></h3>
+            </div>
+          </div>
           <p>A Swiss fashion retailer running six Shopify stores from one shared theme: CHF, EUR and GBP, each with a test and a production store.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li><strong>Loyalty program (Nilecard):</strong> a theme-driven points system with per-store redemption values, maximum points and fallback logic, plus points balance and history in the customer account.</li>
-              <li><strong>Multi-store and localisation:</strong> the GBP store pair added to the build pipeline, cross-store country switching that remembers the shopper's choice, and per-store Klaviyo endpoints.</li>
-              <li><strong>Customer account:</strong> order history and order detail with payment method and transaction breakdown.</li>
-              <li><strong>Search:</strong> an InstantSearch implementation for the search page and predictive search, with progressive rendering and skeleton loading.</li>
-              <li><strong>SEO:</strong> JSON-LD structured data for products, collections and breadcrumbs, including return policy, shipping and delivery-time data, with locale-aware schema and canonical URLs.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>InstantSearch</li><li>Klaviyo</li><li>JSON-LD</li></ul>
-          <a class="out" href="https://www.nile.ch" target="_blank" rel="noopener noreferrer">nile.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/nile/">View project</a><a class="out" href="https://www.nile.ch" target="_blank" rel="noopener noreferrer">nile.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme functionality integration">
-          <p class="meta">Built at aiconomy AG &middot; main developer</p>
-          <h3>Ecofort</h3>
+          <a class="thumb" href="projects/ecofort/" tabindex="-1" aria-hidden="true"><img src="projects/ecofort/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm brand-dark"><img src="projects/ecofort/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG &middot; main developer</p>
+              <h3><a href="projects/ecofort/">Ecofort</a></h3>
+            </div>
+          </div>
           <p>Storefront for a Swiss supplier of heating and dehumidification products, plus theme repositories for the sister stores Infrarotheizung and Luftentfeuchter.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li><strong>Performance:</strong> critical CSS extracted, theme scripts deferred, LCP image and fonts preloaded, and the product image slider rebuilt to remove layout shift on mobile.</li>
-              <li>An accessibility pass covering colour contrast, link names and iframe titles.</li>
-              <li>Collection loading with skeleton states, and an advice and news loader with per-article SEO, a 404 for empty pages and inactive articles filtered out.</li>
-              <li>Trusted Shops ratings, a delivery status indicator on the product page and legacy product IDs carried through cart into checkout for tracking.</li>
-              <li><strong>Credit check reliability:</strong> Intrum outages were being treated as declines. The backend now reports whether Intrum actually returned a decision, calls have timeouts so checkout never hangs, and checkout shows a neutral "temporarily unavailable" message.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>Dawn</li><li>Checkout UI extensions</li><li>Laravel</li></ul>
-          <a class="out" href="https://www.ecofort.ch" target="_blank" rel="noopener noreferrer">ecofort.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/ecofort/">View project</a><a class="out" href="https://www.ecofort.ch" target="_blank" rel="noopener noreferrer">ecofort.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme functionality app">
-          <p class="meta">Built at aiconomy AG &middot; lead contributor</p>
-          <h3>FC Basel 1893</h3>
+          <a class="thumb" href="projects/fc-basel-1893/" tabindex="-1" aria-hidden="true"><img src="projects/fc-basel-1893/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/fc-basel-1893/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG &middot; lead contributor</p>
+              <h3><a href="projects/fc-basel-1893/">FC Basel 1893</a></h3>
+            </div>
+          </div>
           <p>The Swiss football club's website and fan shop, running together on one Shopify theme: news, videos, match data, players and the jersey configurator.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li><strong>Club content on Shopify:</strong> a newest-videos page with category groups and skeleton loading, a faster league table, a "current / next match" button, player squads for the men's and women's teams, and the news pages with category filtering and a breaking news ticker.</li>
-              <li><strong>Header and search:</strong> a sticky gradient header with mega menu and mobile drawer, and predictive search across products, players and news in one modal.</li>
-              <li><strong>Jersey configurator:</strong> kit number fonts, a top or bottom name position, sponsor badges in the sponsor's brand font with brightness detection for contrast, per-digit pricing for custom numbers and a searchable player number dropdown.</li>
-              <li><strong>Checkout bundling:</strong> a Cart Transform admin page and safety gate in the club's companion Shopify app.</li>
-              <li>Customer-specific discounted prices across product pages, collections and cart, stock rules so out-of-stock products cannot be bought, and purchase-disabled products with a notice.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>Canvas</li><li>Shopify Functions</li></ul>
-          <a class="out" href="https://www.fcb.ch/" target="_blank" rel="noopener noreferrer">fcb.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/fc-basel-1893/">View project</a><a class="out" href="https://www.fcb.ch/" target="_blank" rel="noopener noreferrer">fcb.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme functionality">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Confiserie Sprüngli</h3>
+          <a class="thumb" href="projects/confiserie-sprungli/" tabindex="-1" aria-hidden="true"><img src="projects/confiserie-sprungli/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/confiserie-sprungli/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/confiserie-sprungli/">Confiserie Sprüngli</a></h3>
+            </div>
+          </div>
           <p>Shopify build for a Swiss confectioner, rebuilding the brand's existing site design on Dawn: product pages, collection pages, navigation and animations.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li><strong>Product page:</strong> tabbed product information (ingredients, nutritional values, declaration), each tab its own snippet, with empty tabs hidden automatically so a product without nutrition data never shows a blank tab.</li>
-              <li>Breadcrumbs, title, price and a transport and delivery-period block.</li>
-              <li>A grid card selector for product options, a product video modal and a related products block.</li>
-              <li>Product badges, including a "New" badge driven by product data.</li>
-              <li><strong>Collection page:</strong> banner and breadcrumbs, a sidebar filter layout for desktop and a separate filter experience for mobile, and product cards rebuilt to match the brand's existing design.</li>
-              <li>Desktop mega menu, mobile navigation drawer and a reveal-on-scroll animation.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>CSS</li><li>Dawn</li></ul>
-          <a class="out" href="https://www.spruengli.ch" target="_blank" rel="noopener noreferrer">spruengli.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/confiserie-sprungli/">View project</a><a class="out" href="https://www.spruengli.ch" target="_blank" rel="noopener noreferrer">spruengli.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme functionality">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Chrüterhüsli</h3>
+          <a class="thumb" href="projects/chruterhusli/" tabindex="-1" aria-hidden="true"><img src="projects/chruterhusli/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/chruterhusli/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/chruterhusli/">Chrüterhüsli</a></h3>
+            </div>
+          </div>
           <p>Storefront for a Swiss drugstore and natural products retailer, built on Shopify's Horizon theme.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li><strong>Wishlist, end to end:</strong> instead of browser storage, the client talks to a Shopify app proxy, so the list is held server side. Add, fetch, remove one and clear all are separate endpoints, and the button reconciles its state against the server on load so a saved item still reads as saved after a reload.</li>
-              <li>Every user-facing string comes from the theme's locale files with English fallbacks, so the feature stays translatable.</li>
-              <li><strong>Contact page:</strong> the form and its confirmation flow.</li>
-              <li><strong>Collection page:</strong> promotional image blocks with tablet-specific layout logic, the filter and results-count header, and product card alignment.</li>
-              <li>Blog list and article layouts, product page breadcrumbs and spacing, and DE/EN translation work.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>App proxy</li><li>Horizon</li></ul>
-          <a class="out" href="https://www.chrueterhuesli.ch" target="_blank" rel="noopener noreferrer">chrueterhuesli.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/chruterhusli/">View project</a><a class="out" href="https://www.chrueterhuesli.ch" target="_blank" rel="noopener noreferrer">chrueterhuesli.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="functionality integration">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Bruderer</h3>
+          <a class="thumb" href="projects/bruderer/" tabindex="-1" aria-hidden="true"><img src="projects/bruderer/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/bruderer/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/bruderer/">Bruderer</a></h3>
+            </div>
+          </div>
           <p>Storefront for a Swiss confectionery maker, with a custom product filtering layer that replaces Shopify's native facets.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li>A storefront filtering client that queries an external search service and builds its filters from product metafields: allergens, certifications and chocolate type.</li>
-              <li><strong>Allergen normalisation:</strong> the same allergen appears under different spellings across the store's three languages and supplier data, so each one is reduced to a canonical name with an alias list. A shopper filtering on the German, English or French term lands on the same results.</li>
-              <li>The client resolves its own API endpoint from the shop domain, so production and staging each hit their own search index with no config change.</li>
-              <li>Customer login page, product page adjustments and DE/EN/FR translation work across the storefront.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>Search API</li><li>Dawn</li></ul>
-          <a class="out" href="https://www.bruderer.ch" target="_blank" rel="noopener noreferrer">bruderer.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/bruderer/">View project</a><a class="out" href="https://www.bruderer.ch" target="_blank" rel="noopener noreferrer">bruderer.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="functionality">
-          <p class="meta">Built at aiconomy AG &middot; sole developer</p>
-          <h3>Spa Solutions</h3>
+          <a class="thumb" href="projects/spa-solutions/" tabindex="-1" aria-hidden="true"><img src="projects/spa-solutions/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/spa-solutions/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG &middot; sole developer</p>
+              <h3><a href="projects/spa-solutions/">Spa Solutions</a></h3>
+            </div>
+          </div>
           <p>Custom discount and cart logic for a Swiss swim spa and cold plunge retailer, where the price depends on whether the customer installs the product themselves or books the installation team.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li>Discount buttons on the product page that map to dynamic Shopify discounts, so each installation choice shows its own price.</li>
-              <li>Installation (Montage) products added alongside the main product and kept in sync with it: same quantity, removed together, and never reachable on their own.</li>
-              <li>A cart drawer and cart page that recalculate prices and discounts live, with loading and disabled states so quantities cannot drift out of sync.</li>
-              <li>Only one discount active at a time, with the biggest one carried into checkout.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>Shopify discounts</li><li>Metafields</li></ul>
-          <a class="out" href="https://www.spa-solutions.ch/" target="_blank" rel="noopener noreferrer">spa-solutions.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/spa-solutions/">View project</a><a class="out" href="https://www.spa-solutions.ch/" target="_blank" rel="noopener noreferrer">spa-solutions.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="functionality">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Al-Ittihad</h3>
+          <a class="thumb" href="projects/al-ittihad/" tabindex="-1" aria-hidden="true"><img src="projects/al-ittihad/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/al-ittihad/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/al-ittihad/">Al-Ittihad</a></h3>
+            </div>
+          </div>
           <p>Frontend work on a custom product configurator for the club's Shopify store: name and number placement on the shirt and the personalisation overlay on the product page.</p>
           <ul class="tags"><li>JavaScript</li><li>Shopify</li></ul>
-          <a class="out" href="https://shop.ittihadclub.sa" target="_blank" rel="noopener noreferrer">shop.ittihadclub.sa</a>
+          <div class="work-links"><a class="case-link" href="projects/al-ittihad/">View project</a><a class="out" href="https://shop.ittihadclub.sa" target="_blank" rel="noopener noreferrer">shop.ittihadclub.sa</a></div>
         </article>
 
         <article class="work reveal" data-tags="functionality theme">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Art of Fire</h3>
+          <a class="thumb" href="projects/art-of-fire/" tabindex="-1" aria-hidden="true"><img src="projects/art-of-fire/collection.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/art-of-fire/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/art-of-fire/">Art of Fire</a></h3>
+            </div>
+          </div>
           <p>Tag-driven price visibility on the theme: the client hides the price of any product just by tagging it in the Shopify admin, on both product pages and collection listings.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li>No per-product code change or theme edit is needed.</li>
-              <li>The behaviour matches how the store's search and filter app already treats those products.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li></ul>
-          <a class="out" href="https://www.artoffire.ch" target="_blank" rel="noopener noreferrer">artoffire.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/art-of-fire/">View project</a><a class="out" href="https://www.artoffire.ch" target="_blank" rel="noopener noreferrer">artoffire.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme functionality">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>FC Zürich</h3>
+          <a class="thumb" href="projects/fc-zurich/" tabindex="-1" aria-hidden="true"><img src="projects/fc-zurich/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/fc-zurich/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/fc-zurich/">FC Zürich</a></h3>
+            </div>
+          </div>
           <p>Shopify storefront for the Swiss football club: speed work that made collection and product pages at least 30% faster in three days, plus a custom collection filter.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li><strong>Performance:</strong> image attributes and sizing to remove layout shift, minified files and fewer analytics requests.</li>
-              <li><strong>Collection filtering:</strong> price filters, sorting, pagination, applied-filter chips and a separate mobile filter, with skeleton loading.</li>
-              <li>Match listings sorted by date, login and logout links in the footer, women's team sponsors and camp signup deadlines.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>Alpine.js</li></ul>
-          <a class="out" href="https://www.fcz.ch/" target="_blank" rel="noopener noreferrer">fcz.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/fc-zurich/">View project</a><a class="out" href="https://www.fcz.ch/" target="_blank" rel="noopener noreferrer">fcz.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="functionality integration">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>FC St. Gallen 1879</h3>
+          <a class="thumb" href="projects/fc-st-gallen-1879/" tabindex="-1" aria-hidden="true"><img src="projects/fc-st-gallen-1879/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/fc-st-gallen-1879/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/fc-st-gallen-1879/">FC St. Gallen 1879</a></h3>
+            </div>
+          </div>
           <p>Shopify storefront for the Swiss football club, from product filtering and auctions to the club's job portal and video pages.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li>A release-date product filter that renders near-instantly using CSS instead of reloading the grid.</li>
-              <li>The auction page, and full player names in shirt personalisation.</li>
-              <li>The club's Abacus job portal embedded in a Shopify page template.</li>
-              <li>FCSG TV video pages, and a kids club membership form pre-filled from promotion emails.</li>
-              <li>Sold-out products that keep an open product page, and unlisted products in featured collections.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>Abacus</li></ul>
-          <a class="out" href="https://www.fcsg.ch/" target="_blank" rel="noopener noreferrer">fcsg.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/fc-st-gallen-1879/">View project</a><a class="out" href="https://www.fcsg.ch/" target="_blank" rel="noopener noreferrer">fcsg.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="functionality">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>OSCARwash</h3>
+          <a class="thumb" href="projects/oscarwash/" tabindex="-1" aria-hidden="true"><img src="projects/oscarwash/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/oscarwash/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/oscarwash/">OSCARwash</a></h3>
+            </div>
+          </div>
           <p>Customer account features for a Swiss car wash chain with sites in Zug, Emmen and Sihlbrugg.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li>Customer card registration with licence plates, rebuilt as a single-step flow with a loading state and success message.</li>
-              <li>PDF invoices generated in the customer account, with logo, VAT number, discount breakdown and a savings summary.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>jsPDF</li></ul>
-          <a class="out" href="https://www.oscarwash.ch/" target="_blank" rel="noopener noreferrer">oscarwash.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/oscarwash/">View project</a><a class="out" href="https://shop.oscarwash.ch/" target="_blank" rel="noopener noreferrer">shop.oscarwash.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="app functionality">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Revendo</h3>
+          <a class="thumb" href="projects/revendo/" tabindex="-1" aria-hidden="true"><img src="projects/revendo/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/revendo/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/revendo/">Revendo</a></h3>
+            </div>
+          </div>
           <p>A filter extension app for the Swiss refurbished electronics retailer, plus changes to its stock indicator app.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li>A theme app extension that adds an availability filter and keeps the shipping option applied while shoppers filter.</li>
-              <li>Filter cleanup so duplicate or stale filters never stack up in the URL, with matching desktop and mobile dropdowns.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Theme app extension</li><li>JavaScript</li><li>Shopify Liquid</li></ul>
-          <a class="out" href="https://revendo.ch/" target="_blank" rel="noopener noreferrer">revendo.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/revendo/">View project</a><a class="out" href="https://revendo.ch/" target="_blank" rel="noopener noreferrer">revendo.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="functionality">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>House of Jeans</h3>
+          <a class="thumb" href="projects/house-of-jeans/" tabindex="-1" aria-hidden="true"><img src="projects/house-of-jeans/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/house-of-jeans/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/house-of-jeans/">House of Jeans</a></h3>
+            </div>
+          </div>
           <p>Single-use gift cards for a Swiss jeans retailer that work both in store and online.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li>Gift card handling in the cart drawer and cart page, revalidated on every page load.</li>
-              <li>Custom cart pricing and draft orders, so the price at checkout matches the cart.</li>
-              <li>German translations for the whole flow.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>Draft orders</li></ul>
-          <a class="out" href="https://www.houseofjeans.ch/" target="_blank" rel="noopener noreferrer">houseofjeans.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/house-of-jeans/">View project</a><a class="out" href="https://www.houseofjeans.ch/" target="_blank" rel="noopener noreferrer">houseofjeans.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="functionality">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Glory Bomb</h3>
+          <a class="thumb" href="projects/glory-bomb/" tabindex="-1" aria-hidden="true"><img src="projects/glory-bomb/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/glory-bomb/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/glory-bomb/">Glory Bomb</a></h3>
+            </div>
+          </div>
           <p>Can deposit (Pfand) handling for the German store of a functional fruit drink brand.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li>A deposit line added to the cart and kept in sync as quantities change, with debounced updates.</li>
-              <li>A cart count that ignores the deposit line, and per-can pricing for multipacks.</li>
-              <li>The free shipping threshold and shipping copy.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li></ul>
-          <a class="out" href="https://glorybomb.de/" target="_blank" rel="noopener noreferrer">glorybomb.de</a>
+          <div class="work-links"><a class="case-link" href="projects/glory-bomb/">View project</a><a class="out" href="https://glorybomb.de/" target="_blank" rel="noopener noreferrer">glorybomb.de</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Sorenos</h3>
+          <a class="thumb" href="projects/sorenos/" tabindex="-1" aria-hidden="true"><img src="projects/sorenos/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/sorenos/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/sorenos/">Sorenos</a></h3>
+            </div>
+          </div>
           <p>Swiss, German and Austrian stores for a 3M window film specialist.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li>Set up the German store environment.</li>
-              <li>Collection description blocks, a video bar section and a fix so event dates display correctly.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>CSS</li></ul>
-          <a class="out" href="https://sorenos.ch/" target="_blank" rel="noopener noreferrer">sorenos.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/sorenos/">View project</a><a class="out" href="https://sorenos.ch/" target="_blank" rel="noopener noreferrer">sorenos.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Mediconsult</h3>
+          <a class="thumb" href="projects/mediconsult/" tabindex="-1" aria-hidden="true"><img src="projects/mediconsult/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/mediconsult/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/mediconsult/">Mediconsult</a></h3>
+            </div>
+          </div>
           <p>Swiss and Austrian stores for a supplier to ophthalmologists and opticians.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li>Shop and outlet category pages with two-column subcategories.</li>
-              <li>Past courses and events hidden from search.</li>
-              <li>A guard so a missing vendor script no longer breaks the rest of the page.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>CSS</li></ul>
-          <a class="out" href="https://mediconsult.ch/" target="_blank" rel="noopener noreferrer">mediconsult.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/mediconsult/">View project</a><a class="out" href="https://mediconsult.ch/" target="_blank" rel="noopener noreferrer">mediconsult.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Nikin</h3>
+          <a class="thumb" href="projects/nikin/" tabindex="-1" aria-hidden="true"><img src="projects/nikin/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/nikin/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/nikin/">Nikin</a></h3>
+            </div>
+          </div>
           <p>Theme work for a Swiss sustainable clothing brand that plants a tree for every product sold.</p>
-          <details class="more">
-            <summary>What was built</summary>
-            <ul>
-              <li>A market-aware language switcher that shows the right flag for each market.</li>
-              <li>One Google tag, loaded only after consent.</li>
-              <li>Variant picker labels for wearable items.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li></ul>
-          <a class="out" href="https://nikin.ch/" target="_blank" rel="noopener noreferrer">nikin.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/nikin/">View project</a><a class="out" href="https://nikin.ch/" target="_blank" rel="noopener noreferrer">nikin.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme integration">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Infrarotheizung</h3>
+          <a class="thumb" href="projects/infrarotheizung/" tabindex="-1" aria-hidden="true"><img src="projects/infrarotheizung/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/infrarotheizung/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/infrarotheizung/">Infrarotheizung</a></h3>
+            </div>
+          </div>
           <p>Sister store of Ecofort for infrared heating: theme repository setup and the Intrum credit check fix, so outages are no longer shown to customers as credit declines.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>Checkout UI extensions</li><li>Intrum</li></ul>
-          <a class="out" href="https://infrarotheizung-shop.ch/" target="_blank" rel="noopener noreferrer">infrarotheizung-shop.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/infrarotheizung/">View project</a><a class="out" href="https://infrarotheizung-shop.ch/" target="_blank" rel="noopener noreferrer">infrarotheizung-shop.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme integration">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Luftentfeuchter</h3>
+          <a class="thumb" href="projects/luftentfeuchter/" tabindex="-1" aria-hidden="true"><img src="projects/luftentfeuchter/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/luftentfeuchter/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/luftentfeuchter/">Luftentfeuchter</a></h3>
+            </div>
+          </div>
           <p>Sister store of Ecofort for dehumidifiers: theme repository setup and the same Intrum credit check fix.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>Checkout UI extensions</li><li>Intrum</li></ul>
-          <a class="out" href="https://luftentfeuchter-shop.ch/" target="_blank" rel="noopener noreferrer">luftentfeuchter-shop.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/luftentfeuchter/">View project</a><a class="out" href="https://luftentfeuchter-shop.ch/" target="_blank" rel="noopener noreferrer">luftentfeuchter-shop.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Signvision</h3>
+          <a class="thumb" href="projects/signvision/" tabindex="-1" aria-hidden="true"><img src="projects/signvision/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/signvision/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/signvision/">Signvision</a></h3>
+            </div>
+          </div>
           <p>Theme work for a Swiss signage, window film and interior shading company: video cropping and responsiveness across pages.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>CSS</li></ul>
-          <a class="out" href="https://signvision.ch/" target="_blank" rel="noopener noreferrer">signvision.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/signvision/">View project</a><a class="out" href="https://signvision.ch/" target="_blank" rel="noopener noreferrer">signvision.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Built at aiconomy AG</p>
-          <h3>Lush Switzerland</h3>
+          <a class="thumb" href="projects/lush-switzerland/" tabindex="-1" aria-hidden="true"><img src="projects/lush-switzerland/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/lush-switzerland/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at aiconomy AG</p>
+              <h3><a href="projects/lush-switzerland/">Lush Switzerland</a></h3>
+            </div>
+          </div>
           <p>Storefront work on the Swiss Shopify store of the handmade cosmetics brand.</p>
           <ul class="tags"><li>Shopify Liquid</li></ul>
-          <a class="out" href="https://lush.ch/" target="_blank" rel="noopener noreferrer">lush.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/lush-switzerland/">View project</a><a class="out" href="https://lush.ch/" target="_blank" rel="noopener noreferrer">lush.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="app integration">
-          <p class="meta">Built at aiconomy AG &middot; internal app</p>
-          <h3>Multi-store content sync</h3>
+          <a class="thumb thumb-brand" href="projects/multi-store-content-sync/" tabindex="-1" aria-hidden="true"><span class="thumb-initials">MS</span></a>
+          <div class="work-head">
+            <span class="brand brand-sm brand-initials" aria-hidden="true">MS</span>
+            <div>
+              <p class="meta">Built at aiconomy AG &middot; internal app</p>
+              <h3><a href="projects/multi-store-content-sync/">Multi-store content sync</a></h3>
+            </div>
+          </div>
           <p>An admin app that keeps content in sync across a client's multiple stores: metaobjects, metafields, menus, blogs, pages and translations. Deployed as a separate instance per client and built by a team of four developers.</p>
-          <details class="more">
-            <summary>My contribution</summary>
-            <ul>
-              <li><strong>Metaobject synchronisation:</strong> reserved Shopify types are checked for existence rather than created, definition validations are remapped against the target store, and referenced file IDs are mapped so images survive the transfer.</li>
-              <li><strong>Blog metafields sync</strong> as a new route and UI, with deduplicated error summaries that expand to full detail.</li>
-              <li><strong>Theme-referenced file backfill:</strong> enumerating a store's whole file library was timing out, so the app resolves only the files the live theme references and uploads those missing on the target, as a scheduled background job.</li>
-              <li>Exact-filename matching on file lookup, so naming collisions no longer upload the wrong asset.</li>
-              <li>Market adaptation, so each target store receives translations in its own primary language.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>React Router</li><li>TypeScript</li><li>Prisma</li><li>Admin GraphQL API</li><li>Polaris</li></ul>
+          <div class="work-links"><a class="case-link" href="projects/multi-store-content-sync/">View project</a></div>
         </article>
 
         <article class="work reveal" data-tags="app integration">
-          <p class="meta">Built at aiconomy AG &middot; internal app</p>
-          <h3>PrestaShop to Shopify migration app</h3>
+          <a class="thumb thumb-brand" href="projects/prestashop-to-shopify-migration-app/" tabindex="-1" aria-hidden="true"><span class="thumb-initials">PT</span></a>
+          <div class="work-head">
+            <span class="brand brand-sm brand-initials" aria-hidden="true">PT</span>
+            <div>
+              <p class="meta">Built at aiconomy AG &middot; internal app</p>
+              <h3><a href="projects/prestashop-to-shopify-migration-app/">PrestaShop to Shopify migration app</a></h3>
+            </div>
+          </div>
           <p>An admin app that migrates customers and historical orders from PrestaShop into Shopify through the Admin GraphQL API. Built once and run per market, first Switzerland and then the UAE.</p>
-          <details class="more">
-            <summary>How it works</summary>
-            <ul>
-              <li><strong>The hard requirement was silence.</strong> Importing tens of thousands of historical customers and backdated orders into a live store would, by default, email every customer an account invitation and an order receipt.</li>
-              <li>The guarantee is enforced by the build: order creation is reachable through a single function that hardcodes the receipt options to false and bypasses inventory, customers are created without a password or invited state, and a guard test fails the build if the invite mutations are ever referenced.</li>
-              <li>A three-file upload stepper for the PrestaShop exports, with a <strong>dry run by default</strong>: parsed counts, per-file previews, unmatched customers, missing SKUs and blocked rows, all before anything is written.</li>
-              <li>Import is a separate action behind a confirmation that restates the no-email guarantee and the target shop domain. It runs customers then orders oldest first, reports live progress and can be cancelled.</li>
-              <li>Idempotent and resumable, so a failed run can be re-run safely, with a downloadable CSV report of every source row.</li>
-            </ul>
-          </details>
           <ul class="tags"><li>React Router</li><li>TypeScript</li><li>Prisma</li><li>Admin GraphQL API</li><li>Polaris</li><li>Vitest</li></ul>
+          <div class="work-links"><a class="case-link" href="projects/prestashop-to-shopify-migration-app/">View project</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Built at WebGurus</p>
-          <h3>American Stationery</h3>
+          <a class="thumb thumb-brand" href="projects/american-stationery/" tabindex="-1" aria-hidden="true"><span class="thumb-initials">AS</span></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/american-stationery/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at WebGurus</p>
+              <h3><a href="projects/american-stationery/">American Stationery</a></h3>
+            </div>
+          </div>
           <p>Custom Shopify theme work for a US client.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>CSS</li></ul>
-          <a class="out" href="https://www.americanstationery.com" target="_blank" rel="noopener noreferrer">americanstationery.com</a>
+          <div class="work-links"><a class="case-link" href="projects/american-stationery/">View project</a><a class="out" href="https://www.americanstationery.com" target="_blank" rel="noopener noreferrer">americanstationery.com</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Built at WebGurus</p>
-          <h3>Brand Depot</h3>
+          <a class="thumb" href="projects/brand-depot/" tabindex="-1" aria-hidden="true"><img src="projects/brand-depot/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/brand-depot/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at WebGurus</p>
+              <h3><a href="projects/brand-depot/">Brand Depot</a></h3>
+            </div>
+          </div>
           <p>Custom Shopify theme work for a US client.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>CSS</li></ul>
-          <a class="out" href="https://branddepot.com/" target="_blank" rel="noopener noreferrer">branddepot.com</a>
+          <div class="work-links"><a class="case-link" href="projects/brand-depot/">View project</a><a class="out" href="https://branddepot.com/" target="_blank" rel="noopener noreferrer">branddepot.com</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Built at WebGurus</p>
-          <h3>Cosmic Clothing</h3>
+          <a class="thumb" href="projects/cosmic-clothing/" tabindex="-1" aria-hidden="true"><img src="projects/cosmic-clothing/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/cosmic-clothing/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Built at WebGurus</p>
+              <h3><a href="projects/cosmic-clothing/">Cosmic Clothing</a></h3>
+            </div>
+          </div>
           <p>Custom Shopify theme work for a US client.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>CSS</li></ul>
-          <a class="out" href="https://cosmicclothing.co/" target="_blank" rel="noopener noreferrer">cosmicclothing.co</a>
+          <div class="work-links"><a class="case-link" href="projects/cosmic-clothing/">View project</a><a class="out" href="https://cosmicclothing.co/" target="_blank" rel="noopener noreferrer">cosmicclothing.co</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Custom theme</p>
-          <h3>Tshirts.com</h3>
+          <a class="thumb thumb-brand" href="projects/tshirts-com/" tabindex="-1" aria-hidden="true"><img class="thumb-logo" src="projects/tshirts-com/logo.png" alt="" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/tshirts-com/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Custom theme</p>
+              <h3><a href="projects/tshirts-com/">Tshirts.com</a></h3>
+            </div>
+          </div>
           <p>Our founder's first fully custom Shopify theme, built from scratch for a US custom t-shirt printer and optimised step by step: load time went from over 9 seconds to under 2.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>CSS</li></ul>
-          <a class="out" href="https://www.tshirts.com/" target="_blank" rel="noopener noreferrer">tshirts.com</a>
+          <div class="work-links"><a class="case-link" href="projects/tshirts-com/">View project</a><a class="out" href="https://www.tshirts.com/" target="_blank" rel="noopener noreferrer">tshirts.com</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Shopify project</p>
-          <h3>Photography.com</h3>
+          <a class="thumb" href="projects/photography-com/" tabindex="-1" aria-hidden="true"><img src="projects/photography-com/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/photography-com/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Shopify project</p>
+              <h3><a href="projects/photography-com/">Photography.com</a></h3>
+            </div>
+          </div>
           <p>Theme work for a US store that turns customers' photos into wall art on canvas, metal, acrylic and wood.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>CSS</li></ul>
-          <a class="out" href="https://photography.com/" target="_blank" rel="noopener noreferrer">photography.com</a>
+          <div class="work-links"><a class="case-link" href="projects/photography-com/">View project</a><a class="out" href="https://photography.com/" target="_blank" rel="noopener noreferrer">photography.com</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Shopify project</p>
-          <h3>Topform Data</h3>
+          <a class="thumb thumb-brand" href="projects/topform-data/" tabindex="-1" aria-hidden="true"><span class="thumb-initials">TD</span></a>
+          <div class="work-head">
+            <span class="brand brand-sm brand-initials" aria-hidden="true">TD</span>
+            <div>
+              <p class="meta">Shopify project</p>
+              <h3><a href="projects/topform-data/">Topform Data</a></h3>
+            </div>
+          </div>
           <p>Store work for a US printer of forms, envelopes and stationery for dental, orthodontic and medical practices.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>CSS</li></ul>
-          <a class="out" href="http://topformdata.com/" target="_blank" rel="noopener noreferrer">topformdata.com</a>
+          <div class="work-links"><a class="case-link" href="projects/topform-data/">View project</a><a class="out" href="http://topformdata.com/" target="_blank" rel="noopener noreferrer">topformdata.com</a></div>
         </article>
 
         <article class="work reveal" data-tags="functionality">
-          <p class="meta">Shopify project</p>
-          <h3>Skypergola</h3>
+          <a class="thumb" href="projects/skypergola/" tabindex="-1" aria-hidden="true"><img src="projects/skypergola/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm brand-dark"><img src="projects/skypergola/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Shopify project</p>
+              <h3><a href="projects/skypergola/">Skypergola</a></h3>
+            </div>
+          </div>
           <p>Custom discount logic for a Swiss aluminium pergola retailer, built on dynamic Shopify discounts and metafields.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li><li>Metafields</li></ul>
-          <a class="out" href="https://skypergola.ch/" target="_blank" rel="noopener noreferrer">skypergola.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/skypergola/">View project</a><a class="out" href="https://skypergola.ch/" target="_blank" rel="noopener noreferrer">skypergola.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Shopify project</p>
-          <h3>Pyrostar, Bugano &amp; Weco</h3>
+          <a class="thumb thumb-brand" href="projects/pyrostar-bugano-and-weco/" tabindex="-1" aria-hidden="true"><img class="thumb-logo" src="projects/pyrostar-bugano-and-weco/logo.png" alt="" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/pyrostar-bugano-and-weco/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Shopify project</p>
+              <h3><a href="projects/pyrostar-bugano-and-weco/">Pyrostar, Bugano &amp; Weco</a></h3>
+            </div>
+          </div>
           <p>Stores for leading fireworks retailers in Switzerland and neighbouring countries.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>JavaScript</li></ul>
-          <a class="out" href="https://www.pyrostar.ch/" target="_blank" rel="noopener noreferrer">pyrostar.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/pyrostar-bugano-and-weco/">View project</a><a class="out" href="https://www.pyrostar.ch/" target="_blank" rel="noopener noreferrer">pyrostar.ch</a></div>
         </article>
 
         <article class="work reveal" data-tags="theme">
-          <p class="meta">Shopify project</p>
-          <h3>Konigs</h3>
+          <a class="thumb thumb-brand" href="projects/konigs/" tabindex="-1" aria-hidden="true"><img class="thumb-logo" src="projects/konigs/logo.png" alt="" loading="lazy" decoding="async"></a>
+          <div class="work-head">
+            <span class="brand brand-sm"><img src="projects/konigs/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <div>
+              <p class="meta">Shopify project</p>
+              <h3><a href="projects/konigs/">Konigs</a></h3>
+            </div>
+          </div>
           <p>Store work for a lighting retailer in St. Gallen selling lamps, textile cables and fittings online and in its showroom.</p>
           <ul class="tags"><li>Shopify Liquid</li><li>CSS</li></ul>
-          <a class="out" href="https://konigs.ch/" target="_blank" rel="noopener noreferrer">konigs.ch</a>
+          <div class="work-links"><a class="case-link" href="projects/konigs/">View project</a><a class="out" href="https://konigs.ch/" target="_blank" rel="noopener noreferrer">konigs.ch</a></div>
         </article>
+
+        <!-- projects:end -->
 
       </div>
     </div>

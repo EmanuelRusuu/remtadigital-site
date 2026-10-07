@@ -1,0 +1,796 @@
+[
+  {
+    "slug": "curaprox",
+    "title": "Curaprox (CURADEN AG)",
+    "meta": "Built at aiconomy AG &middot; lead contributor",
+    "summary": "A full redesign of the Swiss and UAE Curaprox stores: two separate Shopify stores running from one shared base theme on Horizon.",
+    "detailsTitle": "What was built",
+    "details": [
+      "<strong>Multi-store content system:</strong> blocks resolve their own content from the shop domain and from PIM metafields, so the same block renders UAE shipping copy on one store and Swiss copy on the other, and removes itself entirely when the backing metafield is empty.",
+      "A merchant-configurable product page accordion whose body is chosen by a source setting: rich text, a structured specification set from the PIM, ingredients or store-specific shipping information, with empty-value gating at every level.",
+      "Expert box block and the HubSpot newsletter integration, including a single language-independent form for the UAE store.",
+      "Store-aware social links, client-side blog filtering with OR-within-group logic and pagination, and a product card rating component."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "Horizon",
+      "PIM metafields",
+      "HubSpot"
+    ],
+    "filters": [
+      "theme",
+      "functionality",
+      "integration"
+    ],
+    "url": "https://www.curaprox.ch",
+    "urlLabel": "curaprox.ch"
+  },
+  {
+    "slug": "ev-zug",
+    "title": "EV Zug",
+    "meta": "Built at aiconomy AG &middot; lead contributor",
+    "summary": "The official Shopify storefront of EV Zug, a Swiss National League hockey club: personalised jerseys, checkout bundling, live auctions and ERP-driven pricing.",
+    "detailsTitle": "What was built",
+    "details": [
+      "<strong>Checkout bundling:</strong> a Cart Transform Function in TypeScript, compiled to WebAssembly, that merges personalised jersey components into a single bundle line in cart and checkout, keeping every component attached for fulfilment with no change to the total. Plus its admin page in the companion app.",
+      "<strong>Jersey personalisation:</strong> optical centering of jersey numbers using canvas-based glyph analysis, recalculated after the webfont loads, personalisation pricing, brand fonts and state that survives switching jerseys.",
+      "<strong>Live auction page</strong> with bidding interactions, modal flows and guest login.",
+      "<strong>Customer-specific pricing:</strong> aico ERP discount groups applied across product pages, product cards, quick add and cart, including Swiss Rappen rounding.",
+      "Bilingual DE/EN order confirmation emails in Outlook-safe Liquid.",
+      "Separate development and production themes on a branch-based workflow, with matching environments for the app."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "TypeScript",
+      "Shopify Functions",
+      "WebAssembly",
+      "React Router"
+    ],
+    "filters": [
+      "theme",
+      "functionality",
+      "app",
+      "integration"
+    ],
+    "url": "https://shop.evz.ch/",
+    "urlLabel": "shop.evz.ch"
+  },
+  {
+    "slug": "inuikii",
+    "title": "Inuikii",
+    "meta": "Built at aiconomy AG &middot; lead contributor",
+    "summary": "Four connected Shopify builds for the footwear brand: the main Swiss store, a private B2B showroom, an influencer store and a checkout app.",
+    "detailsTitle": "What was built",
+    "details": [
+      "<strong>Search:</strong> Shopify's native search replaced with a Meilisearch storefront layer across search and collection pages, with colour grouping, market-aware pricing and instant results.",
+      "A back-in-stock and notify-me flow that replaced a paid third-party app, a size guide with per-product size scales, storewide sale pricing and a returns and refund-request flow driven by order tags and fulfilment status.",
+      "<strong>Virtual Showroom:</strong> a private B2B catalogue with prices, cart and checkout removed, and article numbers, size ranges and buyer-focused navigation added.",
+      "<strong>Influencer store:</strong> a private storefront with a Klaviyo integration that tags subscribers by store source.",
+      "<strong>Checkout app:</strong> a TypeScript Shopify app with an unsubscribe API and a Checkout UI extension showing editorial story cards in checkout and on the thank-you page.",
+      "Full DE/EN localisation."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "TypeScript",
+      "Meilisearch",
+      "Klaviyo",
+      "Checkout UI extensions"
+    ],
+    "filters": [
+      "theme",
+      "functionality",
+      "app",
+      "integration"
+    ],
+    "url": "https://inuikii.com",
+    "urlLabel": "inuikii.com"
+  },
+  {
+    "slug": "nile",
+    "title": "Nile",
+    "meta": "Built at aiconomy AG &middot; lead contributor",
+    "summary": "A Swiss fashion retailer running six Shopify stores from one shared theme: CHF, EUR and GBP, each with a test and a production store.",
+    "detailsTitle": "What was built",
+    "details": [
+      "<strong>Loyalty program (Nilecard):</strong> a theme-driven points system with per-store redemption values, maximum points and fallback logic, plus points balance and history in the customer account.",
+      "<strong>Multi-store and localisation:</strong> the GBP store pair added to the build pipeline, cross-store country switching that remembers the shopper's choice, and per-store Klaviyo endpoints.",
+      "<strong>Customer account:</strong> order history and order detail with payment method and transaction breakdown.",
+      "<strong>Search:</strong> an InstantSearch implementation for the search page and predictive search, with progressive rendering and skeleton loading.",
+      "<strong>SEO:</strong> JSON-LD structured data for products, collections and breadcrumbs, including return policy, shipping and delivery-time data, with locale-aware schema and canonical URLs."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "InstantSearch",
+      "Klaviyo",
+      "JSON-LD"
+    ],
+    "filters": [
+      "theme",
+      "functionality",
+      "integration"
+    ],
+    "url": "https://www.nile.ch",
+    "urlLabel": "nile.ch"
+  },
+  {
+    "slug": "ecofort",
+    "title": "Ecofort",
+    "meta": "Built at aiconomy AG &middot; main developer",
+    "summary": "Storefront for a Swiss supplier of heating and dehumidification products, plus theme repositories for the sister stores Infrarotheizung and Luftentfeuchter.",
+    "detailsTitle": "What was built",
+    "details": [
+      "<strong>Performance:</strong> critical CSS extracted, theme scripts deferred, LCP image and fonts preloaded, and the product image slider rebuilt to remove layout shift on mobile.",
+      "An accessibility pass covering colour contrast, link names and iframe titles.",
+      "Collection loading with skeleton states, and an advice and news loader with per-article SEO, a 404 for empty pages and inactive articles filtered out.",
+      "Trusted Shops ratings, a delivery status indicator on the product page and legacy product IDs carried through cart into checkout for tracking.",
+      "<strong>Credit check reliability:</strong> Intrum outages were being treated as declines. The backend now reports whether Intrum actually returned a decision, calls have timeouts so checkout never hangs, and checkout shows a neutral \"temporarily unavailable\" message."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "Dawn",
+      "Checkout UI extensions",
+      "Laravel"
+    ],
+    "filters": [
+      "theme",
+      "functionality",
+      "integration"
+    ],
+    "url": "https://www.ecofort.ch",
+    "urlLabel": "ecofort.ch"
+  },
+  {
+    "slug": "fc-basel-1893",
+    "title": "FC Basel 1893",
+    "meta": "Built at aiconomy AG &middot; lead contributor",
+    "summary": "The Swiss football club's website and fan shop, running together on one Shopify theme: news, videos, match data, players and the jersey configurator.",
+    "detailsTitle": "What was built",
+    "details": [
+      "<strong>Club content on Shopify:</strong> a newest-videos page with category groups and skeleton loading, a faster league table, a \"current / next match\" button, player squads for the men's and women's teams, and the news pages with category filtering and a breaking news ticker.",
+      "<strong>Header and search:</strong> a sticky gradient header with mega menu and mobile drawer, and predictive search across products, players and news in one modal.",
+      "<strong>Jersey configurator:</strong> kit number fonts, a top or bottom name position, sponsor badges in the sponsor's brand font with brightness detection for contrast, per-digit pricing for custom numbers and a searchable player number dropdown.",
+      "<strong>Checkout bundling:</strong> a Cart Transform admin page and safety gate in the club's companion Shopify app.",
+      "Customer-specific discounted prices across product pages, collections and cart, stock rules so out-of-stock products cannot be bought, and purchase-disabled products with a notice."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "Canvas",
+      "Shopify Functions"
+    ],
+    "filters": [
+      "theme",
+      "functionality",
+      "app"
+    ],
+    "url": "https://www.fcb.ch/",
+    "urlLabel": "fcb.ch"
+  },
+  {
+    "slug": "confiserie-sprungli",
+    "title": "Confiserie Sprüngli",
+    "meta": "Built at aiconomy AG",
+    "summary": "Shopify build for a Swiss confectioner, rebuilding the brand's existing site design on Dawn: product pages, collection pages, navigation and animations.",
+    "detailsTitle": "What was built",
+    "details": [
+      "<strong>Product page:</strong> tabbed product information (ingredients, nutritional values, declaration), each tab its own snippet, with empty tabs hidden automatically so a product without nutrition data never shows a blank tab.",
+      "Breadcrumbs, title, price and a transport and delivery-period block.",
+      "A grid card selector for product options, a product video modal and a related products block.",
+      "Product badges, including a \"New\" badge driven by product data.",
+      "<strong>Collection page:</strong> banner and breadcrumbs, a sidebar filter layout for desktop and a separate filter experience for mobile, and product cards rebuilt to match the brand's existing design.",
+      "Desktop mega menu, mobile navigation drawer and a reveal-on-scroll animation."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "CSS",
+      "Dawn"
+    ],
+    "filters": [
+      "theme",
+      "functionality"
+    ],
+    "url": "https://www.spruengli.ch",
+    "urlLabel": "spruengli.ch"
+  },
+  {
+    "slug": "chruterhusli",
+    "title": "Chrüterhüsli",
+    "meta": "Built at aiconomy AG",
+    "summary": "Storefront for a Swiss drugstore and natural products retailer, built on Shopify's Horizon theme.",
+    "detailsTitle": "What was built",
+    "details": [
+      "<strong>Wishlist, end to end:</strong> instead of browser storage, the client talks to a Shopify app proxy, so the list is held server side. Add, fetch, remove one and clear all are separate endpoints, and the button reconciles its state against the server on load so a saved item still reads as saved after a reload.",
+      "Every user-facing string comes from the theme's locale files with English fallbacks, so the feature stays translatable.",
+      "<strong>Contact page:</strong> the form and its confirmation flow.",
+      "<strong>Collection page:</strong> promotional image blocks with tablet-specific layout logic, the filter and results-count header, and product card alignment.",
+      "Blog list and article layouts, product page breadcrumbs and spacing, and DE/EN translation work."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "App proxy",
+      "Horizon"
+    ],
+    "filters": [
+      "theme",
+      "functionality"
+    ],
+    "url": "https://www.chrueterhuesli.ch",
+    "urlLabel": "chrueterhuesli.ch"
+  },
+  {
+    "slug": "bruderer",
+    "title": "Bruderer",
+    "meta": "Built at aiconomy AG",
+    "summary": "Storefront for a Swiss confectionery maker, with a custom product filtering layer that replaces Shopify's native facets.",
+    "detailsTitle": "What was built",
+    "details": [
+      "A storefront filtering client that queries an external search service and builds its filters from product metafields: allergens, certifications and chocolate type.",
+      "<strong>Allergen normalisation:</strong> the same allergen appears under different spellings across the store's three languages and supplier data, so each one is reduced to a canonical name with an alias list. A shopper filtering on the German, English or French term lands on the same results.",
+      "The client resolves its own API endpoint from the shop domain, so production and staging each hit their own search index with no config change.",
+      "Customer login page, product page adjustments and DE/EN/FR translation work across the storefront."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "Search API",
+      "Dawn"
+    ],
+    "filters": [
+      "functionality",
+      "integration"
+    ],
+    "url": "https://www.bruderer.ch",
+    "urlLabel": "bruderer.ch"
+  },
+  {
+    "slug": "spa-solutions",
+    "title": "Spa Solutions",
+    "meta": "Built at aiconomy AG &middot; sole developer",
+    "summary": "Custom discount and cart logic for a Swiss swim spa and cold plunge retailer, where the price depends on whether the customer installs the product themselves or books the installation team.",
+    "detailsTitle": "What was built",
+    "details": [
+      "Discount buttons on the product page that map to dynamic Shopify discounts, so each installation choice shows its own price.",
+      "Installation (Montage) products added alongside the main product and kept in sync with it: same quantity, removed together, and never reachable on their own.",
+      "A cart drawer and cart page that recalculate prices and discounts live, with loading and disabled states so quantities cannot drift out of sync.",
+      "Only one discount active at a time, with the biggest one carried into checkout."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "Shopify discounts",
+      "Metafields"
+    ],
+    "filters": [
+      "functionality"
+    ],
+    "url": "https://www.spa-solutions.ch/",
+    "urlLabel": "spa-solutions.ch"
+  },
+  {
+    "slug": "al-ittihad",
+    "title": "Al-Ittihad",
+    "meta": "Built at aiconomy AG",
+    "summary": "Frontend work on a custom product configurator for the club's Shopify store: name and number placement on the shirt and the personalisation overlay on the product page.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "JavaScript",
+      "Shopify"
+    ],
+    "filters": [
+      "functionality"
+    ],
+    "url": "https://shop.ittihadclub.sa",
+    "urlLabel": "shop.ittihadclub.sa"
+  },
+  {
+    "slug": "art-of-fire",
+    "title": "Art of Fire",
+    "meta": "Built at aiconomy AG",
+    "summary": "Tag-driven price visibility on the theme: the client hides the price of any product just by tagging it in the Shopify admin, on both product pages and collection listings.",
+    "detailsTitle": "What was built",
+    "details": [
+      "No per-product code change or theme edit is needed.",
+      "The behaviour matches how the store's search and filter app already treats those products."
+    ],
+    "tech": [
+      "Shopify Liquid"
+    ],
+    "filters": [
+      "functionality",
+      "theme"
+    ],
+    "url": "https://www.artoffire.ch",
+    "urlLabel": "artoffire.ch",
+    "hideShots": [
+      "home.webp"
+    ]
+  },
+  {
+    "slug": "fc-zurich",
+    "title": "FC Zürich",
+    "meta": "Built at aiconomy AG",
+    "summary": "Shopify storefront for the Swiss football club: speed work that made collection and product pages at least 30% faster in three days, plus a custom collection filter.",
+    "detailsTitle": "What was built",
+    "details": [
+      "<strong>Performance:</strong> image attributes and sizing to remove layout shift, minified files and fewer analytics requests.",
+      "<strong>Collection filtering:</strong> price filters, sorting, pagination, applied-filter chips and a separate mobile filter, with skeleton loading.",
+      "Match listings sorted by date, login and logout links in the footer, women's team sponsors and camp signup deadlines."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "Alpine.js"
+    ],
+    "filters": [
+      "theme",
+      "functionality"
+    ],
+    "url": "https://www.fcz.ch/",
+    "urlLabel": "fcz.ch"
+  },
+  {
+    "slug": "fc-st-gallen-1879",
+    "title": "FC St. Gallen 1879",
+    "meta": "Built at aiconomy AG",
+    "summary": "Shopify storefront for the Swiss football club, from product filtering and auctions to the club's job portal and video pages.",
+    "detailsTitle": "What was built",
+    "details": [
+      "A release-date product filter that renders near-instantly using CSS instead of reloading the grid.",
+      "The auction page, and full player names in shirt personalisation.",
+      "The club's Abacus job portal embedded in a Shopify page template.",
+      "FCSG TV video pages, and a kids club membership form pre-filled from promotion emails.",
+      "Sold-out products that keep an open product page, and unlisted products in featured collections."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "Abacus"
+    ],
+    "filters": [
+      "functionality",
+      "integration"
+    ],
+    "url": "https://www.fcsg.ch/",
+    "urlLabel": "fcsg.ch"
+  },
+  {
+    "slug": "oscarwash",
+    "title": "OSCARwash",
+    "meta": "Built at aiconomy AG",
+    "summary": "Customer account features for a Swiss car wash chain with sites in Zug, Emmen and Sihlbrugg.",
+    "detailsTitle": "What was built",
+    "details": [
+      "Customer card registration with licence plates, rebuilt as a single-step flow with a loading state and success message.",
+      "PDF invoices generated in the customer account, with logo, VAT number, discount breakdown and a savings summary."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "jsPDF"
+    ],
+    "filters": [
+      "functionality"
+    ],
+    "url": "https://shop.oscarwash.ch/",
+    "urlLabel": "shop.oscarwash.ch"
+  },
+  {
+    "slug": "revendo",
+    "title": "Revendo",
+    "meta": "Built at aiconomy AG",
+    "summary": "A filter extension app for the Swiss refurbished electronics retailer, plus changes to its stock indicator app.",
+    "detailsTitle": "What was built",
+    "details": [
+      "A theme app extension that adds an availability filter and keeps the shipping option applied while shoppers filter.",
+      "Filter cleanup so duplicate or stale filters never stack up in the URL, with matching desktop and mobile dropdowns."
+    ],
+    "tech": [
+      "Theme app extension",
+      "JavaScript",
+      "Shopify Liquid"
+    ],
+    "filters": [
+      "app",
+      "functionality"
+    ],
+    "url": "https://revendo.ch/",
+    "urlLabel": "revendo.ch"
+  },
+  {
+    "slug": "house-of-jeans",
+    "title": "House of Jeans",
+    "meta": "Built at aiconomy AG",
+    "summary": "Single-use gift cards for a Swiss jeans retailer that work both in store and online.",
+    "detailsTitle": "What was built",
+    "details": [
+      "Gift card handling in the cart drawer and cart page, revalidated on every page load.",
+      "Custom cart pricing and draft orders, so the price at checkout matches the cart.",
+      "German translations for the whole flow."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "Draft orders"
+    ],
+    "filters": [
+      "functionality"
+    ],
+    "url": "https://www.houseofjeans.ch/",
+    "urlLabel": "houseofjeans.ch"
+  },
+  {
+    "slug": "glory-bomb",
+    "title": "Glory Bomb",
+    "meta": "Built at aiconomy AG",
+    "summary": "Can deposit (Pfand) handling for the German store of a functional fruit drink brand.",
+    "detailsTitle": "What was built",
+    "details": [
+      "A deposit line added to the cart and kept in sync as quantities change, with debounced updates.",
+      "A cart count that ignores the deposit line, and per-can pricing for multipacks.",
+      "The free shipping threshold and shipping copy."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript"
+    ],
+    "filters": [
+      "functionality"
+    ],
+    "url": "https://glorybomb.de/",
+    "urlLabel": "glorybomb.de"
+  },
+  {
+    "slug": "sorenos",
+    "title": "Sorenos",
+    "meta": "Built at aiconomy AG",
+    "summary": "Swiss, German and Austrian stores for a 3M window film specialist.",
+    "detailsTitle": "What was built",
+    "details": [
+      "Set up the German store environment.",
+      "Collection description blocks, a video bar section and a fix so event dates display correctly."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "CSS"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://sorenos.ch/",
+    "urlLabel": "sorenos.ch"
+  },
+  {
+    "slug": "mediconsult",
+    "title": "Mediconsult",
+    "meta": "Built at aiconomy AG",
+    "summary": "Swiss and Austrian stores for a supplier to ophthalmologists and opticians.",
+    "detailsTitle": "What was built",
+    "details": [
+      "Shop and outlet category pages with two-column subcategories.",
+      "Past courses and events hidden from search.",
+      "A guard so a missing vendor script no longer breaks the rest of the page."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "CSS"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://mediconsult.ch/",
+    "urlLabel": "mediconsult.ch"
+  },
+  {
+    "slug": "nikin",
+    "title": "Nikin",
+    "meta": "Built at aiconomy AG",
+    "summary": "Theme work for a Swiss sustainable clothing brand that plants a tree for every product sold.",
+    "detailsTitle": "What was built",
+    "details": [
+      "A market-aware language switcher that shows the right flag for each market.",
+      "One Google tag, loaded only after consent.",
+      "Variant picker labels for wearable items."
+    ],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://nikin.ch/",
+    "urlLabel": "nikin.ch"
+  },
+  {
+    "slug": "infrarotheizung",
+    "title": "Infrarotheizung",
+    "meta": "Built at aiconomy AG",
+    "summary": "Sister store of Ecofort for infrared heating: theme repository setup and the Intrum credit check fix, so outages are no longer shown to customers as credit declines.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "Checkout UI extensions",
+      "Intrum"
+    ],
+    "filters": [
+      "theme",
+      "integration"
+    ],
+    "url": "https://infrarotheizung-shop.ch/",
+    "urlLabel": "infrarotheizung-shop.ch"
+  },
+  {
+    "slug": "luftentfeuchter",
+    "title": "Luftentfeuchter",
+    "meta": "Built at aiconomy AG",
+    "summary": "Sister store of Ecofort for dehumidifiers: theme repository setup and the same Intrum credit check fix.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "Checkout UI extensions",
+      "Intrum"
+    ],
+    "filters": [
+      "theme",
+      "integration"
+    ],
+    "url": "https://luftentfeuchter-shop.ch/",
+    "urlLabel": "luftentfeuchter-shop.ch"
+  },
+  {
+    "slug": "signvision",
+    "title": "Signvision",
+    "meta": "Built at aiconomy AG",
+    "summary": "Theme work for a Swiss signage, window film and interior shading company: video cropping and responsiveness across pages.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "CSS"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://signvision.ch/",
+    "urlLabel": "signvision.ch"
+  },
+  {
+    "slug": "lush-switzerland",
+    "title": "Lush Switzerland",
+    "meta": "Built at aiconomy AG",
+    "summary": "Storefront work on the Swiss Shopify store of the handmade cosmetics brand.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://lush.ch/",
+    "urlLabel": "lush.ch"
+  },
+  {
+    "slug": "multi-store-content-sync",
+    "title": "Multi-store content sync",
+    "meta": "Built at aiconomy AG &middot; internal app",
+    "summary": "An admin app that keeps content in sync across a client's multiple stores: metaobjects, metafields, menus, blogs, pages and translations. Deployed as a separate instance per client and built by a team of four developers.",
+    "detailsTitle": "My contribution",
+    "details": [
+      "<strong>Metaobject synchronisation:</strong> reserved Shopify types are checked for existence rather than created, definition validations are remapped against the target store, and referenced file IDs are mapped so images survive the transfer.",
+      "<strong>Blog metafields sync</strong> as a new route and UI, with deduplicated error summaries that expand to full detail.",
+      "<strong>Theme-referenced file backfill:</strong> enumerating a store's whole file library was timing out, so the app resolves only the files the live theme references and uploads those missing on the target, as a scheduled background job.",
+      "Exact-filename matching on file lookup, so naming collisions no longer upload the wrong asset.",
+      "Market adaptation, so each target store receives translations in its own primary language."
+    ],
+    "tech": [
+      "React Router",
+      "TypeScript",
+      "Prisma",
+      "Admin GraphQL API",
+      "Polaris"
+    ],
+    "filters": [
+      "app",
+      "integration"
+    ],
+    "url": null,
+    "urlLabel": null
+  },
+  {
+    "slug": "prestashop-to-shopify-migration-app",
+    "title": "PrestaShop to Shopify migration app",
+    "meta": "Built at aiconomy AG &middot; internal app",
+    "summary": "An admin app that migrates customers and historical orders from PrestaShop into Shopify through the Admin GraphQL API. Built once and run per market, first Switzerland and then the UAE.",
+    "detailsTitle": "How it works",
+    "details": [
+      "<strong>The hard requirement was silence.</strong> Importing tens of thousands of historical customers and backdated orders into a live store would, by default, email every customer an account invitation and an order receipt.",
+      "The guarantee is enforced by the build: order creation is reachable through a single function that hardcodes the receipt options to false and bypasses inventory, customers are created without a password or invited state, and a guard test fails the build if the invite mutations are ever referenced.",
+      "A three-file upload stepper for the PrestaShop exports, with a <strong>dry run by default</strong>: parsed counts, per-file previews, unmatched customers, missing SKUs and blocked rows, all before anything is written.",
+      "Import is a separate action behind a confirmation that restates the no-email guarantee and the target shop domain. It runs customers then orders oldest first, reports live progress and can be cancelled.",
+      "Idempotent and resumable, so a failed run can be re-run safely, with a downloadable CSV report of every source row."
+    ],
+    "tech": [
+      "React Router",
+      "TypeScript",
+      "Prisma",
+      "Admin GraphQL API",
+      "Polaris",
+      "Vitest"
+    ],
+    "filters": [
+      "app",
+      "integration"
+    ],
+    "url": null,
+    "urlLabel": null
+  },
+  {
+    "slug": "american-stationery",
+    "title": "American Stationery",
+    "meta": "Built at WebGurus",
+    "summary": "Custom Shopify theme work for a US client.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "CSS"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://www.americanstationery.com",
+    "urlLabel": "americanstationery.com"
+  },
+  {
+    "slug": "brand-depot",
+    "title": "Brand Depot",
+    "meta": "Built at WebGurus",
+    "summary": "Custom Shopify theme work for a US client.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "CSS"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://branddepot.com/",
+    "urlLabel": "branddepot.com"
+  },
+  {
+    "slug": "cosmic-clothing",
+    "title": "Cosmic Clothing",
+    "meta": "Built at WebGurus",
+    "summary": "Custom Shopify theme work for a US client.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "CSS"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://cosmicclothing.co/",
+    "urlLabel": "cosmicclothing.co"
+  },
+  {
+    "slug": "tshirts-com",
+    "title": "Tshirts.com",
+    "meta": "Custom theme",
+    "summary": "Our founder's first fully custom Shopify theme, built from scratch for a US custom t-shirt printer and optimised step by step: load time went from over 9 seconds to under 2.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "CSS"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://www.tshirts.com/",
+    "urlLabel": "tshirts.com"
+  },
+  {
+    "slug": "photography-com",
+    "title": "Photography.com",
+    "meta": "Shopify project",
+    "summary": "Theme work for a US store that turns customers' photos into wall art on canvas, metal, acrylic and wood.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "CSS"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://photography.com/",
+    "urlLabel": "photography.com"
+  },
+  {
+    "slug": "topform-data",
+    "title": "Topform Data",
+    "meta": "Shopify project",
+    "summary": "Store work for a US printer of forms, envelopes and stationery for dental, orthodontic and medical practices.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "CSS"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "http://topformdata.com/",
+    "urlLabel": "topformdata.com"
+  },
+  {
+    "slug": "skypergola",
+    "title": "Skypergola",
+    "meta": "Shopify project",
+    "summary": "Custom discount logic for a Swiss aluminium pergola retailer, built on dynamic Shopify discounts and metafields.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript",
+      "Metafields"
+    ],
+    "filters": [
+      "functionality"
+    ],
+    "url": "https://skypergola.ch/",
+    "urlLabel": "skypergola.ch"
+  },
+  {
+    "slug": "pyrostar-bugano-and-weco",
+    "title": "Pyrostar, Bugano &amp; Weco",
+    "meta": "Shopify project",
+    "summary": "Stores for leading fireworks retailers in Switzerland and neighbouring countries.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "JavaScript"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://www.pyrostar.ch/",
+    "urlLabel": "pyrostar.ch"
+  },
+  {
+    "slug": "konigs",
+    "title": "Konigs",
+    "meta": "Shopify project",
+    "summary": "Store work for a lighting retailer in St. Gallen selling lamps, textile cables and fittings online and in its showroom.",
+    "detailsTitle": null,
+    "details": [],
+    "tech": [
+      "Shopify Liquid",
+      "CSS"
+    ],
+    "filters": [
+      "theme"
+    ],
+    "url": "https://konigs.ch/",
+    "urlLabel": "konigs.ch"
+  }
+]
