@@ -25,7 +25,34 @@
     "url": "https://www.curaprox.ch",
     "urlLabel": "curaprox.ch",
     "company": "aiconomy AG",
-    "role": "Lead contributor"
+    "role": "Lead contributor",
+    "results": [
+      {
+        "value": "16.2 → 4.5 MB",
+        "label": "weight of a colour-variant product page"
+      },
+      {
+        "value": "13.0 → 1.4 MB",
+        "label": "gallery images on that page"
+      },
+      {
+        "value": "2.03 → 0.76 MB",
+        "label": "HTML of a 36-colour product page"
+      },
+      {
+        "value": "84 / 84",
+        "label": "UAE delivery dates matching checkout"
+      },
+      {
+        "value": "−34%",
+        "label": "time until the bestseller slider showed all images on slow 3G (31.7 s → 20.8 s)"
+      },
+      {
+        "value": "0.108 → 0",
+        "label": "layout shift on mobile product pages (seen in half the runs before)"
+      }
+    ],
+    "resultsNote": "Measured in my pull requests with Lighthouse and real Chrome on unpublished test themes against the live theme (August and September 2026): mobile Lighthouse for page weight, Slow-3G with a cold cache for the slider, and repeated runs for layout shift."
   },
   {
     "slug": "ev-zug",
@@ -56,7 +83,22 @@
     "url": "https://shop.evz.ch/",
     "urlLabel": "shop.evz.ch",
     "company": "aiconomy AG",
-    "role": "Lead contributor"
+    "role": "Lead contributor",
+    "results": [
+      {
+        "value": "1,479",
+        "label": "lines in the live auction page"
+      },
+      {
+        "value": "8,070",
+        "label": "lines of order-confirmation emails, German and English"
+      },
+      {
+        "value": "325 / 907",
+        "label": "commits in the store repository are mine (October 2026)"
+      }
+    ],
+    "resultsNote": "Line counts from the files in the repository; commit count across all branches, excluding merges."
   },
   {
     "slug": "inuikii",
@@ -87,7 +129,22 @@
     "url": "https://inuikii.com",
     "urlLabel": "inuikii.com",
     "company": "aiconomy AG",
-    "role": "Lead contributor"
+    "role": "Lead contributor",
+    "results": [
+      {
+        "value": "~3,000",
+        "label": "lines in the Meilisearch search and collection layer"
+      },
+      {
+        "value": "4",
+        "label": "connected builds: store, B2B showroom, influencer store, checkout app"
+      },
+      {
+        "value": "1",
+        "label": "paid notify-me app replaced by a custom flow"
+      }
+    ],
+    "resultsNote": "Line count of the two search scripts in the theme repository."
   },
   {
     "slug": "nile",
@@ -345,7 +402,13 @@
     "url": "https://www.fcz.ch/",
     "urlLabel": "fcz.ch",
     "company": "aiconomy AG",
-    "role": "Developer"
+    "role": "Developer",
+    "results": [
+      {
+        "value": "≥ 30%",
+        "label": "faster collection and product pages after three days of work"
+      }
+    ]
   },
   {
     "slug": "fc-st-gallen-1879",
@@ -661,7 +724,22 @@
     "urlLabel": null,
     "company": "aiconomy AG",
     "role": "Developer",
-    "kind": "Internal Shopify app"
+    "kind": "Internal Shopify app",
+    "results": [
+      {
+        "value": "0",
+        "label": "customer emails, enforced by a test that fails the build"
+      },
+      {
+        "value": "17",
+        "label": "test suites behind the importer"
+      },
+      {
+        "value": "53 / 56",
+        "label": "commits in the app are mine"
+      }
+    ],
+    "resultsNote": "From the app repository: tests/no-email-guard.test.ts and 17 test files."
   },
   {
     "slug": "american-stationery",
@@ -737,7 +815,13 @@
     "url": "https://www.tshirts.com/",
     "urlLabel": "tshirts.com",
     "company": null,
-    "role": "Theme developer"
+    "role": "Theme developer",
+    "results": [
+      {
+        "value": "9+ s → <2 s",
+        "label": "time until everything was loaded and the page was usable"
+      }
+    ]
   },
   {
     "slug": "photography-com",

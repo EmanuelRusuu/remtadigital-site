@@ -143,6 +143,19 @@ function page(p, i) {
           <figcaption>Mobile</figcaption>
         </figure>` : '';
 
+  const results = p.results ? `
+  <section class="results-sec">
+    <div class="wrap">
+      <div class="project-card">
+        <h2>By the numbers</h2>
+        <dl class="stats">
+          ${p.results.map(r => `<div><dt>${r.value}</dt><dd>${r.label}</dd></div>`).join('\n          ')}
+        </dl>
+        ${p.resultsNote ? `<p class="note">${p.resultsNote}</p>` : ''}
+      </div>
+    </div>
+  </section>` : '';
+
   const facts = [
     p.company ? `<div><dt>Company</dt><dd>${p.company}</dd></div>` : '',
     `<div><dt>My role</dt><dd>${p.role}</dd></div>`,
@@ -194,7 +207,7 @@ ${headerHtml}
       </div>
     </div>
   </section>
-${gallery}
+${results}${gallery}
   <section class="project-body">
     <div class="wrap${phone ? ' body-grid' : ' narrow'}">
       <div class="project-card">

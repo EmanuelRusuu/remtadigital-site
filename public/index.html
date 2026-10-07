@@ -46,6 +46,7 @@
       <span></span><span></span><span></span>
     </button>
     <nav id="nav" aria-label="Main">
+      <a href="#cases">Case studies</a>
       <a href="#work">Work</a>
       <a href="#services">Services</a>
       <a href="#about">About</a>
@@ -60,7 +61,14 @@
   <section class="intro">
     <div class="wrap">
       <div class="profile">
-        <div class="profile-cover"><img src="assets/img/linkedin-cover.jpg" alt="" width="800" height="200"></div>
+        <div class="profile-cover">
+          <ul class="cover-logos" aria-label="Where I studied and worked">
+            <li><img src="assets/img/brands/itschool.svg" alt="IT School" title="IT School: front-end web development" width="122" height="44" style="--h:44px"></li>
+            <li><img src="assets/img/brands/ubb-crest.webp" alt="Babe&#537;-Bolyai University" title="Babe&#537;-Bolyai University: Economic Informatics" width="64" height="64" style="--h:64px"></li>
+            <li><img src="assets/img/brands/webgurus-mark.svg" alt="WebGurus" title="WebGurus, 2023 to 2025" width="44" height="44" style="--h:44px"></li>
+            <li><img src="assets/img/brands/aico.webp" alt="aico (aiconomy AG)" title="aiconomy AG, 2025 to today" width="124" height="38" style="--h:38px"></li>
+          </ul>
+        </div>
         <div class="profile-top">
           <img class="avatar" src="assets/img/emanuel-rusu.jpg" alt="Emanuel Rusu" width="152" height="152">
           <div class="profile-main">
@@ -85,6 +93,67 @@
           <p>REMTA Digital is my own company, and it's just me. You talk directly to the person writing the code, and I'll tell you plainly what I'd do, how long it takes and what the trade-offs are.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section id="cases">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Case studies</h2>
+        <p class="note">Four builds I'm proud of, done as a developer at aiconomy AG. The numbers come from my pull requests and the repositories' history; speed figures are lab measurements, noted with their conditions on each project page.</p>
+      </div>
+      <div class="cases">
+        <article class="case">
+          <p class="meta">aiconomy AG &middot; EV Zug, Swiss ice hockey club</p>
+          <h3>Personalised jerseys that check out as one item</h3>
+          <p>A fan's name, number and badges are separate products behind the scenes. I built a Cart Transform Function in TypeScript, compiled to WebAssembly, that merges them into a single line in cart and checkout without changing the total, plus the live auction page and the order emails.</p>
+          <dl class="stats">
+            <div><dt>1,479</dt><dd>lines in the live auction page</dd></div>
+            <div><dt>8,070</dt><dd>lines of Outlook-safe order emails, German and English</dd></div>
+            <div><dt>325</dt><dd>of the store's 907 commits are mine</dd></div>
+          </dl>
+          <a class="case-link" href="projects/ev-zug/">Read the project</a>
+        </article>
+        <article class="case">
+          <p class="meta">aiconomy AG &middot; CURADEN AG (Curaprox)</p>
+          <h3>Moving a live store's customers without sending a single email</h3>
+          <p>Importing a whole customer and order history into a live Shopify store normally emails every customer an invite and a receipt. I built the migration app so that can't happen: one code path creates orders with receipts switched off, and a test fails the build if anything else could send mail. Every run starts as a dry run.</p>
+          <dl class="stats">
+            <div><dt>0</dt><dd>customer emails, enforced by a release-blocking test</dd></div>
+            <div><dt>17</dt><dd>test suites behind the importer</dd></div>
+            <div><dt>53</dt><dd>of the app's 56 commits are mine</dd></div>
+          </dl>
+          <a class="case-link" href="projects/prestashop-to-shopify-migration-app/">Read the project</a>
+        </article>
+        <article class="case">
+          <p class="meta">aiconomy AG &middot; Inuikii, Swiss footwear brand</p>
+          <h3>Search that knows colours and markets</h3>
+          <p>I replaced Shopify's native search and collection filtering with a Meilisearch layer that groups colour variants, shows market-aware prices and returns results as you type. Around it: a B2B showroom, an influencer store and a checkout app.</p>
+          <dl class="stats">
+            <div><dt>~3,000</dt><dd>lines in the search and collection layer</dd></div>
+            <div><dt>4</dt><dd>connected builds for one brand</dd></div>
+            <div><dt>1</dt><dd>paid app replaced by a custom back-in-stock flow</dd></div>
+          </dl>
+          <a class="case-link" href="projects/inuikii/">Read the project</a>
+        </article>
+        <article class="case">
+          <p class="meta">aiconomy AG &middot; CURADEN AG (Curaprox)</p>
+          <h3>One theme for two countries, then a much lighter product page</h3>
+          <p>The Swiss and UAE stores share one Horizon theme, with content resolved per store from the PIM. Before go-live I went through the product pages: properly sized images, a shared swatch sprite instead of 36 copies of the same SVG, and delivery promises that match checkout.</p>
+          <dl class="stats">
+            <div><dt>16.2&rarr;4.5 MB</dt><dd>page weight of a colour-variant product page</dd></div>
+            <div><dt>2.03&rarr;0.76 MB</dt><dd>HTML of a 36-colour product page</dd></div>
+            <div><dt>84/84</dt><dd>UAE delivery dates matching checkout</dd></div>
+          </dl>
+          <a class="case-link" href="projects/curaprox/">Read the project</a>
+        </article>
+      </div>
+      <h3 class="tools-title">Quick speed wins</h3>
+      <ul class="wins">
+        <li><strong>Tshirts.com:</strong> on my first fully custom theme, the time until everything was loaded and the page was usable went from over 9 seconds to under 2.</li>
+        <li><strong>FC Z&uuml;rich:</strong> collection and product pages at least 30% faster after three days of work.</li>
+        <li><strong>Curaprox:</strong> on a slow 3G connection the bestseller slider showed all its images 34% sooner (31.7 s to 20.8 s), and a layout shift on mobile product pages that showed up in half the test runs (0.108) is gone.</li>
+      </ul>
     </div>
   </section>
 
