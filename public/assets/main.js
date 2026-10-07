@@ -39,20 +39,24 @@
     });
   });
 
-  // Reveal on scroll
-  var els = document.querySelectorAll('.reveal');
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce || !('IntersectionObserver' in window)) {
-    els.forEach(function (el) { el.classList.add('in'); });
-  } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    els.forEach(function (el) { io.observe(el); });
+  // Project sorting: featured (original order), most visited site (Tranco rank), name
+  var grid = document.querySelector('.work-grid');
+  var sort = document.getElementById('sort');
+  var sortNote = document.getElementById('sort-note');
+  if (grid && sort) {
+    var original = Array.prototype.slice.call(grid.querySelectorAll('.work'));
+    var rank = function (el) { var r = parseInt(el.getAttribute('data-rank'), 10); return isNaN(r) ? Infinity : r; };
+    var name = function (el) { return el.getAttribute('data-title') || ''; };
+    sort.addEventListener('change', function () {
+      var list = original.slice();
+      if (sort.value === 'popular') {
+        list.sort(function (a, b) { return (rank(a) - rank(b)) || name(a).localeCompare(name(b)); });
+      } else if (sort.value === 'az') {
+        list.sort(function (a, b) { return name(a).localeCompare(name(b)); });
+      }
+      list.forEach(function (el) { grid.appendChild(el); });
+      grid.classList.toggle('show-rank', sort.value === 'popular');
+      if (sortNote) sortNote.hidden = sort.value !== 'popular';
+    });
   }
 })();

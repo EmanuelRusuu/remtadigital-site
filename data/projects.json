@@ -2,7 +2,6 @@
   {
     "slug": "curaprox",
     "title": "Curaprox (CURADEN AG)",
-    "meta": "Built at aiconomy AG &middot; lead contributor",
     "summary": "A full redesign of the Swiss and UAE Curaprox stores: two separate Shopify stores running from one shared base theme on Horizon.",
     "detailsTitle": "What was built",
     "details": [
@@ -24,12 +23,13 @@
       "integration"
     ],
     "url": "https://www.curaprox.ch",
-    "urlLabel": "curaprox.ch"
+    "urlLabel": "curaprox.ch",
+    "company": "aiconomy AG",
+    "role": "Lead contributor"
   },
   {
     "slug": "ev-zug",
     "title": "EV Zug",
-    "meta": "Built at aiconomy AG &middot; lead contributor",
     "summary": "The official Shopify storefront of EV Zug, a Swiss National League hockey club: personalised jerseys, checkout bundling, live auctions and ERP-driven pricing.",
     "detailsTitle": "What was built",
     "details": [
@@ -54,12 +54,13 @@
       "integration"
     ],
     "url": "https://shop.evz.ch/",
-    "urlLabel": "shop.evz.ch"
+    "urlLabel": "shop.evz.ch",
+    "company": "aiconomy AG",
+    "role": "Lead contributor"
   },
   {
     "slug": "inuikii",
     "title": "Inuikii",
-    "meta": "Built at aiconomy AG &middot; lead contributor",
     "summary": "Four connected Shopify builds for the footwear brand: the main Swiss store, a private B2B showroom, an influencer store and a checkout app.",
     "detailsTitle": "What was built",
     "details": [
@@ -84,12 +85,13 @@
       "integration"
     ],
     "url": "https://inuikii.com",
-    "urlLabel": "inuikii.com"
+    "urlLabel": "inuikii.com",
+    "company": "aiconomy AG",
+    "role": "Lead contributor"
   },
   {
     "slug": "nile",
     "title": "Nile",
-    "meta": "Built at aiconomy AG &middot; lead contributor",
     "summary": "A Swiss fashion retailer running six Shopify stores from one shared theme: CHF, EUR and GBP, each with a test and a production store.",
     "detailsTitle": "What was built",
     "details": [
@@ -112,12 +114,13 @@
       "integration"
     ],
     "url": "https://www.nile.ch",
-    "urlLabel": "nile.ch"
+    "urlLabel": "nile.ch",
+    "company": "aiconomy AG",
+    "role": "Lead contributor"
   },
   {
     "slug": "ecofort",
     "title": "Ecofort",
-    "meta": "Built at aiconomy AG &middot; main developer",
     "summary": "Storefront for a Swiss supplier of heating and dehumidification products, plus theme repositories for the sister stores Infrarotheizung and Luftentfeuchter.",
     "detailsTitle": "What was built",
     "details": [
@@ -140,12 +143,13 @@
       "integration"
     ],
     "url": "https://www.ecofort.ch",
-    "urlLabel": "ecofort.ch"
+    "urlLabel": "ecofort.ch",
+    "company": "aiconomy AG",
+    "role": "Main developer"
   },
   {
     "slug": "fc-basel-1893",
     "title": "FC Basel 1893",
-    "meta": "Built at aiconomy AG &middot; lead contributor",
     "summary": "The Swiss football club's website and fan shop, running together on one Shopify theme: news, videos, match data, players and the jersey configurator.",
     "detailsTitle": "What was built",
     "details": [
@@ -167,12 +171,13 @@
       "app"
     ],
     "url": "https://www.fcb.ch/",
-    "urlLabel": "fcb.ch"
+    "urlLabel": "fcb.ch",
+    "company": "aiconomy AG",
+    "role": "Lead contributor"
   },
   {
     "slug": "confiserie-sprungli",
     "title": "Confiserie Sprüngli",
-    "meta": "Built at aiconomy AG",
     "summary": "Shopify build for a Swiss confectioner, rebuilding the brand's existing site design on Dawn: product pages, collection pages, navigation and animations.",
     "detailsTitle": "What was built",
     "details": [
@@ -194,12 +199,13 @@
       "functionality"
     ],
     "url": "https://www.spruengli.ch",
-    "urlLabel": "spruengli.ch"
+    "urlLabel": "spruengli.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "chruterhusli",
     "title": "Chrüterhüsli",
-    "meta": "Built at aiconomy AG",
     "summary": "Storefront for a Swiss drugstore and natural products retailer, built on Shopify's Horizon theme.",
     "detailsTitle": "What was built",
     "details": [
@@ -220,12 +226,13 @@
       "functionality"
     ],
     "url": "https://www.chrueterhuesli.ch",
-    "urlLabel": "chrueterhuesli.ch"
+    "urlLabel": "chrueterhuesli.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "bruderer",
     "title": "Bruderer",
-    "meta": "Built at aiconomy AG",
     "summary": "Storefront for a Swiss confectionery maker, with a custom product filtering layer that replaces Shopify's native facets.",
     "detailsTitle": "What was built",
     "details": [
@@ -245,12 +252,13 @@
       "integration"
     ],
     "url": "https://www.bruderer.ch",
-    "urlLabel": "bruderer.ch"
+    "urlLabel": "bruderer.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "spa-solutions",
     "title": "Spa Solutions",
-    "meta": "Built at aiconomy AG &middot; sole developer",
     "summary": "Custom discount and cart logic for a Swiss swim spa and cold plunge retailer, where the price depends on whether the customer installs the product themselves or books the installation team.",
     "detailsTitle": "What was built",
     "details": [
@@ -269,12 +277,13 @@
       "functionality"
     ],
     "url": "https://www.spa-solutions.ch/",
-    "urlLabel": "spa-solutions.ch"
+    "urlLabel": "spa-solutions.ch",
+    "company": "aiconomy AG",
+    "role": "Sole developer"
   },
   {
     "slug": "al-ittihad",
     "title": "Al-Ittihad",
-    "meta": "Built at aiconomy AG",
     "summary": "Frontend work on a custom product configurator for the club's Shopify store: name and number placement on the shirt and the personalisation overlay on the product page.",
     "detailsTitle": null,
     "details": [],
@@ -286,12 +295,13 @@
       "functionality"
     ],
     "url": "https://shop.ittihadclub.sa",
-    "urlLabel": "shop.ittihadclub.sa"
+    "urlLabel": "shop.ittihadclub.sa",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "art-of-fire",
     "title": "Art of Fire",
-    "meta": "Built at aiconomy AG",
     "summary": "Tag-driven price visibility on the theme: the client hides the price of any product just by tagging it in the Shopify admin, on both product pages and collection listings.",
     "detailsTitle": "What was built",
     "details": [
@@ -309,12 +319,13 @@
     "urlLabel": "artoffire.ch",
     "hideShots": [
       "home.webp"
-    ]
+    ],
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "fc-zurich",
     "title": "FC Zürich",
-    "meta": "Built at aiconomy AG",
     "summary": "Shopify storefront for the Swiss football club: speed work that made collection and product pages at least 30% faster in three days, plus a custom collection filter.",
     "detailsTitle": "What was built",
     "details": [
@@ -332,12 +343,13 @@
       "functionality"
     ],
     "url": "https://www.fcz.ch/",
-    "urlLabel": "fcz.ch"
+    "urlLabel": "fcz.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "fc-st-gallen-1879",
     "title": "FC St. Gallen 1879",
-    "meta": "Built at aiconomy AG",
     "summary": "Shopify storefront for the Swiss football club, from product filtering and auctions to the club's job portal and video pages.",
     "detailsTitle": "What was built",
     "details": [
@@ -357,12 +369,13 @@
       "integration"
     ],
     "url": "https://www.fcsg.ch/",
-    "urlLabel": "fcsg.ch"
+    "urlLabel": "fcsg.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "oscarwash",
     "title": "OSCARwash",
-    "meta": "Built at aiconomy AG",
     "summary": "Customer account features for a Swiss car wash chain with sites in Zug, Emmen and Sihlbrugg.",
     "detailsTitle": "What was built",
     "details": [
@@ -378,12 +391,13 @@
       "functionality"
     ],
     "url": "https://shop.oscarwash.ch/",
-    "urlLabel": "shop.oscarwash.ch"
+    "urlLabel": "shop.oscarwash.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "revendo",
     "title": "Revendo",
-    "meta": "Built at aiconomy AG",
     "summary": "A filter extension app for the Swiss refurbished electronics retailer, plus changes to its stock indicator app.",
     "detailsTitle": "What was built",
     "details": [
@@ -400,12 +414,13 @@
       "functionality"
     ],
     "url": "https://revendo.ch/",
-    "urlLabel": "revendo.ch"
+    "urlLabel": "revendo.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "house-of-jeans",
     "title": "House of Jeans",
-    "meta": "Built at aiconomy AG",
     "summary": "Single-use gift cards for a Swiss jeans retailer that work both in store and online.",
     "detailsTitle": "What was built",
     "details": [
@@ -422,12 +437,13 @@
       "functionality"
     ],
     "url": "https://www.houseofjeans.ch/",
-    "urlLabel": "houseofjeans.ch"
+    "urlLabel": "houseofjeans.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "glory-bomb",
     "title": "Glory Bomb",
-    "meta": "Built at aiconomy AG",
     "summary": "Can deposit (Pfand) handling for the German store of a functional fruit drink brand.",
     "detailsTitle": "What was built",
     "details": [
@@ -443,12 +459,13 @@
       "functionality"
     ],
     "url": "https://glorybomb.de/",
-    "urlLabel": "glorybomb.de"
+    "urlLabel": "glorybomb.de",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "sorenos",
     "title": "Sorenos",
-    "meta": "Built at aiconomy AG",
     "summary": "Swiss, German and Austrian stores for a 3M window film specialist.",
     "detailsTitle": "What was built",
     "details": [
@@ -463,12 +480,13 @@
       "theme"
     ],
     "url": "https://sorenos.ch/",
-    "urlLabel": "sorenos.ch"
+    "urlLabel": "sorenos.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "mediconsult",
     "title": "Mediconsult",
-    "meta": "Built at aiconomy AG",
     "summary": "Swiss and Austrian stores for a supplier to ophthalmologists and opticians.",
     "detailsTitle": "What was built",
     "details": [
@@ -485,12 +503,13 @@
       "theme"
     ],
     "url": "https://mediconsult.ch/",
-    "urlLabel": "mediconsult.ch"
+    "urlLabel": "mediconsult.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "nikin",
     "title": "Nikin",
-    "meta": "Built at aiconomy AG",
     "summary": "Theme work for a Swiss sustainable clothing brand that plants a tree for every product sold.",
     "detailsTitle": "What was built",
     "details": [
@@ -506,12 +525,13 @@
       "theme"
     ],
     "url": "https://nikin.ch/",
-    "urlLabel": "nikin.ch"
+    "urlLabel": "nikin.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "infrarotheizung",
     "title": "Infrarotheizung",
-    "meta": "Built at aiconomy AG",
     "summary": "Sister store of Ecofort for infrared heating: theme repository setup and the Intrum credit check fix, so outages are no longer shown to customers as credit declines.",
     "detailsTitle": null,
     "details": [],
@@ -525,12 +545,13 @@
       "integration"
     ],
     "url": "https://infrarotheizung-shop.ch/",
-    "urlLabel": "infrarotheizung-shop.ch"
+    "urlLabel": "infrarotheizung-shop.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "luftentfeuchter",
     "title": "Luftentfeuchter",
-    "meta": "Built at aiconomy AG",
     "summary": "Sister store of Ecofort for dehumidifiers: theme repository setup and the same Intrum credit check fix.",
     "detailsTitle": null,
     "details": [],
@@ -544,12 +565,13 @@
       "integration"
     ],
     "url": "https://luftentfeuchter-shop.ch/",
-    "urlLabel": "luftentfeuchter-shop.ch"
+    "urlLabel": "luftentfeuchter-shop.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "signvision",
     "title": "Signvision",
-    "meta": "Built at aiconomy AG",
     "summary": "Theme work for a Swiss signage, window film and interior shading company: video cropping and responsiveness across pages.",
     "detailsTitle": null,
     "details": [],
@@ -561,12 +583,13 @@
       "theme"
     ],
     "url": "https://signvision.ch/",
-    "urlLabel": "signvision.ch"
+    "urlLabel": "signvision.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "lush-switzerland",
     "title": "Lush Switzerland",
-    "meta": "Built at aiconomy AG",
     "summary": "Storefront work on the Swiss Shopify store of the handmade cosmetics brand.",
     "detailsTitle": null,
     "details": [],
@@ -577,12 +600,13 @@
       "theme"
     ],
     "url": "https://lush.ch/",
-    "urlLabel": "lush.ch"
+    "urlLabel": "lush.ch",
+    "company": "aiconomy AG",
+    "role": "Developer"
   },
   {
     "slug": "multi-store-content-sync",
     "title": "Multi-store content sync",
-    "meta": "Built at aiconomy AG &middot; internal app",
     "summary": "An admin app that keeps content in sync across a client's multiple stores: metaobjects, metafields, menus, blogs, pages and translations. Deployed as a separate instance per client and built by a team of four developers.",
     "detailsTitle": "My contribution",
     "details": [
@@ -604,12 +628,14 @@
       "integration"
     ],
     "url": null,
-    "urlLabel": null
+    "urlLabel": null,
+    "company": "aiconomy AG",
+    "role": "Developer",
+    "kind": "Internal Shopify app"
   },
   {
     "slug": "prestashop-to-shopify-migration-app",
     "title": "PrestaShop to Shopify migration app",
-    "meta": "Built at aiconomy AG &middot; internal app",
     "summary": "An admin app that migrates customers and historical orders from PrestaShop into Shopify through the Admin GraphQL API. Built once and run per market, first Switzerland and then the UAE.",
     "detailsTitle": "How it works",
     "details": [
@@ -632,13 +658,15 @@
       "integration"
     ],
     "url": null,
-    "urlLabel": null
+    "urlLabel": null,
+    "company": "aiconomy AG",
+    "role": "Developer",
+    "kind": "Internal Shopify app"
   },
   {
     "slug": "american-stationery",
     "title": "American Stationery",
-    "meta": "Built at WebGurus",
-    "summary": "Custom Shopify theme work for a US client.",
+    "summary": "Custom Shopify theme work for a US store selling personalised stationery and gifts.",
     "detailsTitle": null,
     "details": [],
     "tech": [
@@ -650,13 +678,14 @@
       "theme"
     ],
     "url": "https://www.americanstationery.com",
-    "urlLabel": "americanstationery.com"
+    "urlLabel": "americanstationery.com",
+    "company": "WebGurus",
+    "role": "Developer"
   },
   {
     "slug": "brand-depot",
     "title": "Brand Depot",
-    "meta": "Built at WebGurus",
-    "summary": "Custom Shopify theme work for a US client.",
+    "summary": "Custom Shopify theme work for a US store selling custom branded merchandise, such as embroidered caps.",
     "detailsTitle": null,
     "details": [],
     "tech": [
@@ -668,13 +697,14 @@
       "theme"
     ],
     "url": "https://branddepot.com/",
-    "urlLabel": "branddepot.com"
+    "urlLabel": "branddepot.com",
+    "company": "WebGurus",
+    "role": "Developer"
   },
   {
     "slug": "cosmic-clothing",
     "title": "Cosmic Clothing",
-    "meta": "Built at WebGurus",
-    "summary": "Custom Shopify theme work for a US client.",
+    "summary": "Custom Shopify theme work for a US apparel brand with zodiac and nature designs.",
     "detailsTitle": null,
     "details": [],
     "tech": [
@@ -686,13 +716,14 @@
       "theme"
     ],
     "url": "https://cosmicclothing.co/",
-    "urlLabel": "cosmicclothing.co"
+    "urlLabel": "cosmicclothing.co",
+    "company": "WebGurus",
+    "role": "Developer"
   },
   {
     "slug": "tshirts-com",
     "title": "Tshirts.com",
-    "meta": "Custom theme",
-    "summary": "Our founder's first fully custom Shopify theme, built from scratch for a US custom t-shirt printer and optimised step by step: load time went from over 9 seconds to under 2.",
+    "summary": "My first fully custom Shopify theme, built from scratch for a US custom t-shirt printer and optimised step by step: load time went from over 9 seconds to under 2.",
     "detailsTitle": null,
     "details": [],
     "tech": [
@@ -704,12 +735,13 @@
       "theme"
     ],
     "url": "https://www.tshirts.com/",
-    "urlLabel": "tshirts.com"
+    "urlLabel": "tshirts.com",
+    "company": null,
+    "role": "Theme developer"
   },
   {
     "slug": "photography-com",
     "title": "Photography.com",
-    "meta": "Shopify project",
     "summary": "Theme work for a US store that turns customers' photos into wall art on canvas, metal, acrylic and wood.",
     "detailsTitle": null,
     "details": [],
@@ -722,12 +754,13 @@
       "theme"
     ],
     "url": "https://photography.com/",
-    "urlLabel": "photography.com"
+    "urlLabel": "photography.com",
+    "company": null,
+    "role": "Developer"
   },
   {
     "slug": "topform-data",
     "title": "Topform Data",
-    "meta": "Shopify project",
     "summary": "Store work for a US printer of forms, envelopes and stationery for dental, orthodontic and medical practices.",
     "detailsTitle": null,
     "details": [],
@@ -739,12 +772,13 @@
       "theme"
     ],
     "url": "http://topformdata.com/",
-    "urlLabel": "topformdata.com"
+    "urlLabel": "topformdata.com",
+    "company": null,
+    "role": "Developer"
   },
   {
     "slug": "skypergola",
     "title": "Skypergola",
-    "meta": "Shopify project",
     "summary": "Custom discount logic for a Swiss aluminium pergola retailer, built on dynamic Shopify discounts and metafields.",
     "detailsTitle": null,
     "details": [],
@@ -757,12 +791,13 @@
       "functionality"
     ],
     "url": "https://skypergola.ch/",
-    "urlLabel": "skypergola.ch"
+    "urlLabel": "skypergola.ch",
+    "company": null,
+    "role": "Developer"
   },
   {
     "slug": "pyrostar-bugano-and-weco",
     "title": "Pyrostar, Bugano &amp; Weco",
-    "meta": "Shopify project",
     "summary": "Stores for leading fireworks retailers in Switzerland and neighbouring countries.",
     "detailsTitle": null,
     "details": [],
@@ -774,12 +809,13 @@
       "theme"
     ],
     "url": "https://www.pyrostar.ch/",
-    "urlLabel": "pyrostar.ch"
+    "urlLabel": "pyrostar.ch",
+    "company": null,
+    "role": "Developer"
   },
   {
     "slug": "konigs",
     "title": "Konigs",
-    "meta": "Shopify project",
     "summary": "Store work for a lighting retailer in St. Gallen selling lamps, textile cables and fittings online and in its showroom.",
     "detailsTitle": null,
     "details": [],
@@ -791,6 +827,8 @@
       "theme"
     ],
     "url": "https://konigs.ch/",
-    "urlLabel": "konigs.ch"
+    "urlLabel": "konigs.ch",
+    "company": null,
+    "role": "Developer"
   }
 ]

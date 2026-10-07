@@ -13,6 +13,7 @@ public/robots.txt
 public/sitemap.xml             generated
 data/projects.json             the projects: title, role, summary, details, stack, filters, live URL
 data/media.json                what capture found per project (Shopify or not, icon, logo, screenshots)
+data/popularity.json           Tranco traffic ranks used by the "Most visited site" sort
 scripts/                       local tooling, not used by the deploy
 wrangler.jsonc                 Cloudflare Worker config (serves public/ as static assets)
 ```
@@ -33,7 +34,13 @@ To refresh a project's icon, logo and screenshots (uses the local Chrome with a 
 cd scripts && node capture.mjs curaprox nile
 ```
 
-Run `node capture.mjs` without arguments to refresh every project. Screenshots are only taken for sites that still run on Shopify, so a store that has moved to another platform never shows work that isn't ours. Commit the generated files; the deploy itself has no build step.
+To refresh the traffic ranks behind the "Most visited site" sort (from the [Tranco list](https://tranco-list.eu/)):
+
+```bash
+cd scripts && node popularity.mjs && node build.mjs
+```
+
+Run `node capture.mjs` without arguments to refresh every project. Screenshots are only taken for sites that still run on Shopify, so a store that has moved to another platform never shows work that isn't mine. Commit the generated files; the deploy itself has no build step.
 
 ## Run locally
 
