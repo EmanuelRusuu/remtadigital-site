@@ -312,7 +312,7 @@ ${results}${gallery}
     <div class="wrap narrow center">
       <h2>Want something like this for your store?</h2>
       <p class="lead">Send me a short message about your store and what you'd like to build.</p>
-      <p><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a></p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
     </div>
   </section>
 

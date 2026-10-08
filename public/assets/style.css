@@ -59,6 +59,9 @@ strong{color:var(--text)}
 #nav a:hover{color:var(--accent)}
 #nav .nav-cta{color:#fff;background:var(--accent);padding:7px 16px;border-radius:8px}
 #nav .nav-cta:hover{background:var(--accent-dark);color:#fff}
+#nav .nav-cv{color:var(--accent);border:1px solid var(--divider);padding:6px 14px;border-radius:8px}
+#nav .nav-cv:hover{border-color:var(--accent);background:var(--accent-soft)}
+.center-row{justify-content:center}
 .menu-btn{display:none;background:var(--card);border:1px solid var(--line);border-radius:8px;width:44px;height:44px;padding:0;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:4px}
 .menu-btn span{display:block;width:18px;height:2px;background:var(--text);border-radius:2px}
 
@@ -311,6 +314,7 @@ footer p{margin:4px 0;max-width:90ch}
   #nav.open{display:flex}
   #nav a{padding:12px 0;border-bottom:1px solid var(--line)}
   #nav .nav-cta{margin-top:12px;text-align:center;border-bottom:0}
+  #nav .nav-cv{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:12px 0}
   .pager{grid-template-columns:1fr 1fr}
   .pager .all{grid-column:1/-1;order:3;text-align:center}
   .cover-logos{gap:12px}

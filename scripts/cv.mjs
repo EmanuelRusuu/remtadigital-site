@@ -1,5 +1,5 @@
 // Render my one-page CV to public/emanuel-rusu-cv.pdf (A4) with the site's fonts and colours.
-// Every line here is also on remtadigital.com or LinkedIn; update both together.
+// Every line here is also on remtadigital.com, LinkedIn or my own CV (without the private phone and e-mail).
 // Usage: node cv.mjs
 import puppeteer from 'puppeteer-core';
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -8,9 +8,14 @@ const ROOT = new URL('../', import.meta.url);
 const BROWSER = process.env.BROWSER_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const data = (p, type) => `data:${type};base64,${readFileSync(new URL(p, ROOT)).toString('base64')}`;
 
-const tools = ['Shopify Liquid', 'Dawn', 'Horizon', 'JavaScript', 'TypeScript', 'React Router', 'Polaris', 'Shopify Admin GraphQL API',
-  'App proxy', 'Metaobjects & metafields', 'Shopify Functions', 'Checkout UI extensions', 'WebAssembly', 'Meilisearch', 'InstantSearch',
-  'Klaviyo', 'HubSpot', 'JSON-LD & SEO', 'Prisma', 'Vitest', 'Laravel', 'HTML & CSS'];
+// Grouped like my own CV; the same tools as on the site plus the general ones from that CV.
+const skills = [
+  ['Shopify', 'Liquid, Dawn, Horizon, Functions, Checkout UI and theme app extensions, App proxy, Admin GraphQL API, metaobjects and metafields, Shopify CLI'],
+  ['Apps', 'TypeScript, React Router, Node and Express, Prisma, Polaris, Vitest, WebAssembly, Laravel'],
+  ['Front-end', 'JavaScript, jQuery, HTML and CSS, Vue, React, Tailwind, JSON-LD and SEO'],
+  ['Integrations', 'Cloud ERP, Meilisearch, InstantSearch, Klaviyo, HubSpot'],
+  ['Tools', 'Git, Jira, Bitbucket, Figma'],
+];
 
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:CvSans;font-weight:400 700;src:url(${data('public/assets/fonts/source-sans-3-latin.woff2', 'font/woff2')})}
@@ -27,7 +32,8 @@ aside h2{font-size:8.6pt;letter-spacing:.08em;text-transform:uppercase;color:#a9
 aside p,aside li{font-size:9pt}
 aside ul{list-style:none}
 aside li{margin-bottom:1.2mm}
-.tools li{display:inline-block;margin:0 1mm 1.4mm 0;padding:.5mm 2mm;border:1px solid rgba(255,255,255,.35);border-radius:1.5mm;font-size:8.2pt}
+.skills li{margin-bottom:2mm;font-size:8.6pt;line-height:1.38}
+.skills b{display:block;color:#fff}
 main{padding:13mm 13mm 10mm 11mm}
 h1{font-family:CvSerif;font-weight:650;font-size:27pt;line-height:1.05;color:#1c2326}
 .role{font-size:12pt;font-weight:600;color:#1d5e6b;margin:1.5mm 0 4mm}
@@ -55,13 +61,13 @@ main h2{font-family:CvSerif;font-weight:650;font-size:13pt;color:#1c2326;border-
     <li>Cluj-Napoca, Romania, working remotely</li>
   </ul>
   <h2>Languages</h2>
-  <p>English and Romanian</p>
-  <h2>Tools I use every day</h2>
-  <ul class="tools">${tools.map(t => `<li>${t.replace('&', '&amp;')}</li>`).join('')}</ul>
+  <ul><li>English: C1</li><li>Romanian: native</li></ul>
+  <h2>Skills</h2>
+  <ul class="skills">${skills.map(([k, v]) => `<li><b>${k}</b>${v}</li>`).join('')}</ul>
   <h2>Education</h2>
   <ul>
     <li><b>Babe&#537;-Bolyai University</b><br>Economic Informatics, 2021 to 2024</li>
-    <li><b>IT School</b><br>Front-End Web Development certification, 2023</li>
+    <li><b>IT School</b><br>Front-End Web Development, certified Web Page Designer, 2022 to 2023</li>
   </ul>
 </aside>
 <main>
@@ -72,7 +78,7 @@ main h2{font-family:CvSerif;font-weight:650;font-size:13pt;color:#1c2326;border-
   <h2>Experience</h2>
   <div class="job">
     <div class="job-head"><b>REMTA Digital</b><span>Dec 2025 to today</span></div>
-    <p class="sub">Founder and Shopify developer. My own one-person company for Shopify projects.</p>
+    <p class="sub">Founder and Shopify developer. My own company: Shopify apps, Shopify Functions and Checkout UI Extensions for business clients, delivered end to end, including ERP-integrated projects.</p>
   </div>
   <div class="job">
     <div class="job-head"><b>aiconomy AG</b><span>Apr 2025 to today</span></div>
@@ -82,15 +88,17 @@ main h2{font-family:CvSerif;font-weight:650;font-size:13pt;color:#1c2326;border-
       <li><strong>Curaprox:</strong> the Swiss and UAE stores on one shared Horizon theme, with content resolved per store from the PIM. A colour-variant product page went from 16.2 MB to 4.5 MB.</li>
       <li><strong>PrestaShop to Shopify migration app:</strong> customers and order history imported into a live store without a single customer email, enforced by a release-blocking test; 17 test suites.</li>
       <li><strong>Inuikii:</strong> a Meilisearch search and collection layer with colour grouping and market-aware prices, plus a B2B showroom, an influencer store and a checkout app.</li>
+      <li>A server-side wishlist over a Shopify app proxy.</li>
       <li><strong>Also:</strong> FC Basel 1893, FC St. Gallen 1879, FC Z&uuml;rich (collection and product pages at least 30% faster), Confiserie Spr&uuml;ngli, Nile, Lush Switzerland, Revendo and more.</li>
     </ul>
   </div>
   <div class="job">
     <div class="job-head"><b>WebGurus</b><span>Oct 2023 to Mar 2025</span></div>
-    <p class="sub">Shopify developer on custom themes for US clients, after starting there as a mobile app developer and full stack intern.</p>
+    <p class="sub">Shopify developer: custom Shopify themes built from scratch for US stores used by thousands of people every day.</p>
     <ul>
       <li><strong>Tshirts.com:</strong> my first fully custom theme, built from scratch, then optimised until the page was loaded and usable in under 2 seconds, down from over 9.</li>
       <li><strong>Also:</strong> American Stationery, Brand Depot and Cosmic Clothing.</li>
+      <li><strong>Before Shopify:</strong> full-stack developer, building a mobile news app for government officials in Moldova in under three months, after a full-stack internship.</li>
     </ul>
   </div>
   <h2>How I work</h2>
