@@ -157,7 +157,8 @@ function page(p, i) {
   const mobile = list.find(s => s.mobile);
   const rec = m(p);
   const rank = rankOf(p);
-  const ogImage = desktop[0] ? `${SITE}/projects/${p.slug}/${desktop[0].file}` : `${SITE}/assets/img/emanuel-rusu.jpg`;
+  // Preview image rendered by og.mjs; falls back to a screenshot, then the homepage preview.
+  const ogImage = hasFile(p.slug, 'og.jpg') ? `${SITE}/projects/${p.slug}/og.jpg` : desktop[0] ? `${SITE}/projects/${p.slug}/${desktop[0].file}` : `${SITE}/assets/img/og-home.jpg`;
   const logo = hasFile(p.slug, rec.logo) ? `<img class="project-logo" src="/projects/${p.slug}/${rec.logo}" alt="${attr(p.title)} logo">` : '';
   const live = p.url ? `<a class="btn out" href="${p.url}" target="_blank" rel="noopener noreferrer">Visit ${hostLabel(p)}</a>` : '';
   const captured = rec.capturedAt ? new Date(rec.capturedAt).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }) : '';
@@ -250,6 +251,9 @@ function page(p, i) {
 <meta property="og:type" content="article">
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${ogImage}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="${url}">
 <link rel="icon" href="${favicon}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">

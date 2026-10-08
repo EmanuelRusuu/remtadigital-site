@@ -45,6 +45,13 @@ cd scripts && node popularity.mjs && node regional.mjs && node build.mjs
 
 `popularity.mjs` fetches worldwide ranks from the [Tranco list](https://tranco-list.eu/). `regional.mjs` downloads the latest [Chrome UX Report](https://developer.chrome.com/docs/crux) country lists (via [zakird/crux-top-lists](https://github.com/zakird/crux-top-lists)) for every European country plus each store's home market, and records each domain's best rank band per country. In `data/popularity.json`, `markets` sets a store's home country when its domain doesn't say (`.com`), `extraDomains` adds a project's other stores, and `categories` holds hand-checked placings with their source (for example Curaprox against other oral-care brand sites in the Swiss list); a category `badge`, or a top-1,000 band in the home country, shows as a badge on the homepage card.
 
+Link previews and the CV are rendered with the local Chrome too:
+
+```bash
+cd scripts && node og.mjs   # 1200x630 og:image for the homepage and every project page
+cd scripts && node cv.mjs   # public/emanuel-rusu-cv.pdf, one A4 page; keep it in line with the site
+```
+
 Run `node capture.mjs` without arguments to refresh every project. Screenshots are only taken for sites that still run on Shopify, so a store that has moved to another platform never shows work that isn't mine. Commit the generated files; the deploy itself has no build step.
 
 ## Run locally
