@@ -261,8 +261,9 @@
     "title": "W. Bruderer AG – Schokoladen Halbfabrikate & Confiserie Grosshandel",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "light",
-    "iconSource": 49
+    "iconTone": "dark",
+    "iconSource": 256,
+    "iconNote": "full logo from the site og:image"
   },
   "spa-solutions": {
     "shopify": true,
@@ -712,7 +713,8 @@
     "capturedAt": "2026-10-07",
     "themeColor": null,
     "iconTone": "dark",
-    "iconSource": 16
+    "iconSource": 256,
+    "iconNote": "symbol cropped from IRS_Logo_Black_1.png on the site"
   },
   "lush-switzerland": {
     "shopify": true,
@@ -826,7 +828,7 @@
     "shopify": true,
     "status": 200,
     "icon": "icon.png",
-    "logo": null,
+    "logo": "logo.svg",
     "shots": [
       {
         "file": "home.webp",
@@ -850,7 +852,8 @@
     "capturedAt": "2026-10-07",
     "themeColor": null,
     "iconTone": "dark",
-    "iconSource": 40
+    "iconSource": 256,
+    "iconNote": "aperture cropped from Photography-Logo.svg on the site"
   },
   "pyrostar-bugano-and-weco": {
     "shopify": false,
@@ -909,13 +912,14 @@
   "american-stationery": {
     "shopify": false,
     "status": 200,
-    "icon": "icon.png",
-    "logo": null,
+    "icon": null,
+    "logo": "logo.svg",
     "shots": [],
     "title": "Stationery & Personalized Gifts From American Stationery",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark",
-    "iconSource": 50
+    "iconTone": null,
+    "iconSource": null,
+    "iconNote": "only a generic Magento favicon; initials instead"
   }
 }
