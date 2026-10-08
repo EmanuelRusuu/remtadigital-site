@@ -58,11 +58,11 @@
   },
   "categories": {
     "curaprox": {
-      "badge": "#7 dental site in Switzerland",
-      "text": "#7 in Dentist and Dental Services in Switzerland",
-      "source": "Similarweb",
-      "url": "https://www.similarweb.com/website/curaprox.ch/",
-      "month": "September 2026"
+      "badge": "Most visited oral-care brand in Switzerland",
+      "text": "The only oral-care brand site in Switzerland’s top 10,000. Colgate, elmex, Trisa and Oral-B are in the top 50,000; meridol and TePe in the top 100,000; Sensodyne, Waterpik and happybrush in the top 500,000.",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
     },
     "fc-basel-1893": {
       "badge": "Top 2 football club site in Switzerland",
