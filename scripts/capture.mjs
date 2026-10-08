@@ -1,5 +1,6 @@
 // Capture brand icon, header logo and screenshots for each project with a live site.
 // Usage: node capture.mjs [slug ...]   (no slugs = all projects)
+//        node capture.mjs --icons [slug ...]   (refresh only the brand icons)
 // Writes public/projects/<slug>/* and data/media.json. Uses the locally installed Chrome (fresh temp profile).
 import puppeteer from 'puppeteer-core';
 import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs';
@@ -109,10 +110,13 @@ async function toPng(page, buf, type, size) {
     const ctx = c.getContext('2d');
     const s = Math.min(size / img.naturalWidth, size / img.naturalHeight);
     const w = img.naturalWidth * s, h = img.naturalHeight * s;
+    ctx.imageSmoothingQuality = 'high';
     ctx.drawImage(img, (size - w) / 2, (size - h) / 2, w, h);
-    return c.toDataURL('image/png');
+    return { url: c.toDataURL('image/png'), source: Math.min(img.naturalWidth, img.naturalHeight) || size };
   }, dataUrl, size);
-  return Buffer.from(out.split(',')[1], 'base64');
+  const png = Buffer.from(out.url.split(',')[1], 'base64');
+  png.source = out.source; // the original image's size, so callers can tell a sharp icon from an upscaled favicon
+  return png;
 }
 
 // 'light' when the icon's visible pixels are mostly white (needs a dark tile), else 'dark'.
@@ -147,21 +151,26 @@ async function captureIcon(page, dir) {
         return score(b) - score(a);
       });
   });
-  const tries = [...candidates.map(c => c.href), new URL('/favicon.ico', page.url()).href];
+  const tries = [...new Set([...candidates.map(c => c.href), new URL('/favicon.ico', page.url()).href])];
+  // Fetch every candidate and keep the sharpest one (largest source), since pages show icons at up to 112px.
+  let best = null;
   for (let href of tries) {
     try {
-      if (/cdn\.shopify\.com|\/cdn\/shop\//.test(href)) href = href.replace(/([?&])(width|height)=\d+/g, '$1$2=192').replace(/_\d+x\d*(\.\w+)/, '$1') + (href.includes('width=') ? '' : (href.includes('?') ? '&' : '?') + 'width=192');
+      if (/cdn\.shopify\.com|\/cdn\/shop\//.test(href)) href = href.replace(/([?&])(width|height)=\d+/g, '$1$2=512').replace(/_\d+x\d*(\.\w+)/, '$1') + (href.includes('width=') ? '' : (href.includes('?') ? '&' : '?') + 'width=512');
       const res = await fetch(href, { headers: { 'User-Agent': UA_DESKTOP }, signal: AbortSignal.timeout(15000) });
       if (!res.ok) continue;
       const type = (res.headers.get('content-type') || '').split(';')[0] || 'image/x-icon';
       if (!type.startsWith('image/')) continue;
-      const png = await toPng(page, Buffer.from(await res.arrayBuffer()), type, 96);
-      writeFileSync(new URL('icon.png', dir), png);
-      page.__iconTone = await iconTone(page, png).catch(() => 'dark');
-      return 'icon.png';
+      const png = await toPng(page, Buffer.from(await res.arrayBuffer()), type, 256);
+      if (!best || png.source > best.source) best = png;
+      if (best.source >= 256) break;
     } catch { /* try next */ }
   }
-  return null;
+  if (!best) return null;
+  writeFileSync(new URL('icon.png', dir), best);
+  page.__iconTone = await iconTone(page, best).catch(() => 'dark');
+  page.__iconSource = best.source;
+  return 'icon.png';
 }
 
 async function captureLogo(page, dir) {
@@ -216,6 +225,7 @@ async function captureProject(browser, p) {
     rec.themeColor = await page.evaluate(() => (document.querySelector('meta[name="theme-color"]') || {}).content || null);
     rec.icon = await captureIcon(page, dir);
     rec.iconTone = page.__iconTone || null;
+    rec.iconSource = page.__iconSource || null;
     rec.logo = await captureLogo(page, dir).catch(() => null);
     if (rec.shopify && status > 0 && status < 400) {
       rec.shots.push({ file: await shot(page, dir, 'home.webp'), label: 'Homepage' });
@@ -258,6 +268,21 @@ async function captureProject(browser, p) {
     await page.close().catch(() => {});
   }
   return rec;
+}
+
+if (only[0] === '--icons') {
+  const slugs = only.slice(1);
+  const b = await puppeteer.launch({ executablePath: BROWSER, headless: true, pipe: true, protocolTimeout: 240000, args: ['--no-first-run', '--disable-blink-features=AutomationControlled'] });
+  for (const p of projects.filter(p => p.url && media[p.slug] && (!slugs.length || slugs.includes(p.slug)))) {
+    const { page } = await open(b, p.url, false);
+    const icon = await captureIcon(page, new URL(`public/projects/${p.slug}/`, ROOT)).catch(() => null);
+    if (icon) Object.assign(media[p.slug], { icon, iconTone: page.__iconTone, iconSource: page.__iconSource });
+    console.log(p.slug.padEnd(36), icon ? `source ${page.__iconSource}px, ${page.__iconTone}` : 'no icon found, kept the old one');
+    await page.close().catch(() => {});
+    writeFileSync(mediaPath, JSON.stringify(media, null, 2) + '\n');
+  }
+  await b.close();
+  process.exit(0);
 }
 
 if (only[0] === '--tones') {

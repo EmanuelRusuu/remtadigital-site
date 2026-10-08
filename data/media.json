@@ -26,7 +26,8 @@
     "title": "Zahnpflege aus der Schweiz | CURAPROX Shop Schweiz",
     "capturedAt": "2026-10-07",
     "themeColor": "rgb(255 255 255)",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 180
   },
   "ev-zug": {
     "shopify": true,
@@ -55,7 +56,9 @@
     "title": "Offizieller EVZ Fanshop | Trikots, Fanartikel, Accessoires & mehr",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 256,
+    "iconNote": "circle crop of the header logo"
   },
   "inuikii": {
     "shopify": true,
@@ -84,7 +87,8 @@
     "title": "INUIKII Offizieller Online-Store — Summer Sale",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 128
   },
   "nile": {
     "shopify": true,
@@ -113,7 +117,8 @@
     "title": "NILE Online Store",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 256
   },
   "ecofort": {
     "shopify": true,
@@ -142,7 +147,8 @@
     "title": "ecofort – Da fühl ich mich zuhause | Raumklima & Haushalt | ecofort.ch",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "light"
+    "iconTone": "light",
+    "iconSource": 168
   },
   "confiserie-sprungli": {
     "shopify": true,
@@ -163,7 +169,9 @@
     "title": "Confiserie Sprüngli | Confiserie Sprüngli",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 256,
+    "iconNote": "logo.svg from the site (og:image)"
   },
   "fc-basel-1893": {
     "shopify": true,
@@ -192,7 +200,9 @@
     "title": "Offizielle Website des FC Basel 1893",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 256,
+    "iconNote": "FC_Basel_crest.svg from Wikimedia Commons"
   },
   "chruterhusli": {
     "shopify": true,
@@ -221,7 +231,8 @@
     "title": "Chrüterhüsli – Chrüterhüsli AG",
     "capturedAt": "2026-10-07",
     "themeColor": "rgb(238, 231, 219)",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 512
   },
   "bruderer": {
     "shopify": true,
@@ -250,7 +261,8 @@
     "title": "W. Bruderer AG – Schokoladen Halbfabrikate & Confiserie Grosshandel",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "light",
+    "iconSource": 49
   },
   "spa-solutions": {
     "shopify": true,
@@ -279,7 +291,8 @@
     "title": "Whirlpool & Swimspa kaufen in der Schweiz | Spa Solutions",
     "capturedAt": "2026-10-07",
     "themeColor": "#1e2d7d",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 300
   },
   "al-ittihad": {
     "shopify": true,
@@ -308,7 +321,8 @@
     "title": "Al-Ittihad Official Store | Authentic Jerseys & Merchandise – Al Ittihad Club - نادي الاتحاد",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 100
   },
   "fc-zurich": {
     "shopify": true,
@@ -337,7 +351,8 @@
     "title": "Willkommen beim FCZ - #NieUsenandGah – FC Zürich",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 115
   },
   "art-of-fire": {
     "shopify": true,
@@ -366,7 +381,8 @@
     "title": "Art of Fire, die Kunst des Feuers, Ofenbau, Kaminbau, Cheminéebau",
     "capturedAt": "2026-10-07",
     "themeColor": "#d0011b",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 192
   },
   "oscarwash": {
     "shopify": true,
@@ -395,7 +411,8 @@
     "title": "OSCAR Wash & Care AG – OSCAR Wash & Care AG",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 64
   },
   "fc-st-gallen-1879": {
     "shopify": true,
@@ -424,7 +441,8 @@
     "title": "FC St.Gallen 1879",
     "capturedAt": "2026-10-07",
     "themeColor": "#007c3e",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 200
   },
   "revendo": {
     "shopify": true,
@@ -453,7 +471,8 @@
     "title": "Refurbished Geräte kaufen, verkaufen & reparieren – Revendo",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 500
   },
   "house-of-jeans": {
     "shopify": true,
@@ -482,7 +501,8 @@
     "title": "House of Jeans | Jeans & Mode für Frauen und Männer | Schweiz",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 512
   },
   "sorenos": {
     "shopify": true,
@@ -511,7 +531,8 @@
     "title": "SORENOS.CH - Fensterfolien Fachhandel Schweiz | 3M & mehr",
     "capturedAt": "2026-10-07",
     "themeColor": "#01598e",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 170
   },
   "glory-bomb": {
     "shopify": true,
@@ -540,7 +561,8 @@
     "title": "GLORY BOMB® – DIE FRUCHTIGE MANGOSTAN BOMBE: frech & funktional!",
     "capturedAt": "2026-10-07",
     "themeColor": "#ffffff",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 192
   },
   "mediconsult": {
     "shopify": true,
@@ -569,7 +591,8 @@
     "title": "Homepage | Mediconsult Schweiz",
     "capturedAt": "2026-10-07",
     "themeColor": "#ffffff",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 512
   },
   "nikin": {
     "shopify": true,
@@ -598,7 +621,8 @@
     "title": "NIKIN: Nachhaltige Mode 🌲 Together for Nature. Tree by Tree.",
     "capturedAt": "2026-10-07",
     "themeColor": "rgb(51 51 51)",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 192
   },
   "signvision": {
     "shopify": true,
@@ -627,7 +651,8 @@
     "title": "signvision.ch",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 64
   },
   "luftentfeuchter": {
     "shopify": true,
@@ -656,7 +681,8 @@
     "title": "Luftentfeuchter & Wäschetrockner für ein perfektes Raumklima!",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 70
   },
   "infrarotheizung": {
     "shopify": true,
@@ -685,7 +711,8 @@
     "title": "Infrarotheizungen & moderne Heizsysteme online kaufen",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 16
   },
   "lush-switzerland": {
     "shopify": true,
@@ -714,7 +741,8 @@
     "title": "LUSH (Switzerland) AG",
     "capturedAt": "2026-10-07",
     "themeColor": "#ffffff",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 512
   },
   "brand-depot": {
     "shopify": true,
@@ -739,7 +767,8 @@
     "title": "BrandDepot – Brand Depot",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 100
   },
   "cosmic-clothing": {
     "shopify": true,
@@ -768,7 +797,8 @@
     "title": "Cosmic Clothing Co.",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 192
   },
   "tshirts-com": {
     "shopify": false,
@@ -779,7 +809,8 @@
     "title": "Custom T-Shirts — A Better Shirt to Print On",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 64
   },
   "topform-data": {
     "shopify": false,
@@ -818,7 +849,8 @@
     "title": "Photography.com",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 40
   },
   "pyrostar-bugano-and-weco": {
     "shopify": false,
@@ -829,7 +861,8 @@
     "title": "Feuerwerk und Pyrotechnik Online-Shop",
     "capturedAt": "2026-10-07",
     "themeColor": "#000000",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 192
   },
   "konigs": {
     "shopify": false,
@@ -840,7 +873,8 @@
     "title": "Lampen und Beleuchtungszubehör kaufen | Konigs",
     "capturedAt": "2026-10-07",
     "themeColor": "#ffffff",
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 180
   },
   "skypergola": {
     "shopify": true,
@@ -869,7 +903,8 @@
     "title": "Premium Aluminium-Pergola mit Lamellendach – Sky Pergola Schweiz",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "light"
+    "iconTone": "dark",
+    "iconSource": 200
   },
   "american-stationery": {
     "shopify": false,
@@ -880,6 +915,7 @@
     "title": "Stationery & Personalized Gifts From American Stationery",
     "capturedAt": "2026-10-07",
     "themeColor": null,
-    "iconTone": "dark"
+    "iconTone": "dark",
+    "iconSource": 50
   }
 }

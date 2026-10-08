@@ -85,7 +85,9 @@ function provenance(p) {
 function brand(p, prefix, size = 'sm') {
   const icon = m(p).icon;
   if (hasFile(p.slug, icon)) {
-    return `<span class="brand brand-${size}${m(p).iconTone === 'light' ? ' brand-dark' : ''}"><img src="${prefix}${p.slug}/${icon}" alt="" width="96" height="96" loading="lazy" decoding="async"></span>`;
+    const src = m(p).iconSource;
+    const low = src && src < 64 ? ` brand-lowres" style="--src:${src}px` : '';
+    return `<span class="brand brand-${size}${m(p).iconTone === 'light' ? ' brand-dark' : ''}${low}"><img src="${prefix}${p.slug}/${icon}" alt="" width="96" height="96" loading="lazy" decoding="async"></span>`;
   }
   return `<span class="brand brand-${size} brand-initials" aria-hidden="true">${initials(p.title)}</span>`;
 }
@@ -191,7 +193,7 @@ function page(p, i) {
       <div class="project-card">
         <h2>By the numbers</h2>
         <dl class="stats">
-          ${p.results.map(r => `<div><dt>${r.value}</dt><dd>${r.label}</dd></div>`).join('\n          ')}
+          ${p.results.map(r => `<div><dt>${r.value}</dt><dd>${r.label}${r.before ? `<span class="was">Before: ${r.before}</span>` : ''}</dd></div>`).join('\n          ')}
         </dl>
         ${p.resultsNote ? `<p class="note">${p.resultsNote}</p>` : ''}
       </div>
@@ -231,8 +233,8 @@ function page(p, i) {
   ].filter(Boolean).join(' ');
   const reach = rows.length || cat ? `
           <div class="reach">
-            <h2>Site popularity</h2>${cat ? `
-            <p class="badge">${cat.badge}</p>
+            <h2>Site popularity</h2>${cat ? `${cat.badge ? `
+            <p class="badge">${cat.badge}</p>` : ''}
             <p class="reach-cat">${cat.text} <span>(<a href="${cat.url}" target="_blank" rel="noopener noreferrer">${cat.source}</a>, ${cat.month})</span></p>` : ''}
             <dl>
               ${rows.join('\n              ')}
@@ -242,7 +244,7 @@ function page(p, i) {
 
   return `${head}<title>${strip(p.title)} | Emanuel Rusu, REMTA Digital</title>
 <meta name="description" content="${attr(p.summary)}">
-<meta name="theme-color" content="#0a66c2">
+<meta name="theme-color" content="#1d5e6b">
 <meta property="og:title" content="${attr(p.title)} | Emanuel Rusu, REMTA Digital">
 <meta property="og:description" content="${attr(p.summary)}">
 <meta property="og:type" content="article">
@@ -251,6 +253,8 @@ function page(p, i) {
 <link rel="canonical" href="${url}">
 <link rel="icon" href="${favicon}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body class="project-page" id="top">

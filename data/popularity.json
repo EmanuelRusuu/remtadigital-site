@@ -77,6 +77,75 @@
       "source": "Chrome UX Report",
       "url": "https://developer.chrome.com/docs/crux",
       "month": "August 2026"
+    },
+    "confiserie-sprungli": {
+      "badge": "Most visited chocolatier in Switzerland",
+      "text": "The only Swiss chocolatier in Switzerland’s top 5,000. Lindt and Cailler are in the top 10,000; Camille Bloch, Honold, Maestrani and Max Chocolatier in the top 50,000.",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    },
+    "skypergola": {
+      "badge": "Most visited pergola brand in Switzerland",
+      "text": "Ahead of every other pergola and awning brand checked: Warema, Griesser and Pergola-Line are in the top 50,000, Weinor and Solarlux in the top 100,000, Renson and Markilux in the top 500,000.",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    },
+    "revendo": {
+      "badge": "Top 2 refurbished-tech shop in Switzerland",
+      "text": "In the top 5,000 together with refurbed.ch, the only other refurbished-electronics shop that high. Recommerce is in the top 10,000; Back Market and Swappie in the top 100,000.",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    },
+    "fc-zurich": {
+      "text": "In the top 5,000 with Young Boys, Servette, Grasshoppers, Sion, Thun, Lausanne-Sport and Winterthur. Only FC Basel and FC St. Gallen rank higher among Swiss football clubs.",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    },
+    "ev-zug": {
+      "text": "In the top 10,000 with HC Lugano, EHC Kloten, HC Ajoie and the Rapperswil-Jona Lakers. SC Bern, ZSC Lions, HC Davos, Fribourg-Gottéron, Lausanne HC, SCL Tigers and Ambrì-Piotta are in the top 5,000.",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    },
+    "nile": {
+      "text": "In the top 5,000 with fashion retailers PKZ, Chicorée and Bongénie, ahead of Tally Weijl and Companys (top 50,000). Department stores Globus and Manor are in the top 1,000.",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    },
+    "ecofort": {
+      "text": "In the top 5,000 with Dyson, Jura and Kärcher, ahead of Stadler Form, Trisa, Rowenta (top 50,000), Meaco (top 100,000) and Boneco (top 500,000).",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    },
+    "nikin": {
+      "text": "In the top 10,000 with sustainable fashion brands Armedangels and Hessnatur, ahead of Patagonia, Vaude and Odlo (top 50,000).",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    },
+    "lush-switzerland": {
+      "text": "In the top 10,000 with Weleda and Nivea, ahead of The Body Shop, Kiehl’s, Aesop, Dr. Hauschka and Lavera (top 50,000). Rituals and Yves Rocher are in the top 5,000.",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    },
+    "pyrostar-bugano-and-weco": {
+      "text": "No Swiss fireworks shop ranks higher: Pyrostar is in the top 50,000 with Feuerwerkshop.ch, Vulcanet and Feuerwerksverkauf.ch.",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
+    },
+    "al-ittihad": {
+      "text": "The shop is in Saudi Arabia’s top 10,000 with Al-Ahli’s store, ahead of the Al-Nassr and Al-Qadsiah stores (top 50,000).",
+      "source": "Chrome UX Report",
+      "url": "https://developer.chrome.com/docs/crux",
+      "month": "August 2026"
     }
   },
   "regional": {

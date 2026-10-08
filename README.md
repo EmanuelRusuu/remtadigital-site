@@ -35,6 +35,8 @@ To refresh a project's icon, logo and screenshots (uses the local Chrome with a 
 cd scripts && node capture.mjs curaprox nile
 ```
 
+`node capture.mjs --icons` refreshes only the brand icons (the sharpest one each site offers, saved at 256 px).
+
 To refresh the traffic data behind the "Most visited" sort, the badges and each project's "Site popularity" box:
 
 ```bash

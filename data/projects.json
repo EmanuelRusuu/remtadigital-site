@@ -28,28 +28,33 @@
     "role": "Lead contributor",
     "results": [
       {
-        "value": "16.2 → 4.5 MB",
-        "label": "weight of a colour-variant product page"
+        "value": "4.5 MB",
+        "label": "weight of a colour-variant product page",
+        "before": "16.2 MB"
       },
       {
-        "value": "13.0 → 1.4 MB",
-        "label": "gallery images on that page"
+        "value": "1.4 MB",
+        "label": "gallery images on that page",
+        "before": "13.0 MB"
       },
       {
-        "value": "2.03 → 0.76 MB",
-        "label": "HTML of a 36-colour product page"
+        "value": "0.76 MB",
+        "label": "HTML of a 36-colour product page",
+        "before": "2.03 MB"
       },
       {
-        "value": "84 / 84",
+        "value": "84 of 84",
         "label": "UAE delivery dates matching checkout"
       },
       {
-        "value": "−34%",
-        "label": "time until the bestseller slider showed all images on slow 3G (31.7 s → 20.8 s)"
+        "value": "20.8 s",
+        "label": "until the bestseller slider showed all images on slow 3G, 34% sooner",
+        "before": "31.7 s"
       },
       {
-        "value": "0.108 → 0",
-        "label": "layout shift on mobile product pages (seen in half the runs before)"
+        "value": "0",
+        "label": "layout shift on mobile product pages",
+        "before": "0.108, in half the test runs"
       }
     ],
     "resultsNote": "Measured in my pull requests with Lighthouse and real Chrome on unpublished test themes against the live theme (August and September 2026): mobile Lighthouse for page weight, Slow-3G with a cold cache for the slider, and repeated runs for layout shift."
@@ -94,7 +99,7 @@
         "label": "lines of order-confirmation emails, German and English"
       },
       {
-        "value": "325 / 907",
+        "value": "325 of 907",
         "label": "commits in the store repository are mine (October 2026)"
       }
     ],
@@ -132,7 +137,7 @@
     "role": "Lead contributor",
     "results": [
       {
-        "value": "~3,000",
+        "value": "About 3,000",
         "label": "lines in the Meilisearch search and collection layer"
       },
       {
@@ -405,7 +410,7 @@
     "role": "Developer",
     "results": [
       {
-        "value": "≥ 30%",
+        "value": "At least 30%",
         "label": "faster collection and product pages after three days of work"
       }
     ]
@@ -735,7 +740,7 @@
         "label": "test suites behind the importer"
       },
       {
-        "value": "53 / 56",
+        "value": "53 of 56",
         "label": "commits in the app are mine"
       }
     ],
@@ -818,8 +823,9 @@
     "role": "Theme developer",
     "results": [
       {
-        "value": "9+ s → <2 s",
-        "label": "time until everything was loaded and the page was usable"
+        "value": "Under 2 s",
+        "label": "time until everything was loaded and the page was usable",
+        "before": "over 9 s"
       }
     ]
   },
