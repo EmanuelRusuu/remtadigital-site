@@ -81,7 +81,7 @@ main h2{font-family:CvSerif;font-weight:650;font-size:13pt;color:#1c2326;border-
     <p class="sub">Founder and Shopify developer. My own company: Shopify apps, Shopify Functions and Checkout UI Extensions for business clients, delivered end to end, including ERP-integrated projects.</p>
   </div>
   <div class="job">
-    <div class="job-head"><b>aiconomy AG</b><span>Apr 2025 to today</span></div>
+    <div class="job-head"><b>aiconomy AG</b><span>Mar 2025 to today</span></div>
     <p class="sub">Shopify developer on multilingual Swiss stores connected to aico's cloud ERP, POS and PIM: frontend, custom functionality, discount logic and custom apps.</p>
     <ul>
       <li><strong>EV Zug:</strong> a Cart Transform Function in TypeScript, compiled to WebAssembly, that merges a personalised jersey into one line in cart and checkout; the live auction page and the order emails. 325 of the store's 907 commits are mine.</li>
@@ -93,7 +93,7 @@ main h2{font-family:CvSerif;font-weight:650;font-size:13pt;color:#1c2326;border-
     </ul>
   </div>
   <div class="job">
-    <div class="job-head"><b>WebGurus</b><span>Oct 2023 to Mar 2025</span></div>
+    <div class="job-head"><b>WebGurus</b><span>Nov 2023 to Mar 2025</span></div>
     <p class="sub">Shopify developer: custom Shopify themes built from scratch for US stores used by thousands of people every day.</p>
     <ul>
       <li><strong>Tshirts.com:</strong> my first fully custom theme, built from scratch, then optimised until the page was loaded and usable in under 2 seconds, down from over 9.</li>
