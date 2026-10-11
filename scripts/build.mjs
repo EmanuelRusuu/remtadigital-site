@@ -69,6 +69,9 @@ const popOrder = new Map(projects.slice().sort((a, b) =>
   ((rankOf(a) || Infinity) - (rankOf(b) || Infinity)) ||
   strip(a.title).localeCompare(strip(b.title))).map((p, i) => [p.slug, i + 1]));
 
+// Link-preview text: LinkedIn wants at least 100 characters, so short summaries get a note on what the page shows.
+const shareText = p => strip(p.summary).length >= 100 ? p.summary : `${p.summary} ${p.company ? `What I built at ${p.company}, with screenshots and details.` : 'What I built, with screenshots and details.'}`;
+
 // Short label for cards: who I did the work with, and my role.
 function metaLine(p) {
   if (p.company) return `${p.company} &middot; ${p.role}`;
@@ -244,10 +247,10 @@ function page(p, i) {
           </div>` : '';
 
   return `${head}<title>${strip(p.title)} | Emanuel Rusu, REMTA Digital</title>
-<meta name="description" content="${attr(p.summary)}">
+<meta name="description" content="${attr(shareText(p))}">
 <meta name="theme-color" content="#1d5e6b">
 <meta property="og:title" content="${attr(p.title)} | Emanuel Rusu, REMTA Digital">
-<meta property="og:description" content="${attr(p.summary)}">
+<meta property="og:description" content="${attr(shareText(p))}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${ogImage}">
