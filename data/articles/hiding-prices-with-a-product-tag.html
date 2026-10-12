@@ -1,0 +1,51 @@
+<!--
+{
+  "title": "Hide a product's price with one tag in the Shopify admin",
+  "summary": "On Art of Fire the team hides the price of any product by adding a tag in the Shopify admin, with no code change. How tag-driven price visibility works in a theme, where it has to apply, and what it does not hide.",
+  "date": "2026-10-12",
+  "order": 42,
+  "category": "Case note",
+  "project": "art-of-fire",
+  "tags": ["Liquid", "Product tags", "Product pages", "Collections"],
+  "links": [
+    { "title": "Liquid product object (tags)", "url": "https://shopify.dev/docs/api/liquid/objects/product" },
+    { "title": "Liquid operators, including contains", "url": "https://shopify.dev/docs/api/liquid/basics" },
+    { "title": "Ajax Product API", "url": "https://shopify.dev/docs/api/ajax/reference/product" },
+    { "title": "Product tags (Shopify Help Center)", "url": "https://help.shopify.com/en/manual/products/details/tags" }
+  ]
+}
+-->
+<p>Stores sometimes want to show a product without its price, for example when it is made to measure or priced per project and the price comes from a conversation. For the Swiss store <a href="/projects/art-of-fire/">Art of Fire</a> I built price visibility that the team controls from the Shopify admin. Add a tag to a product, and its price disappears from the store. Remove the tag, and it is back.</p>
+
+<h2>Why a tag</h2>
+<p>A tag is the cheapest switch Shopify offers. Anyone who can edit a product can add one, it works the same way for every product, and it can be applied to many products at once with a bulk edit. Nobody has to open the theme code or ask a developer, and no product needs its own template.</p>
+
+<h2>The check in Liquid</h2>
+<p>In the theme, every product has a list of tags, and Liquid's <code>contains</code> operator checks whether a list holds a given value. The whole switch is one condition around the price:</p>
+<pre><code>{%- if product.tags contains 'hide-price' -%}
+  &lt;p class="price price--on-request"&gt;Price on request&lt;/p&gt;
+{%- else -%}
+  {%- render 'price', product: product -%}
+{%- endif -%}</code></pre>
+<p class="code-note">A minimal version of the pattern; the tag name here is only an example. <code>contains</code> on a list matches whole values exactly, so pick one spelling for the tag and stick to it.</p>
+
+<h2>Every place a price appears</h2>
+<p>The condition is simple. The work is finding every place the theme prints a price, because a hidden price that still shows up in one corner of the store is worse than no rule at all. On Art of Fire the rule applies to both product pages and collection listings. In a typical theme, that means at least:</p>
+<ul>
+  <li>the price block in the main product section;</li>
+  <li>the product card snippet, which collection pages, search results and featured collections all reuse;</li>
+  <li>anything else that renders its own price, such as a quick-add modal or product recommendations.</li>
+</ul>
+<p>The store also runs a search and filter app, which already had its own way of treating these products. I made the theme behave the same way, so a product does not show a price in the search results and hide it on its own page, or the other way round.</p>
+
+<h2>What a hidden price does not hide</h2>
+<p>Hiding a price in the theme changes what shoppers see. It does not make the price secret:</p>
+<ul>
+  <li>The product's JSON at <code>/products/&lt;handle&gt;.js</code>, part of Shopify's Ajax Product API, still includes the price.</li>
+  <li>Structured data and product feeds may still carry it, depending on how the theme and your sales channels are set up.</li>
+  <li>If the product can still be added to the cart, the cart and checkout show its price.</li>
+</ul>
+<p>For "price on request" products that is usually fine: the goal is to start a conversation, not to keep a number confidential. If the price really must not be public, the product needs a different setup, for example no price on the product at all and a quote form instead.</p>
+
+<h2>The general lesson</h2>
+<p>When a store needs a rule that applies to some products and not others, put the switch where the team already works, in the product admin, and keep the logic in one condition in the theme. Then the hard part is only making sure the theme applies it everywhere, consistently with any app that shows the same products.</p>

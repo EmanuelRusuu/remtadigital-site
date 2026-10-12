@@ -1,0 +1,55 @@
+<!--
+{
+  "title": "PDF invoices from the Shopify customer account, built with jsPDF",
+  "summary": "For a Swiss car wash chain I made every order in the customer account downloadable as a proper invoice, with logo, VAT number and each discount listed. How it works in a Shopify theme, and the one-step card registration that came with it.",
+  "date": "2026-10-12",
+  "order": 41,
+  "category": "Case note",
+  "project": "oscarwash",
+  "tags": ["Customer accounts", "jsPDF", "Liquid", "JavaScript"],
+  "links": [
+    { "title": "jsPDF on GitHub", "url": "https://github.com/parallax/jsPDF" },
+    { "title": "jsPDF documentation", "url": "https://artskydj.github.io/jsPDF/docs/jsPDF.html" },
+    { "title": "Liquid order object", "url": "https://shopify.dev/docs/api/liquid/objects/order" },
+    { "title": "Customer account UI extensions", "url": "https://shopify.dev/docs/api/customer-account-ui-extensions" }
+  ]
+}
+-->
+<p><a href="/projects/oscarwash/">OSCARwash</a> runs car washes in Zug, Emmen and Sihlbrugg and sells online through a Shopify store. My part was the customer account: a downloadable invoice for every order, and a simpler way to register a customer card.</p>
+
+<h2>An invoice in one click</h2>
+<p>The customer account lists a customer's past orders. The job was to let them download a proper invoice for any of those orders, straight from the account.</p>
+<p>Each invoice carries what someone filing it would look for:</p>
+<ul>
+  <li><strong>The company's logo and VAT number,</strong> so it reads as an invoice from the business rather than a printout of a web page.</li>
+  <li><strong>A discount breakdown,</strong> with each discount on its own line instead of one lump sum.</li>
+  <li><strong>A savings summary</strong> that shows what the customer saved on the order.</li>
+</ul>
+
+<h2>Building the PDF where the data already is</h2>
+<p>The invoices are generated in the browser with jsPDF, an open-source JavaScript library that draws a PDF page by page: text, lines, images, then a download. Everything an invoice needs is already on the order page, because the theme renders the order with Liquid. So the page only has to hand that data to a script in a form it can read, and the script lays it out.</p>
+<p>A pattern that keeps this tidy is to render the order into a small JSON block, so the script never has to scrape text out of the page:</p>
+<pre><code>&lt;script type="application/json" id="invoice-data"&gt;
+{
+  "number": {{ order.name | json }},
+  "date": {{ order.created_at | date: '%d.%m.%Y' | json }},
+  "total": {{ order.total_price | money | json }}
+}
+&lt;/script&gt;</code></pre>
+<pre><code>const data = JSON.parse(document.getElementById('invoice-data').textContent);
+const { jsPDF } = window.jspdf;
+const doc = new jsPDF();
+doc.text(`Invoice ${data.number}`, 20, 30);
+doc.text(data.date, 20, 38);
+// … logo, address, VAT number, line items, discounts, totals
+doc.save(`invoice-${data.number.replace('#', '')}.pdf`);</code></pre>
+<p class="code-note">Simplified to show the shape. The real invoice also lays out line items, each discount and the savings summary.</p>
+<p>The advantage of this approach is that nothing new has to run anywhere: no server, no extra app, no stored files. An invoice is created at the moment it is asked for, from the same order data the customer is looking at.</p>
+<p>One thing to check before copying it: it relies on the account pages being theme templates written in Liquid, as Shopify's classic customer accounts are. Shopify's newer customer accounts are not built from theme templates; they are extended with customer account UI extensions instead.</p>
+
+<h2>Registering a customer card in one step</h2>
+<p>Customers register their OSCARwash customer card together with their licence plates. I rebuilt that registration as a single-step flow. It shows a loading state while the request runs and a clear success message when it is done.</p>
+<p>Both details sound minor, and both prevent real problems. Without a loading state, people press the button again when nothing seems to happen and send the form twice. Without a success message, they are left unsure whether the card is registered at all.</p>
+
+<h2>The general lesson</h2>
+<p>Before adding an app or a server for a document like an invoice, check what the page already knows. When the data is already rendered for the customer, a library like jsPDF can turn it into a file in the browser, and there is nothing extra to host, secure or keep in sync.</p>

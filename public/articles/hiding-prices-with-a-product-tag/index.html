@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="google-adsense-account" content="ca-pub-2728164635897891">
+<title>Hide a product's price with one tag in the Shopify admin | Emanuel Rusu</title>
+<meta name="description" content="On Art of Fire the team hides the price of any product by adding a tag in the Shopify admin, with no code change. How tag-driven price visibility works in a theme, where it has to apply, and what it does not hide.">
+<meta name="theme-color" content="#1d5e6b">
+<meta property="og:title" content="Hide a product's price with one tag in the Shopify admin | Emanuel Rusu">
+<meta property="og:description" content="On Art of Fire the team hides the price of any product by adding a tag in the Shopify admin, with no code change. How tag-driven price visibility works in a theme, where it has to apply, and what it does not hide.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://remtadigital.com/articles/hiding-prices-with-a-product-tag/">
+<meta property="og:image" content="https://remtadigital.com/articles/hiding-prices-with-a-product-tag/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://remtadigital.com/articles/hiding-prices-with-a-product-tag/">
+<link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="alternate" type="application/rss+xml" title="Articles by Emanuel Rusu" href="/articles/feed.xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Hide a product's price with one tag in the Shopify admin","description":"On Art of Fire the team hides the price of any product by adding a tag in the Shopify admin, with no code change. How tag-driven price visibility works in a theme, where it has to apply, and what it does not hide.","datePublished":"2026-10-12","dateModified":"2026-10-12","articleSection":"Case note","keywords":"Liquid, Product tags, Product pages, Collections","image":"https://remtadigital.com/articles/hiding-prices-with-a-product-tag/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/hiding-prices-with-a-product-tag/","inLanguage":"en","author":{"@type":"Person","@id":"https://remtadigital.com/#person","name":"Emanuel Rusu","url":"https://remtadigital.com/"},"publisher":{"@type":"Organization","@id":"https://remtadigital.com/#business","name":"REMTA Digital","logo":{"@type":"ImageObject","url":"https://remtadigital.com/assets/img/apple-touch-icon.png"}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://remtadigital.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://remtadigital.com/articles/"},{"@type":"ListItem","position":3,"name":"Hide a product's price with one tag in the Shopify admin","item":"https://remtadigital.com/articles/hiding-prices-with-a-product-tag/"}]}]}</script>
+</head>
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="REMTA Digital, home"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1d5e6b"/><path d="M18 48V16h12a9 9 0 0 1 0 18H18m10 0 10 14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="44" y="16" width="5" height="32" rx="2.5" fill="#8fd0d8"/></svg><span class="logo-word"><b>REMTA</b> <span>Digital</span></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Main">
+      <a href="/#cases">Case studies</a>
+      <a href="/#work">Work</a>
+      <a href="/articles/">Articles</a>
+      <a href="/#services">Services</a>
+      <a href="/#working-together">Working together</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+      <a class="nav-lang" href="/de/" hreflang="de" lang="de">Deutsch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>Art of Fire</span></nav>
+    <header class="article-head">
+      <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 3 min read</p>
+      <h1>Hide a product's price with one tag in the Shopify admin</h1>
+      <p class="lead">On Art of Fire the team hides the price of any product by adding a tag in the Shopify admin, with no code change. How tag-driven price visibility works in a theme, where it has to apply, and what it does not hide.</p>
+      <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
+    </header>
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#why-a-tag">Why a tag</a></li><li><a href="#the-check-in-liquid">The check in Liquid</a></li><li><a href="#every-place-a-price-appears">Every place a price appears</a></li><li><a href="#what-a-hidden-price-does-not-hide">What a hidden price does not hide</a></li><li><a href="#the-general-lesson">The general lesson</a></li><li><a href="#further-reading">Further reading</a></li></ol>
+    </nav>
+    <div class="article-body">
+      <p>Stores sometimes want to show a product without its price, for example when it is made to measure or priced per project and the price comes from a conversation. For the Swiss store <a href="/projects/art-of-fire/">Art of Fire</a> I built price visibility that the team controls from the Shopify admin. Add a tag to a product, and its price disappears from the store. Remove the tag, and it is back.</p>
+
+<h2 id="why-a-tag">Why a tag</h2>
+<p>A tag is the cheapest switch Shopify offers. Anyone who can edit a product can add one, it works the same way for every product, and it can be applied to many products at once with a bulk edit. Nobody has to open the theme code or ask a developer, and no product needs its own template.</p>
+
+<h2 id="the-check-in-liquid">The check in Liquid</h2>
+<p>In the theme, every product has a list of tags, and Liquid's <code>contains</code> operator checks whether a list holds a given value. The whole switch is one condition around the price:</p>
+<pre><code>{%- if product.tags contains 'hide-price' -%}
+  &lt;p class="price price--on-request"&gt;Price on request&lt;/p&gt;
+{%- else -%}
+  {%- render 'price', product: product -%}
+{%- endif -%}</code></pre>
+<p class="code-note">A minimal version of the pattern; the tag name here is only an example. <code>contains</code> on a list matches whole values exactly, so pick one spelling for the tag and stick to it.</p>
+
+<h2 id="every-place-a-price-appears">Every place a price appears</h2>
+<p>The condition is simple. The work is finding every place the theme prints a price, because a hidden price that still shows up in one corner of the store is worse than no rule at all. On Art of Fire the rule applies to both product pages and collection listings. In a typical theme, that means at least:</p>
+<ul>
+  <li>the price block in the main product section;</li>
+  <li>the product card snippet, which collection pages, search results and featured collections all reuse;</li>
+  <li>anything else that renders its own price, such as a quick-add modal or product recommendations.</li>
+</ul>
+<p>The store also runs a search and filter app, which already had its own way of treating these products. I made the theme behave the same way, so a product does not show a price in the search results and hide it on its own page, or the other way round.</p>
+
+<h2 id="what-a-hidden-price-does-not-hide">What a hidden price does not hide</h2>
+<p>Hiding a price in the theme changes what shoppers see. It does not make the price secret:</p>
+<ul>
+  <li>The product's JSON at <code>/products/&lt;handle&gt;.js</code>, part of Shopify's Ajax Product API, still includes the price.</li>
+  <li>Structured data and product feeds may still carry it, depending on how the theme and your sales channels are set up.</li>
+  <li>If the product can still be added to the cart, the cart and checkout show its price.</li>
+</ul>
+<p>For "price on request" products that is usually fine: the goal is to start a conversation, not to keep a number confidential. If the price really must not be public, the product needs a different setup, for example no price on the product at all and a quote form instead.</p>
+
+<h2 id="the-general-lesson">The general lesson</h2>
+<p>When a store needs a rule that applies to some products and not others, put the switch where the team already works, in the product admin, and keep the logic in one condition in the theme. Then the hard part is only making sure the theme applies it everywhere, consistently with any app that shows the same products.</p>
+      <section class="further">
+        <h2 id="further-reading">Further reading</h2>
+        <ul><li><a class="out" href="https://shopify.dev/docs/api/liquid/objects/product" target="_blank" rel="noopener noreferrer">Liquid product object (tags)</a></li><li><a class="out" href="https://shopify.dev/docs/api/liquid/basics" target="_blank" rel="noopener noreferrer">Liquid operators, including contains</a></li><li><a class="out" href="https://shopify.dev/docs/api/ajax/reference/product" target="_blank" rel="noopener noreferrer">Ajax Product API</a></li><li><a class="out" href="https://help.shopify.com/en/manual/products/details/tags" target="_blank" rel="noopener noreferrer">Product tags (Shopify Help Center)</a></li></ul>
+      </section>
+    </div>
+    <div class="article-foot">
+      <p class="provenance">From my work on <a href="/projects/art-of-fire/">Art of Fire</a>, built as a developer at aiconomy AG, which ran the project for its client.</p>
+      <ul class="tags"><li>Liquid</li><li>Product tags</li><li>Product pages</li><li>Collections</li></ul>
+      <p><a class="case-link" href="/projects/art-of-fire/">See the project</a></p>
+    </div>
+  </article>
+
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>More articles</h2>
+      <div class="posts">
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/one-jersey-one-cart-line/">One jersey, one cart line: personalised shirts with a Cart Transform Function</a></h3>
+          <p>A personalised hockey jersey is really four products: the shirt, the name, the number and the badges. Here is how I made them check out as one line for EV Zug without touching the price.</p>
+          <a class="case-link" href="/articles/one-jersey-one-cart-line/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/migrating-customers-without-sending-a-single-email/">Moving a store's whole history without sending a single email</a></h3>
+          <p>Importing tens of thousands of past customers and orders into a live Shopify store would normally email every one of them. Here is how I built a migration app where that cannot happen.</p>
+          <a class="case-link" href="/articles/migrating-customers-without-sending-a-single-email/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/from-16-mb-to-4-mb-product-page/">From 16.2 MB to 4.5 MB: slimming down a Shopify product page</a></h3>
+          <p>A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.</p>
+          <a class="case-link" href="/articles/from-16-mb-to-4-mb-product-page/">Read the article</a>
+        </article>
+</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap narrow center">
+      <h2>Want something like this for your store?</h2>
+      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania.</p>
+    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
+    <p><a href="/privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>

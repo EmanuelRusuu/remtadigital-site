@@ -1,0 +1,57 @@
+<!--
+{
+  "title": "Pfand in the cart: a can deposit line for a German Shopify store",
+  "summary": "Drinks cans sold in Germany carry a deposit, and the cart has to charge it without confusing anyone. How I kept a deposit line in step with the cans on Glory Bomb, and why the cart count leaves it out.",
+  "date": "2026-10-12",
+  "order": 40,
+  "category": "Case note",
+  "project": "glory-bomb",
+  "tags": ["Cart", "Ajax Cart API", "JavaScript", "Germany"],
+  "links": [
+    { "title": "Ajax Cart API (Shopify developer docs)", "url": "https://shopify.dev/docs/api/ajax/reference/cart" },
+    { "title": "Liquid cart object", "url": "https://shopify.dev/docs/api/liquid/objects/cart" },
+    { "title": "Debounce (MDN glossary)", "url": "https://developer.mozilla.org/en-US/docs/Glossary/Debounce" },
+    { "title": "Deutsche Pfandsystem GmbH, the German deposit system", "url": "https://dpg-pfandsystem.de/" }
+  ]
+}
+-->
+<p><a href="/projects/glory-bomb/">Glory Bomb</a> sells functional fruit drinks in cans, and its German store runs on Shopify. In Germany, single-use drinks cans carry a deposit, the Pfand: 25 cents a can, paid on top of the price and refunded when the can goes back. A store that sells cans charges it too, so the cart has to show a deposit that always matches what is in it.</p>
+
+<h2>One line that follows the cans</h2>
+<p>I added the deposit as its own line in the cart. That keeps it visible and honest: the shopper sees the drinks at their price and the deposit next to them, instead of a price that is mysteriously higher than on the product page.</p>
+<p>The catch is that the deposit line has to follow every change to the drinks. Add a pack, remove one, change a quantity in the cart drawer: each time, the deposit has to end up right. In a Shopify theme those changes go through the Ajax Cart API (<code>/cart/add.js</code>, <code>/cart/change.js</code>, <code>/cart/update.js</code>), and each call returns the whole cart. That makes the safe approach simple: after a change, look at the full cart, work out what the deposit should be, and correct the deposit line if it is wrong.</p>
+
+<h2>Why the updates are debounced</h2>
+<p>A shopper who taps the plus button five times sends five quantity changes in quick succession. If every one of them also triggered a deposit correction, the requests would race each other, and a slow answer to the third tap could arrive after the fifth and leave the deposit one step behind.</p>
+<p>So the deposit update is debounced: it waits until the taps stop for a moment, then reads the cart once and makes one correction based on the final quantities.</p>
+<pre><code>let timer;
+function syncDepositSoon() {
+  clearTimeout(timer);
+  timer = setTimeout(syncDeposit, 400);
+}
+
+async function syncDeposit() {
+  const cart = await fetch('/cart.js').then(r =&gt; r.json());
+  const wanted = depositFor(cart.items);   // from the drinks in the cart
+  const index = cart.items.findIndex(isDepositLine);
+  if (index === -1 &amp;&amp; wanted &gt; 0) return addDeposit(wanted);
+  if (index !== -1 &amp;&amp; cart.items[index].quantity !== wanted) {
+    await fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ line: index + 1, quantity: wanted }),
+    });
+  }
+}</code></pre>
+<p class="code-note">A minimal sketch of the pattern, not the store's code. <code>depositFor</code> and <code>isDepositLine</code> stand for however the store identifies its drinks and its deposit product.</p>
+
+<h2>A cart count that leaves the deposit out</h2>
+<p>Shopify's item count adds up the quantity of every line in the cart, and a deposit line is a line like any other. Left alone, the cart icon would count deposit units as if they were products, and a shopper who added one pack would see a number that made no sense to them.</p>
+<p>The count in the header therefore ignores the deposit line and only counts what the shopper actually chose. It is a small detail, but the cart icon is the first thing people look at after pressing "Add to cart".</p>
+
+<h2>Prices per can, and free shipping</h2>
+<p>Glory Bomb sells its drinks in multipacks, so I added a per-can price to them. A shopper comparing two pack sizes can see straight away what one can costs in each, without doing the division.</p>
+<p>In the same project I set up the free shipping threshold and the shipping copy around it.</p>
+
+<h2>The general lesson</h2>
+<p>Any charge that depends on what is in the cart, a deposit, a recycling fee or a packaging charge, is easiest to keep right if it is recalculated from the whole cart rather than nudged up and down with each click. And anything you show the shopper as a number, the item count or a unit price, should be worked out from the products they chose, not read straight from the raw cart lines.</p>

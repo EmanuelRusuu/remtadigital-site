@@ -125,5 +125,26 @@
     <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
     <description>Two Swiss club stores, two kinds of speed. On FC Zürich, three days of work made collection and product pages at least 30% faster. On FC St. Gallen, a release-date filter that renders almost instantly by using CSS instead of reloading.</description>
   </item>
+  <item>
+    <title>Pfand in the cart: a can deposit line for a German Shopify store</title>
+    <link>https://remtadigital.com/articles/a-can-deposit-line-in-the-shopify-cart/</link>
+    <guid>https://remtadigital.com/articles/a-can-deposit-line-in-the-shopify-cart/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>Drinks cans sold in Germany carry a deposit, and the cart has to charge it without confusing anyone. How I kept a deposit line in step with the cans on Glory Bomb, and why the cart count leaves it out.</description>
+  </item>
+  <item>
+    <title>PDF invoices from the Shopify customer account, built with jsPDF</title>
+    <link>https://remtadigital.com/articles/pdf-invoices-in-the-shopify-customer-account/</link>
+    <guid>https://remtadigital.com/articles/pdf-invoices-in-the-shopify-customer-account/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>For a Swiss car wash chain I made every order in the customer account downloadable as a proper invoice, with logo, VAT number and each discount listed. How it works in a Shopify theme, and the one-step card registration that came with it.</description>
+  </item>
+  <item>
+    <title>Hide a product's price with one tag in the Shopify admin</title>
+    <link>https://remtadigital.com/articles/hiding-prices-with-a-product-tag/</link>
+    <guid>https://remtadigital.com/articles/hiding-prices-with-a-product-tag/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>On Art of Fire the team hides the price of any product by adding a tag in the Shopify admin, with no code change. How tag-driven price visibility works in a theme, where it has to apply, and what it does not hide.</description>
+  </item>
 </channel>
 </rss>
