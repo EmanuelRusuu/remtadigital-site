@@ -5,6 +5,16 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
+  // Cookie-free counter: a CV download or a click on an email link sends one beacon with the event
+  // name. The server keeps only a count per day; nothing about the visitor is sent or stored.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a || !navigator.sendBeacon) return;
+    var href = a.getAttribute('href');
+    var event = /^mailto:/i.test(href) ? 'email' : /emanuel-rusu-cv\.pdf$/.test(href) ? 'cv' : null;
+    if (event) navigator.sendBeacon('/api/hit?e=' + event);
+  });
+
   // Mobile menu
   var btn = document.querySelector('.menu-btn');
   var nav = document.getElementById('nav');

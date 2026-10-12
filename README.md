@@ -68,6 +68,25 @@ Run `node capture.mjs` without arguments to refresh every project. Screenshots a
 
 Both language versions link to each other with `<link rel="alternate" hreflang="en|de|x-default">` (x-default is English), and the header has a language switch ("Deutsch" / "English") that points to the matching page where one exists. The hreflang lines on the English homepage are written by hand in `public/index.html`; the generated pages get them from `pageHead({ alternates })`.
 
+## CV and email counter
+
+`src/worker.js` counts CV downloads and clicks on email links without cookies. `public/assets/main.js` sends `POST /api/hit?e=cv` or `?e=email` with `navigator.sendBeacon`; the Worker stores only the day, the event and a running count in one SQLite-backed Durable Object (`Counter`, binding `COUNTER` in `wrangler.jsonc`, created on deploy). No IP address, user agent or cookie is stored. Beacons from other origins are refused.
+
+To read the totals, set a secret once (any long random string; keep it somewhere safe):
+
+```bash
+npx wrangler login
+npx wrangler secret put STATS_TOKEN
+```
+
+Then:
+
+```bash
+curl -H "Authorization: Bearer <your token>" https://remtadigital.com/api/stats
+```
+
+It returns `{"totals":{"cv":…,"email":…},"days":{"2026-10-12":{"cv":…,"email":…},…}}`. Until the secret is set, `/api/stats` is a 404. For local testing, put `STATS_TOKEN=local-test-token` in `.dev.vars` (gitignored) and run `npx wrangler@4.86.0 dev`.
+
 ## Search engines
 
 Google Search Console has the domain property remtadigital.com (verified by a TXT record in Cloudflare DNS; keep it) with sitemap.xml submitted. Bing, Yandex and other IndexNow engines are notified with:

@@ -522,7 +522,7 @@ ${pageEnd}`;
 }
 
 // ---- privacy page (required by AdSense; keep it in line with what the site actually loads)
-write('public/privacy/index.html', `${pageHead({ title: 'Privacy | REMTA Digital', description: 'What remtadigital.com collects: cookieless visit statistics from Cloudflare, and Google AdSense ads on article pages only.', url: `${SITE}/privacy/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
+write('public/privacy/index.html', `${pageHead({ title: 'Privacy | REMTA Digital', description: 'What remtadigital.com collects: cookieless visit statistics from Cloudflare, a cookie-free daily count of CV downloads and email clicks, and Google AdSense ads on article pages only.', url: `${SITE}/privacy/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
 <body class="article-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
 
@@ -538,6 +538,9 @@ ${headerHtml}
       <p>This site belongs to REMTA S.R.L. (REMTA Digital), Cluj-Napoca, Romania. For any question about your data, write to <a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a>.</p>
       <h2>Visit statistics</h2>
       <p>I use Cloudflare Web Analytics to count visits and page views. It sets no cookies and does not identify you; I only see totals such as pages viewed, countries, browsers and referring sites.</p>
+      <h2>CV and email counter</h2>
+      <p>When you download my CV or click one of my email links, your browser sends a short signal to this site that says only which of the two it was. My server adds one to a count for that day. That is all it keeps: the date, the event ("cv" or "email") and the number. It stores no cookies, no IP address, no browser details and nothing that could tell one visitor from another, and it reads nothing from your device.</p>
+      <p>Because nothing personal is stored and nothing is read from or saved on your device, this counter needs no consent banner. Like every request to this site, the signal passes through Cloudflare, which hosts the site.</p>
       <h2>Ads on article pages</h2>
       <p>The article pages show ads from Google AdSense. Google and its partners may use cookies to show and measure ads, and in the EU and UK you are asked for your consent first. You can read <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites that use its services</a> and change your ad settings at <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">My Ad Center</a>. The homepage, project pages and CV show no ads.</p>
       <h2>Email</h2>

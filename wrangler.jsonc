@@ -1,7 +1,7 @@
 {
   // Static site served by the "first" Worker (remtadigital.com). No build step.
-  // src/worker.js runs first on every request (www -> apex redirect) and hands the rest to the assets;
-  // unknown paths get public/404.html with status 404.
+  // src/worker.js runs first on every request (www -> apex redirect, the /api counter) and hands the
+  // rest to the assets; unknown paths get public/404.html with status 404.
   "name": "first",
   "compatibility_date": "2026-05-01",
   "main": "src/worker.js",
@@ -10,5 +10,11 @@
     "binding": "ASSETS",
     "run_worker_first": true,
     "not_found_handling": "404-page"
-  }
+  },
+  // Cookie-free counter for CV downloads and email clicks: one SQLite-backed Durable Object,
+  // created on deploy (available on the Workers Free plan). Stores only day, event and count.
+  "durable_objects": {
+    "bindings": [{ "name": "COUNTER", "class_name": "Counter" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Counter"] }]
 }
