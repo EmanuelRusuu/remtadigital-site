@@ -39,6 +39,22 @@
     });
   });
 
+  // Profile photo: open the full portrait in a native <dialog>. Where the browser supports
+  // View Transitions, the avatar grows into the portrait and shrinks back on close.
+  var photoBtn = document.querySelector('.avatar-btn');
+  var photo = document.getElementById('photo-view');
+  if (photoBtn && photo && photo.showModal) {
+    var morph = function (update) {
+      if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.startViewTransition(update);
+      else update();
+    };
+    var closePhoto = function () { morph(function () { photo.close(); photoBtn.classList.remove('is-open'); }); };
+    photoBtn.addEventListener('click', function () { morph(function () { photoBtn.classList.add('is-open'); photo.showModal(); }); });
+    photo.querySelector('.photo-close').addEventListener('click', closePhoto);
+    photo.addEventListener('click', function (e) { if (e.target === photo) closePhoto(); });
+    photo.addEventListener('cancel', function (e) { e.preventDefault(); closePhoto(); });
+  }
+
   // Project sorting: featured (original order), most visited (order computed by build.mjs:
   // home-country rank band, then worldwide rank), name
   var grid = document.querySelector('.work-grid');

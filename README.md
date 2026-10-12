@@ -18,7 +18,8 @@ data/media.json                what capture found per project (Shopify or not, i
 data/popularity.json           traffic data for the "Most visited" sort and the project pages:
                                Tranco ranks, Chrome UX Report country bands, category placings
 scripts/                       local tooling, not used by the deploy
-wrangler.jsonc                 Cloudflare Worker config (serves public/ as static assets)
+wrangler.jsonc                 Cloudflare Worker config: src/worker.js redirects www to the apex domain,
+                               then serves public/ (unknown paths get public/404.html with status 404)
 ```
 
 Only `public/` is published. Everything else in the repository stays private.

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Articles by Emanuel Rusu, Shopify developer</title>
+  <link>https://remtadigital.com/articles/</link>
+  <atom:link href="https://remtadigital.com/articles/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Guides to editing Shopify themes and notes from real Shopify projects.</description>
+  <language>en</language>
+  <item>
+    <title>Editing a Shopify theme, part 1: the theme editor, safely</title>
+    <link>https://remtadigital.com/articles/editing-shopify-themes-1-theme-editor/</link>
+    <guid>https://remtadigital.com/articles/editing-shopify-themes-1-theme-editor/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>There are four ways to change a Shopify theme, from clicking in the theme editor to a full Git workflow. Part 1 covers the one every store owner should master first, and the habit that makes all the others safe.</description>
+  </item>
+  <item>
+    <title>Editing a Shopify theme, part 2: the code editor in the admin</title>
+    <link>https://remtadigital.com/articles/editing-shopify-themes-2-code-editor/</link>
+    <guid>https://remtadigital.com/articles/editing-shopify-themes-2-code-editor/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>The quickest way into a theme's code needs nothing but a browser. Where to find it, what each folder does, a small section you can build in five minutes, and how to undo a file you broke.</description>
+  </item>
+  <item>
+    <title>Editing a Shopify theme, part 3: working locally with Shopify CLI</title>
+    <link>https://remtadigital.com/articles/editing-shopify-themes-3-shopify-cli/</link>
+    <guid>https://remtadigital.com/articles/editing-shopify-themes-3-shopify-cli/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>Shopify CLI gives you the theme on your own computer, your own editor and a live preview that reloads as you type. Installing it, the commands that matter, and the one mistake that wipes a merchant's changes.</description>
+  </item>
+  <item>
+    <title>Editing a Shopify theme, part 4: GitHub and a branch for every theme</title>
+    <link>https://remtadigital.com/articles/editing-shopify-themes-4-github/</link>
+    <guid>https://remtadigital.com/articles/editing-shopify-themes-4-github/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>Shopify's GitHub integration turns a branch into a theme and syncs both ways, including the merchant's edits. How to connect it, what it requires, and the branch setup I use so the live store only ever changes on purpose.</description>
+  </item>
+  <item>
+    <title>One jersey, one cart line: personalised shirts with a Cart Transform Function</title>
+    <link>https://remtadigital.com/articles/one-jersey-one-cart-line/</link>
+    <guid>https://remtadigital.com/articles/one-jersey-one-cart-line/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>A personalised hockey jersey is really four products: the shirt, the name, the number and the badges. Here is how I made them check out as one line for EV Zug without touching the price.</description>
+  </item>
+  <item>
+    <title>Moving a store's whole history without sending a single email</title>
+    <link>https://remtadigital.com/articles/migrating-customers-without-sending-a-single-email/</link>
+    <guid>https://remtadigital.com/articles/migrating-customers-without-sending-a-single-email/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>Importing tens of thousands of past customers and orders into a live Shopify store would normally email every one of them. Here is how I built a migration app where that cannot happen.</description>
+  </item>
+  <item>
+    <title>From 16.2 MB to 4.5 MB: slimming down a Shopify product page</title>
+    <link>https://remtadigital.com/articles/from-16-mb-to-4-mb-product-page/</link>
+    <guid>https://remtadigital.com/articles/from-16-mb-to-4-mb-product-page/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.</description>
+  </item>
+  <item>
+    <title>A football club's whole website on one Shopify theme</title>
+    <link>https://remtadigital.com/articles/football-club-website-on-one-shopify-theme/</link>
+    <guid>https://remtadigital.com/articles/football-club-website-on-one-shopify-theme/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>FC Basel runs its news, videos, league table, player pages and fan shop on a single Shopify theme. What it takes to make a store theme behave like a club website, and the jersey configurator in the middle of it.</description>
+  </item>
+  <item>
+    <title>Replacing Shopify search with Meilisearch: colours, markets and instant results</title>
+    <link>https://remtadigital.com/articles/meilisearch-for-shopify-colours-and-markets/</link>
+    <guid>https://remtadigital.com/articles/meilisearch-for-shopify-colours-and-markets/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>For Inuikii, I replaced Shopify's native search and collection filtering with a Meilisearch layer of about 3,000 lines. Why a footwear brand needs colour grouping, what market-aware prices mean for search, and the paid app that went away along the way.</description>
+  </item>
+  <item>
+    <title>When a credit check outage looks like a decline</title>
+    <link>https://remtadigital.com/articles/when-a-credit-check-outage-looks-like-a-decline/</link>
+    <guid>https://remtadigital.com/articles/when-a-credit-check-outage-looks-like-a-decline/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>On Ecofort, customers paying by invoice were being told no whenever the credit check provider had an outage. How I separated 'declined' from 'did not answer', and the performance pass that came with the same project.</description>
+  </item>
+  <item>
+    <title>A wishlist that survives the reload: server-side lists over a Shopify app proxy</title>
+    <link>https://remtadigital.com/articles/a-wishlist-that-survives-the-reload/</link>
+    <guid>https://remtadigital.com/articles/a-wishlist-that-survives-the-reload/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>Most theme wishlists live in the browser and vanish with it. For Chrüterhüsli I built one that is stored on the server through a Shopify app proxy, and a button that checks the server before it claims anything is saved.</description>
+  </item>
+  <item>
+    <title>Syncing content between Shopify stores: metaobjects, files and translations</title>
+    <link>https://remtadigital.com/articles/syncing-content-between-shopify-stores/</link>
+    <guid>https://remtadigital.com/articles/syncing-content-between-shopify-stores/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>Brands with several Shopify stores want to write content once. I worked on the internal app that syncs it: metaobjects whose definitions differ between stores, images that must survive the trip, and a file library too big to read in one go.</description>
+  </item>
+  <item>
+    <title>One allergen, three languages: filtering chocolate the way people search</title>
+    <link>https://remtadigital.com/articles/one-allergen-three-languages/</link>
+    <guid>https://remtadigital.com/articles/one-allergen-three-languages/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>Bruderer sells confectionery in German, English and French, with allergen data from several suppliers. Why the same allergen arrived under many spellings, and how a small normalisation step made the filters trustworthy.</description>
+  </item>
+  <item>
+    <title>Tabs that hide themselves: rebuilding a confectioner's design on Dawn</title>
+    <link>https://remtadigital.com/articles/tabs-that-hide-themselves/</link>
+    <guid>https://remtadigital.com/articles/tabs-that-hide-themselves/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>Confiserie Sprüngli wanted its existing design on Shopify's Dawn theme. The product page details that make that work, starting with information tabs that disappear when a product has nothing to put in them.</description>
+  </item>
+  <item>
+    <title>Six stores, one theme: loyalty points, currencies and structured data at Nile</title>
+    <link>https://remtadigital.com/articles/six-stores-one-theme/</link>
+    <guid>https://remtadigital.com/articles/six-stores-one-theme/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>Nile runs six Shopify stores, a test and a production store for each of CHF, EUR and GBP, from one shared theme. How a loyalty programme, country switching and SEO data work when every feature has to behave in three currencies.</description>
+  </item>
+  <item>
+    <title>Pricing a swim spa: installation choices as Shopify discounts</title>
+    <link>https://remtadigital.com/articles/pricing-a-swim-spa-with-shopify-discounts/</link>
+    <guid>https://remtadigital.com/articles/pricing-a-swim-spa-with-shopify-discounts/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>At Spa Solutions, the price of a swim spa depends on who installs it. As the sole developer, I built that choice into the product page and the cart with dynamic Shopify discounts and installation products that can never drift out of sync.</description>
+  </item>
+  <item>
+    <title>Faster football club stores without a rebuild: FC Zürich and FC St. Gallen</title>
+    <link>https://remtadigital.com/articles/two-football-club-stores-faster/</link>
+    <guid>https://remtadigital.com/articles/two-football-club-stores-faster/</guid>
+    <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
+    <description>Two Swiss club stores, two kinds of speed. On FC Zürich, three days of work made collection and product pages at least 30% faster. On FC St. Gallen, a release-date filter that renders almost instantly by using CSS instead of reloading.</description>
+  </item>
+</channel>
+</rss>

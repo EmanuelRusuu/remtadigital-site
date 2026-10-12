@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="google-adsense-account" content="ca-pub-2728164635897891">
-<title>Emanuel Rusu, Shopify developer | REMTA Digital</title>
-<meta name="description" content="I'm Emanuel Rusu, a Shopify developer in Cluj-Napoca. Through REMTA Digital, my one-person company, I build custom themes, features, apps and integrations for larger, multilingual stores.">
+<title>Freelance Shopify Developer | Emanuel Rusu, REMTA Digital</title>
+<meta name="description" content="Freelance Shopify developer for custom themes, apps, Shopify Functions and ERP integrations. 36 projects for Swiss and US stores, from FC Basel to Curaprox.">
 <meta name="theme-color" content="#1d5e6b">
-<meta property="og:title" content="Emanuel Rusu, Shopify developer | REMTA Digital">
+<meta property="og:title" content="Freelance Shopify Developer | Emanuel Rusu, REMTA Digital">
 <meta property="og:description" content="Custom Shopify themes, features, apps and integrations for larger, multilingual stores. 36 projects with screenshots, results and a downloadable CV.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://remtadigital.com/">
@@ -17,6 +18,7 @@
 <meta property="og:image:alt" content="Emanuel Rusu, Shopify developer and founder of REMTA Digital">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://remtadigital.com/">
+<link rel="alternate" type="application/rss+xml" title="Articles by Emanuel Rusu" href="https://remtadigital.com/articles/feed.xml">
 <link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -25,21 +27,81 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "REMTA Digital",
-  "url": "https://remtadigital.com/",
-  "email": "emanuel@remtadigital.com",
-  "description": "One-person Shopify development company: custom themes, functionality, apps and system integrations.",
-  "areaServed": "Worldwide",
-  "address": { "@type": "PostalAddress", "addressLocality": "Cluj-Napoca", "addressCountry": "RO" },
-  "founder": {
-    "@type": "Person",
-    "name": "Emanuel Rusu",
-    "jobTitle": "Shopify Developer",
-    "image": "https://remtadigital.com/assets/img/emanuel-rusu.jpg",
-    "sameAs": ["https://www.linkedin.com/in/emanuel-rusu/"]
-  },
-  "sameAs": ["https://www.linkedin.com/in/emanuel-rusu/"]
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://remtadigital.com/#business",
+      "name": "REMTA Digital",
+      "legalName": "REMTA S.R.L.",
+      "url": "https://remtadigital.com/",
+      "email": "emanuel@remtadigital.com",
+      "logo": "https://remtadigital.com/assets/img/apple-touch-icon.png",
+      "image": "https://remtadigital.com/assets/img/og-home.jpg",
+      "description": "Freelance Shopify development: custom themes, Shopify apps and Functions, checkout extensions and ERP, PIM and search integrations.",
+      "serviceType": [
+        "Shopify theme development",
+        "Shopify app development",
+        "Shopify integrations",
+        "Shopify store migration",
+        "Shopify speed optimisation"
+      ],
+      "areaServed": "Worldwide",
+      "knowsLanguage": [
+        "en",
+        "ro"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cluj-Napoca",
+        "addressCountry": "RO"
+      },
+      "founder": {
+        "@id": "https://remtadigital.com/#person"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/emanuel-rusu/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://remtadigital.com/#person",
+      "name": "Emanuel Rusu",
+      "jobTitle": "Shopify Developer",
+      "url": "https://remtadigital.com/",
+      "image": "https://remtadigital.com/assets/img/emanuel-rusu.jpg",
+      "worksFor": {
+        "@id": "https://remtadigital.com/#business"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Babeș-Bolyai University"
+      },
+      "knowsAbout": [
+        "Shopify",
+        "Shopify Liquid",
+        "Shopify theme development",
+        "Shopify apps",
+        "Shopify Functions",
+        "Checkout UI extensions",
+        "Shopify Admin GraphQL API",
+        "Meilisearch",
+        "Klaviyo"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/emanuel-rusu/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://remtadigital.com/#website",
+      "url": "https://remtadigital.com/",
+      "name": "REMTA Digital",
+      "publisher": {
+        "@id": "https://remtadigital.com/#business"
+      },
+      "inLanguage": "en"
+    }
+  ]
 }
 </script>
 </head>
@@ -79,10 +141,11 @@
           </ul>
         </div>
         <div class="profile-top">
-          <img class="avatar" src="assets/img/emanuel-rusu.jpg" alt="Emanuel Rusu" width="152" height="152">
+          <button class="avatar-btn" type="button" aria-haspopup="dialog" aria-controls="photo-view" aria-label="View a larger photo of Emanuel Rusu">
+            <img class="avatar" src="assets/img/emanuel-rusu.jpg" alt="Emanuel Rusu" width="400" height="400">
+          </button>
           <div class="profile-main">
-            <h1>Emanuel Rusu</h1>
-            <p class="headline">Shopify developer &middot; Founder of REMTA Digital</p>
+            <h1><span class="h1-name">Emanuel Rusu</span> <span class="headline">Freelance Shopify developer &middot; Founder of REMTA Digital</span></h1>
             <p class="location">Cluj-Napoca, Romania &middot; working remotely in English and Romanian</p>
             <p class="open"><span class="dot" aria-hidden="true"></span>Open to new projects</p>
             <div class="cta-row">
@@ -916,6 +979,14 @@
       <p class="links"><a href="https://www.linkedin.com/in/emanuel-rusu/" target="_blank" rel="noopener noreferrer">Or find me on LinkedIn</a></p>
     </div>
   </section>
+
+  <dialog id="photo-view" class="photo-view" aria-label="Photo of Emanuel Rusu">
+    <figure>
+      <img src="assets/img/emanuel-rusu-portrait.jpg" alt="Emanuel Rusu, Shopify developer, in a white shirt" width="597" height="896" loading="lazy" decoding="async">
+      <figcaption>Emanuel Rusu &middot; Shopify developer, Cluj-Napoca</figcaption>
+    </figure>
+    <button class="photo-close" type="button" aria-label="Close photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </dialog>
 
 </main>
 

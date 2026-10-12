@@ -1,8 +1,14 @@
 {
   // Static site served by the "first" Worker (remtadigital.com). No build step.
+  // src/worker.js runs first on every request (www -> apex redirect) and hands the rest to the assets;
+  // unknown paths get public/404.html with status 404.
   "name": "first",
   "compatibility_date": "2026-05-01",
+  "main": "src/worker.js",
   "assets": {
-    "directory": "./public"
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
   }
 }

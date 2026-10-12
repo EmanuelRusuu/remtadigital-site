@@ -266,10 +266,16 @@ function page(p, i) {
             <p class="note">${sources}</p>
           </div>` : '';
 
-  return `${head}<title>${strip(p.title)} | Emanuel Rusu, REMTA Digital</title>
+  // "Shopify store" in the title for live stores, so searches for the brand plus Shopify find the page.
+  const pageTitle = p.url && !p.kind ? `${strip(p.title)} Shopify store | Emanuel Rusu` : `${strip(p.title)} | Emanuel Rusu, Shopify developer`;
+  const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: 'Projects', item: `${SITE}/#work` },
+    { '@type': 'ListItem', position: 3, name: strip(p.title), item: url } ] };
+  return `${head}<title>${pageTitle}</title>
 <meta name="description" content="${attr(shareText(p))}">
 <meta name="theme-color" content="#1d5e6b">
-<meta property="og:title" content="${attr(p.title)} | Emanuel Rusu, REMTA Digital">
+<meta property="og:title" content="${attr(pageTitle)}">
 <meta property="og:description" content="${attr(shareText(p))}">
 <meta property="og:type" content="article">
 <meta property="og:url" content="${url}">
@@ -283,6 +289,7 @@ function page(p, i) {
 <link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">${JSON.stringify(crumbs)}</script>
 </head>
 <body class="project-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
@@ -370,6 +377,7 @@ const pageHead = ({ title, description, url, image, type, jsonLd, ads }) => `${h
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="alternate" type="application/rss+xml" title="Articles by Emanuel Rusu" href="/articles/feed.xml">
 <link rel="stylesheet" href="/assets/style.css">${ads ? `
 ${ADSENSE}` : ''}${jsonLd ? `
 <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}
@@ -426,8 +434,15 @@ function articlePage(a) {
   const source = p ? `From my work on <a href="/projects/${p.slug}/">${p.title}</a>${p.company ? `, built as a developer at ${p.company}, which ran the project for its client` : ''}.` : '';
   return `${pageHead({
     title: `${attr(a.title)} | Emanuel Rusu`, description: attr(a.summary), url, image, type: 'article', ads: true,
-    jsonLd: { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: strip(a.title), description: strip(a.summary), datePublished: a.date, articleSection: a.category,
-      image, mainEntityOfPage: url, author: { '@type': 'Person', name: 'Emanuel Rusu', url: `${SITE}/` } },
+    jsonLd: { '@context': 'https://schema.org', '@graph': [
+      { '@type': 'BlogPosting', headline: strip(a.title), description: strip(a.summary), datePublished: a.date, dateModified: a.updated || a.date, articleSection: a.category,
+        keywords: (a.tags || []).join(', '), image, mainEntityOfPage: url, inLanguage: 'en',
+        author: { '@type': 'Person', '@id': `${SITE}/#person`, name: 'Emanuel Rusu', url: `${SITE}/` },
+        publisher: { '@type': 'Organization', '@id': `${SITE}/#business`, name: 'REMTA Digital', logo: { '@type': 'ImageObject', url: `${SITE}/assets/img/apple-touch-icon.png` } } },
+      { '@type': 'BreadcrumbList', itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+        { '@type': 'ListItem', position: 2, name: 'Articles', item: `${SITE}/articles/` },
+        { '@type': 'ListItem', position: 3, name: strip(a.title), item: url } ] } ] },
   })}
 <body class="article-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
@@ -465,7 +480,7 @@ ${pageEnd}`;
 
 function articlesIndex() {
   const url = `${SITE}/articles/`;
-  return `${pageHead({ title: 'Articles | Emanuel Rusu, Shopify developer', description: 'A step-by-step guide to editing Shopify themes, and short notes from real Shopify projects: what the problem was, what I built and what changed.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', ads: true })}
+  return `${pageHead({ title: 'Shopify Guides and Project Notes | Emanuel Rusu, Shopify developer', description: 'A step-by-step guide to editing Shopify themes, and short notes from real Shopify projects: what the problem was, what I built and what changed.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', ads: true })}
 <body class="article-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
 
@@ -521,11 +536,57 @@ if (articles.length) {
   write('public/articles/index.html', articlesIndex());
 }
 
-// ---- sitemap
-const urls = [`${SITE}/`, ...projects.map(p => `${SITE}/projects/${p.slug}/`), ...(articles.length ? [`${SITE}/articles/`, ...articles.map(a => `${SITE}/articles/${a.slug}/`)] : []), `${SITE}/privacy/`];
+// ---- 404 page (served by the Worker for any unknown path, with status 404)
+write('public/404.html', `${pageHead({ title: 'Page not found | REMTA Digital', description: 'This page does not exist.', url: `${SITE}/404.html`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' }).replace('content="index, follow, max-image-preview:large"', 'content="noindex"')}
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+${headerHtml}
+
+<main id="main">
+  <section class="articles-hero">
+    <div class="wrap narrow">
+      <h1>This page does not exist</h1>
+      <p class="lead">The link may be old or mistyped. Here is where most people want to go:</p>
+      <ul class="plain">
+        <li><a href="/">Home</a>: who I am and what I build on Shopify</li>
+        <li><a href="/#work">Projects</a>: 36 stores and apps I worked on</li>
+        <li><a href="/articles/">Articles</a>: the theme editing guide and notes from projects</li>
+        <li><a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a>: or just write to me</li>
+      </ul>
+    </div>
+  </section>
+${pageEnd}`);
+
+// ---- RSS feed for the articles
+const xml = s => strip(s).replace(/&(?![a-z]+;|#\d+;)/g, '&amp;').replace(/</g, '&lt;');
+if (articles.length) write('public/articles/feed.xml', `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Articles by Emanuel Rusu, Shopify developer</title>
+  <link>${SITE}/articles/</link>
+  <atom:link href="${SITE}/articles/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>Guides to editing Shopify themes and notes from real Shopify projects.</description>
+  <language>en</language>
+${articles.map(a => `  <item>
+    <title>${xml(a.title)}</title>
+    <link>${SITE}/articles/${a.slug}/</link>
+    <guid>${SITE}/articles/${a.slug}/</guid>
+    <pubDate>${new Date(a.date + 'T08:00:00Z').toUTCString()}</pubDate>
+    <description>${xml(a.summary)}</description>
+  </item>`).join('\n')}
+</channel>
+</rss>
+`);
+
+// ---- sitemap, with the article date or today's build date as lastmod
+const today = new Date().toISOString().slice(0, 10);
+const entries = [[`${SITE}/`, today], ...projects.map(p => [`${SITE}/projects/${p.slug}/`, today]),
+  ...(articles.length ? [[`${SITE}/articles/`, today], ...articles.map(a => [`${SITE}/articles/${a.slug}/`, a.updated || a.date])] : []), [`${SITE}/privacy/`, today]];
+const urls = entries.map(e => e[0]);
 write('public/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.map(u => `  <url>\n    <loc>${u}</loc>\n  </url>`).join('\n')}
+${entries.map(([u, d]) => `  <url>\n    <loc>${u}</loc>\n    <lastmod>${d}</lastmod>\n  </url>`).join('\n')}
 </urlset>
 `);
 
