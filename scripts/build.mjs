@@ -348,7 +348,9 @@ ${footerHtml}
 projects.forEach((p, i) => write(`public/projects/${p.slug}/index.html`, page(p, i)));
 
 // ---- articles
-const pageHead = ({ title, description, url, image, type, jsonLd }) => `${head}<title>${title}</title>
+// Google AdSense (auto ads) runs on article pages only; the portfolio and CV stay ad-free.
+const ADSENSE = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>';
+const pageHead = ({ title, description, url, image, type, jsonLd, ads }) => `${head}<title>${title}</title>
 <meta name="description" content="${description}">
 <meta name="theme-color" content="#1d5e6b">
 <meta property="og:title" content="${title}">
@@ -364,7 +366,8 @@ const pageHead = ({ title, description, url, image, type, jsonLd }) => `${head}<
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/style.css">${jsonLd ? `
+<link rel="stylesheet" href="/assets/style.css">${ads ? `
+${ADSENSE}` : ''}${jsonLd ? `
 <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}
 </head>`;
 const contactSection = heading => `
@@ -392,7 +395,7 @@ function articlePage(a) {
   const others = articles.filter(x => x !== a);
   const source = p ? `From my work on <a href="/projects/${p.slug}/">${p.title}</a>${p.company ? `, built as a developer at ${p.company}, which ran the project for its client` : ''}.` : '';
   return `${pageHead({
-    title: `${attr(a.title)} | Emanuel Rusu`, description: attr(a.summary), url, image, type: 'article',
+    title: `${attr(a.title)} | Emanuel Rusu`, description: attr(a.summary), url, image, type: 'article', ads: true,
     jsonLd: { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: strip(a.title), description: strip(a.summary), datePublished: a.date,
       image, mainEntityOfPage: url, author: { '@type': 'Person', name: 'Emanuel Rusu', url: `${SITE}/` } },
   })}
@@ -432,7 +435,7 @@ ${pageEnd}`;
 
 function articlesIndex() {
   const url = `${SITE}/articles/`;
-  return `${pageHead({ title: 'Articles | Emanuel Rusu, Shopify developer', description: 'Short notes from real Shopify projects: what the problem was, what I built and what changed. Two to three minutes each.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
+  return `${pageHead({ title: 'Articles | Emanuel Rusu, Shopify developer', description: 'Short notes from real Shopify projects: what the problem was, what I built and what changed. Two to three minutes each.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', ads: true })}
 <body class="article-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
 
@@ -450,13 +453,40 @@ ${contactSection('Let&rsquo;s talk about your store')}
 ${pageEnd}`;
 }
 
+// ---- privacy page (required by AdSense; keep it in line with what the site actually loads)
+write('public/privacy/index.html', `${pageHead({ title: 'Privacy | REMTA Digital', description: 'What remtadigital.com collects: cookieless visit statistics from Cloudflare, and Google AdSense ads on article pages only.', url: `${SITE}/privacy/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+${headerHtml}
+
+<main id="main">
+  <article class="article wrap">
+    <header class="article-head">
+      <h1>Privacy</h1>
+      <p class="post-meta">Last updated 12 October 2026</p>
+    </header>
+    <div class="article-body">
+      <p>This site belongs to REMTA S.R.L. (REMTA Digital), Cluj-Napoca, Romania. For any question about your data, write to <a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a>.</p>
+      <h2>Visit statistics</h2>
+      <p>I use Cloudflare Web Analytics to count visits and page views. It sets no cookies and does not identify you; I only see totals such as pages viewed, countries, browsers and referring sites.</p>
+      <h2>Ads on article pages</h2>
+      <p>The article pages show ads from Google AdSense. Google and its partners may use cookies to show and measure ads, and in the EU and UK you are asked for your consent first. You can read <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites that use its services</a> and change your ad settings at <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">My Ad Center</a>. The homepage, project pages and CV show no ads.</p>
+      <h2>Email</h2>
+      <p>If you email me, I use your message only to reply and keep it as long as our conversation or project needs it.</p>
+      <h2>Your rights</h2>
+      <p>Under the GDPR you can ask what I hold about you, have it corrected or deleted, and complain to the Romanian data protection authority (ANSPDCP).</p>
+    </div>
+  </article>
+${pageEnd}`);
+
 if (articles.length) {
   articles.forEach(a => write(`public/articles/${a.slug}/index.html`, articlePage(a)));
   write('public/articles/index.html', articlesIndex());
 }
 
 // ---- sitemap
-const urls = [`${SITE}/`, ...projects.map(p => `${SITE}/projects/${p.slug}/`), ...(articles.length ? [`${SITE}/articles/`, ...articles.map(a => `${SITE}/articles/${a.slug}/`)] : [])];
+const urls = [`${SITE}/`, ...projects.map(p => `${SITE}/projects/${p.slug}/`), ...(articles.length ? [`${SITE}/articles/`, ...articles.map(a => `${SITE}/articles/${a.slug}/`)] : []), `${SITE}/privacy/`];
 write('public/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(u => `  <url>\n    <loc>${u}</loc>\n  </url>`).join('\n')}

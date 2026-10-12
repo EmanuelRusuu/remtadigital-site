@@ -232,6 +232,7 @@ details p{margin:0 0 16px;color:var(--body)}
 .links{margin-top:14px}
 footer{background:var(--text);color:#c3cbce;padding:28px 0;font-size:.93rem}
 footer p{margin:4px 0;max-width:90ch}
+footer a{color:#e6f0f1}
 
 /* project pages */
 .project-hero{padding:24px 0 20px}
