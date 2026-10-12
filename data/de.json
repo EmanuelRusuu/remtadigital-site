@@ -6,6 +6,7 @@
   "nav": {
     "projects": "Projekte",
     "services": "Leistungen",
+    "together": "Zusammenarbeit",
     "industries": "Branchen",
     "about": "Über mich",
     "faq": "FAQ",
@@ -82,6 +83,25 @@
       ["Shopify-Apps", "Admin-Apps, Checkout-Erweiterungen und Shopify Functions auf Basis der Admin GraphQL API."],
       ["Migrationen", "Kunden, Bestellungen und Inhalte von einer anderen Plattform übernommen, zuerst mit einem Probelauf und mit einem Protokoll für jede Zeile."],
       ["Geschwindigkeit und Aufräumen", "Schwere Themes schneller und leichter wartbar machen, ohne den Shop offline zu nehmen."]
+    ]
+  },
+  "together": {
+    "title": "So arbeiten wir zusammen",
+    "note": "Drei Modelle für die Zusammenarbeit. Jedes Projekt ist anders, deshalb veröffentliche ich keine Preise: Sie erhalten vor Beginn ein schriftliches Angebot.",
+    "price": "Preis auf Anfrage:",
+    "ask": "per E-Mail anfragen",
+    "models": [
+      ["Festpreis pro Projekt", "Für Arbeiten mit klarem Umfang, etwa eine neue Funktion, ein Theme-Abschnitt oder eine Migration. Ich halte schriftlich fest, was enthalten ist, und nenne vor dem Start einen Preis.", "Festpreis-Projekt"],
+      ["Nach Aufwand", "Für kleinere Änderungen, Fehlerbehebungen und Arbeiten, deren Umfang noch offen ist. Ich erfasse meine Zeit und verrechne die tatsächlich geleisteten Stunden.", "Arbeit nach Aufwand"],
+      ["Monatliche Betreuung", "Ein festes Stundenkontingent pro Monat für Updates, kleine Änderungen und Fehlerbehebungen, damit Ihr Shop einen Entwickler hat, der ihn bereits kennt.", "Monatliche Betreuung"]
+    ],
+    "stepsTitle": "Ablauf eines Projekts",
+    "steps": [
+      ["E-Mail.", "Schreiben Sie mir an <a href=\"mailto:emanuel@remtadigital.com\">emanuel@remtadigital.com</a>, gern auf Deutsch, mit ein paar Sätzen zu Ihrem Shop und Ihrem Vorhaben."],
+      ["Kurzes Gespräch.", "Wir besprechen in einem Call auf Englisch die Details und offene Fragen."],
+      ["Schriftliche Schätzung.", "Umfang, Zeitplan, Preis und das passende Modell."],
+      ["Umsetzung.", "Ich arbeite in einem GitHub-Repository und auf einem Entwicklungs-Theme. Ihr Live-Shop bleibt unverändert, bis Sie die Änderungen freigeben."],
+      ["Übergabe.", "Der Code bleibt in Ihrem Repository, mit Notizen dazu, was sich geändert hat und wie Sie es bearbeiten."]
     ]
   },
   "industries": {

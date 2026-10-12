@@ -179,7 +179,7 @@ write('public/index.html', index);
 const shared = index;
 const head = shared.slice(0, shared.indexOf('<title>'));
 const headerHtml = shared.slice(shared.indexOf('<header class="site-header"'), shared.indexOf('</header>') + 9)
-  .replace(/href="#(cases|services|work|about|faq|contact)"/g, 'href="/#$1"')
+  .replace(/href="#(cases|services|working-together|work|about|faq|contact)"/g, 'href="/#$1"')
   .replace('href="#top" aria-label="REMTA Digital, back to top"', 'href="/" aria-label="REMTA Digital, home"');
 const footerHtml = shared.slice(shared.indexOf('<footer>'), shared.indexOf('</footer>') + 9);
 const favicon = (shared.match(/<link rel="icon" href="([^"]*)"/) || [])[1];
@@ -625,6 +625,7 @@ const deHeader = enHref => `<header class="site-header">
     <nav id="nav" aria-label="Hauptmenü">
       <a href="/de/#projekte">${de.nav.projects}</a>
       <a href="/de/#leistungen">${de.nav.services}</a>
+      <a href="/de/#zusammenarbeit">${de.nav.together}</a>
       <a href="/de/#branchen">${de.nav.industries}</a>
       <a href="/de/#ueber-mich">${de.nav.about}</a>
       <a href="/de/#faq">${de.nav.faq}</a>
@@ -779,7 +780,27 @@ ${deLangNote()}
     </div>
   </section>
 
-  <section id="branchen">
+  <section id="zusammenarbeit">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>${de.together.title}</h2>
+        <p class="note">${de.together.note}</p>
+      </div>
+      <div class="models">${de.together.models.map(([h, t, subject]) => `
+        <article class="model">
+          <h3>${h}</h3>
+          <p>${t}</p>
+          <p class="price">${de.together.price} <a href="mailto:emanuel@remtadigital.com?subject=${encodeURIComponent(subject)}">${de.together.ask}</a></p>
+        </article>`).join('')}
+      </div>
+      <h3 class="tools-title">${de.together.stepsTitle}</h3>
+      <ol class="steps">
+        ${de.together.steps.map(([h, t]) => `<li><strong>${h}</strong> ${t}</li>`).join('\n        ')}
+      </ol>
+    </div>
+  </section>
+
+  <section id="branchen" class="alt">
     <div class="wrap">
       <nav class="industries industries-top" aria-labelledby="branchen-title">
         <h2 id="branchen-title">${de.industries.title}</h2>
@@ -793,7 +814,7 @@ ${deLangNote()}
     </div>
   </section>
 
-  <section id="ueber-mich" class="alt">
+  <section id="ueber-mich">
     <div class="wrap about-grid">
       <div>
         <h2>${de.about.title}</h2>
@@ -811,7 +832,7 @@ ${deLangNote()}
     </div>
   </section>
 
-  <section id="faq">
+  <section id="faq" class="alt">
     <div class="wrap narrow">
       <div class="sec-head">
         <h2>${de.faq.title}</h2>

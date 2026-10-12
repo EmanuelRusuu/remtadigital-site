@@ -5,7 +5,8 @@ Static one-page site for [remtadigital.com](https://remtadigital.com). Plain HTM
 ## Structure
 
 ```
-public/index.html              homepage (project cards are generated, see below)
+public/index.html              homepage (project cards are generated, see below); the "How we work together"
+                               section (#working-together) is hand-written here, its German twin is "together" in data/de.json
 public/projects/<slug>/        one page per project, with brand icon, logo and screenshots
 public/assets/style.css        styles (dark by default, light via prefers-color-scheme)
 public/assets/main.js          mobile menu, project filters, reveal-on-scroll
