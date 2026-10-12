@@ -12,6 +12,8 @@ public/assets/main.js          mobile menu, project filters, reveal-on-scroll
 public/robots.txt
 public/sitemap.xml             generated
 data/projects.json             the projects: title, role, summary, details, stack, filters, live URL
+data/categories.json           industry categories: name, SEO title, intro and the projects in each;
+                               build.mjs writes /industries/<slug>/ pages, the category dropdown and card labels
 data/articles/<slug>.html       one file per article: a JSON front block in an HTML comment, then the body;
                                build.mjs adds the table of contents, reading time, guide navigation and Further reading
 data/media.json                what capture found per project (Shopify or not, icon, logo, screenshots)

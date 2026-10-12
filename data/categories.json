@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "sports-clubs",
+    "name": "Sports clubs",
+    "seoTitle": "Shopify developer for sports clubs and fan shops",
+    "intro": "Fan shops and club websites on Shopify for Swiss football and ice hockey clubs, and the shirt configurator for a Saudi football club: personalised jerseys, bundles that check out as one line, auctions, match content and customer-specific pricing.",
+    "projects": ["fc-basel-1893", "ev-zug", "fc-st-gallen-1879", "fc-zurich", "al-ittihad"]
+  },
+  {
+    "slug": "fashion-apparel",
+    "name": "Fashion & apparel",
+    "seoTitle": "Shopify developer for fashion, footwear and apparel brands",
+    "intro": "Shopify work for fashion, footwear and apparel brands: six stores in three currencies for Nile, a Meilisearch search layer and a B2B showroom for Inuikii, gift cards for a jeans retailer, and theme work for Swiss and US clothing brands.",
+    "projects": ["nile", "inuikii", "nikin", "house-of-jeans", "cosmic-clothing"]
+  },
+  {
+    "slug": "food-drink",
+    "name": "Food & drink",
+    "seoTitle": "Shopify developer for food, confectionery and drinks brands",
+    "intro": "Stores for Swiss confectioners and a German drinks brand: Sprüngli's design rebuilt on Dawn, allergen filters in three languages for Bruderer, and can deposit (Pfand) handling for Glory Bomb.",
+    "projects": ["confiserie-sprungli", "bruderer", "glory-bomb"]
+  },
+  {
+    "slug": "health-beauty",
+    "name": "Health & beauty",
+    "seoTitle": "Shopify developer for health, beauty and medical stores",
+    "intro": "Oral care, cosmetics, natural remedies and medical supplies: the Curaprox redesign for Switzerland and the UAE, Lush Switzerland, Chrüterhüsli on Horizon, and Mediconsult's stores for ophthalmologists and opticians.",
+    "projects": ["curaprox", "lush-switzerland", "chruterhusli", "mediconsult"]
+  },
+  {
+    "slug": "home-building",
+    "name": "Home & building",
+    "seoTitle": "Shopify developer for home, heating and building products",
+    "intro": "Heating, dehumidifiers, swim spas, pergolas, fireplaces, lighting, signage and window film: stores where products are large, configurable or installed, with credit checks, installation pricing and discount logic to match.",
+    "projects": ["ecofort", "spa-solutions", "skypergola", "infrarotheizung", "luftentfeuchter", "art-of-fire", "konigs", "sorenos", "signvision"]
+  },
+  {
+    "slug": "print-personalised",
+    "name": "Print & personalised products",
+    "seoTitle": "Shopify developer for print and personalised products",
+    "intro": "Custom Shopify theme work for US stores that print and personalise: stationery and gifts, branded merchandise, custom t-shirts, photo wall art, and forms for dental and medical practices.",
+    "projects": ["american-stationery", "tshirts-com", "brand-depot", "photography-com", "topform-data"]
+  },
+  {
+    "slug": "specialist-retail",
+    "name": "Specialist retail & services",
+    "seoTitle": "Shopify developer for specialist retailers and service businesses",
+    "intro": "Refurbished electronics, fireworks and a car wash chain: a filter extension app for Revendo, stores for the fireworks retailers Pyrostar, Bugano and Weco, and customer account features for OSCARwash.",
+    "projects": ["revendo", "pyrostar-bugano-and-weco", "oscarwash"]
+  },
+  {
+    "slug": "apps-tools",
+    "name": "Apps & tools",
+    "seoTitle": "Shopify app developer: admin apps and internal tools",
+    "intro": "Shopify admin apps built for client projects: a PrestaShop to Shopify migration app that never emails a customer, and a content sync app that keeps metaobjects, menus and translations aligned across stores.",
+    "projects": ["prestashop-to-shopify-migration-app", "multi-store-content-sync"]
+  }
+]

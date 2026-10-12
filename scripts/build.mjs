@@ -17,6 +17,9 @@ const projects = readJson('data/projects.json', []);
 const media = readJson('data/media.json', {});
 const popularity = readJson('data/popularity.json', { ranks: {}, aliases: {} });
 const articles = loadArticles(ROOT);
+const categories = readJson('data/categories.json', []);
+const catOf = p => categories.find(c => c.projects.includes(p.slug));
+const catName = c => c.name.replace(/&/g, '&amp;');
 
 const strip = s => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const attr = s => strip(s).replace(/"/g, '&quot;');
@@ -125,7 +128,9 @@ function thumb(p, prefix) {
   return `<a class="thumb thumb-brand" href="${prefix}${p.slug}/" tabindex="-1" aria-hidden="true">${inner}</a>`;
 }
 
-function card(p) {
+// root is '' on the homepage (relative links) and '/' on other pages.
+function card(p, root = '') {
+  const cat = catOf(p);
   const rank = rankOf(p);
   const tags = p.tech.map(t => `<li>${t}</li>`).join('');
   const live = p.url ? `<a class="out" href="${p.url}" target="_blank" rel="noopener noreferrer">${hostLabel(p)}</a>` : '';
@@ -134,20 +139,21 @@ function card(p) {
   const rankLine = parts.length ? parts.join(' &middot; ') : (p.url ? 'Not in public traffic rankings' : 'Internal tool, no public site');
   const badge = badgeOf(p);
   return `
-        <article class="work" data-tags="${p.filters.join(' ')}" data-title="${attr(p.title)}" data-pop="${popOrder.get(p.slug)}">
-          ${thumb(p, 'projects/')}
+        <article class="work" data-tags="${p.filters.join(' ')}" data-cat="${cat ? cat.slug : ''}" data-title="${attr(p.title)}" data-pop="${popOrder.get(p.slug)}">
+          ${thumb(p, `${root}projects/`)}
           <div class="work-head">
-            ${brand(p, 'projects/')}
+            ${brand(p, `${root}projects/`)}
             <div>
-              <h3><a href="projects/${p.slug}/">${p.title}</a></h3>
-              <p class="meta">${metaLine(p)}</p>
+              <h3><a href="${root}projects/${p.slug}/">${p.title}</a></h3>
+              <p class="meta">${metaLine(p)}</p>${cat ? `
+              <p class="cat"><a href="${root}industries/${cat.slug}/">${catName(cat)}</a></p>` : ''}
             </div>
           </div>${badge ? `
           <p class="badge">${badge}</p>` : ''}
           <p class="rank">${rankLine}</p>
           <p>${p.summary}</p>
           <ul class="tags">${tags}</ul>
-          <div class="work-links"><a class="case-link" href="projects/${p.slug}/">View project</a>${live}</div>
+          <div class="work-links"><a class="case-link" href="${root}projects/${p.slug}/">View project</a>${live}</div>
         </article>
 `;
 }
@@ -156,9 +162,16 @@ function card(p) {
 let index = read('public/index.html');
 const start = '<!-- projects:start -->', end = '<!-- projects:end -->';
 if (!index.includes(start)) throw new Error('index.html is missing the projects markers');
-index = index.slice(0, index.indexOf(start) + start.length) + '\n' + projects.map(card).join('') + '\n        ' + index.slice(index.indexOf(end));
+index = index.slice(0, index.indexOf(start) + start.length) + '\n' + projects.map(p => card(p)).join('') + '\n        ' + index.slice(index.indexOf(end));
 const aStart = '<!-- articles:start -->', aEnd = '<!-- articles:end -->';
 if (index.includes(aStart)) index = index.slice(0, index.indexOf(aStart) + aStart.length) + '\n' + [...articles.filter(a => a.featured), ...articles.filter(a => !a.featured && !a.series)].slice(0, 3).map(a => articleCard(a, 'articles/')).join('') + '\n        ' + index.slice(index.indexOf(aEnd));
+const fill = (html, name, inner) => {
+  const a = `<!-- ${name}:start -->`, z = `<!-- ${name}:end -->`;
+  if (!html.includes(a)) throw new Error(`index.html is missing the ${name} markers`);
+  return html.slice(0, html.indexOf(a) + a.length) + inner + html.slice(html.indexOf(z));
+};
+index = fill(index, 'cats', '\n' + categories.map(c => `              <option value="${c.slug}">${catName(c)} (${c.projects.length})</option>`).join('\n') + '\n              ');
+index = fill(index, 'industries', '\n' + categories.map(c => `          <li><a href="industries/${c.slug}/">${catName(c)} <span>${c.projects.length}</span></a></li>`).join('\n') + '\n          ');
 index = index.replace(/<dt>\d+<\/dt><dd>projects on this page<\/dd>/, `<dt>${projects.length}</dt><dd>projects on this page</dd>`);
 write('public/index.html', index);
 
@@ -228,6 +241,7 @@ function page(p, i) {
     p.company ? `<div><dt>Company</dt><dd>${p.company}</dd></div>` : '',
     `<div><dt>My role</dt><dd>${p.role}</dd></div>`,
     p.url ? `<div><dt>Live site</dt><dd><a class="out" href="${p.url}" target="_blank" rel="noopener noreferrer">${hostLabel(p)}</a></dd></div>` : '',
+    catOf(p) ? `<div><dt>Industry</dt><dd><a href="/industries/${catOf(p).slug}/">${catName(catOf(p))}</a></dd></div>` : '',
     `<div><dt>Stack</dt><dd>${p.tech.join(', ')}</dd></div>`,
   ].filter(Boolean).join('\n            ');
 
@@ -536,6 +550,57 @@ if (articles.length) {
   write('public/articles/index.html', articlesIndex());
 }
 
+// ---- industry pages: one indexable page per category, with its projects and related articles
+function industryPage(c) {
+  const url = `${SITE}/industries/${c.slug}/`;
+  const list = c.projects.map(s => projects.find(p => p.slug === s)).filter(Boolean);
+  const related = articles.filter(a => c.projects.includes(a.project));
+  const crumbs = { '@context': 'https://schema.org', '@graph': [
+    { '@type': 'CollectionPage', name: c.seoTitle, description: c.intro, url, about: c.name,
+      hasPart: list.map(p => ({ '@type': 'CreativeWork', name: strip(p.title), url: `${SITE}/projects/${p.slug}/` })) },
+    { '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+      { '@type': 'ListItem', position: 2, name: 'Projects', item: `${SITE}/#work` },
+      { '@type': 'ListItem', position: 3, name: c.name, item: url } ] } ] };
+  return `${pageHead({ title: `${c.seoTitle} | Emanuel Rusu`, description: attr(c.intro), url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd: crumbs })}
+<body class="industry-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+${headerHtml}
+
+<main id="main">
+  <section class="industry-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/#work">My work</a> <span aria-hidden="true">/</span> <span>${catName(c)}</span></nav>
+      <h1>${c.seoTitle}</h1>
+      <p class="lead">${c.intro}</p>
+      <p class="note">${list.length} ${list.length === 1 ? 'project' : 'projects'}. I worked on most of them as a developer at aiconomy AG or WebGurus; each project page says which parts I built myself.</p>
+    </div>
+  </section>
+  <section class="industry-list">
+    <div class="wrap">
+      <div class="work-grid">${list.map(p => card(p, '/')).join('')}</div>
+    </div>
+  </section>${related.length ? `
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>Articles from these projects</h2>
+      <div class="posts">${related.map(a => articleCard(a, '/articles/')).join('')}</div>
+    </div>
+  </section>` : ''}
+  <section class="other-industries">
+    <div class="wrap">
+      <nav class="industries" aria-label="Other industries">
+        <h3>Other industries</h3>
+        <ul>${categories.filter(x => x !== c).map(x => `<li><a href="/industries/${x.slug}/">${catName(x)}</a></li>`).join('')}</ul>
+      </nav>
+    </div>
+  </section>
+${contactSection('Want something like this for your store?')}
+${pageEnd}`;
+}
+categories.forEach(c => write(`public/industries/${c.slug}/index.html`, industryPage(c)));
+
 // ---- 404 page (served by the Worker for any unknown path, with status 404)
 write('public/404.html', `${pageHead({ title: 'Page not found | REMTA Digital', description: 'This page does not exist.', url: `${SITE}/404.html`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' }).replace('content="index, follow, max-image-preview:large"', 'content="noindex"')}
 <body class="article-page" id="top">
@@ -582,7 +647,8 @@ ${articles.map(a => `  <item>
 // ---- sitemap, with the article date or today's build date as lastmod
 const today = new Date().toISOString().slice(0, 10);
 const entries = [[`${SITE}/`, today], ...projects.map(p => [`${SITE}/projects/${p.slug}/`, today]),
-  ...(articles.length ? [[`${SITE}/articles/`, today], ...articles.map(a => [`${SITE}/articles/${a.slug}/`, a.updated || a.date])] : []), [`${SITE}/privacy/`, today]];
+  ...(articles.length ? [[`${SITE}/articles/`, today], ...articles.map(a => [`${SITE}/articles/${a.slug}/`, a.updated || a.date])] : []),
+  ...categories.map(c => [`${SITE}/industries/${c.slug}/`, today]), [`${SITE}/privacy/`, today]];
 const urls = entries.map(e => e[0]);
 write('public/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
