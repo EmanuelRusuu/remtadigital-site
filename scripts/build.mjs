@@ -1,4 +1,5 @@
 // Build the project cards on the homepage and one page per project from data/projects.json,
+// the articles (data/articles.json) with their list page and homepage section,
 // data/media.json (written by capture.mjs) and data/popularity.json (Tranco ranks from popularity.mjs,
 // country bands from regional.mjs, hand-checked category placings).
 // Output is committed; the deploy has no build step.
@@ -14,6 +15,7 @@ const write = (p, s) => { mkdirSync(new URL(p.replace(/[^/]+$/, ''), ROOT), { re
 const projects = readJson('data/projects.json', []);
 const media = readJson('data/media.json', {});
 const popularity = readJson('data/popularity.json', { ranks: {}, aliases: {} });
+const articles = readJson('data/articles.json', []);
 
 const strip = s => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const attr = s => strip(s).replace(/"/g, '&quot;');
@@ -23,6 +25,18 @@ const m = p => media[p.slug] || {};
 const shots = p => (m(p).shots || []).filter(s => hasFile(p.slug, s.file) && !(p.hideShots || []).includes(s.file));
 const hostLabel = p => p.urlLabel || (p.url ? new URL(p.url).host.replace(/^www\./, '') : '');
 const fmt = n => n.toLocaleString('en-US');
+// Reading time at 200 words a minute, rounded up.
+const readingTime = a => Math.max(1, Math.ceil(strip(a.body.join(' ')).split(' ').length / 200));
+const longDate = d => new Date(d + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const articleMeta = a => `<time datetime="${a.date}">${longDate(a.date)}</time> &middot; ${readingTime(a)} min read`;
+const articleCard = (a, prefix) => `
+        <article class="post">
+          <p class="post-meta">${articleMeta(a)}</p>
+          <h3><a href="${prefix}${a.slug}/">${a.title}</a></h3>
+          <p>${a.summary}</p>
+          <a class="case-link" href="${prefix}${a.slug}/">Read the article</a>
+        </article>
+`;
 
 // Tranco ranks registrable domains (example.ch), so map shop.example.ch to example.ch.
 const registrable = p => p.url ? new URL(p.url).host.replace(/^www\./, '').split('.').slice(-2).join('.') : null;
@@ -139,6 +153,8 @@ let index = read('public/index.html');
 const start = '<!-- projects:start -->', end = '<!-- projects:end -->';
 if (!index.includes(start)) throw new Error('index.html is missing the projects markers');
 index = index.slice(0, index.indexOf(start) + start.length) + '\n' + projects.map(card).join('') + '\n        ' + index.slice(index.indexOf(end));
+const aStart = '<!-- articles:start -->', aEnd = '<!-- articles:end -->';
+if (index.includes(aStart)) index = index.slice(0, index.indexOf(aStart) + aStart.length) + '\n' + articles.map(a => articleCard(a, 'articles/')).join('') + '\n        ' + index.slice(index.indexOf(aEnd));
 index = index.replace(/<dt>\d+<\/dt><dd>projects on this page<\/dd>/, `<dt>${projects.length}</dt><dd>projects on this page</dd>`);
 write('public/index.html', index);
 
@@ -146,7 +162,7 @@ write('public/index.html', index);
 const shared = index;
 const head = shared.slice(0, shared.indexOf('<title>'));
 const headerHtml = shared.slice(shared.indexOf('<header class="site-header"'), shared.indexOf('</header>') + 9)
-  .replace(/href="#(services|work|about|faq|contact)"/g, 'href="/#$1"')
+  .replace(/href="#(cases|services|work|about|faq|contact)"/g, 'href="/#$1"')
   .replace('href="#top" aria-label="REMTA Digital, back to top"', 'href="/" aria-label="REMTA Digital, home"');
 const footerHtml = shared.slice(shared.indexOf('<footer>'), shared.indexOf('</footer>') + 9);
 const favicon = (shared.match(/<link rel="icon" href="([^"]*)"/) || [])[1];
@@ -331,8 +347,116 @@ ${footerHtml}
 
 projects.forEach((p, i) => write(`public/projects/${p.slug}/index.html`, page(p, i)));
 
+// ---- articles
+const pageHead = ({ title, description, url, image, type, jsonLd }) => `${head}<title>${title}</title>
+<meta name="description" content="${description}">
+<meta name="theme-color" content="#1d5e6b">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${description}">
+<meta property="og:type" content="${type}">
+<meta property="og:url" content="${url}">
+<meta property="og:image" content="${image}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="${url}">
+<link rel="icon" href="${favicon}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/style.css">${jsonLd ? `
+<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}
+</head>`;
+const contactSection = heading => `
+  <section id="contact">
+    <div class="wrap narrow center">
+      <h2>${heading}</h2>
+      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    </div>
+  </section>`;
+const pageEnd = `
+</main>
+
+${footerHtml}
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>
+`;
+
+function articlePage(a) {
+  const url = `${SITE}/articles/${a.slug}/`;
+  const image = existsSync(new URL(`public/articles/${a.slug}/og.jpg`, ROOT)) ? `${url}og.jpg` : `${SITE}/assets/img/og-home.jpg`;
+  const p = projects.find(x => x.slug === a.project);
+  const others = articles.filter(x => x !== a);
+  const source = p ? `From my work on <a href="/projects/${p.slug}/">${p.title}</a>${p.company ? `, built as a developer at ${p.company}, which ran the project for its client` : ''}.` : '';
+  return `${pageHead({
+    title: `${attr(a.title)} | Emanuel Rusu`, description: attr(a.summary), url, image, type: 'article',
+    jsonLd: { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: strip(a.title), description: strip(a.summary), datePublished: a.date,
+      image, mainEntityOfPage: url, author: { '@type': 'Person', name: 'Emanuel Rusu', url: `${SITE}/` } },
+  })}
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+${headerHtml}
+
+<main id="main">
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>${p ? strip(p.title) : 'Article'}</span></nav>
+    <header class="article-head">
+      <p class="post-meta">${articleMeta(a)}</p>
+      <h1>${a.title}</h1>
+      <p class="lead">${a.summary}</p>
+      <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
+    </header>
+    <div class="article-body">
+      ${a.body.join('\n      ')}
+    </div>
+    <div class="article-foot">
+      ${source ? `<p class="provenance">${source}</p>` : ''}
+      <ul class="tags">${(a.tags || []).map(t => `<li>${t}</li>`).join('')}</ul>
+      ${p ? `<p><a class="case-link" href="/projects/${p.slug}/">See the project</a></p>` : ''}
+    </div>
+  </article>
+${others.length ? `
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>More articles</h2>
+      <div class="posts">${others.map(x => articleCard(x, '/articles/')).join('')}</div>
+    </div>
+  </section>` : ''}
+${contactSection('Want something like this for your store?')}
+${pageEnd}`;
+}
+
+function articlesIndex() {
+  const url = `${SITE}/articles/`;
+  return `${pageHead({ title: 'Articles | Emanuel Rusu, Shopify developer', description: 'Short notes from real Shopify projects: what the problem was, what I built and what changed. Two to three minutes each.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+${headerHtml}
+
+<main id="main">
+  <section class="articles-hero">
+    <div class="wrap">
+      <h1>Articles</h1>
+      <p class="lead">Short notes from real Shopify projects: what the problem was, what I built and what changed.</p>
+      <div class="posts">${articles.map(a => articleCard(a, '/articles/')).join('')}</div>
+    </div>
+  </section>
+${contactSection('Let&rsquo;s talk about your store')}
+${pageEnd}`;
+}
+
+if (articles.length) {
+  articles.forEach(a => write(`public/articles/${a.slug}/index.html`, articlePage(a)));
+  write('public/articles/index.html', articlesIndex());
+}
+
 // ---- sitemap
-const urls = [`${SITE}/`, ...projects.map(p => `${SITE}/projects/${p.slug}/`)];
+const urls = [`${SITE}/`, ...projects.map(p => `${SITE}/projects/${p.slug}/`), ...(articles.length ? [`${SITE}/articles/`, ...articles.map(a => `${SITE}/articles/${a.slug}/`)] : [])];
 write('public/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(u => `  <url>\n    <loc>${u}</loc>\n  </url>`).join('\n')}
@@ -345,4 +469,5 @@ const ranked = projects.filter(rankOf).length;
 const banded = projects.filter(homeBand).length;
 const badged = projects.filter(badgeOf).map(p => strip(p.title));
 console.log(`built ${projects.length} project pages (${withShots} with screenshots, ${withIcon} with brand icons, ${ranked} with a Tranco rank, ${banded} with a home-country band), sitemap with ${urls.length} URLs`);
+console.log(`articles: ${articles.map(a => `${a.slug} (${readingTime(a)} min)`).join(', ')}`);
 console.log(`badges: ${badged.join('; ') || 'none'}`);

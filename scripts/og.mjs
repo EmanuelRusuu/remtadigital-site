@@ -10,6 +10,7 @@ const read = p => readFileSync(new URL(p, ROOT));
 const projects = JSON.parse(read('data/projects.json'));
 const media = JSON.parse(read('data/media.json'));
 const popularity = JSON.parse(read('data/popularity.json'));
+const articles = existsSync(new URL('data/articles.json', ROOT)) ? JSON.parse(read('data/articles.json')) : [];
 
 const data = (p, type) => `data:${type};base64,${read(p).toString('base64')}`;
 const mime = f => f.endsWith('.svg') ? 'image/svg+xml' : f.endsWith('.webp') ? 'image/webp' : f.endsWith('.jpg') ? 'image/jpeg' : 'image/png';
@@ -82,6 +83,24 @@ ${right}
 <div class="foot mark">${logo}<b>REMTA</b><span>Digital · Emanuel Rusu, Shopify developer</span></div>`;
 }
 
+function articleHtml(a) {
+  const p = projects.find(x => x.slug === a.project);
+  const icon = p && file(p.slug, (media[p.slug] || {}).icon);
+  const words = strip(a.body.join(' ')).split(/\s+/).length; // same 200 words a minute as build.mjs
+  return `<style>${fonts}
+body{background:linear-gradient(120deg,#1d5e6b 0%,#2f6170 45%,#417684 100%);color:#fff;padding:64px 72px;position:relative}
+.kicker{font-size:24px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a9d3da}
+h1{font-family:OgSerif;font-weight:650;font-size:${strip(a.title).length > 60 ? 58 : 66}px;line-height:1.1;margin:22px 0 0;max-width:${icon ? 880 : 1050}px}
+.icon{position:absolute;right:72px;top:64px;width:140px;height:140px;border-radius:32px;background:#fff;display:grid;place-items:center}
+.icon img{width:100px;height:100px;object-fit:contain}
+.foot{position:absolute;left:72px;bottom:56px;color:#fff}.mark span{opacity:.9}
+</style>
+<p class="kicker">Article · ${Math.max(1, Math.ceil(words / 200))} min read</p>
+<h1>${strip(a.title)}</h1>
+${icon ? `<div class="icon"><img src="${icon}"></div>` : ''}
+<div class="foot mark">${logo}<b>REMTA</b><span>Digital · Emanuel Rusu, Shopify developer</span></div>`;
+}
+
 const browser = await puppeteer.launch({ executablePath: BROWSER, headless: true, pipe: true });
 const page = await browser.newPage();
 await page.setViewport({ width: 1200, height: 630 });
@@ -92,5 +111,6 @@ async function render(html, out) {
 }
 await render(homeHtml(), 'public/assets/img/og-home.jpg');
 for (const p of projects) await render(projectHtml(p), `public/projects/${p.slug}/og.jpg`);
+for (const a of articles) await render(articleHtml(a), `public/articles/${a.slug}/og.jpg`);
 await browser.close();
-console.log(`rendered og-home.jpg and ${projects.length} project previews`);
+console.log(`rendered og-home.jpg, ${projects.length} project and ${articles.length} article previews`);

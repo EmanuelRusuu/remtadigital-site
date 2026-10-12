@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From 16.2 MB to 4.5 MB: slimming down a Shopify product page | Emanuel Rusu</title>
+<meta name="description" content="A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.">
+<meta name="theme-color" content="#1d5e6b">
+<meta property="og:title" content="From 16.2 MB to 4.5 MB: slimming down a Shopify product page | Emanuel Rusu">
+<meta property="og:description" content="A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://remtadigital.com/articles/from-16-mb-to-4-mb-product-page/">
+<meta property="og:image" content="https://remtadigital.com/articles/from-16-mb-to-4-mb-product-page/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://remtadigital.com/articles/from-16-mb-to-4-mb-product-page/">
+<link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"From 16.2 MB to 4.5 MB: slimming down a Shopify product page","description":"A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.","datePublished":"2026-10-12","image":"https://remtadigital.com/articles/from-16-mb-to-4-mb-product-page/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/from-16-mb-to-4-mb-product-page/","author":{"@type":"Person","name":"Emanuel Rusu","url":"https://remtadigital.com/"}}</script>
+</head>
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="REMTA Digital, home"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1d5e6b"/><path d="M18 48V16h12a9 9 0 0 1 0 18H18m10 0 10 14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="44" y="16" width="5" height="32" rx="2.5" fill="#8fd0d8"/></svg><span class="logo-word"><b>REMTA</b> <span>Digital</span></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Main">
+      <a href="/#cases">Case studies</a>
+      <a href="/#work">Work</a>
+      <a href="/articles/">Articles</a>
+      <a href="/#services">Services</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>Curaprox (CURADEN AG)</span></nav>
+    <header class="article-head">
+      <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+      <h1>From 16.2 MB to 4.5 MB: slimming down a Shopify product page</h1>
+      <p class="lead">A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.</p>
+      <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
+    </header>
+    <div class="article-body">
+      <p>Before the new Swiss and UAE Curaprox stores went live, I went through the product pages with Lighthouse and a real Chrome. One colour-variant product page weighed 16.2 MB on mobile. A toothbrush that comes in 36 colours is a nice problem for a brand and a heavy one for a page.</p>
+      <p>None of the fixes were clever. All of them were about sending less.</p>
+      <h2>1. Images the size they are shown</h2>
+      <p>The gallery was loading images far larger than the space they filled on a phone. Serving properly sized images took the gallery from 13.0 MB to 1.4 MB, on its own the biggest single win.</p>
+      <h2>2. One swatch, drawn once</h2>
+      <p>Each of the 36 colour swatches had the same SVG shape pasted inline. Thirty-six copies of identical markup is invisible to a shopper and very visible in the HTML, so I defined the shape once and referenced it everywhere:</p>
+      <pre><code>&lt;svg hidden&gt;&lt;symbol id="swatch" viewBox="0 0 24 24"&gt;…&lt;/symbol&gt;&lt;/svg&gt;
+
+&lt;!-- each of the 36 swatches --&gt;
+&lt;svg&gt;&lt;use href="#swatch"/&gt;&lt;/svg&gt;</code></pre>
+      <p class="code-note">Simplified. Each swatch still gets its own colour.</p>
+      <p>The HTML of that 36-colour page went from 2.03 MB to 0.76 MB.</p>
+      <h2>3. Nothing that jumps</h2>
+      <p>On mobile product pages, content shifted after loading in about half of the test runs, with a layout shift score of 0.108. After my fix it was zero in every run. On a slow 3G connection, the bestseller slider now shows all its images after 20.8 seconds instead of 31.7, 34% sooner.</p>
+      <h2>The part that is not about speed</h2>
+      <p>While I was in there, I checked the delivery promises on the UAE product pages against what checkout actually offers. All 84 test cases now match, because a fast page that promises the wrong delivery date is still a bad page.</p>
+      <p class="code-note">Measured in my pull requests on unpublished test themes against the live theme, August and September 2026: mobile Lighthouse for page weight, Slow 3G with a cold cache for the slider, repeated runs for layout shift.</p>
+    </div>
+    <div class="article-foot">
+      <p class="provenance">From my work on <a href="/projects/curaprox/">Curaprox (CURADEN AG)</a>, built as a developer at aiconomy AG, which ran the project for its client.</p>
+      <ul class="tags"><li>Performance</li><li>Liquid</li><li>Horizon</li></ul>
+      <p><a class="case-link" href="/projects/curaprox/">See the project</a></p>
+    </div>
+  </article>
+
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>More articles</h2>
+      <div class="posts">
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/one-jersey-one-cart-line/">One jersey, one cart line: personalised shirts with a Cart Transform Function</a></h3>
+          <p>A personalised hockey jersey is really four products: the shirt, the name, the number and the badges. Here is how I made them check out as one line for EV Zug without touching the price.</p>
+          <a class="case-link" href="/articles/one-jersey-one-cart-line/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/migrating-customers-without-sending-a-single-email/">Moving a store's whole history without sending a single email</a></h3>
+          <p>Importing tens of thousands of past customers and orders into a live Shopify store would normally email every one of them. Here is how I built a migration app where that cannot happen.</p>
+          <a class="case-link" href="/articles/migrating-customers-without-sending-a-single-email/">Read the article</a>
+        </article>
+</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap narrow center">
+      <h2>Want something like this for your store?</h2>
+      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania.</p>
+    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>

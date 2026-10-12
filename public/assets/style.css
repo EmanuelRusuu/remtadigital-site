@@ -330,3 +330,35 @@ footer p{margin:4px 0;max-width:90ch}
   html{scroll-behavior:auto}
   .case-link::after,.go::after{transition:none}
 }
+
+/* articles */
+.posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.post{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.alt .post{background:var(--canvas)}
+.post h3{font-family:var(--serif);font-size:1.3rem;font-weight:650;line-height:1.25}
+.post h3 a{color:var(--text);text-decoration:none}
+.post h3 a:hover{color:var(--accent);text-decoration:underline}
+.post p{margin:0}
+.post .case-link{margin-top:auto;padding-top:6px;font-weight:700;text-decoration:none}
+.post-meta{color:var(--muted);font-size:.93rem;font-weight:600}
+.all-posts{margin:22px 0 0}
+.all-posts .case-link{font-weight:700;text-decoration:none}
+.articles-hero{padding:40px 0 56px}
+.articles-hero h1{font-size:clamp(2rem,4vw,2.6rem);margin-bottom:10px}
+.articles-hero .lead{max-width:62ch;margin-bottom:28px}
+.article{max-width:760px;padding-top:28px;padding-bottom:40px}
+.article-head h1{font-size:clamp(1.9rem,4.4vw,2.7rem);line-height:1.15;margin:8px 0 14px}
+.article-head .lead{font-size:1.2rem;color:var(--body)}
+.byline{display:flex;align-items:center;gap:10px;color:var(--muted);font-weight:600;margin:18px 0 0;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.byline img{width:40px;height:40px;border-radius:12px;object-fit:cover}
+.article-body{font-size:1.1rem;line-height:1.75;padding-top:8px}
+.article-body p{margin:0 0 18px}
+.article-body h2{font-size:1.55rem;margin:34px 0 12px}
+.article-body pre{background:#1c2326;color:#e6f0f1;border-radius:10px;padding:16px 18px;overflow-x:auto;font-size:.88rem;line-height:1.55;margin:0 0 8px}
+.article-body code{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}
+.article-body .code-note{font-size:.93rem;color:var(--muted);margin-bottom:22px}
+.article-foot{margin-top:30px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
+.article-foot .provenance{margin:0}
+.article-foot .case-link{font-weight:700;text-decoration:none}
+.more-posts{padding:8px 0 48px}
+.more-posts h2{margin-bottom:18px}
