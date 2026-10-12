@@ -59,6 +59,16 @@ cd scripts && node cv.mjs   # public/emanuel-rusu-cv.pdf, one A4 page; keep it i
 
 Run `node capture.mjs` without arguments to refresh every project. Screenshots are only taken for sites that still run on Shopify, so a store that has moved to another platform never shows work that isn't mine. Commit the generated files; the deploy itself has no build step.
 
+## Search engines
+
+Google Search Console has the domain property remtadigital.com (verified by a TXT record in Cloudflare DNS; keep it) with sitemap.xml submitted. Bing, Yandex and other IndexNow engines are notified with:
+
+```bash
+cd scripts && node indexnow.mjs
+```
+
+The key file is the 32-character `public/<key>.txt`; do not delete it.
+
 ## Run locally
 
 ```bash
