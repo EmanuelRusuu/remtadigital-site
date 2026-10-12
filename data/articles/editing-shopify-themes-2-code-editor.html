@@ -1,0 +1,68 @@
+<!--
+{
+  "title": "Editing a Shopify theme, part 2: the code editor in the admin",
+  "summary": "The quickest way into a theme's code needs nothing but a browser. Where to find it, what each folder does, a small section you can build in five minutes, and how to undo a file you broke.",
+  "date": "2026-10-12",
+  "order": 2,
+  "category": "Guide",
+  "series": { "name": "Editing a Shopify theme", "part": 2 },
+  "tags": ["Liquid", "Code editor", "Sections"],
+  "links": [
+    { "title": "Editing theme code (Shopify Help Center)", "url": "https://help.shopify.com/en/manual/online-store/themes/theme-structure/extend/edit-theme-code" },
+    { "title": "Theme architecture (Shopify developer docs)", "url": "https://shopify.dev/docs/storefronts/themes/architecture" },
+    { "title": "Section schema (Shopify developer docs)", "url": "https://shopify.dev/docs/storefronts/themes/architecture/sections/section-schema" },
+    { "title": "Liquid reference", "url": "https://shopify.dev/docs/api/liquid" }
+  ]
+}
+-->
+<p><a href="/articles/editing-shopify-themes-1-theme-editor/">Part 1</a> covered the theme editor, which arranges what the theme already has. When you need something the theme does not have, you need its code, and the quickest way in is already in your admin.</p>
+
+<h2>Opening the code editor</h2>
+<ol>
+  <li>Duplicate the theme first (Online Store, then <strong>···</strong> and <strong>Duplicate</strong>). Never practise on the live theme.</li>
+  <li>On the copy, open the <strong>···</strong> menu and choose <strong>Edit code</strong>.</li>
+</ol>
+<p>You get a file tree on the left and an editor on the right. Saving a file saves it straight to that theme, so the duplicate really matters.</p>
+
+<h2>A two-minute tour of the folders</h2>
+<ul>
+  <li><code>layout/</code>: the frame around every page. <code>theme.liquid</code> holds the <code>&lt;head&gt;</code>, the header and footer groups and the main content slot.</li>
+  <li><code>templates/</code>: one file per page type. Modern themes use JSON templates, which simply list sections and their settings.</li>
+  <li><code>sections/</code>: the building blocks the theme editor shows. Each one is Liquid plus a <code>{% schema %}</code> that defines its settings.</li>
+  <li><code>blocks/</code>: reusable theme blocks, in newer themes such as Horizon.</li>
+  <li><code>snippets/</code>: small pieces of Liquid reused across sections, included with <code>{% render %}</code>.</li>
+  <li><code>assets/</code>: CSS, JavaScript, images and fonts.</li>
+  <li><code>config/</code>: <code>settings_schema.json</code> defines the theme settings, <code>settings_data.json</code> stores their values.</li>
+  <li><code>locales/</code>: translation files, one per language.</li>
+</ul>
+
+<h2>Your first section, in five minutes</h2>
+<p>Say you want a short delivery note that the merchant can place anywhere and edit in the theme editor. Next to the <code>sections</code> folder, use the button to add a new file, name it <code>delivery-note</code> and replace the contents with:</p>
+<pre><code>&lt;div class="delivery-note page-width"&gt;
+  &lt;p&gt;{{ section.settings.text }}&lt;/p&gt;
+&lt;/div&gt;
+
+{% schema %}
+{
+  "name": "Delivery note",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Text",
+      "default": "Free delivery from CHF 50" }
+  ],
+  "presets": [ { "name": "Delivery note" } ]
+}
+{% endschema %}</code></pre>
+<p class="code-note">The <code>page-width</code> class exists in Dawn; use your theme's own container class if it differs.</p>
+<p>Save, open the theme editor, click <strong>Add section</strong> and <em>Delivery note</em> is there, with an editable text field. The <code>presets</code> entry is what makes it appear in that list. That pattern, Liquid for the output and a schema for the settings, is most of what custom theme work is.</p>
+
+<h2>Undoing a file you broke</h2>
+<p>The code editor keeps a short history per file, called the Timeline:</p>
+<ol>
+  <li>Open the file and look at its Timeline.</li>
+  <li>Click an entry to compare it with the current version.</li>
+  <li>Right-click the entry, choose <strong>Restore contents</strong>, then <strong>Restore</strong>.</li>
+</ol>
+<p>Three limits are worth knowing before you rely on it: it restores one file at a time, it cannot bring back a deleted file, and older versions eventually disappear. For anything bigger than a small fix, that is why the next two parts exist.</p>
+
+<h2>When to move on</h2>
+<p>The code editor is perfect for a small change or a quick fix. It gets uncomfortable when a change touches several files, when two people work on the same theme, or when you want to see the result before saving. That is where working locally with Shopify CLI comes in: <a href="/articles/editing-shopify-themes-3-shopify-cli/">part 3</a>.</p>

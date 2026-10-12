@@ -1,0 +1,36 @@
+<!--
+{
+  "title": "Faster football club stores without a rebuild: FC Zürich and FC St. Gallen",
+  "summary": "Two Swiss club stores, two kinds of speed. On FC Zürich, three days of work made collection and product pages at least 30% faster. On FC St. Gallen, a release-date filter that renders almost instantly by using CSS instead of reloading.",
+  "date": "2026-10-12",
+  "order": 39,
+  "category": "Case note",
+  "project": "fc-zurich",
+  "tags": ["Performance", "Alpine.js", "CSS"],
+  "links": [
+    { "title": "Cumulative Layout Shift (web.dev)", "url": "https://web.dev/articles/cls" },
+    { "title": "Optimise images (web.dev)", "url": "https://web.dev/learn/performance/image-performance" },
+    { "title": "Alpine.js", "url": "https://alpinejs.dev/" }
+  ]
+}
+-->
+<p>Club stores have a problem most shops do not: their busiest moments are announced in advance. A new kit, a cup run, a sold-out match. Two Swiss club stores I worked on show two different ways to make a theme faster without starting again.</p>
+
+<h2>FC Zürich: at least 30% faster in three days</h2>
+<p>On <a href="/projects/fc-zurich/">FC Zürich</a>, three days of focused work made collection and product pages at least 30% faster. Nothing in it was exotic:</p>
+<ul>
+  <li><strong>Image attributes and sizing.</strong> Images got their dimensions and proper sizes, which also removed the layout shift where content jumped as images loaded.</li>
+  <li><strong>Minified files.</strong> Less to download on every page.</li>
+  <li><strong>Fewer analytics requests.</strong> Tracking scripts add up on every page view.</li>
+</ul>
+<p>None of it needed clever code: images, file sizes and third-party scripts are where pages like these get heavy.</p>
+
+<h2>FC Zürich: a filter that matches the store</h2>
+<p>The same project got a custom collection filter built with Alpine.js: price filters, sorting, pagination, chips for the filters currently applied, a separate filter for mobile and skeleton loading while results arrive. Around it, smaller fixes: match listings sorted by date, login and logout links in the footer, the women's team sponsors and camp signup deadlines.</p>
+
+<h2>FC St. Gallen: speed by not reloading</h2>
+<p>On <a href="/projects/fc-st-gallen-1879/">FC St. Gallen 1879</a>, fans can filter products by release date, and the filter renders near-instantly. The trick is that it does not reload the product grid at all: the products are already on the page, and CSS decides which ones show. No request, no waiting.</p>
+<p>Other work on the club's store included the auction page, full player names in shirt personalisation, the club's Abacus job portal embedded in a Shopify page template, the FCSG TV video pages, a kids club membership form pre-filled from promotion emails, sold-out products that keep an open product page, and unlisted products shown in featured collections.</p>
+
+<h2>Two kinds of fast</h2>
+<p>FC Zürich's work makes every page lighter. FC St. Gallen's filter makes one interaction feel instant. Most stores need both, and the second only works once the first is done. Both clubs' sites are among the most visited in Switzerland: FC St. Gallen in the top 1,000 and FC Zürich in the top 5,000, by Chrome traffic.</p>

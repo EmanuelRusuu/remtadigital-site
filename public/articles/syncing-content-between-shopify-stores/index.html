@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2728164635897891">
+<title>Syncing content between Shopify stores: metaobjects, files and translations | Emanuel Rusu</title>
+<meta name="description" content="Brands with several Shopify stores want to write content once. I worked on the internal app that syncs it: metaobjects whose definitions differ between stores, images that must survive the trip, and a file library too big to read in one go.">
+<meta name="theme-color" content="#1d5e6b">
+<meta property="og:title" content="Syncing content between Shopify stores: metaobjects, files and translations | Emanuel Rusu">
+<meta property="og:description" content="Brands with several Shopify stores want to write content once. I worked on the internal app that syncs it: metaobjects whose definitions differ between stores, images that must survive the trip, and a file library too big to read in one go.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://remtadigital.com/articles/syncing-content-between-shopify-stores/">
+<meta property="og:image" content="https://remtadigital.com/articles/syncing-content-between-shopify-stores/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://remtadigital.com/articles/syncing-content-between-shopify-stores/">
+<link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Syncing content between Shopify stores: metaobjects, files and translations","description":"Brands with several Shopify stores want to write content once. I worked on the internal app that syncs it: metaobjects whose definitions differ between stores, images that must survive the trip, and a file library too big to read in one go.","datePublished":"2026-10-12","articleSection":"Case note","image":"https://remtadigital.com/articles/syncing-content-between-shopify-stores/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/syncing-content-between-shopify-stores/","author":{"@type":"Person","name":"Emanuel Rusu","url":"https://remtadigital.com/"}}</script>
+</head>
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="REMTA Digital, home"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1d5e6b"/><path d="M18 48V16h12a9 9 0 0 1 0 18H18m10 0 10 14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="44" y="16" width="5" height="32" rx="2.5" fill="#8fd0d8"/></svg><span class="logo-word"><b>REMTA</b> <span>Digital</span></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Main">
+      <a href="/#cases">Case studies</a>
+      <a href="/#work">Work</a>
+      <a href="/articles/">Articles</a>
+      <a href="/#services">Services</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>Multi-store content sync</span></nav>
+    <header class="article-head">
+      <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+      <h1>Syncing content between Shopify stores: metaobjects, files and translations</h1>
+      <p class="lead">Brands with several Shopify stores want to write content once. I worked on the internal app that syncs it: metaobjects whose definitions differ between stores, images that must survive the trip, and a file library too big to read in one go.</p>
+      <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
+    </header>
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#metaobjects-that-do-not-match">Metaobjects that do not match</a></li><li><a href="#a-file-library-too-big-to-read">A file library too big to read</a></li><li><a href="#errors-people-can-read">Errors people can read</a></li><li><a href="#each-store-in-its-own-language">Each store in its own language</a></li><li><a href="#further-reading">Further reading</a></li></ol>
+    </nav>
+    <div class="article-body">
+      <p>A brand with several Shopify stores does not want to write every page, menu and blog post once per store. At aiconomy AG, a team of four developers built an admin app that keeps content in sync across a client's stores: metaobjects, metafields, menus, blogs, pages and translations. Each client gets its own instance. This is about the parts I built.</p>
+
+<h2 id="metaobjects-that-do-not-match">Metaobjects that do not match</h2>
+<p>Metaobjects are Shopify's structured content: a "team member" or an "FAQ entry" with fields you define. Copying them between stores sounds easy until the two stores' definitions differ. My part of the synchronisation handles three of those differences:</p>
+<ul>
+  <li><strong>Reserved types.</strong> Some metaobject types are Shopify's own. They are checked for existence on the target store rather than created.</li>
+  <li><strong>Validations.</strong> Definition validations are remapped against the target store, so a rule that points at something in store A points at its equivalent in store B.</li>
+  <li><strong>Files.</strong> Referenced file IDs are mapped, so the images inside a metaobject survive the transfer instead of pointing at a file that only exists in the source store.</li>
+</ul>
+
+<h2 id="a-file-library-too-big-to-read">A file library too big to read</h2>
+<p>To make sure the target store has the images its theme needs, the obvious approach is to list the source store's whole file library and copy what is missing. On real stores that listing was timing out.</p>
+<p>So the app now works backwards: it resolves only the files the live theme actually references and uploads the ones missing on the target, as a scheduled background job. Fewer files to read, no timeouts, and no request waiting on a merchant's screen.</p>
+<p>A related fix made file lookups match the exact filename. Before, two files with similar names could collide, and the wrong asset got uploaded.</p>
+
+<h2 id="errors-people-can-read">Errors people can read</h2>
+<p>I also added blog metafield sync as a new route and screen. When something fails across hundreds of items, a wall of identical errors helps nobody, so errors are deduplicated into a short summary that expands to the full detail when you need it.</p>
+
+<h2 id="each-store-in-its-own-language">Each store in its own language</h2>
+<p>Finally, market adaptation: each target store receives translations in its own primary language.</p>
+<p>None of this shows on a storefront, which is the point. Merchants write once, and every store gets the right content, with its images, in its own language.</p>
+      <section class="further">
+        <h2 id="further-reading">Further reading</h2>
+        <ul><li><a class="out" href="https://shopify.dev/docs/apps/build/custom-data/metaobjects" target="_blank" rel="noopener noreferrer">Metaobjects (Shopify developer docs)</a></li><li><a class="out" href="https://shopify.dev/docs/api/admin-graphql" target="_blank" rel="noopener noreferrer">Shopify Admin GraphQL API</a></li><li><a class="out" href="https://shopify.dev/docs/api/polaris" target="_blank" rel="noopener noreferrer">Polaris (Shopify developer docs)</a></li></ul>
+      </section>
+    </div>
+    <div class="article-foot">
+      <p class="provenance">From my work on <a href="/projects/multi-store-content-sync/">Multi-store content sync</a>, built as a developer at aiconomy AG, which ran the project for its client.</p>
+      <ul class="tags"><li>Admin GraphQL API</li><li>Metaobjects</li><li>React Router</li><li>Prisma</li></ul>
+      <p><a class="case-link" href="/projects/multi-store-content-sync/">See the project</a></p>
+    </div>
+  </article>
+
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>More articles</h2>
+      <div class="posts">
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/one-jersey-one-cart-line/">One jersey, one cart line: personalised shirts with a Cart Transform Function</a></h3>
+          <p>A personalised hockey jersey is really four products: the shirt, the name, the number and the badges. Here is how I made them check out as one line for EV Zug without touching the price.</p>
+          <a class="case-link" href="/articles/one-jersey-one-cart-line/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/migrating-customers-without-sending-a-single-email/">Moving a store's whole history without sending a single email</a></h3>
+          <p>Importing tens of thousands of past customers and orders into a live Shopify store would normally email every one of them. Here is how I built a migration app where that cannot happen.</p>
+          <a class="case-link" href="/articles/migrating-customers-without-sending-a-single-email/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/from-16-mb-to-4-mb-product-page/">From 16.2 MB to 4.5 MB: slimming down a Shopify product page</a></h3>
+          <p>A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.</p>
+          <a class="case-link" href="/articles/from-16-mb-to-4-mb-product-page/">Read the article</a>
+        </article>
+</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap narrow center">
+      <h2>Want something like this for your store?</h2>
+      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania.</p>
+    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
+    <p><a href="/privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>

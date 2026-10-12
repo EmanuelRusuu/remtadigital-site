@@ -1,0 +1,64 @@
+<!--
+{
+  "title": "Editing a Shopify theme, part 1: the theme editor, safely",
+  "summary": "There are four ways to change a Shopify theme, from clicking in the theme editor to a full Git workflow. Part 1 covers the one every store owner should master first, and the habit that makes all the others safe.",
+  "date": "2026-10-12",
+  "order": 1,
+  "category": "Guide",
+  "featured": true,
+  "series": { "name": "Editing a Shopify theme", "part": 1 },
+  "tags": ["Theme editor", "Online Store 2.0", "Beginners"],
+  "links": [
+    { "title": "Duplicating themes (Shopify Help Center)", "url": "https://help.shopify.com/en/manual/online-store/themes/managing-themes/duplicating-themes" },
+    { "title": "Theme editor (Shopify Help Center)", "url": "https://help.shopify.com/en/manual/online-store/themes/customizing-themes/theme-editor" },
+    { "title": "Theme architecture (Shopify developer docs)", "url": "https://shopify.dev/docs/storefronts/themes/architecture" }
+  ]
+}
+-->
+<p>There are four ways to change a Shopify theme, and I use all of them, often on the same project:</p>
+<ol>
+  <li><strong>The theme editor</strong>: click and drag, no code. This part.</li>
+  <li><strong>The code editor</strong> in the Shopify admin: edit Liquid, CSS and JavaScript in the browser. <a href="/articles/editing-shopify-themes-2-code-editor/">Part 2</a>.</li>
+  <li><strong>Shopify CLI</strong>: work on your own computer with a live preview. <a href="/articles/editing-shopify-themes-3-shopify-cli/">Part 3</a>.</li>
+  <li><strong>GitHub</strong>: every change versioned, reviewed and synced both ways. <a href="/articles/editing-shopify-themes-4-github/">Part 4</a>.</li>
+</ol>
+<p>They are not alternatives so much as layers. Even on stores where every line of code goes through Git, the merchant still changes banners and texts in the theme editor every week.</p>
+
+<h2>Step 1: duplicate the theme first</h2>
+<p>Before any change you are not sure about, make a copy. It costs ten seconds and it is the only real undo button for a whole theme:</p>
+<ol>
+  <li>In the Shopify admin, go to <strong>Online Store</strong>.</li>
+  <li>On the theme you want to copy, open the actions menu (the <strong>···</strong> button) and click <strong>Duplicate</strong>.</li>
+  <li>The copy appears in your theme library as <em>Copy of</em> plus the original name.</li>
+</ol>
+<p>Work on the copy, preview it, and publish it only when you are happy. The live store never shows a half-finished change.</p>
+
+<h2>Step 2: open the theme editor</h2>
+<p>Go to <strong>Online Store</strong> and click <strong>Customize</strong> on the theme. The editor shows your store in a preview window, with three things worth knowing:</p>
+<ul>
+  <li><strong>The page selector</strong> at the top switches between templates: home page, product pages, collections, the cart and so on. Changes apply to the template, so editing one product page changes every product that uses it.</li>
+  <li><strong>The sidebar</strong> lists the sections on that page. Sections can be added, reordered, hidden and removed, and most contain blocks you can add and reorder inside them.</li>
+  <li><strong>Theme settings</strong> hold what is global: colours, typography, buttons, the cart style, social links.</li>
+</ul>
+<p>Nothing is visible to customers until you click <strong>Save</strong>, and on a duplicated theme not even then.</p>
+
+<h2>What the editor actually changes</h2>
+<p>This is the part most people never see. The theme editor does not store your changes somewhere separate. It writes them into the theme's own files:</p>
+<ul>
+  <li><code>templates/*.json</code> files describe which sections a page has, in which order and with which settings.</li>
+  <li><code>config/settings_data.json</code> holds the values of the theme settings.</li>
+</ul>
+<p>That matters the moment a developer starts working on the code. If they upload an old copy of those files, your edits from last week are gone. Parts <a href="/articles/editing-shopify-themes-3-shopify-cli/">3</a> and <a href="/articles/editing-shopify-themes-4-github/">4</a> show how to avoid exactly that.</p>
+
+<h2>When the editor is not enough</h2>
+<p>The editor can only arrange what the theme already offers. Texts, images, colours, the order of sections and which blocks appear are all editor work. A new kind of section, a different product page layout or a feature the theme does not have needs code.</p>
+<p>A well-built theme pushes that line as far as possible. On the <a href="/projects/confiserie-sprungli/">Sprüngli</a> product page, information tabs hide themselves when a product has no data for them, and on <a href="/projects/curaprox/">Curaprox</a> blocks remove themselves when their content is empty. The merchant never has to remember to switch anything off. That is the standard I aim for: the editor should be enough for everything a store does every week.</p>
+
+<h2>Quick checklist</h2>
+<ul>
+  <li>Duplicate before experimenting; publish the copy when it is ready.</li>
+  <li>Check the change on mobile with the device toggle in the editor.</li>
+  <li>Remember that a template change applies to every page using that template.</li>
+  <li>Tell your developer when you have changed things in the editor, so nobody overwrites them.</li>
+</ul>
+<p>Next: <a href="/articles/editing-shopify-themes-2-code-editor/">part 2, the code editor</a>, for the first step into Liquid without installing anything.</p>

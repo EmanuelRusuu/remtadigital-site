@@ -1,0 +1,41 @@
+<!--
+{
+  "title": "Replacing Shopify search with Meilisearch: colours, markets and instant results",
+  "summary": "For Inuikii, I replaced Shopify's native search and collection filtering with a Meilisearch layer of about 3,000 lines. Why a footwear brand needs colour grouping, what market-aware prices mean for search, and the paid app that went away along the way.",
+  "date": "2026-10-12",
+  "order": 31,
+  "category": "Case note",
+  "project": "inuikii",
+  "tags": ["Meilisearch", "Search", "Klaviyo", "Checkout UI extensions"],
+  "links": [
+    { "title": "Meilisearch documentation", "url": "https://www.meilisearch.com/docs" },
+    { "title": "Shopify Markets (developer docs)", "url": "https://shopify.dev/docs/storefronts/headless/building-with-the-storefront-api/markets" },
+    { "title": "Checkout UI extensions", "url": "https://shopify.dev/docs/api/checkout-ui-extensions" }
+  ]
+}
+-->
+<p>A shoe comes in colours, and every colour is a variant. To Shopify's native search, a boot in five colours is one product. To a shopper scrolling a collection, it should often look like five, or like one with its colours side by side, depending on the page. That gap is why <a href="/projects/inuikii/">Inuikii</a>'s search and collection pages now run on Meilisearch.</p>
+
+<h2>What the search layer does</h2>
+<p>I replaced Shopify's native search and collection filtering with a Meilisearch storefront layer, about 3,000 lines across two scripts in the theme. It covers both the search page and the collection pages, with three things the native version could not do the way the brand wanted:</p>
+<ul>
+  <li><strong>Colour grouping:</strong> colour variants are grouped in the results the way the brand wants them shown.</li>
+  <li><strong>Market-aware prices:</strong> each shopper sees the price of their own market in the results.</li>
+  <li><strong>Instant results:</strong> results update as you type, without a page reload.</li>
+</ul>
+
+<h2>Why not just use an app?</h2>
+<p>Search apps exist, and for many stores they are the right answer. On Inuikii, the project went the other way where the need was specific: the back-in-stock and notify-me flow, for example, is my own code and replaced a paid third-party app.</p>
+<p>The same thinking produced the size guide with per-product size scales, storewide sale pricing, and a returns and refund-request flow that is driven by order tags and fulfilment status rather than by a separate system.</p>
+
+<h2>Four storefronts, one brand</h2>
+<p>The main Swiss store is one of four connected builds:</p>
+<ul>
+  <li><strong>A virtual B2B showroom:</strong> a private catalogue for buyers, with prices, cart and checkout removed and article numbers, size ranges and buyer-focused navigation added.</li>
+  <li><strong>An influencer store:</strong> a private storefront whose Klaviyo integration tags every subscriber with the store they came from.</li>
+  <li><strong>A checkout app:</strong> a TypeScript Shopify app with an unsubscribe API and a Checkout UI extension that shows editorial story cards in checkout and on the thank-you page.</li>
+</ul>
+<p>All of it in German and English.</p>
+
+<h2>What I would tell another brand</h2>
+<p>Native Shopify search is good enough for most catalogues. It stops being enough when the way people browse does not match the way products are stored, as with colours on shoes. That is when a dedicated search layer earns its keep, and when it is worth building it so that it understands markets from day one.</p>

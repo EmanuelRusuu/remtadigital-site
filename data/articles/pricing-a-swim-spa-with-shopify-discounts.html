@@ -1,0 +1,37 @@
+<!--
+{
+  "title": "Pricing a swim spa: installation choices as Shopify discounts",
+  "summary": "At Spa Solutions, the price of a swim spa depends on who installs it. As the sole developer, I built that choice into the product page and the cart with dynamic Shopify discounts and installation products that can never drift out of sync.",
+  "date": "2026-10-12",
+  "order": 38,
+  "category": "Case note",
+  "project": "spa-solutions",
+  "tags": ["Shopify discounts", "Cart", "Liquid"],
+  "links": [
+    { "title": "Discounts (Shopify Help Center)", "url": "https://help.shopify.com/en/manual/discounts" },
+    { "title": "Cart API (Shopify Ajax API)", "url": "https://shopify.dev/docs/api/ajax/reference/cart" }
+  ]
+}
+-->
+<p>A swim spa is not a T-shirt. At <a href="/projects/spa-solutions/">Spa Solutions</a>, a Swiss retailer of swim spas and cold plunges, the price depends on a choice the customer makes before buying: install it themselves, or book the installation team. I was the sole developer on the custom discount and cart logic that makes that choice work.</p>
+
+<h2>Each choice, its own price</h2>
+<p>On the product page, the installation options are buttons. Each button maps to a dynamic Shopify discount, so choosing an option shows the price for that option straight away, rather than a single list price and a surprise at checkout.</p>
+
+<h2>Installation products that cannot go astray</h2>
+<p>When a customer books the installation, an installation (Montage) product is added alongside the spa. Three rules keep the two together:</p>
+<ol>
+  <li><strong>Same quantity.</strong> Two spas mean two installations, automatically.</li>
+  <li><strong>Removed together.</strong> Remove the spa and its installation goes with it.</li>
+  <li><strong>Never on its own.</strong> The installation product cannot be reached or bought by itself.</li>
+</ol>
+<p>Without those rules, a cart can end up with an installation and nothing to install.</p>
+
+<h2>A cart that keeps up</h2>
+<p>The cart drawer and the cart page recalculate prices and discounts live. While a change is being applied, controls show a loading state and are disabled, so a quick double click cannot leave the spa and its installation with different quantities.</p>
+
+<h2>One discount at a time</h2>
+<p>Only one discount is active at a time, and the biggest one is carried into checkout. The customer always gets the best price they qualify for, and the store never stacks discounts it did not intend.</p>
+
+<h2>The general pattern</h2>
+<p>Any product with a service attached, whether installation, assembly or setup, has the same needs: a visible price per option, a service line that follows the product, and a cart that cannot get out of step. Shopify does not do that out of the box, and writing the rules down first is most of the work.</p>

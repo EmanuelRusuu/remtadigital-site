@@ -1,0 +1,38 @@
+<!--
+{
+  "title": "Six stores, one theme: loyalty points, currencies and structured data at Nile",
+  "summary": "Nile runs six Shopify stores, a test and a production store for each of CHF, EUR and GBP, from one shared theme. How a loyalty programme, country switching and SEO data work when every feature has to behave in three currencies.",
+  "date": "2026-10-12",
+  "order": 37,
+  "category": "Case note",
+  "project": "nile",
+  "tags": ["Multi-store", "Klaviyo", "InstantSearch", "JSON-LD"],
+  "links": [
+    { "title": "Product structured data (Google Search Central)", "url": "https://developers.google.com/search/docs/appearance/structured-data/product" },
+    { "title": "InstantSearch.js (Algolia)", "url": "https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/js/" },
+    { "title": "Klaviyo developer documentation", "url": "https://developers.klaviyo.com/" }
+  ]
+}
+-->
+<p><a href="/projects/nile/">Nile</a>, a Swiss fashion retailer, runs six Shopify stores: Swiss francs, euros and pounds, each with a test store and a production store. All six run from one shared theme. Every feature has to work in all of them, and behave slightly differently in each.</p>
+
+<h2>A loyalty programme in the theme</h2>
+<p>The Nilecard is Nile's loyalty programme, and its points system is driven by the theme. The hard part is that a point is not worth the same everywhere:</p>
+<ul>
+  <li>each store has its own redemption value,</li>
+  <li>each store has a maximum number of points that can be used,</li>
+  <li>and fallback logic covers the cases where a value is missing.</li>
+</ul>
+<p>Customers see their points balance and history in their account, next to order history and an order detail page with the payment method and a transaction breakdown.</p>
+
+<h2>Adding a third currency</h2>
+<p>The pound stores came later. Adding them meant adding the GBP store pair to the build pipeline, so the shared theme deploys to all six stores. Shoppers can switch country across stores, and the theme remembers their choice. Each store also has its own Klaviyo endpoint.</p>
+
+<h2>Search that renders progressively</h2>
+<p>The search page and the predictive search run on InstantSearch, rendering results progressively with skeleton loading, so the page has its shape before the products arrive.</p>
+
+<h2>Structured data, in three currencies</h2>
+<p>For search engines, the theme outputs JSON-LD structured data for products, collections and breadcrumbs, including the return policy, shipping and delivery-time information that Google can show in results. The schema is locale-aware, with canonical URLs, so each store describes its products in its own language and currency.</p>
+
+<h2>One theme, many stores</h2>
+<p>Running several stores from one theme is the right call for most brands that sell in more than one currency: one codebase, one set of fixes. The cost is that every feature needs a per-store answer, and the design work is in finding where that answer lives so nobody has to maintain six versions of the same thing. Nile is in Switzerland's top 5,000 sites by Chrome traffic, and its EU store is in Germany's top 10,000.</p>

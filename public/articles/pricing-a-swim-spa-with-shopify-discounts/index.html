@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2728164635897891">
+<title>Pricing a swim spa: installation choices as Shopify discounts | Emanuel Rusu</title>
+<meta name="description" content="At Spa Solutions, the price of a swim spa depends on who installs it. As the sole developer, I built that choice into the product page and the cart with dynamic Shopify discounts and installation products that can never drift out of sync.">
+<meta name="theme-color" content="#1d5e6b">
+<meta property="og:title" content="Pricing a swim spa: installation choices as Shopify discounts | Emanuel Rusu">
+<meta property="og:description" content="At Spa Solutions, the price of a swim spa depends on who installs it. As the sole developer, I built that choice into the product page and the cart with dynamic Shopify discounts and installation products that can never drift out of sync.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://remtadigital.com/articles/pricing-a-swim-spa-with-shopify-discounts/">
+<meta property="og:image" content="https://remtadigital.com/articles/pricing-a-swim-spa-with-shopify-discounts/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://remtadigital.com/articles/pricing-a-swim-spa-with-shopify-discounts/">
+<link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Pricing a swim spa: installation choices as Shopify discounts","description":"At Spa Solutions, the price of a swim spa depends on who installs it. As the sole developer, I built that choice into the product page and the cart with dynamic Shopify discounts and installation products that can never drift out of sync.","datePublished":"2026-10-12","articleSection":"Case note","image":"https://remtadigital.com/articles/pricing-a-swim-spa-with-shopify-discounts/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/pricing-a-swim-spa-with-shopify-discounts/","author":{"@type":"Person","name":"Emanuel Rusu","url":"https://remtadigital.com/"}}</script>
+</head>
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="REMTA Digital, home"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1d5e6b"/><path d="M18 48V16h12a9 9 0 0 1 0 18H18m10 0 10 14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="44" y="16" width="5" height="32" rx="2.5" fill="#8fd0d8"/></svg><span class="logo-word"><b>REMTA</b> <span>Digital</span></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Main">
+      <a href="/#cases">Case studies</a>
+      <a href="/#work">Work</a>
+      <a href="/articles/">Articles</a>
+      <a href="/#services">Services</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>Spa Solutions</span></nav>
+    <header class="article-head">
+      <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+      <h1>Pricing a swim spa: installation choices as Shopify discounts</h1>
+      <p class="lead">At Spa Solutions, the price of a swim spa depends on who installs it. As the sole developer, I built that choice into the product page and the cart with dynamic Shopify discounts and installation products that can never drift out of sync.</p>
+      <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
+    </header>
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#each-choice-its-own-price">Each choice, its own price</a></li><li><a href="#installation-products-that-cannot-go-astray">Installation products that cannot go astray</a></li><li><a href="#a-cart-that-keeps-up">A cart that keeps up</a></li><li><a href="#one-discount-at-a-time">One discount at a time</a></li><li><a href="#the-general-pattern">The general pattern</a></li><li><a href="#further-reading">Further reading</a></li></ol>
+    </nav>
+    <div class="article-body">
+      <p>A swim spa is not a T-shirt. At <a href="/projects/spa-solutions/">Spa Solutions</a>, a Swiss retailer of swim spas and cold plunges, the price depends on a choice the customer makes before buying: install it themselves, or book the installation team. I was the sole developer on the custom discount and cart logic that makes that choice work.</p>
+
+<h2 id="each-choice-its-own-price">Each choice, its own price</h2>
+<p>On the product page, the installation options are buttons. Each button maps to a dynamic Shopify discount, so choosing an option shows the price for that option straight away, rather than a single list price and a surprise at checkout.</p>
+
+<h2 id="installation-products-that-cannot-go-astray">Installation products that cannot go astray</h2>
+<p>When a customer books the installation, an installation (Montage) product is added alongside the spa. Three rules keep the two together:</p>
+<ol>
+  <li><strong>Same quantity.</strong> Two spas mean two installations, automatically.</li>
+  <li><strong>Removed together.</strong> Remove the spa and its installation goes with it.</li>
+  <li><strong>Never on its own.</strong> The installation product cannot be reached or bought by itself.</li>
+</ol>
+<p>Without those rules, a cart can end up with an installation and nothing to install.</p>
+
+<h2 id="a-cart-that-keeps-up">A cart that keeps up</h2>
+<p>The cart drawer and the cart page recalculate prices and discounts live. While a change is being applied, controls show a loading state and are disabled, so a quick double click cannot leave the spa and its installation with different quantities.</p>
+
+<h2 id="one-discount-at-a-time">One discount at a time</h2>
+<p>Only one discount is active at a time, and the biggest one is carried into checkout. The customer always gets the best price they qualify for, and the store never stacks discounts it did not intend.</p>
+
+<h2 id="the-general-pattern">The general pattern</h2>
+<p>Any product with a service attached, whether installation, assembly or setup, has the same needs: a visible price per option, a service line that follows the product, and a cart that cannot get out of step. Shopify does not do that out of the box, and writing the rules down first is most of the work.</p>
+      <section class="further">
+        <h2 id="further-reading">Further reading</h2>
+        <ul><li><a class="out" href="https://help.shopify.com/en/manual/discounts" target="_blank" rel="noopener noreferrer">Discounts (Shopify Help Center)</a></li><li><a class="out" href="https://shopify.dev/docs/api/ajax/reference/cart" target="_blank" rel="noopener noreferrer">Cart API (Shopify Ajax API)</a></li></ul>
+      </section>
+    </div>
+    <div class="article-foot">
+      <p class="provenance">From my work on <a href="/projects/spa-solutions/">Spa Solutions</a>, built as a developer at aiconomy AG, which ran the project for its client.</p>
+      <ul class="tags"><li>Shopify discounts</li><li>Cart</li><li>Liquid</li></ul>
+      <p><a class="case-link" href="/projects/spa-solutions/">See the project</a></p>
+    </div>
+  </article>
+
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>More articles</h2>
+      <div class="posts">
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/one-jersey-one-cart-line/">One jersey, one cart line: personalised shirts with a Cart Transform Function</a></h3>
+          <p>A personalised hockey jersey is really four products: the shirt, the name, the number and the badges. Here is how I made them check out as one line for EV Zug without touching the price.</p>
+          <a class="case-link" href="/articles/one-jersey-one-cart-line/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/migrating-customers-without-sending-a-single-email/">Moving a store's whole history without sending a single email</a></h3>
+          <p>Importing tens of thousands of past customers and orders into a live Shopify store would normally email every one of them. Here is how I built a migration app where that cannot happen.</p>
+          <a class="case-link" href="/articles/migrating-customers-without-sending-a-single-email/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/from-16-mb-to-4-mb-product-page/">From 16.2 MB to 4.5 MB: slimming down a Shopify product page</a></h3>
+          <p>A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.</p>
+          <a class="case-link" href="/articles/from-16-mb-to-4-mb-product-page/">Read the article</a>
+        </article>
+</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap narrow center">
+      <h2>Want something like this for your store?</h2>
+      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania.</p>
+    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
+    <p><a href="/privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>

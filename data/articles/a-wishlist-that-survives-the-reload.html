@@ -1,0 +1,40 @@
+<!--
+{
+  "title": "A wishlist that survives the reload: server-side lists over a Shopify app proxy",
+  "summary": "Most theme wishlists live in the browser and vanish with it. For Chrüterhüsli I built one that is stored on the server through a Shopify app proxy, and a button that checks the server before it claims anything is saved.",
+  "date": "2026-10-12",
+  "order": 33,
+  "category": "Case note",
+  "project": "chruterhusli",
+  "tags": ["App proxy", "Horizon", "Localisation"],
+  "links": [
+    { "title": "About app proxies (Shopify developer docs)", "url": "https://shopify.dev/docs/apps/build/online-store/app-proxies" },
+    { "title": "Locale files (Shopify developer docs)", "url": "https://shopify.dev/docs/storefronts/themes/architecture/locales" },
+    { "title": "Horizon theme repository", "url": "https://github.com/Shopify/horizon" }
+  ]
+}
+-->
+<p>The easy way to build a wishlist in a Shopify theme is to keep it in the browser's local storage. It takes an afternoon, and it breaks the first time a shopper switches from phone to laptop, clears their browser or simply comes back on a different device. For <a href="/projects/chruterhusli/">Chrüterhüsli</a>, a Swiss drugstore and natural products retailer on Shopify's Horizon theme, I built it the other way.</p>
+
+<h2>The list lives on the server</h2>
+<p>Instead of browser storage, the theme talks to a Shopify app proxy. An app proxy lets the storefront call an app's backend through a URL on the store's own domain, so the request carries the shop context and the list is held server side.</p>
+<p>The API is deliberately small, one endpoint per action:</p>
+<ul>
+  <li>add an item,</li>
+  <li>fetch the list,</li>
+  <li>remove one item,</li>
+  <li>clear the whole list.</li>
+</ul>
+<p>Separate endpoints keep each action simple to test and simple to reason about when something goes wrong.</p>
+
+<h2>A button that does not lie</h2>
+<p>The subtle part is the heart button on each product. If it only remembers what the shopper clicked during this page view, a saved product shows as unsaved after a reload, and the shopper clicks it again. So on load, the button reconciles its state against the server: a product that is saved reads as saved, on any page, after any reload.</p>
+
+<h2>Translatable from the first line</h2>
+<p>Chrüterhüsli sells in German and English, so every string the wishlist shows comes from the theme's locale files, with English fallbacks. Adding a language later means adding translations, not hunting through JavaScript for hard-coded text.</p>
+
+<h2>The rest of the build</h2>
+<p>Around the wishlist I worked on the contact page with its form and confirmation flow, promotional image blocks on the collection page with their own tablet layout, the filter and results-count header, product card alignment, the blog list and article layouts, product page breadcrumbs and spacing, and the German and English translations.</p>
+
+<h2>When browser storage is still fine</h2>
+<p>For a "recently viewed" strip, local storage is the right tool: nobody expects it to follow them. A wishlist is different. People use it to plan a purchase across days and devices, and a list that quietly disappears is worse than no list at all.</p>

@@ -1,0 +1,46 @@
+<!--
+{
+  "title": "From 16.2 MB to 4.5 MB: slimming down a Shopify product page",
+  "summary": "A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.",
+  "date": "2026-10-12",
+  "project": "curaprox",
+  "tags": [
+    "Performance",
+    "Liquid",
+    "Horizon"
+  ],
+  "order": 22,
+  "category": "Case note",
+  "links": [
+    {
+      "title": "Cumulative Layout Shift (web.dev)",
+      "url": "https://web.dev/articles/cls"
+    },
+    {
+      "title": "image_url filter (Shopify Liquid)",
+      "url": "https://shopify.dev/docs/api/liquid/filters/image_url"
+    },
+    {
+      "title": "SVG <use> element (MDN)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/use"
+    }
+  ]
+}
+-->
+<p>Before the new Swiss and UAE Curaprox stores went live, I went through the product pages with Lighthouse and a real Chrome. One colour-variant product page weighed 16.2 MB on mobile. A toothbrush that comes in 36 colours is a nice problem for a brand and a heavy one for a page.</p>
+<p>None of the fixes were clever. All of them were about sending less.</p>
+<h2>1. Images the size they are shown</h2>
+<p>The gallery was loading images far larger than the space they filled on a phone. Serving properly sized images took the gallery from 13.0 MB to 1.4 MB, on its own the biggest single win.</p>
+<h2>2. One swatch, drawn once</h2>
+<p>Each of the 36 colour swatches had the same SVG shape pasted inline. Thirty-six copies of identical markup is invisible to a shopper and very visible in the HTML, so I defined the shape once and referenced it everywhere:</p>
+<pre><code>&lt;svg hidden&gt;&lt;symbol id="swatch" viewBox="0 0 24 24"&gt;…&lt;/symbol&gt;&lt;/svg&gt;
+
+&lt;!-- each of the 36 swatches --&gt;
+&lt;svg&gt;&lt;use href="#swatch"/&gt;&lt;/svg&gt;</code></pre>
+<p class="code-note">Simplified. Each swatch still gets its own colour.</p>
+<p>The HTML of that 36-colour page went from 2.03 MB to 0.76 MB.</p>
+<h2>3. Nothing that jumps</h2>
+<p>On mobile product pages, content shifted after loading in about half of the test runs, with a layout shift score of 0.108. After my fix it was zero in every run. On a slow 3G connection, the bestseller slider now shows all its images after 20.8 seconds instead of 31.7, 34% sooner.</p>
+<h2>The part that is not about speed</h2>
+<p>While I was in there, I checked the delivery promises on the UAE product pages against what checkout actually offers. All 84 test cases now match, because a fast page that promises the wrong delivery date is still a bad page.</p>
+<p class="code-note">Measured in my pull requests on unpublished test themes against the live theme, August and September 2026: mobile Lighthouse for page weight, Slow 3G with a cold cache for the slider, repeated runs for layout shift.</p>

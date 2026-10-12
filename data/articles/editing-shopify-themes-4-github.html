@@ -1,0 +1,56 @@
+<!--
+{
+  "title": "Editing a Shopify theme, part 4: GitHub and a branch for every theme",
+  "summary": "Shopify's GitHub integration turns a branch into a theme and syncs both ways, including the merchant's edits. How to connect it, what it requires, and the branch setup I use so the live store only ever changes on purpose.",
+  "date": "2026-10-12",
+  "order": 4,
+  "category": "Guide",
+  "series": { "name": "Editing a Shopify theme", "part": 4 },
+  "tags": ["GitHub", "Version control", "Workflow"],
+  "links": [
+    { "title": "Shopify GitHub integration (developer docs)", "url": "https://shopify.dev/docs/storefronts/themes/tools/github" },
+    { "title": "Version control best practices for themes", "url": "https://shopify.dev/docs/storefronts/themes/best-practices/version-control" },
+    { "title": "Dawn theme repository", "url": "https://github.com/Shopify/dawn" },
+    { "title": "Horizon theme repository", "url": "https://github.com/Shopify/horizon" }
+  ]
+}
+-->
+<p>The first three parts gave you ways to change a theme. This one gives you a memory: every change recorded, every version recoverable, and a clear answer to "who changed this and when". With Shopify's GitHub integration, a branch in a repository becomes a theme in your store.</p>
+
+<h2>Prepare the repository</h2>
+<p>The integration only connects branches that follow the standard theme folder structure from <a href="/articles/editing-shopify-themes-2-code-editor/">part 2</a>: <code>layout/</code>, <code>templates/</code>, <code>sections/</code> and the rest at the root. If you use a build step, connect a branch that holds the built files, not the source. The quickest way to get there is to pull the live theme with Shopify CLI (<a href="/articles/editing-shopify-themes-3-shopify-cli/">part 3</a>), commit it and push it to a new repository.</p>
+
+<h2>Connect a branch</h2>
+<ol>
+  <li>Install the Shopify GitHub app on your GitHub account or organisation. Granting it access to specific repositories keeps the list tidy for staff.</li>
+  <li>In the Shopify admin, go to <strong>Online Store</strong> and then <strong>Themes</strong>.</li>
+  <li>In the <strong>Theme library</strong>, click <strong>Add theme</strong> and then <strong>Connect from GitHub</strong>.</li>
+  <li>Pick the account or organisation, the repository and the branch.</li>
+</ol>
+<p>The theme card now shows the repository, the branch and the time of the last commit. You need write access to the repository; GitHub outside collaborators cannot connect branches.</p>
+
+<h2>How the two-way sync works</h2>
+<ul>
+  <li><strong>GitHub to Shopify:</strong> every push to the branch updates the connected theme.</li>
+  <li><strong>Shopify to GitHub:</strong> every save in the theme editor, the code editor or a theme app becomes a commit on the branch, authored by the <code>shopify</code> bot and naming the person who saved. Saves within about ten seconds of each other are combined into one commit.</li>
+</ul>
+<p>The write-back cannot be switched off, and that is a feature. The merchant's editor changes from <a href="/articles/editing-shopify-themes-1-theme-editor/">part 1</a> now land in Git like everyone else's, so the overwrite problem from part 3 becomes an ordinary merge you can see and resolve.</p>
+
+<h2>A branch setup that works</h2>
+<p>Shopify's own recommendation is simple, and it is close to what I use:</p>
+<ul>
+  <li><strong>main</strong> is connected to the published theme. Merging into main is how the live store changes, and nothing else changes it.</li>
+  <li><strong>Feature branches</strong> are connected as unpublished themes, so each piece of work has its own preview in the real store.</li>
+  <li><strong>Campaign branches</strong> can be published temporarily, for a sale for example, and the main theme is republished afterwards. Publishing a connected theme keeps its connection.</li>
+</ul>
+<p>On <a href="/projects/ev-zug/">EV Zug</a> I worked exactly this way: separate development and production themes on a branch-based workflow, with matching environments for the store's app. It is what makes it possible to ship in small, reviewable steps while the club's shop stays open.</p>
+
+<h2>Three habits that save trouble</h2>
+<ol>
+  <li><strong>Pull before you merge.</strong> The branch receives the merchant's commits from Shopify, so update your local copy first and merge their changes into yours, not the other way round.</li>
+  <li><strong>Keep content decisions with the merchant.</strong> When <code>templates/*.json</code> or <code>config/settings_data.json</code> conflict, the merchant's version is usually the right one.</li>
+  <li><strong>Never reconnect a branch you disconnected.</strong> You cannot: connecting it again adds a brand-new theme. Disconnect only when you mean it.</li>
+</ol>
+
+<h2>Putting the four parts together</h2>
+<p>The theme editor for content, the code editor for a quick fix, Shopify CLI for real development, and GitHub so that all of it is recorded. If you would like this set up on your store, or a theme built on top of it, <a href="/#contact">get in touch</a>.</p>

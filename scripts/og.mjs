@@ -3,6 +3,7 @@
 // Usage: node og.mjs
 import puppeteer from 'puppeteer-core';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { loadArticles } from './articles.mjs';
 
 const ROOT = new URL('../', import.meta.url);
 const BROWSER = process.env.BROWSER_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe';
@@ -10,7 +11,7 @@ const read = p => readFileSync(new URL(p, ROOT));
 const projects = JSON.parse(read('data/projects.json'));
 const media = JSON.parse(read('data/media.json'));
 const popularity = JSON.parse(read('data/popularity.json'));
-const articles = existsSync(new URL('data/articles.json', ROOT)) ? JSON.parse(read('data/articles.json')) : [];
+const articles = loadArticles(ROOT);
 
 const data = (p, type) => `data:${type};base64,${read(p).toString('base64')}`;
 const mime = f => f.endsWith('.svg') ? 'image/svg+xml' : f.endsWith('.webp') ? 'image/webp' : f.endsWith('.jpg') ? 'image/jpeg' : 'image/png';
@@ -86,7 +87,7 @@ ${right}
 function articleHtml(a) {
   const p = projects.find(x => x.slug === a.project);
   const icon = p && file(p.slug, (media[p.slug] || {}).icon);
-  const words = strip(a.body.join(' ')).split(/\s+/).length; // same 200 words a minute as build.mjs
+  const words = strip(a.body.join(' ').replace(/<[^>]+>/g, ' ')).trim().split(/\s+/).length; // same 200 words a minute as build.mjs
   return `<style>${fonts}
 body{background:linear-gradient(120deg,#1d5e6b 0%,#2f6170 45%,#417684 100%);color:#fff;padding:64px 72px;position:relative}
 .kicker{font-size:24px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#a9d3da}
@@ -95,7 +96,7 @@ h1{font-family:OgSerif;font-weight:650;font-size:${strip(a.title).length > 60 ? 
 .icon img{width:100px;height:100px;object-fit:contain}
 .foot{position:absolute;left:72px;bottom:56px;color:#fff}.mark span{opacity:.9}
 </style>
-<p class="kicker">Article · ${Math.max(1, Math.ceil(words / 200))} min read</p>
+<p class="kicker">${a.series ? `Guide · part ${a.series.part}` : 'Article'} · ${Math.max(1, Math.ceil(words / 200))} min read</p>
 <h1>${strip(a.title)}</h1>
 ${icon ? `<div class="icon"><img src="${icon}"></div>` : ''}
 <div class="foot mark">${logo}<b>REMTA</b><span>Digital · Emanuel Rusu, Shopify developer</span></div>`;

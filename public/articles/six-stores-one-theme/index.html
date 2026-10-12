@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2728164635897891">
+<title>Six stores, one theme: loyalty points, currencies and structured data at Nile | Emanuel Rusu</title>
+<meta name="description" content="Nile runs six Shopify stores, a test and a production store for each of CHF, EUR and GBP, from one shared theme. How a loyalty programme, country switching and SEO data work when every feature has to behave in three currencies.">
+<meta name="theme-color" content="#1d5e6b">
+<meta property="og:title" content="Six stores, one theme: loyalty points, currencies and structured data at Nile | Emanuel Rusu">
+<meta property="og:description" content="Nile runs six Shopify stores, a test and a production store for each of CHF, EUR and GBP, from one shared theme. How a loyalty programme, country switching and SEO data work when every feature has to behave in three currencies.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://remtadigital.com/articles/six-stores-one-theme/">
+<meta property="og:image" content="https://remtadigital.com/articles/six-stores-one-theme/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://remtadigital.com/articles/six-stores-one-theme/">
+<link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Six stores, one theme: loyalty points, currencies and structured data at Nile","description":"Nile runs six Shopify stores, a test and a production store for each of CHF, EUR and GBP, from one shared theme. How a loyalty programme, country switching and SEO data work when every feature has to behave in three currencies.","datePublished":"2026-10-12","articleSection":"Case note","image":"https://remtadigital.com/articles/six-stores-one-theme/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/six-stores-one-theme/","author":{"@type":"Person","name":"Emanuel Rusu","url":"https://remtadigital.com/"}}</script>
+</head>
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="REMTA Digital, home"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1d5e6b"/><path d="M18 48V16h12a9 9 0 0 1 0 18H18m10 0 10 14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="44" y="16" width="5" height="32" rx="2.5" fill="#8fd0d8"/></svg><span class="logo-word"><b>REMTA</b> <span>Digital</span></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Main">
+      <a href="/#cases">Case studies</a>
+      <a href="/#work">Work</a>
+      <a href="/articles/">Articles</a>
+      <a href="/#services">Services</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>Nile</span></nav>
+    <header class="article-head">
+      <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+      <h1>Six stores, one theme: loyalty points, currencies and structured data at Nile</h1>
+      <p class="lead">Nile runs six Shopify stores, a test and a production store for each of CHF, EUR and GBP, from one shared theme. How a loyalty programme, country switching and SEO data work when every feature has to behave in three currencies.</p>
+      <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
+    </header>
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#a-loyalty-programme-in-the-theme">A loyalty programme in the theme</a></li><li><a href="#adding-a-third-currency">Adding a third currency</a></li><li><a href="#search-that-renders-progressively">Search that renders progressively</a></li><li><a href="#structured-data-in-three-currencies">Structured data, in three currencies</a></li><li><a href="#one-theme-many-stores">One theme, many stores</a></li><li><a href="#further-reading">Further reading</a></li></ol>
+    </nav>
+    <div class="article-body">
+      <p><a href="/projects/nile/">Nile</a>, a Swiss fashion retailer, runs six Shopify stores: Swiss francs, euros and pounds, each with a test store and a production store. All six run from one shared theme. Every feature has to work in all of them, and behave slightly differently in each.</p>
+
+<h2 id="a-loyalty-programme-in-the-theme">A loyalty programme in the theme</h2>
+<p>The Nilecard is Nile's loyalty programme, and its points system is driven by the theme. The hard part is that a point is not worth the same everywhere:</p>
+<ul>
+  <li>each store has its own redemption value,</li>
+  <li>each store has a maximum number of points that can be used,</li>
+  <li>and fallback logic covers the cases where a value is missing.</li>
+</ul>
+<p>Customers see their points balance and history in their account, next to order history and an order detail page with the payment method and a transaction breakdown.</p>
+
+<h2 id="adding-a-third-currency">Adding a third currency</h2>
+<p>The pound stores came later. Adding them meant adding the GBP store pair to the build pipeline, so the shared theme deploys to all six stores. Shoppers can switch country across stores, and the theme remembers their choice. Each store also has its own Klaviyo endpoint.</p>
+
+<h2 id="search-that-renders-progressively">Search that renders progressively</h2>
+<p>The search page and the predictive search run on InstantSearch, rendering results progressively with skeleton loading, so the page has its shape before the products arrive.</p>
+
+<h2 id="structured-data-in-three-currencies">Structured data, in three currencies</h2>
+<p>For search engines, the theme outputs JSON-LD structured data for products, collections and breadcrumbs, including the return policy, shipping and delivery-time information that Google can show in results. The schema is locale-aware, with canonical URLs, so each store describes its products in its own language and currency.</p>
+
+<h2 id="one-theme-many-stores">One theme, many stores</h2>
+<p>Running several stores from one theme is the right call for most brands that sell in more than one currency: one codebase, one set of fixes. The cost is that every feature needs a per-store answer, and the design work is in finding where that answer lives so nobody has to maintain six versions of the same thing. Nile is in Switzerland's top 5,000 sites by Chrome traffic, and its EU store is in Germany's top 10,000.</p>
+      <section class="further">
+        <h2 id="further-reading">Further reading</h2>
+        <ul><li><a class="out" href="https://developers.google.com/search/docs/appearance/structured-data/product" target="_blank" rel="noopener noreferrer">Product structured data (Google Search Central)</a></li><li><a class="out" href="https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/js/" target="_blank" rel="noopener noreferrer">InstantSearch.js (Algolia)</a></li><li><a class="out" href="https://developers.klaviyo.com/" target="_blank" rel="noopener noreferrer">Klaviyo developer documentation</a></li></ul>
+      </section>
+    </div>
+    <div class="article-foot">
+      <p class="provenance">From my work on <a href="/projects/nile/">Nile</a>, built as a developer at aiconomy AG, which ran the project for its client.</p>
+      <ul class="tags"><li>Multi-store</li><li>Klaviyo</li><li>InstantSearch</li><li>JSON-LD</li></ul>
+      <p><a class="case-link" href="/projects/nile/">See the project</a></p>
+    </div>
+  </article>
+
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>More articles</h2>
+      <div class="posts">
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/one-jersey-one-cart-line/">One jersey, one cart line: personalised shirts with a Cart Transform Function</a></h3>
+          <p>A personalised hockey jersey is really four products: the shirt, the name, the number and the badges. Here is how I made them check out as one line for EV Zug without touching the price.</p>
+          <a class="case-link" href="/articles/one-jersey-one-cart-line/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/migrating-customers-without-sending-a-single-email/">Moving a store's whole history without sending a single email</a></h3>
+          <p>Importing tens of thousands of past customers and orders into a live Shopify store would normally email every one of them. Here is how I built a migration app where that cannot happen.</p>
+          <a class="case-link" href="/articles/migrating-customers-without-sending-a-single-email/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/from-16-mb-to-4-mb-product-page/">From 16.2 MB to 4.5 MB: slimming down a Shopify product page</a></h3>
+          <p>A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.</p>
+          <a class="case-link" href="/articles/from-16-mb-to-4-mb-product-page/">Read the article</a>
+        </article>
+</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap narrow center">
+      <h2>Want something like this for your store?</h2>
+      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania.</p>
+    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
+    <p><a href="/privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>

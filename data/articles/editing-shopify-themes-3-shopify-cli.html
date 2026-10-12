@@ -1,0 +1,54 @@
+<!--
+{
+  "title": "Editing a Shopify theme, part 3: working locally with Shopify CLI",
+  "summary": "Shopify CLI gives you the theme on your own computer, your own editor and a live preview that reloads as you type. Installing it, the commands that matter, and the one mistake that wipes a merchant's changes.",
+  "date": "2026-10-12",
+  "order": 3,
+  "category": "Guide",
+  "series": { "name": "Editing a Shopify theme", "part": 3 },
+  "tags": ["Shopify CLI", "Local development", "Theme Check"],
+  "links": [
+    { "title": "Shopify CLI: requirements and installation", "url": "https://shopify.dev/docs/api/shopify-cli" },
+    { "title": "shopify theme dev", "url": "https://shopify.dev/docs/api/shopify-cli/theme/theme-dev" },
+    { "title": "shopify theme pull", "url": "https://shopify.dev/docs/api/shopify-cli/theme/theme-pull" },
+    { "title": "shopify theme push", "url": "https://shopify.dev/docs/api/shopify-cli/theme/theme-push" },
+    { "title": "shopify theme check", "url": "https://shopify.dev/docs/api/shopify-cli/theme/theme-check" },
+    { "title": "Skeleton theme on GitHub", "url": "https://github.com/Shopify/skeleton-theme" }
+  ]
+}
+-->
+<p>The code editor from <a href="/articles/editing-shopify-themes-2-code-editor/">part 2</a> saves every keystroke straight to a theme. Shopify CLI turns that around: the theme lives on your computer, you edit it with any editor you like, and a local preview shows the result before anything reaches the store.</p>
+
+<h2>Install it</h2>
+<p>You need Node.js 22.12 or newer, Git 2.28.0 or newer and a package manager (npm, Yarn 1.x or pnpm). Then:</p>
+<pre><code>npm install -g @shopify/cli@latest
+shopify version</code></pre>
+<p>On macOS you can use Homebrew instead: <code>brew tap shopify/shopify</code>, then <code>brew install shopify-cli</code>. There is no separate login step: the first command that needs your store opens a browser window to sign in.</p>
+
+<h2>Get a theme onto your computer</h2>
+<p>For an existing store, create an empty folder and pull the theme you want to work on:</p>
+<pre><code>shopify theme pull --store your-store</code></pre>
+<p>Without more flags it lists the store's themes and lets you pick one. <code>--live</code> pulls the published theme and <code>--theme</code> takes a theme ID or name. To start from scratch instead, <code>shopify theme init my-theme</code> clones Shopify's minimal Skeleton theme.</p>
+
+<h2>The live preview</h2>
+<pre><code>shopify theme dev --store your-store</code></pre>
+<p>This uploads your local files to a private development theme and starts a preview at <code>http://127.0.0.1:9292</code>. It uses the store's real products and data, reloads CSS and sections instantly when you save, and prints a link to open the theme editor and a preview link you can send to a colleague.</p>
+<p>Two details worth knowing: checkout customisations do not show in the local preview, and the development theme is deleted when you run <code>shopify auth logout</code>. If you change settings in the theme editor while working, <code>--theme-editor-sync</code> writes those changes back into your local files.</p>
+
+<h2>Check, share, push</h2>
+<ul>
+  <li><code>shopify theme check</code> lints the theme for Liquid errors and best practices. <code>--auto-correct</code> fixes what it can.</li>
+  <li><code>shopify theme share</code> uploads the theme as a new unpublished theme with a random name and gives you a preview link. Ideal for showing a client work in progress.</li>
+  <li><code>shopify theme push --unpublished --theme "New product page"</code> creates a named unpublished theme from your files.</li>
+  <li><code>shopify theme push --theme 123456789</code> updates an existing theme. Pushing to the live theme needs <code>--allow-live</code> in scripts, and <code>--publish</code> makes the pushed theme live.</li>
+</ul>
+
+<h2>The mistake that wipes a merchant's work</h2>
+<p>As <a href="/articles/editing-shopify-themes-1-theme-editor/">part 1</a> explained, everything a merchant does in the theme editor is stored in <code>templates/*.json</code> and <code>config/settings_data.json</code>. Pull a theme on Monday, work until Friday, push, and every banner the merchant changed in between is replaced by your Monday copy.</p>
+<p>Two habits prevent it. Pull right before you push, so your copy of those files is current. Or leave them out of the push entirely:</p>
+<pre><code>shopify theme push --theme 123456789 \
+  --ignore "templates/*.json" --ignore "config/settings_data.json"</code></pre>
+<p>Quote patterns that contain wildcards, as above. <code>--only</code> works the same way when you want to upload just a few files.</p>
+
+<h2>How I use it</h2>
+<p>My usual loop: I build on a development or staging theme, preview locally, check with Theme Check and share a link before anything is published. What it does not give you is history: who changed what, and a way back. That is GitHub, in <a href="/articles/editing-shopify-themes-4-github/">part 4</a>.</p>

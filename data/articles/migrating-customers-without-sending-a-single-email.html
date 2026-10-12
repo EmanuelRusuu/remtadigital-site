@@ -1,0 +1,41 @@
+<!--
+{
+  "title": "Moving a store's whole history without sending a single email",
+  "summary": "Importing tens of thousands of past customers and orders into a live Shopify store would normally email every one of them. Here is how I built a migration app where that cannot happen.",
+  "date": "2026-10-12",
+  "project": "prestashop-to-shopify-migration-app",
+  "tags": [
+    "Admin GraphQL API",
+    "TypeScript",
+    "Testing"
+  ],
+  "order": 21,
+  "category": "Case note",
+  "links": [
+    {
+      "title": "orderCreate mutation (Shopify Admin GraphQL API)",
+      "url": "https://shopify.dev/docs/api/admin-graphql/latest/mutations/orderCreate"
+    },
+    {
+      "title": "customerCreate mutation (Shopify Admin GraphQL API)",
+      "url": "https://shopify.dev/docs/api/admin-graphql/latest/mutations/customerCreate"
+    }
+  ]
+}
+-->
+<p>When a brand moves from PrestaShop to Shopify, its customer history has to come along: accounts, addresses and years of past orders. Shopify can import all of it through the Admin GraphQL API. By default, it will also politely email every customer an account invitation and a receipt for an order they placed three years ago.</p>
+<p>For a store with tens of thousands of customers, that is not a bug report. It is a crisis. So the one hard requirement for this migration app was silence.</p>
+<h2>Making the mistake impossible, not unlikely</h2>
+<p>A checkbox or a careful developer is not a guarantee. I wanted the code itself to make sending mail impossible, so the app has exactly one place that creates orders, and the receipt options there are hardcoded:</p>
+<pre><code>// The only code path that creates orders (simplified)
+const options = {
+  sendReceipt: false,
+  sendFulfillmentReceipt: false,
+  inventoryBehaviour: "BYPASS",
+};</code></pre>
+<p>Customers are created without a password or an invited state, so Shopify has no reason to send an invitation. And a guard test fails the build if any of the invite mutations is ever referenced anywhere in the code. If someone adds one in a year, the release stops before it reaches a store.</p>
+<h2>Dry run first, always</h2>
+<p>The merchant uploads three PrestaShop exports. Nothing is written yet: the app first shows what it parsed, previews of every file, customers it could not match, missing SKUs and rows it will skip.</p>
+<p>Only then can they start the import, behind a confirmation that repeats the no-email promise and the exact shop domain it will write to. Customers go in first, then orders from oldest to newest, with live progress and a cancel button. Every run can be repeated safely and ends with a CSV report of every source row.</p>
+<h2>Built once, used twice</h2>
+<p>The app ran for the Swiss store and then for the UAE store. Behind it are 17 test suites, and 53 of its 56 commits are mine. The number I am proudest of is the one nobody sees: zero customer emails.</p>

@@ -1,0 +1,43 @@
+<!--
+{
+  "title": "A football club's whole website on one Shopify theme",
+  "summary": "FC Basel runs its news, videos, league table, player pages and fan shop on a single Shopify theme. What it takes to make a store theme behave like a club website, and the jersey configurator in the middle of it.",
+  "date": "2026-10-12",
+  "order": 30,
+  "category": "Case note",
+  "project": "fc-basel-1893",
+  "tags": ["Liquid", "Canvas", "Search"],
+  "links": [
+    { "title": "Predictive Search API (Shopify)", "url": "https://shopify.dev/docs/api/ajax/reference/predictive-search" },
+    { "title": "Metaobjects (Shopify developer docs)", "url": "https://shopify.dev/docs/apps/build/custom-data/metaobjects" },
+    { "title": "Cart Transform Function API", "url": "https://shopify.dev/docs/api/functions/latest/cart-transform" }
+  ]
+}
+-->
+<p>Many football clubs run two sites: a website for news and a shop on a separate system. <a href="/projects/fc-basel-1893/">FC Basel 1893</a> runs both on one Shopify theme. A fan reading the match report and a fan buying the new home shirt are on the same site, with the same header and the same search.</p>
+<p>That is a good idea for fans and an interesting problem for a theme, because Shopify themes are built around products, not fixtures and line-ups.</p>
+
+<h2>Club content in a store theme</h2>
+<p>The club side of the theme is a set of pages that would normally live in a CMS:</p>
+<ul>
+  <li>a newest-videos page, grouped by category, with skeleton loading so the grid has its shape before the videos arrive;</li>
+  <li>a league table that loads faster than before, and a button that always points at the current or next match;</li>
+  <li>player squads for the men's and the women's teams;</li>
+  <li>news pages with category filtering and a breaking-news ticker.</li>
+</ul>
+
+<h2>One search for products, players and news</h2>
+<p>A club site has three kinds of things people look for, so the search does all three. The sticky header, with its mega menu and mobile drawer, opens a single predictive search modal with results across products, players and news.</p>
+
+<h2>The jersey configurator</h2>
+<p>Shirt personalisation is where the details pile up:</p>
+<ul>
+  <li><strong>Kit fonts.</strong> Numbers render in the club's kit font, with the name placed at the top or the bottom.</li>
+  <li><strong>Sponsor badges</strong> are drawn in the sponsor's own brand font, and the configurator measures the brightness of the shirt behind them so the badge stays readable on light and dark kits.</li>
+  <li><strong>Pricing per digit</strong> for custom numbers, and a searchable dropdown of real player numbers.</li>
+</ul>
+<p>Behind the configurator, the club's companion Shopify app has a Cart Transform admin page with a safety gate, so the personalised parts check out as one line. I wrote about the same idea for EV Zug in <a href="/articles/one-jersey-one-cart-line/">One jersey, one cart line</a>.</p>
+
+<h2>Store rules that fans never notice</h2>
+<p>The shop side has its own quiet logic: customer-specific discounted prices on product pages, collections and the cart, stock rules so an out-of-stock product cannot be bought, and products that are visible but not for sale, with a notice explaining why.</p>
+<p>The result is a theme that is half club website, half store, and from the fan's side, simply the FC Basel site. FC Basel's site is also one of only two Swiss football club sites in Switzerland's top 1,000, measured by Chrome traffic.</p>

@@ -5,6 +5,7 @@
 // Output is committed; the deploy has no build step.
 // Usage: node build.mjs
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { loadArticles } from './articles.mjs';
 
 const ROOT = new URL('../', import.meta.url);
 const SITE = 'https://remtadigital.com';
@@ -15,7 +16,7 @@ const write = (p, s) => { mkdirSync(new URL(p.replace(/[^/]+$/, ''), ROOT), { re
 const projects = readJson('data/projects.json', []);
 const media = readJson('data/media.json', {});
 const popularity = readJson('data/popularity.json', { ranks: {}, aliases: {} });
-const articles = readJson('data/articles.json', []);
+const articles = loadArticles(ROOT);
 
 const strip = s => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 const attr = s => strip(s).replace(/"/g, '&quot;');
@@ -26,12 +27,15 @@ const shots = p => (m(p).shots || []).filter(s => hasFile(p.slug, s.file) && !(p
 const hostLabel = p => p.urlLabel || (p.url ? new URL(p.url).host.replace(/^www\./, '') : '');
 const fmt = n => n.toLocaleString('en-US');
 // Reading time at 200 words a minute, rounded up.
-const readingTime = a => Math.max(1, Math.ceil(strip(a.body.join(' ')).split(' ').length / 200));
+const readingTime = a => Math.max(1, Math.ceil(strip(a.body.join(' ').replace(/<[^>]+>/g, ' ')).split(' ').length / 200));
+const slugify = s => strip(s).toLowerCase().replace(/&[a-z]+;/g, '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const seriesParts = a => a.series ? articles.filter(x => x.series && x.series.name === a.series.name).sort((x, y) => x.series.part - y.series.part) : [];
+const shortTitle = a => { const t = a.series ? a.title.replace(/^[^:]*:\s*/, '') : a.title; return t.charAt(0).toUpperCase() + t.slice(1); };
 const longDate = d => new Date(d + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 const articleMeta = a => `<time datetime="${a.date}">${longDate(a.date)}</time> &middot; ${readingTime(a)} min read`;
 const articleCard = (a, prefix) => `
         <article class="post">
-          <p class="post-meta">${articleMeta(a)}</p>
+          <p class="post-meta">${a.series ? `<span class="post-cat">Guide, part ${a.series.part}</span> &middot; ` : ''}${articleMeta(a)}</p>
           <h3><a href="${prefix}${a.slug}/">${a.title}</a></h3>
           <p>${a.summary}</p>
           <a class="case-link" href="${prefix}${a.slug}/">Read the article</a>
@@ -154,7 +158,7 @@ const start = '<!-- projects:start -->', end = '<!-- projects:end -->';
 if (!index.includes(start)) throw new Error('index.html is missing the projects markers');
 index = index.slice(0, index.indexOf(start) + start.length) + '\n' + projects.map(card).join('') + '\n        ' + index.slice(index.indexOf(end));
 const aStart = '<!-- articles:start -->', aEnd = '<!-- articles:end -->';
-if (index.includes(aStart)) index = index.slice(0, index.indexOf(aStart) + aStart.length) + '\n' + articles.map(a => articleCard(a, 'articles/')).join('') + '\n        ' + index.slice(index.indexOf(aEnd));
+if (index.includes(aStart)) index = index.slice(0, index.indexOf(aStart) + aStart.length) + '\n' + [...articles.filter(a => a.featured), ...articles.filter(a => !a.featured && !a.series)].slice(0, 3).map(a => articleCard(a, 'articles/')).join('') + '\n        ' + index.slice(index.indexOf(aEnd));
 index = index.replace(/<dt>\d+<\/dt><dd>projects on this page<\/dd>/, `<dt>${projects.length}</dt><dd>projects on this page</dd>`);
 write('public/index.html', index);
 
@@ -392,11 +396,37 @@ function articlePage(a) {
   const url = `${SITE}/articles/${a.slug}/`;
   const image = existsSync(new URL(`public/articles/${a.slug}/og.jpg`, ROOT)) ? `${url}og.jpg` : `${SITE}/assets/img/og-home.jpg`;
   const p = projects.find(x => x.slug === a.project);
-  const others = articles.filter(x => x !== a);
+  const parts = seriesParts(a);
+  const toc = [];
+  let body = a.body.join('\n').replace(/<h2>([\s\S]*?)<\/h2>/g, (m, t) => { const id = slugify(t); toc.push([id, t]); return `<h2 id="${id}">${t}</h2>`; });
+  if (a.links.length) toc.push(['further-reading', 'Further reading']);
+  const tocHtml = toc.length >= 3 ? `
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol>${toc.map(([id, t]) => `<li><a href="#${id}">${strip(t)}</a></li>`).join('')}</ol>
+    </nav>` : '';
+  const seriesHtml = parts.length > 1 ? `
+    <aside class="series" aria-label="${a.series.name}">
+      <p><strong>${a.series.name}</strong> &middot; part ${a.series.part} of ${parts.length}</p>
+      <ol>${parts.map(x => x === a ? `<li aria-current="page">${shortTitle(x)}</li>` : `<li><a href="/articles/${x.slug}/">${shortTitle(x)}</a></li>`).join('')}</ol>
+    </aside>` : '';
+  const further = a.links.length ? `
+      <section class="further">
+        <h2 id="further-reading">Further reading</h2>
+        <ul>${a.links.map(l => `<li><a class="out" href="${l.url}" target="_blank" rel="noopener noreferrer">${l.title}</a></li>`).join('')}</ul>
+      </section>` : '';
+  const i = parts.indexOf(a);
+  const pager = parts.length > 1 ? `
+  <nav class="pager wrap" aria-label="Guide parts">
+    ${i > 0 ? `<a href="/articles/${parts[i - 1].slug}/"><span>Previous part</span>${shortTitle(parts[i - 1])}</a>` : '<span></span>'}
+    <a class="all" href="/articles/">All articles</a>
+    ${i < parts.length - 1 ? `<a href="/articles/${parts[i + 1].slug}/"><span>Next part</span>${shortTitle(parts[i + 1])}</a>` : '<span></span>'}
+  </nav>` : '';
+  const others = [...articles.filter(x => x !== a && !parts.includes(x) && x.category === a.category), ...articles.filter(x => x !== a && !parts.includes(x) && x.category !== a.category)].slice(0, 3);
   const source = p ? `From my work on <a href="/projects/${p.slug}/">${p.title}</a>${p.company ? `, built as a developer at ${p.company}, which ran the project for its client` : ''}.` : '';
   return `${pageHead({
     title: `${attr(a.title)} | Emanuel Rusu`, description: attr(a.summary), url, image, type: 'article', ads: true,
-    jsonLd: { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: strip(a.title), description: strip(a.summary), datePublished: a.date,
+    jsonLd: { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: strip(a.title), description: strip(a.summary), datePublished: a.date, articleSection: a.category,
       image, mainEntityOfPage: url, author: { '@type': 'Person', name: 'Emanuel Rusu', url: `${SITE}/` } },
   })}
 <body class="article-page" id="top">
@@ -406,22 +436,22 @@ ${headerHtml}
 
 <main id="main">
   <article class="article wrap">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>${p ? strip(p.title) : 'Article'}</span></nav>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>${a.series ? a.series.name : p ? strip(p.title) : 'Article'}</span></nav>
     <header class="article-head">
-      <p class="post-meta">${articleMeta(a)}</p>
+      <p class="post-meta">${a.series ? `<span class="post-cat">Guide, part ${a.series.part}</span> &middot; ` : ''}${articleMeta(a)}</p>
       <h1>${a.title}</h1>
       <p class="lead">${a.summary}</p>
       <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
-    </header>
+    </header>${seriesHtml}${tocHtml}
     <div class="article-body">
-      ${a.body.join('\n      ')}
+      ${body}${further}
     </div>
     <div class="article-foot">
       ${source ? `<p class="provenance">${source}</p>` : ''}
       <ul class="tags">${(a.tags || []).map(t => `<li>${t}</li>`).join('')}</ul>
       ${p ? `<p><a class="case-link" href="/projects/${p.slug}/">See the project</a></p>` : ''}
     </div>
-  </article>
+  </article>${pager}
 ${others.length ? `
   <section class="more-posts">
     <div class="wrap">
@@ -435,7 +465,7 @@ ${pageEnd}`;
 
 function articlesIndex() {
   const url = `${SITE}/articles/`;
-  return `${pageHead({ title: 'Articles | Emanuel Rusu, Shopify developer', description: 'Short notes from real Shopify projects: what the problem was, what I built and what changed. Two to three minutes each.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', ads: true })}
+  return `${pageHead({ title: 'Articles | Emanuel Rusu, Shopify developer', description: 'A step-by-step guide to editing Shopify themes, and short notes from real Shopify projects: what the problem was, what I built and what changed.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', ads: true })}
 <body class="article-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
 
@@ -445,8 +475,14 @@ ${headerHtml}
   <section class="articles-hero">
     <div class="wrap">
       <h1>Articles</h1>
-      <p class="lead">Short notes from real Shopify projects: what the problem was, what I built and what changed.</p>
-      <div class="posts">${articles.map(a => articleCard(a, '/articles/')).join('')}</div>
+      <p class="lead">A step-by-step guide to editing Shopify themes, and short notes from real projects. A few minutes each.</p>
+      ${[...new Set(articles.filter(a => a.series).map(a => a.series.name))].map(name => `
+      <h2 class="posts-title">${name}</h2>
+      <p class="note">A step-by-step guide, from the theme editor to a full Git workflow.</p>
+      <div class="posts">${articles.filter(a => a.series && a.series.name === name).sort((x, y) => x.series.part - y.series.part).map(a => articleCard(a, '/articles/')).join('')}</div>`).join('')}
+      <h2 class="posts-title">Notes from my projects</h2>
+      <p class="note">What the problem was, what I built and what changed, from stores I worked on at aiconomy AG and WebGurus.</p>
+      <div class="posts">${articles.filter(a => !a.series).map(a => articleCard(a, '/articles/')).join('')}</div>
     </div>
   </section>
 ${contactSection('Let&rsquo;s talk about your store')}

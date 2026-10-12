@@ -1,0 +1,32 @@
+<!--
+{
+  "title": "One allergen, three languages: filtering chocolate the way people search",
+  "summary": "Bruderer sells confectionery in German, English and French, with allergen data from several suppliers. Why the same allergen arrived under many spellings, and how a small normalisation step made the filters trustworthy.",
+  "date": "2026-10-12",
+  "order": 35,
+  "category": "Case note",
+  "project": "bruderer",
+  "tags": ["Search", "Metafields", "Dawn", "Localisation"],
+  "links": [
+    { "title": "Metafields (Shopify developer docs)", "url": "https://shopify.dev/docs/apps/build/custom-data" },
+    { "title": "Storefront filtering in Shopify themes", "url": "https://shopify.dev/docs/storefronts/themes/navigation-search/filtering/storefront-filtering" },
+    { "title": "Dawn theme repository", "url": "https://github.com/Shopify/dawn" }
+  ]
+}
+-->
+<p>For a confectionery shop, allergen filters are not a nice extra. A parent filtering out nuts needs every product with nuts to disappear, every time, in whatever language they are browsing. On <a href="/projects/bruderer/">Bruderer</a>, that turned out to be harder than it sounds.</p>
+
+<h2>Filters built from product data</h2>
+<p>Bruderer's product filtering does not use Shopify's native facets. I built a storefront filtering client that queries an external search service and builds its filters from product metafields: allergens, certifications and chocolate type. That gives the store filters that match how its customers actually choose, not just the generic ones a theme ships with.</p>
+
+<h2>The same allergen, many spellings</h2>
+<p>The data came from two directions at once. The store runs in three languages, German, English and French, and allergen information also comes from supplier data. So the same allergen arrived under different spellings and in different languages, and a naive filter would show several entries for what is really one thing, each matching only part of the products.</p>
+<p>The fix is a normalisation step. Each allergen is reduced to one canonical name with a list of aliases. When a product's data says any of the aliases, it counts as the canonical allergen. A shopper filtering on the German, English or French term lands on the same results.</p>
+<p>It is a small table, but it is what turns a filter from "probably right" into something a careful parent can rely on.</p>
+
+<h2>Staging that finds its own index</h2>
+<p>One more detail matters for testing: the filtering client resolves its own API endpoint from the shop domain. Production and staging each hit their own search index with no configuration change, so testing on staging can never accidentally read or show production data.</p>
+<p>Around the filtering I also built the customer login page, product page adjustments, and translation work across the storefront in all three languages.</p>
+
+<h2>Where else this applies</h2>
+<p>Any filter fed by data from more than one source needs the same treatment: sizes from different brands, colours named by different suppliers, materials in different languages. Normalise to one canonical value with aliases, and the filters stop lying.</p>

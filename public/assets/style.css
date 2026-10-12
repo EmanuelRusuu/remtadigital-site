@@ -363,3 +363,23 @@ footer a{color:#e6f0f1}
 .article-foot .case-link{font-weight:700;text-decoration:none}
 .more-posts{padding:8px 0 48px}
 .more-posts h2{margin-bottom:18px}
+
+.post-cat{color:var(--accent)}
+.posts-title{margin:36px 0 6px}
+.articles-hero .posts-title:first-of-type{margin-top:8px}
+.articles-hero .note{margin-bottom:18px}
+.toc,.series{margin:22px 0 4px;padding:16px 20px;border:1px solid var(--line);border-radius:var(--radius);background:var(--card)}
+.toc p,.series p{margin:0 0 8px;font-weight:700;color:var(--text)}
+.toc ol,.series ol{margin:0;padding-left:22px}
+.toc li,.series li{margin:3px 0}
+.toc a{text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.series{background:var(--accent-tint);border-color:transparent}
+.series li[aria-current]{font-weight:700;color:var(--text)}
+.article-body h2{scroll-margin-top:80px}
+.article-body ol,.article-body ul{margin:0 0 18px;padding-left:24px}
+.article-body li{margin:0 0 8px}
+.article-body code{font-size:.92em;background:var(--tint);border-radius:4px;padding:1px 5px}
+.article-body pre code{background:none;padding:0;font-size:inherit}
+.further{margin-top:30px;padding-top:6px}
+.further ul{padding-left:22px}

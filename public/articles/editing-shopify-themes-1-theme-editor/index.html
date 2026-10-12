@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2728164635897891">
+<title>Editing a Shopify theme, part 1: the theme editor, safely | Emanuel Rusu</title>
+<meta name="description" content="There are four ways to change a Shopify theme, from clicking in the theme editor to a full Git workflow. Part 1 covers the one every store owner should master first, and the habit that makes all the others safe.">
+<meta name="theme-color" content="#1d5e6b">
+<meta property="og:title" content="Editing a Shopify theme, part 1: the theme editor, safely | Emanuel Rusu">
+<meta property="og:description" content="There are four ways to change a Shopify theme, from clicking in the theme editor to a full Git workflow. Part 1 covers the one every store owner should master first, and the habit that makes all the others safe.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://remtadigital.com/articles/editing-shopify-themes-1-theme-editor/">
+<meta property="og:image" content="https://remtadigital.com/articles/editing-shopify-themes-1-theme-editor/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://remtadigital.com/articles/editing-shopify-themes-1-theme-editor/">
+<link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Editing a Shopify theme, part 1: the theme editor, safely","description":"There are four ways to change a Shopify theme, from clicking in the theme editor to a full Git workflow. Part 1 covers the one every store owner should master first, and the habit that makes all the others safe.","datePublished":"2026-10-12","articleSection":"Guide","image":"https://remtadigital.com/articles/editing-shopify-themes-1-theme-editor/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/editing-shopify-themes-1-theme-editor/","author":{"@type":"Person","name":"Emanuel Rusu","url":"https://remtadigital.com/"}}</script>
+</head>
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="REMTA Digital, home"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1d5e6b"/><path d="M18 48V16h12a9 9 0 0 1 0 18H18m10 0 10 14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="44" y="16" width="5" height="32" rx="2.5" fill="#8fd0d8"/></svg><span class="logo-word"><b>REMTA</b> <span>Digital</span></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Main">
+      <a href="/#cases">Case studies</a>
+      <a href="/#work">Work</a>
+      <a href="/articles/">Articles</a>
+      <a href="/#services">Services</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>Editing a Shopify theme</span></nav>
+    <header class="article-head">
+      <p class="post-meta"><span class="post-cat">Guide, part 1</span> &middot; <time datetime="2026-10-12">12 October 2026</time> &middot; 4 min read</p>
+      <h1>Editing a Shopify theme, part 1: the theme editor, safely</h1>
+      <p class="lead">There are four ways to change a Shopify theme, from clicking in the theme editor to a full Git workflow. Part 1 covers the one every store owner should master first, and the habit that makes all the others safe.</p>
+      <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
+    </header>
+    <aside class="series" aria-label="Editing a Shopify theme">
+      <p><strong>Editing a Shopify theme</strong> &middot; part 1 of 4</p>
+      <ol><li aria-current="page">The theme editor, safely</li><li><a href="/articles/editing-shopify-themes-2-code-editor/">The code editor in the admin</a></li><li><a href="/articles/editing-shopify-themes-3-shopify-cli/">Working locally with Shopify CLI</a></li><li><a href="/articles/editing-shopify-themes-4-github/">GitHub and a branch for every theme</a></li></ol>
+    </aside>
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#step-1-duplicate-the-theme-first">Step 1: duplicate the theme first</a></li><li><a href="#step-2-open-the-theme-editor">Step 2: open the theme editor</a></li><li><a href="#what-the-editor-actually-changes">What the editor actually changes</a></li><li><a href="#when-the-editor-is-not-enough">When the editor is not enough</a></li><li><a href="#quick-checklist">Quick checklist</a></li><li><a href="#further-reading">Further reading</a></li></ol>
+    </nav>
+    <div class="article-body">
+      <p>There are four ways to change a Shopify theme, and I use all of them, often on the same project:</p>
+<ol>
+  <li><strong>The theme editor</strong>: click and drag, no code. This part.</li>
+  <li><strong>The code editor</strong> in the Shopify admin: edit Liquid, CSS and JavaScript in the browser. <a href="/articles/editing-shopify-themes-2-code-editor/">Part 2</a>.</li>
+  <li><strong>Shopify CLI</strong>: work on your own computer with a live preview. <a href="/articles/editing-shopify-themes-3-shopify-cli/">Part 3</a>.</li>
+  <li><strong>GitHub</strong>: every change versioned, reviewed and synced both ways. <a href="/articles/editing-shopify-themes-4-github/">Part 4</a>.</li>
+</ol>
+<p>They are not alternatives so much as layers. Even on stores where every line of code goes through Git, the merchant still changes banners and texts in the theme editor every week.</p>
+
+<h2 id="step-1-duplicate-the-theme-first">Step 1: duplicate the theme first</h2>
+<p>Before any change you are not sure about, make a copy. It costs ten seconds and it is the only real undo button for a whole theme:</p>
+<ol>
+  <li>In the Shopify admin, go to <strong>Online Store</strong>.</li>
+  <li>On the theme you want to copy, open the actions menu (the <strong>···</strong> button) and click <strong>Duplicate</strong>.</li>
+  <li>The copy appears in your theme library as <em>Copy of</em> plus the original name.</li>
+</ol>
+<p>Work on the copy, preview it, and publish it only when you are happy. The live store never shows a half-finished change.</p>
+
+<h2 id="step-2-open-the-theme-editor">Step 2: open the theme editor</h2>
+<p>Go to <strong>Online Store</strong> and click <strong>Customize</strong> on the theme. The editor shows your store in a preview window, with three things worth knowing:</p>
+<ul>
+  <li><strong>The page selector</strong> at the top switches between templates: home page, product pages, collections, the cart and so on. Changes apply to the template, so editing one product page changes every product that uses it.</li>
+  <li><strong>The sidebar</strong> lists the sections on that page. Sections can be added, reordered, hidden and removed, and most contain blocks you can add and reorder inside them.</li>
+  <li><strong>Theme settings</strong> hold what is global: colours, typography, buttons, the cart style, social links.</li>
+</ul>
+<p>Nothing is visible to customers until you click <strong>Save</strong>, and on a duplicated theme not even then.</p>
+
+<h2 id="what-the-editor-actually-changes">What the editor actually changes</h2>
+<p>This is the part most people never see. The theme editor does not store your changes somewhere separate. It writes them into the theme's own files:</p>
+<ul>
+  <li><code>templates/*.json</code> files describe which sections a page has, in which order and with which settings.</li>
+  <li><code>config/settings_data.json</code> holds the values of the theme settings.</li>
+</ul>
+<p>That matters the moment a developer starts working on the code. If they upload an old copy of those files, your edits from last week are gone. Parts <a href="/articles/editing-shopify-themes-3-shopify-cli/">3</a> and <a href="/articles/editing-shopify-themes-4-github/">4</a> show how to avoid exactly that.</p>
+
+<h2 id="when-the-editor-is-not-enough">When the editor is not enough</h2>
+<p>The editor can only arrange what the theme already offers. Texts, images, colours, the order of sections and which blocks appear are all editor work. A new kind of section, a different product page layout or a feature the theme does not have needs code.</p>
+<p>A well-built theme pushes that line as far as possible. On the <a href="/projects/confiserie-sprungli/">Sprüngli</a> product page, information tabs hide themselves when a product has no data for them, and on <a href="/projects/curaprox/">Curaprox</a> blocks remove themselves when their content is empty. The merchant never has to remember to switch anything off. That is the standard I aim for: the editor should be enough for everything a store does every week.</p>
+
+<h2 id="quick-checklist">Quick checklist</h2>
+<ul>
+  <li>Duplicate before experimenting; publish the copy when it is ready.</li>
+  <li>Check the change on mobile with the device toggle in the editor.</li>
+  <li>Remember that a template change applies to every page using that template.</li>
+  <li>Tell your developer when you have changed things in the editor, so nobody overwrites them.</li>
+</ul>
+<p>Next: <a href="/articles/editing-shopify-themes-2-code-editor/">part 2, the code editor</a>, for the first step into Liquid without installing anything.</p>
+      <section class="further">
+        <h2 id="further-reading">Further reading</h2>
+        <ul><li><a class="out" href="https://help.shopify.com/en/manual/online-store/themes/managing-themes/duplicating-themes" target="_blank" rel="noopener noreferrer">Duplicating themes (Shopify Help Center)</a></li><li><a class="out" href="https://help.shopify.com/en/manual/online-store/themes/customizing-themes/theme-editor" target="_blank" rel="noopener noreferrer">Theme editor (Shopify Help Center)</a></li><li><a class="out" href="https://shopify.dev/docs/storefronts/themes/architecture" target="_blank" rel="noopener noreferrer">Theme architecture (Shopify developer docs)</a></li></ul>
+      </section>
+    </div>
+    <div class="article-foot">
+      
+      <ul class="tags"><li>Theme editor</li><li>Online Store 2.0</li><li>Beginners</li></ul>
+      
+    </div>
+  </article>
+  <nav class="pager wrap" aria-label="Guide parts">
+    <span></span>
+    <a class="all" href="/articles/">All articles</a>
+    <a href="/articles/editing-shopify-themes-2-code-editor/"><span>Next part</span>The code editor in the admin</a>
+  </nav>
+
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>More articles</h2>
+      <div class="posts">
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/one-jersey-one-cart-line/">One jersey, one cart line: personalised shirts with a Cart Transform Function</a></h3>
+          <p>A personalised hockey jersey is really four products: the shirt, the name, the number and the badges. Here is how I made them check out as one line for EV Zug without touching the price.</p>
+          <a class="case-link" href="/articles/one-jersey-one-cart-line/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/migrating-customers-without-sending-a-single-email/">Moving a store's whole history without sending a single email</a></h3>
+          <p>Importing tens of thousands of past customers and orders into a live Shopify store would normally email every one of them. Here is how I built a migration app where that cannot happen.</p>
+          <a class="case-link" href="/articles/migrating-customers-without-sending-a-single-email/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/from-16-mb-to-4-mb-product-page/">From 16.2 MB to 4.5 MB: slimming down a Shopify product page</a></h3>
+          <p>A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.</p>
+          <a class="case-link" href="/articles/from-16-mb-to-4-mb-product-page/">Read the article</a>
+        </article>
+</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap narrow center">
+      <h2>Want something like this for your store?</h2>
+      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania.</p>
+    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
+    <p><a href="/privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>

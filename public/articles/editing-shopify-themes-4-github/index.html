@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2728164635897891">
+<title>Editing a Shopify theme, part 4: GitHub and a branch for every theme | Emanuel Rusu</title>
+<meta name="description" content="Shopify's GitHub integration turns a branch into a theme and syncs both ways, including the merchant's edits. How to connect it, what it requires, and the branch setup I use so the live store only ever changes on purpose.">
+<meta name="theme-color" content="#1d5e6b">
+<meta property="og:title" content="Editing a Shopify theme, part 4: GitHub and a branch for every theme | Emanuel Rusu">
+<meta property="og:description" content="Shopify's GitHub integration turns a branch into a theme and syncs both ways, including the merchant's edits. How to connect it, what it requires, and the branch setup I use so the live store only ever changes on purpose.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://remtadigital.com/articles/editing-shopify-themes-4-github/">
+<meta property="og:image" content="https://remtadigital.com/articles/editing-shopify-themes-4-github/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://remtadigital.com/articles/editing-shopify-themes-4-github/">
+<link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Editing a Shopify theme, part 4: GitHub and a branch for every theme","description":"Shopify's GitHub integration turns a branch into a theme and syncs both ways, including the merchant's edits. How to connect it, what it requires, and the branch setup I use so the live store only ever changes on purpose.","datePublished":"2026-10-12","articleSection":"Guide","image":"https://remtadigital.com/articles/editing-shopify-themes-4-github/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/editing-shopify-themes-4-github/","author":{"@type":"Person","name":"Emanuel Rusu","url":"https://remtadigital.com/"}}</script>
+</head>
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="REMTA Digital, home"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1d5e6b"/><path d="M18 48V16h12a9 9 0 0 1 0 18H18m10 0 10 14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="44" y="16" width="5" height="32" rx="2.5" fill="#8fd0d8"/></svg><span class="logo-word"><b>REMTA</b> <span>Digital</span></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Main">
+      <a href="/#cases">Case studies</a>
+      <a href="/#work">Work</a>
+      <a href="/articles/">Articles</a>
+      <a href="/#services">Services</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>Editing a Shopify theme</span></nav>
+    <header class="article-head">
+      <p class="post-meta"><span class="post-cat">Guide, part 4</span> &middot; <time datetime="2026-10-12">12 October 2026</time> &middot; 3 min read</p>
+      <h1>Editing a Shopify theme, part 4: GitHub and a branch for every theme</h1>
+      <p class="lead">Shopify's GitHub integration turns a branch into a theme and syncs both ways, including the merchant's edits. How to connect it, what it requires, and the branch setup I use so the live store only ever changes on purpose.</p>
+      <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
+    </header>
+    <aside class="series" aria-label="Editing a Shopify theme">
+      <p><strong>Editing a Shopify theme</strong> &middot; part 4 of 4</p>
+      <ol><li><a href="/articles/editing-shopify-themes-1-theme-editor/">The theme editor, safely</a></li><li><a href="/articles/editing-shopify-themes-2-code-editor/">The code editor in the admin</a></li><li><a href="/articles/editing-shopify-themes-3-shopify-cli/">Working locally with Shopify CLI</a></li><li aria-current="page">GitHub and a branch for every theme</li></ol>
+    </aside>
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#prepare-the-repository">Prepare the repository</a></li><li><a href="#connect-a-branch">Connect a branch</a></li><li><a href="#how-the-two-way-sync-works">How the two-way sync works</a></li><li><a href="#a-branch-setup-that-works">A branch setup that works</a></li><li><a href="#three-habits-that-save-trouble">Three habits that save trouble</a></li><li><a href="#putting-the-four-parts-together">Putting the four parts together</a></li><li><a href="#further-reading">Further reading</a></li></ol>
+    </nav>
+    <div class="article-body">
+      <p>The first three parts gave you ways to change a theme. This one gives you a memory: every change recorded, every version recoverable, and a clear answer to "who changed this and when". With Shopify's GitHub integration, a branch in a repository becomes a theme in your store.</p>
+
+<h2 id="prepare-the-repository">Prepare the repository</h2>
+<p>The integration only connects branches that follow the standard theme folder structure from <a href="/articles/editing-shopify-themes-2-code-editor/">part 2</a>: <code>layout/</code>, <code>templates/</code>, <code>sections/</code> and the rest at the root. If you use a build step, connect a branch that holds the built files, not the source. The quickest way to get there is to pull the live theme with Shopify CLI (<a href="/articles/editing-shopify-themes-3-shopify-cli/">part 3</a>), commit it and push it to a new repository.</p>
+
+<h2 id="connect-a-branch">Connect a branch</h2>
+<ol>
+  <li>Install the Shopify GitHub app on your GitHub account or organisation. Granting it access to specific repositories keeps the list tidy for staff.</li>
+  <li>In the Shopify admin, go to <strong>Online Store</strong> and then <strong>Themes</strong>.</li>
+  <li>In the <strong>Theme library</strong>, click <strong>Add theme</strong> and then <strong>Connect from GitHub</strong>.</li>
+  <li>Pick the account or organisation, the repository and the branch.</li>
+</ol>
+<p>The theme card now shows the repository, the branch and the time of the last commit. You need write access to the repository; GitHub outside collaborators cannot connect branches.</p>
+
+<h2 id="how-the-two-way-sync-works">How the two-way sync works</h2>
+<ul>
+  <li><strong>GitHub to Shopify:</strong> every push to the branch updates the connected theme.</li>
+  <li><strong>Shopify to GitHub:</strong> every save in the theme editor, the code editor or a theme app becomes a commit on the branch, authored by the <code>shopify</code> bot and naming the person who saved. Saves within about ten seconds of each other are combined into one commit.</li>
+</ul>
+<p>The write-back cannot be switched off, and that is a feature. The merchant's editor changes from <a href="/articles/editing-shopify-themes-1-theme-editor/">part 1</a> now land in Git like everyone else's, so the overwrite problem from part 3 becomes an ordinary merge you can see and resolve.</p>
+
+<h2 id="a-branch-setup-that-works">A branch setup that works</h2>
+<p>Shopify's own recommendation is simple, and it is close to what I use:</p>
+<ul>
+  <li><strong>main</strong> is connected to the published theme. Merging into main is how the live store changes, and nothing else changes it.</li>
+  <li><strong>Feature branches</strong> are connected as unpublished themes, so each piece of work has its own preview in the real store.</li>
+  <li><strong>Campaign branches</strong> can be published temporarily, for a sale for example, and the main theme is republished afterwards. Publishing a connected theme keeps its connection.</li>
+</ul>
+<p>On <a href="/projects/ev-zug/">EV Zug</a> I worked exactly this way: separate development and production themes on a branch-based workflow, with matching environments for the store's app. It is what makes it possible to ship in small, reviewable steps while the club's shop stays open.</p>
+
+<h2 id="three-habits-that-save-trouble">Three habits that save trouble</h2>
+<ol>
+  <li><strong>Pull before you merge.</strong> The branch receives the merchant's commits from Shopify, so update your local copy first and merge their changes into yours, not the other way round.</li>
+  <li><strong>Keep content decisions with the merchant.</strong> When <code>templates/*.json</code> or <code>config/settings_data.json</code> conflict, the merchant's version is usually the right one.</li>
+  <li><strong>Never reconnect a branch you disconnected.</strong> You cannot: connecting it again adds a brand-new theme. Disconnect only when you mean it.</li>
+</ol>
+
+<h2 id="putting-the-four-parts-together">Putting the four parts together</h2>
+<p>The theme editor for content, the code editor for a quick fix, Shopify CLI for real development, and GitHub so that all of it is recorded. If you would like this set up on your store, or a theme built on top of it, <a href="/#contact">get in touch</a>.</p>
+      <section class="further">
+        <h2 id="further-reading">Further reading</h2>
+        <ul><li><a class="out" href="https://shopify.dev/docs/storefronts/themes/tools/github" target="_blank" rel="noopener noreferrer">Shopify GitHub integration (developer docs)</a></li><li><a class="out" href="https://shopify.dev/docs/storefronts/themes/best-practices/version-control" target="_blank" rel="noopener noreferrer">Version control best practices for themes</a></li><li><a class="out" href="https://github.com/Shopify/dawn" target="_blank" rel="noopener noreferrer">Dawn theme repository</a></li><li><a class="out" href="https://github.com/Shopify/horizon" target="_blank" rel="noopener noreferrer">Horizon theme repository</a></li></ul>
+      </section>
+    </div>
+    <div class="article-foot">
+      
+      <ul class="tags"><li>GitHub</li><li>Version control</li><li>Workflow</li></ul>
+      
+    </div>
+  </article>
+  <nav class="pager wrap" aria-label="Guide parts">
+    <a href="/articles/editing-shopify-themes-3-shopify-cli/"><span>Previous part</span>Working locally with Shopify CLI</a>
+    <a class="all" href="/articles/">All articles</a>
+    <span></span>
+  </nav>
+
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>More articles</h2>
+      <div class="posts">
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/one-jersey-one-cart-line/">One jersey, one cart line: personalised shirts with a Cart Transform Function</a></h3>
+          <p>A personalised hockey jersey is really four products: the shirt, the name, the number and the badges. Here is how I made them check out as one line for EV Zug without touching the price.</p>
+          <a class="case-link" href="/articles/one-jersey-one-cart-line/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/migrating-customers-without-sending-a-single-email/">Moving a store's whole history without sending a single email</a></h3>
+          <p>Importing tens of thousands of past customers and orders into a live Shopify store would normally email every one of them. Here is how I built a migration app where that cannot happen.</p>
+          <a class="case-link" href="/articles/migrating-customers-without-sending-a-single-email/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/from-16-mb-to-4-mb-product-page/">From 16.2 MB to 4.5 MB: slimming down a Shopify product page</a></h3>
+          <p>A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.</p>
+          <a class="case-link" href="/articles/from-16-mb-to-4-mb-product-page/">Read the article</a>
+        </article>
+</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap narrow center">
+      <h2>Want something like this for your store?</h2>
+      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania.</p>
+    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
+    <p><a href="/privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>

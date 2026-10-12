@@ -1,0 +1,37 @@
+<!--
+{
+  "title": "Tabs that hide themselves: rebuilding a confectioner's design on Dawn",
+  "summary": "Confiserie Sprüngli wanted its existing design on Shopify's Dawn theme. The product page details that make that work, starting with information tabs that disappear when a product has nothing to put in them.",
+  "date": "2026-10-12",
+  "order": 36,
+  "category": "Case note",
+  "project": "confiserie-sprungli",
+  "tags": ["Dawn", "Liquid", "Product pages"],
+  "links": [
+    { "title": "Dawn theme repository", "url": "https://github.com/Shopify/dawn" },
+    { "title": "Liquid render tag", "url": "https://shopify.dev/docs/api/liquid/tags/render" },
+    { "title": "Metafields (Shopify developer docs)", "url": "https://shopify.dev/docs/apps/build/custom-data" }
+  ]
+}
+-->
+<p><a href="/projects/confiserie-sprungli/">Confiserie Sprüngli</a> already had a design customers knew. The job was not to invent a new one but to rebuild it on Shopify's Dawn theme: product pages, collection pages, navigation and animations, so the store keeps its look while gaining everything a maintained Shopify theme brings.</p>
+
+<h2>Tabs that hide themselves</h2>
+<p>Chocolate comes with a lot of information: ingredients, nutritional values, the legal declaration. On the product page these sit in tabs, and each tab is its own snippet. That separation pays off in two ways.</p>
+<p>First, each tab can be changed without touching the others. Second, and more important for the people running the shop: a tab with no content hides itself. A product without nutrition data never shows a blank "Nutritional values" tab. Nobody has to remember to switch it off, product by product, and a shopper never clicks a tab that leads nowhere.</p>
+<p>It is a small decision with a large effect on a catalogue with many products, where data is never complete everywhere at once.</p>
+
+<h2>The rest of the product page</h2>
+<ul>
+  <li>Breadcrumbs, title, price and a block for transport and delivery periods, which matter for fresh confectionery.</li>
+  <li>A grid of cards for choosing product options, instead of a plain dropdown.</li>
+  <li>A product video modal and a related-products block.</li>
+  <li>Product badges, including a "New" badge driven by product data rather than set by hand.</li>
+</ul>
+
+<h2>Collections and navigation</h2>
+<p>Collection pages got a banner and breadcrumbs, a sidebar filter layout on desktop and a separate filter experience on mobile, where a sidebar does not fit. Product cards were rebuilt to match the brand's existing design. Navigation is a desktop mega menu and a mobile drawer, with a reveal-on-scroll animation as content comes into view.</p>
+
+<h2>Why rebuild on Dawn at all?</h2>
+<p>A fully custom theme can look like anything, and so can Dawn with enough work. The difference is what comes with it: Shopify's own theme, kept up to date, with the theme editor working the way merchants expect. Rebuilding a brand's design on top of it keeps the brand's look and the platform's foundations.</p>
+<p>Sprüngli's site is also the only Swiss chocolatier in Switzerland's top 5,000 sites by Chrome traffic, ahead of Lindt and Cailler. A design customers know is worth keeping.</p>

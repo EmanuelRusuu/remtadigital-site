@@ -12,8 +12,8 @@ public/assets/main.js          mobile menu, project filters, reveal-on-scroll
 public/robots.txt
 public/sitemap.xml             generated
 data/projects.json             the projects: title, role, summary, details, stack, filters, live URL
-data/articles.json             articles: title, summary, date, related project, body as HTML paragraphs;
-                               build.mjs writes /articles/, the homepage section and the reading time (200 words a minute)
+data/articles/<slug>.html       one file per article: a JSON front block in an HTML comment, then the body;
+                               build.mjs adds the table of contents, reading time, guide navigation and Further reading
 data/media.json                what capture found per project (Shopify or not, icon, logo, screenshots)
 data/popularity.json           traffic data for the "Most visited" sort and the project pages:
                                Tranco ranks, Chrome UX Report country bands, category placings

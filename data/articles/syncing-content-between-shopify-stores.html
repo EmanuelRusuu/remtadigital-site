@@ -1,0 +1,37 @@
+<!--
+{
+  "title": "Syncing content between Shopify stores: metaobjects, files and translations",
+  "summary": "Brands with several Shopify stores want to write content once. I worked on the internal app that syncs it: metaobjects whose definitions differ between stores, images that must survive the trip, and a file library too big to read in one go.",
+  "date": "2026-10-12",
+  "order": 34,
+  "category": "Case note",
+  "project": "multi-store-content-sync",
+  "tags": ["Admin GraphQL API", "Metaobjects", "React Router", "Prisma"],
+  "links": [
+    { "title": "Metaobjects (Shopify developer docs)", "url": "https://shopify.dev/docs/apps/build/custom-data/metaobjects" },
+    { "title": "Shopify Admin GraphQL API", "url": "https://shopify.dev/docs/api/admin-graphql" },
+    { "title": "Polaris (Shopify developer docs)", "url": "https://shopify.dev/docs/api/polaris" }
+  ]
+}
+-->
+<p>A brand with several Shopify stores does not want to write every page, menu and blog post once per store. At aiconomy AG, a team of four developers built an admin app that keeps content in sync across a client's stores: metaobjects, metafields, menus, blogs, pages and translations. Each client gets its own instance. This is about the parts I built.</p>
+
+<h2>Metaobjects that do not match</h2>
+<p>Metaobjects are Shopify's structured content: a "team member" or an "FAQ entry" with fields you define. Copying them between stores sounds easy until the two stores' definitions differ. My part of the synchronisation handles three of those differences:</p>
+<ul>
+  <li><strong>Reserved types.</strong> Some metaobject types are Shopify's own. They are checked for existence on the target store rather than created.</li>
+  <li><strong>Validations.</strong> Definition validations are remapped against the target store, so a rule that points at something in store A points at its equivalent in store B.</li>
+  <li><strong>Files.</strong> Referenced file IDs are mapped, so the images inside a metaobject survive the transfer instead of pointing at a file that only exists in the source store.</li>
+</ul>
+
+<h2>A file library too big to read</h2>
+<p>To make sure the target store has the images its theme needs, the obvious approach is to list the source store's whole file library and copy what is missing. On real stores that listing was timing out.</p>
+<p>So the app now works backwards: it resolves only the files the live theme actually references and uploads the ones missing on the target, as a scheduled background job. Fewer files to read, no timeouts, and no request waiting on a merchant's screen.</p>
+<p>A related fix made file lookups match the exact filename. Before, two files with similar names could collide, and the wrong asset got uploaded.</p>
+
+<h2>Errors people can read</h2>
+<p>I also added blog metafield sync as a new route and screen. When something fails across hundreds of items, a wall of identical errors helps nobody, so errors are deduplicated into a short summary that expands to the full detail when you need it.</p>
+
+<h2>Each store in its own language</h2>
+<p>Finally, market adaptation: each target store receives translations in its own primary language.</p>
+<p>None of this shows on a storefront, which is the point. Merchants write once, and every store gets the right content, with its images, in its own language.</p>

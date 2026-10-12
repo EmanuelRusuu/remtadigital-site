@@ -1,0 +1,40 @@
+<!--
+{
+  "title": "When a credit check outage looks like a decline",
+  "summary": "On Ecofort, customers paying by invoice were being told no whenever the credit check provider had an outage. How I separated 'declined' from 'did not answer', and the performance pass that came with the same project.",
+  "date": "2026-10-12",
+  "order": 32,
+  "category": "Case note",
+  "project": "ecofort",
+  "tags": ["Checkout UI extensions", "Laravel", "Performance", "Accessibility"],
+  "links": [
+    { "title": "Checkout UI extensions", "url": "https://shopify.dev/docs/api/checkout-ui-extensions" },
+    { "title": "Largest Contentful Paint (web.dev)", "url": "https://web.dev/articles/lcp" },
+    { "title": "Cumulative Layout Shift (web.dev)", "url": "https://web.dev/articles/cls" }
+  ]
+}
+-->
+<p>Paying by invoice is common in Switzerland, and stores that offer it check the customer's credit first. On <a href="/projects/ecofort/">Ecofort</a>, that check runs through Intrum. The problem I was asked to fix was subtle and expensive: when Intrum had an outage, the customer was told their credit check had failed.</p>
+
+<h2>Two answers that looked the same</h2>
+<p>From the checkout's point of view there were only two outcomes: approved, or not approved. "Intrum looked at this customer and said no" and "Intrum did not answer at all" both ended up as not approved. A perfectly good customer, during a provider hiccup, saw a decline.</p>
+<p>The fix had three parts:</p>
+<ol>
+  <li><strong>The backend says whether a decision exists.</strong> It now reports whether Intrum actually returned a decision, separately from what the decision was.</li>
+  <li><strong>Every call has a timeout,</strong> so a slow provider can never leave checkout hanging.</li>
+  <li><strong>Checkout tells the truth.</strong> When there was no decision, the customer sees a neutral "temporarily unavailable" message instead of a decline.</li>
+</ol>
+<p>Nobody gets approved who should not be. Nobody gets turned away because a server somewhere was slow.</p>
+
+<h2>The rest of the storefront</h2>
+<p>As the main developer on Ecofort, the credit check was one part of a broader pass over the store:</p>
+<ul>
+  <li><strong>Performance:</strong> critical CSS extracted, theme scripts deferred, the largest image and the fonts preloaded, and the product image slider rebuilt so it no longer shifts the layout on mobile.</li>
+  <li><strong>Accessibility:</strong> colour contrast, link names and iframe titles.</li>
+  <li><strong>Content:</strong> collection loading with skeleton states, and an advice and news loader with per-article SEO, a proper 404 for empty pages and inactive articles filtered out.</li>
+  <li><strong>Trust and tracking:</strong> Trusted Shops ratings, a delivery status indicator on the product page, and legacy product IDs carried through the cart into checkout for tracking.</li>
+</ul>
+<p>I also set up the theme repositories for the sister stores, Infrarotheizung and Luftentfeuchter. Ecofort itself is in Switzerland's top 5,000 sites by Chrome traffic, in the same band as Dyson and Jura.</p>
+
+<h2>The general lesson</h2>
+<p>Any checkout step that calls an outside service has three outcomes, not two: yes, no, and no answer. Treating the third like the second is an easy bug to miss in payment and verification flows, and it is always worth checking for.</p>

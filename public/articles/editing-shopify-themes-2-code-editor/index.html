@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-2728164635897891">
+<title>Editing a Shopify theme, part 2: the code editor in the admin | Emanuel Rusu</title>
+<meta name="description" content="The quickest way into a theme's code needs nothing but a browser. Where to find it, what each folder does, a small section you can build in five minutes, and how to undo a file you broke.">
+<meta name="theme-color" content="#1d5e6b">
+<meta property="og:title" content="Editing a Shopify theme, part 2: the code editor in the admin | Emanuel Rusu">
+<meta property="og:description" content="The quickest way into a theme's code needs nothing but a browser. Where to find it, what each folder does, a small section you can build in five minutes, and how to undo a file you broke.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://remtadigital.com/articles/editing-shopify-themes-2-code-editor/">
+<meta property="og:image" content="https://remtadigital.com/articles/editing-shopify-themes-2-code-editor/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://remtadigital.com/articles/editing-shopify-themes-2-code-editor/">
+<link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Editing a Shopify theme, part 2: the code editor in the admin","description":"The quickest way into a theme's code needs nothing but a browser. Where to find it, what each folder does, a small section you can build in five minutes, and how to undo a file you broke.","datePublished":"2026-10-12","articleSection":"Guide","image":"https://remtadigital.com/articles/editing-shopify-themes-2-code-editor/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/editing-shopify-themes-2-code-editor/","author":{"@type":"Person","name":"Emanuel Rusu","url":"https://remtadigital.com/"}}</script>
+</head>
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="REMTA Digital, home"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1d5e6b"/><path d="M18 48V16h12a9 9 0 0 1 0 18H18m10 0 10 14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="44" y="16" width="5" height="32" rx="2.5" fill="#8fd0d8"/></svg><span class="logo-word"><b>REMTA</b> <span>Digital</span></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Main">
+      <a href="/#cases">Case studies</a>
+      <a href="/#work">Work</a>
+      <a href="/articles/">Articles</a>
+      <a href="/#services">Services</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>Editing a Shopify theme</span></nav>
+    <header class="article-head">
+      <p class="post-meta"><span class="post-cat">Guide, part 2</span> &middot; <time datetime="2026-10-12">12 October 2026</time> &middot; 3 min read</p>
+      <h1>Editing a Shopify theme, part 2: the code editor in the admin</h1>
+      <p class="lead">The quickest way into a theme's code needs nothing but a browser. Where to find it, what each folder does, a small section you can build in five minutes, and how to undo a file you broke.</p>
+      <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
+    </header>
+    <aside class="series" aria-label="Editing a Shopify theme">
+      <p><strong>Editing a Shopify theme</strong> &middot; part 2 of 4</p>
+      <ol><li><a href="/articles/editing-shopify-themes-1-theme-editor/">The theme editor, safely</a></li><li aria-current="page">The code editor in the admin</li><li><a href="/articles/editing-shopify-themes-3-shopify-cli/">Working locally with Shopify CLI</a></li><li><a href="/articles/editing-shopify-themes-4-github/">GitHub and a branch for every theme</a></li></ol>
+    </aside>
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#opening-the-code-editor">Opening the code editor</a></li><li><a href="#a-two-minute-tour-of-the-folders">A two-minute tour of the folders</a></li><li><a href="#your-first-section-in-five-minutes">Your first section, in five minutes</a></li><li><a href="#undoing-a-file-you-broke">Undoing a file you broke</a></li><li><a href="#when-to-move-on">When to move on</a></li><li><a href="#further-reading">Further reading</a></li></ol>
+    </nav>
+    <div class="article-body">
+      <p><a href="/articles/editing-shopify-themes-1-theme-editor/">Part 1</a> covered the theme editor, which arranges what the theme already has. When you need something the theme does not have, you need its code, and the quickest way in is already in your admin.</p>
+
+<h2 id="opening-the-code-editor">Opening the code editor</h2>
+<ol>
+  <li>Duplicate the theme first (Online Store, then <strong>···</strong> and <strong>Duplicate</strong>). Never practise on the live theme.</li>
+  <li>On the copy, open the <strong>···</strong> menu and choose <strong>Edit code</strong>.</li>
+</ol>
+<p>You get a file tree on the left and an editor on the right. Saving a file saves it straight to that theme, so the duplicate really matters.</p>
+
+<h2 id="a-two-minute-tour-of-the-folders">A two-minute tour of the folders</h2>
+<ul>
+  <li><code>layout/</code>: the frame around every page. <code>theme.liquid</code> holds the <code>&lt;head&gt;</code>, the header and footer groups and the main content slot.</li>
+  <li><code>templates/</code>: one file per page type. Modern themes use JSON templates, which simply list sections and their settings.</li>
+  <li><code>sections/</code>: the building blocks the theme editor shows. Each one is Liquid plus a <code>{% schema %}</code> that defines its settings.</li>
+  <li><code>blocks/</code>: reusable theme blocks, in newer themes such as Horizon.</li>
+  <li><code>snippets/</code>: small pieces of Liquid reused across sections, included with <code>{% render %}</code>.</li>
+  <li><code>assets/</code>: CSS, JavaScript, images and fonts.</li>
+  <li><code>config/</code>: <code>settings_schema.json</code> defines the theme settings, <code>settings_data.json</code> stores their values.</li>
+  <li><code>locales/</code>: translation files, one per language.</li>
+</ul>
+
+<h2 id="your-first-section-in-five-minutes">Your first section, in five minutes</h2>
+<p>Say you want a short delivery note that the merchant can place anywhere and edit in the theme editor. Next to the <code>sections</code> folder, use the button to add a new file, name it <code>delivery-note</code> and replace the contents with:</p>
+<pre><code>&lt;div class="delivery-note page-width"&gt;
+  &lt;p&gt;{{ section.settings.text }}&lt;/p&gt;
+&lt;/div&gt;
+
+{% schema %}
+{
+  "name": "Delivery note",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Text",
+      "default": "Free delivery from CHF 50" }
+  ],
+  "presets": [ { "name": "Delivery note" } ]
+}
+{% endschema %}</code></pre>
+<p class="code-note">The <code>page-width</code> class exists in Dawn; use your theme's own container class if it differs.</p>
+<p>Save, open the theme editor, click <strong>Add section</strong> and <em>Delivery note</em> is there, with an editable text field. The <code>presets</code> entry is what makes it appear in that list. That pattern, Liquid for the output and a schema for the settings, is most of what custom theme work is.</p>
+
+<h2 id="undoing-a-file-you-broke">Undoing a file you broke</h2>
+<p>The code editor keeps a short history per file, called the Timeline:</p>
+<ol>
+  <li>Open the file and look at its Timeline.</li>
+  <li>Click an entry to compare it with the current version.</li>
+  <li>Right-click the entry, choose <strong>Restore contents</strong>, then <strong>Restore</strong>.</li>
+</ol>
+<p>Three limits are worth knowing before you rely on it: it restores one file at a time, it cannot bring back a deleted file, and older versions eventually disappear. For anything bigger than a small fix, that is why the next two parts exist.</p>
+
+<h2 id="when-to-move-on">When to move on</h2>
+<p>The code editor is perfect for a small change or a quick fix. It gets uncomfortable when a change touches several files, when two people work on the same theme, or when you want to see the result before saving. That is where working locally with Shopify CLI comes in: <a href="/articles/editing-shopify-themes-3-shopify-cli/">part 3</a>.</p>
+      <section class="further">
+        <h2 id="further-reading">Further reading</h2>
+        <ul><li><a class="out" href="https://help.shopify.com/en/manual/online-store/themes/theme-structure/extend/edit-theme-code" target="_blank" rel="noopener noreferrer">Editing theme code (Shopify Help Center)</a></li><li><a class="out" href="https://shopify.dev/docs/storefronts/themes/architecture" target="_blank" rel="noopener noreferrer">Theme architecture (Shopify developer docs)</a></li><li><a class="out" href="https://shopify.dev/docs/storefronts/themes/architecture/sections/section-schema" target="_blank" rel="noopener noreferrer">Section schema (Shopify developer docs)</a></li><li><a class="out" href="https://shopify.dev/docs/api/liquid" target="_blank" rel="noopener noreferrer">Liquid reference</a></li></ul>
+      </section>
+    </div>
+    <div class="article-foot">
+      
+      <ul class="tags"><li>Liquid</li><li>Code editor</li><li>Sections</li></ul>
+      
+    </div>
+  </article>
+  <nav class="pager wrap" aria-label="Guide parts">
+    <a href="/articles/editing-shopify-themes-1-theme-editor/"><span>Previous part</span>The theme editor, safely</a>
+    <a class="all" href="/articles/">All articles</a>
+    <a href="/articles/editing-shopify-themes-3-shopify-cli/"><span>Next part</span>Working locally with Shopify CLI</a>
+  </nav>
+
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>More articles</h2>
+      <div class="posts">
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/one-jersey-one-cart-line/">One jersey, one cart line: personalised shirts with a Cart Transform Function</a></h3>
+          <p>A personalised hockey jersey is really four products: the shirt, the name, the number and the badges. Here is how I made them check out as one line for EV Zug without touching the price.</p>
+          <a class="case-link" href="/articles/one-jersey-one-cart-line/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/migrating-customers-without-sending-a-single-email/">Moving a store's whole history without sending a single email</a></h3>
+          <p>Importing tens of thousands of past customers and orders into a live Shopify store would normally email every one of them. Here is how I built a migration app where that cannot happen.</p>
+          <a class="case-link" href="/articles/migrating-customers-without-sending-a-single-email/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 2 min read</p>
+          <h3><a href="/articles/from-16-mb-to-4-mb-product-page/">From 16.2 MB to 4.5 MB: slimming down a Shopify product page</a></h3>
+          <p>A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.</p>
+          <a class="case-link" href="/articles/from-16-mb-to-4-mb-product-page/">Read the article</a>
+        </article>
+</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap narrow center">
+      <h2>Want something like this for your store?</h2>
+      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania.</p>
+    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
+    <p><a href="/privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>

@@ -22,7 +22,7 @@
 <link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/style.css">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"From 16.2 MB to 4.5 MB: slimming down a Shopify product page","description":"A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.","datePublished":"2026-10-12","image":"https://remtadigital.com/articles/from-16-mb-to-4-mb-product-page/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/from-16-mb-to-4-mb-product-page/","author":{"@type":"Person","name":"Emanuel Rusu","url":"https://remtadigital.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"From 16.2 MB to 4.5 MB: slimming down a Shopify product page","description":"A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.","datePublished":"2026-10-12","articleSection":"Case note","image":"https://remtadigital.com/articles/from-16-mb-to-4-mb-product-page/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/from-16-mb-to-4-mb-product-page/","author":{"@type":"Person","name":"Emanuel Rusu","url":"https://remtadigital.com/"}}</script>
 </head>
 <body class="article-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
@@ -55,24 +55,32 @@
       <p class="lead">A colour-variant product page on the new Curaprox store weighed 16.2 MB. Three unglamorous fixes brought it to 4.5 MB before launch. No framework changes, no new apps.</p>
       <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
     </header>
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#1-images-the-size-they-are-shown">1. Images the size they are shown</a></li><li><a href="#2-one-swatch-drawn-once">2. One swatch, drawn once</a></li><li><a href="#3-nothing-that-jumps">3. Nothing that jumps</a></li><li><a href="#the-part-that-is-not-about-speed">The part that is not about speed</a></li><li><a href="#further-reading">Further reading</a></li></ol>
+    </nav>
     <div class="article-body">
       <p>Before the new Swiss and UAE Curaprox stores went live, I went through the product pages with Lighthouse and a real Chrome. One colour-variant product page weighed 16.2 MB on mobile. A toothbrush that comes in 36 colours is a nice problem for a brand and a heavy one for a page.</p>
-      <p>None of the fixes were clever. All of them were about sending less.</p>
-      <h2>1. Images the size they are shown</h2>
-      <p>The gallery was loading images far larger than the space they filled on a phone. Serving properly sized images took the gallery from 13.0 MB to 1.4 MB, on its own the biggest single win.</p>
-      <h2>2. One swatch, drawn once</h2>
-      <p>Each of the 36 colour swatches had the same SVG shape pasted inline. Thirty-six copies of identical markup is invisible to a shopper and very visible in the HTML, so I defined the shape once and referenced it everywhere:</p>
-      <pre><code>&lt;svg hidden&gt;&lt;symbol id="swatch" viewBox="0 0 24 24"&gt;…&lt;/symbol&gt;&lt;/svg&gt;
+<p>None of the fixes were clever. All of them were about sending less.</p>
+<h2 id="1-images-the-size-they-are-shown">1. Images the size they are shown</h2>
+<p>The gallery was loading images far larger than the space they filled on a phone. Serving properly sized images took the gallery from 13.0 MB to 1.4 MB, on its own the biggest single win.</p>
+<h2 id="2-one-swatch-drawn-once">2. One swatch, drawn once</h2>
+<p>Each of the 36 colour swatches had the same SVG shape pasted inline. Thirty-six copies of identical markup is invisible to a shopper and very visible in the HTML, so I defined the shape once and referenced it everywhere:</p>
+<pre><code>&lt;svg hidden&gt;&lt;symbol id="swatch" viewBox="0 0 24 24"&gt;…&lt;/symbol&gt;&lt;/svg&gt;
 
 &lt;!-- each of the 36 swatches --&gt;
 &lt;svg&gt;&lt;use href="#swatch"/&gt;&lt;/svg&gt;</code></pre>
-      <p class="code-note">Simplified. Each swatch still gets its own colour.</p>
-      <p>The HTML of that 36-colour page went from 2.03 MB to 0.76 MB.</p>
-      <h2>3. Nothing that jumps</h2>
-      <p>On mobile product pages, content shifted after loading in about half of the test runs, with a layout shift score of 0.108. After my fix it was zero in every run. On a slow 3G connection, the bestseller slider now shows all its images after 20.8 seconds instead of 31.7, 34% sooner.</p>
-      <h2>The part that is not about speed</h2>
-      <p>While I was in there, I checked the delivery promises on the UAE product pages against what checkout actually offers. All 84 test cases now match, because a fast page that promises the wrong delivery date is still a bad page.</p>
-      <p class="code-note">Measured in my pull requests on unpublished test themes against the live theme, August and September 2026: mobile Lighthouse for page weight, Slow 3G with a cold cache for the slider, repeated runs for layout shift.</p>
+<p class="code-note">Simplified. Each swatch still gets its own colour.</p>
+<p>The HTML of that 36-colour page went from 2.03 MB to 0.76 MB.</p>
+<h2 id="3-nothing-that-jumps">3. Nothing that jumps</h2>
+<p>On mobile product pages, content shifted after loading in about half of the test runs, with a layout shift score of 0.108. After my fix it was zero in every run. On a slow 3G connection, the bestseller slider now shows all its images after 20.8 seconds instead of 31.7, 34% sooner.</p>
+<h2 id="the-part-that-is-not-about-speed">The part that is not about speed</h2>
+<p>While I was in there, I checked the delivery promises on the UAE product pages against what checkout actually offers. All 84 test cases now match, because a fast page that promises the wrong delivery date is still a bad page.</p>
+<p class="code-note">Measured in my pull requests on unpublished test themes against the live theme, August and September 2026: mobile Lighthouse for page weight, Slow 3G with a cold cache for the slider, repeated runs for layout shift.</p>
+      <section class="further">
+        <h2 id="further-reading">Further reading</h2>
+        <ul><li><a class="out" href="https://web.dev/articles/cls" target="_blank" rel="noopener noreferrer">Cumulative Layout Shift (web.dev)</a></li><li><a class="out" href="https://shopify.dev/docs/api/liquid/filters/image_url" target="_blank" rel="noopener noreferrer">image_url filter (Shopify Liquid)</a></li><li><a class="out" href="https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/use" target="_blank" rel="noopener noreferrer">SVG <use> element (MDN)</a></li></ul>
+      </section>
     </div>
     <div class="article-foot">
       <p class="provenance">From my work on <a href="/projects/curaprox/">Curaprox (CURADEN AG)</a>, built as a developer at aiconomy AG, which ran the project for its client.</p>
@@ -97,6 +105,13 @@
           <h3><a href="/articles/migrating-customers-without-sending-a-single-email/">Moving a store's whole history without sending a single email</a></h3>
           <p>Importing tens of thousands of past customers and orders into a live Shopify store would normally email every one of them. Here is how I built a migration app where that cannot happen.</p>
           <a class="case-link" href="/articles/migrating-customers-without-sending-a-single-email/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><time datetime="2026-10-12">12 October 2026</time> &middot; 3 min read</p>
+          <h3><a href="/articles/football-club-website-on-one-shopify-theme/">A football club's whole website on one Shopify theme</a></h3>
+          <p>FC Basel runs its news, videos, league table, player pages and fan shop on a single Shopify theme. What it takes to make a store theme behave like a club website, and the jersey configurator in the middle of it.</p>
+          <a class="case-link" href="/articles/football-club-website-on-one-shopify-theme/">Read the article</a>
         </article>
 </div>
     </div>
