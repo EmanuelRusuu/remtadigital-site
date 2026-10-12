@@ -8,6 +8,7 @@
     "build": "node build.mjs"
   },
   "dependencies": {
-    "puppeteer-core": "^24.43.1"
+    "puppeteer-core": "^24.43.1",
+    "sharp": "^0.34.3"
   }
 }

@@ -24,6 +24,7 @@
 <link rel="alternate" type="application/rss+xml" title="Articles by Emanuel Rusu" href="https://remtadigital.com/articles/feed.xml">
 <link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" as="image" type="image/avif" imagesrcset="assets/img/emanuel-rusu-136.avif 136w, assets/img/emanuel-rusu-272.avif 272w, assets/img/emanuel-rusu-400.avif 400w" imagesizes="(max-width: 820px) 104px, 136px" fetchpriority="high">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
@@ -140,14 +141,18 @@
         <div class="profile-cover">
           <ul class="cover-logos" aria-label="Where I studied and worked">
             <li><img src="assets/img/brands/itschool.svg" alt="IT School" title="IT School: front-end web development" width="122" height="44" style="--h:44px"></li>
-            <li><img src="assets/img/brands/ubb-crest.webp" alt="Babe&#537;-Bolyai University" title="Babe&#537;-Bolyai University: Economic Informatics" width="64" height="64" style="--h:64px"></li>
+            <li><img src="assets/img/brands/ubb-crest-128.webp" alt="Babe&#537;-Bolyai University" title="Babe&#537;-Bolyai University: Economic Informatics" width="64" height="64" style="--h:64px"></li>
             <li><img src="assets/img/brands/webgurus-mark.svg" alt="WebGurus" title="WebGurus, 2023 to 2025" width="44" height="44" style="--h:44px"></li>
-            <li><img src="assets/img/brands/aico.webp" alt="aico (aiconomy AG)" title="aiconomy AG, 2025 to today" width="124" height="38" style="--h:38px"></li>
+            <li><img src="assets/img/brands/aico-248.webp" alt="aico (aiconomy AG)" title="aiconomy AG, 2025 to today" width="124" height="38" style="--h:38px"></li>
           </ul>
         </div>
         <div class="profile-top">
           <button class="avatar-btn" type="button" aria-haspopup="dialog" aria-controls="photo-view" aria-label="View a larger photo of Emanuel Rusu">
-            <img class="avatar" src="assets/img/emanuel-rusu.jpg" alt="Emanuel Rusu" width="400" height="400">
+            <picture>
+              <source type="image/avif" srcset="assets/img/emanuel-rusu-136.avif 136w, assets/img/emanuel-rusu-272.avif 272w, assets/img/emanuel-rusu-400.avif 400w" sizes="(max-width: 820px) 104px, 136px">
+              <source type="image/webp" srcset="assets/img/emanuel-rusu-136.webp 136w, assets/img/emanuel-rusu-272.webp 272w, assets/img/emanuel-rusu-400.webp 400w" sizes="(max-width: 820px) 104px, 136px">
+              <img class="avatar" src="assets/img/emanuel-rusu.jpg" alt="Emanuel Rusu" width="400" height="400" fetchpriority="high">
+            </picture>
           </button>
           <div class="profile-main">
             <h1><span class="h1-name">Emanuel Rusu</span> <span class="headline">Freelance Shopify developer &middot; Founder of REMTA Digital</span></h1>
@@ -337,9 +342,9 @@
         <!-- projects:start -->
 
         <article class="work" data-tags="theme functionality integration" data-cat="health-beauty" data-title="Curaprox (CURADEN AG)" data-pop="11">
-          <a class="thumb" href="projects/curaprox/" tabindex="-1" aria-hidden="true"><img src="projects/curaprox/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/curaprox/" tabindex="-1" aria-hidden="true"><img src="projects/curaprox/home-640.webp" srcset="projects/curaprox/home-640.webp 640w, projects/curaprox/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/curaprox/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/curaprox/icon.webp"><img src="projects/curaprox/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/curaprox/">Curaprox (CURADEN AG)</a></h3>
               <p class="meta">aiconomy AG &middot; Lead contributor</p>
@@ -354,9 +359,9 @@
         </article>
 
         <article class="work" data-tags="theme functionality app integration" data-cat="sports-clubs" data-title="EV Zug" data-pop="10">
-          <a class="thumb" href="projects/ev-zug/" tabindex="-1" aria-hidden="true"><img src="projects/ev-zug/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/ev-zug/" tabindex="-1" aria-hidden="true"><img src="projects/ev-zug/home-640.webp" srcset="projects/ev-zug/home-640.webp 640w, projects/ev-zug/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/ev-zug/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/ev-zug/icon.webp"><img src="projects/ev-zug/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/ev-zug/">EV Zug</a></h3>
               <p class="meta">aiconomy AG &middot; Lead contributor</p>
@@ -370,9 +375,9 @@
         </article>
 
         <article class="work" data-tags="theme functionality app integration" data-cat="fashion-apparel" data-title="Inuikii" data-pop="19">
-          <a class="thumb" href="projects/inuikii/" tabindex="-1" aria-hidden="true"><img src="projects/inuikii/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/inuikii/" tabindex="-1" aria-hidden="true"><img src="projects/inuikii/home-640.webp" srcset="projects/inuikii/home-640.webp 640w, projects/inuikii/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/inuikii/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/inuikii/icon.webp"><img src="projects/inuikii/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/inuikii/">Inuikii</a></h3>
               <p class="meta">aiconomy AG &middot; Lead contributor</p>
@@ -386,9 +391,9 @@
         </article>
 
         <article class="work" data-tags="theme functionality integration" data-cat="fashion-apparel" data-title="Nile" data-pop="6">
-          <a class="thumb" href="projects/nile/" tabindex="-1" aria-hidden="true"><img src="projects/nile/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/nile/" tabindex="-1" aria-hidden="true"><img src="projects/nile/home-640.webp" srcset="projects/nile/home-640.webp 640w, projects/nile/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/nile/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/nile/icon.webp"><img src="projects/nile/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/nile/">Nile</a></h3>
               <p class="meta">aiconomy AG &middot; Lead contributor</p>
@@ -402,9 +407,9 @@
         </article>
 
         <article class="work" data-tags="theme functionality integration" data-cat="home-building" data-title="Ecofort" data-pop="7">
-          <a class="thumb" href="projects/ecofort/" tabindex="-1" aria-hidden="true"><img src="projects/ecofort/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/ecofort/" tabindex="-1" aria-hidden="true"><img src="projects/ecofort/home-640.webp" srcset="projects/ecofort/home-640.webp 640w, projects/ecofort/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm brand-dark"><img src="projects/ecofort/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm brand-dark"><picture><source type="image/webp" srcset="projects/ecofort/icon.webp"><img src="projects/ecofort/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/ecofort/">Ecofort</a></h3>
               <p class="meta">aiconomy AG &middot; Main developer</p>
@@ -418,9 +423,9 @@
         </article>
 
         <article class="work" data-tags="theme functionality app" data-cat="sports-clubs" data-title="FC Basel 1893" data-pop="1">
-          <a class="thumb" href="projects/fc-basel-1893/" tabindex="-1" aria-hidden="true"><img src="projects/fc-basel-1893/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/fc-basel-1893/" tabindex="-1" aria-hidden="true"><img src="projects/fc-basel-1893/home-640.webp" srcset="projects/fc-basel-1893/home-640.webp 640w, projects/fc-basel-1893/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/fc-basel-1893/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/fc-basel-1893/icon.webp"><img src="projects/fc-basel-1893/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/fc-basel-1893/">FC Basel 1893</a></h3>
               <p class="meta">aiconomy AG &middot; Lead contributor</p>
@@ -435,9 +440,9 @@
         </article>
 
         <article class="work" data-tags="theme functionality" data-cat="food-drink" data-title="Confiserie Sprüngli" data-pop="5">
-          <a class="thumb" href="projects/confiserie-sprungli/" tabindex="-1" aria-hidden="true"><img src="projects/confiserie-sprungli/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/confiserie-sprungli/" tabindex="-1" aria-hidden="true"><img src="projects/confiserie-sprungli/home-640.webp" srcset="projects/confiserie-sprungli/home-640.webp 640w, projects/confiserie-sprungli/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/confiserie-sprungli/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/confiserie-sprungli/icon.webp"><img src="projects/confiserie-sprungli/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/confiserie-sprungli/">Confiserie Sprüngli</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -452,9 +457,9 @@
         </article>
 
         <article class="work" data-tags="theme functionality" data-cat="health-beauty" data-title="Chrüterhüsli" data-pop="15">
-          <a class="thumb" href="projects/chruterhusli/" tabindex="-1" aria-hidden="true"><img src="projects/chruterhusli/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/chruterhusli/" tabindex="-1" aria-hidden="true"><img src="projects/chruterhusli/home-640.webp" srcset="projects/chruterhusli/home-640.webp 640w, projects/chruterhusli/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/chruterhusli/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/chruterhusli/icon.webp"><img src="projects/chruterhusli/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/chruterhusli/">Chrüterhüsli</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -468,9 +473,9 @@
         </article>
 
         <article class="work" data-tags="functionality integration" data-cat="food-drink" data-title="Bruderer" data-pop="25">
-          <a class="thumb" href="projects/bruderer/" tabindex="-1" aria-hidden="true"><img src="projects/bruderer/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/bruderer/" tabindex="-1" aria-hidden="true"><img src="projects/bruderer/home-640.webp" srcset="projects/bruderer/home-640.webp 640w, projects/bruderer/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/bruderer/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/bruderer/icon.webp"><img src="projects/bruderer/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/bruderer/">Bruderer</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -484,9 +489,9 @@
         </article>
 
         <article class="work" data-tags="functionality" data-cat="home-building" data-title="Spa Solutions" data-pop="18">
-          <a class="thumb" href="projects/spa-solutions/" tabindex="-1" aria-hidden="true"><img src="projects/spa-solutions/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/spa-solutions/" tabindex="-1" aria-hidden="true"><img src="projects/spa-solutions/home-640.webp" srcset="projects/spa-solutions/home-640.webp 640w, projects/spa-solutions/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/spa-solutions/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/spa-solutions/icon.webp"><img src="projects/spa-solutions/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/spa-solutions/">Spa Solutions</a></h3>
               <p class="meta">aiconomy AG &middot; Sole developer</p>
@@ -500,9 +505,9 @@
         </article>
 
         <article class="work" data-tags="functionality" data-cat="sports-clubs" data-title="Al-Ittihad" data-pop="9">
-          <a class="thumb" href="projects/al-ittihad/" tabindex="-1" aria-hidden="true"><img src="projects/al-ittihad/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/al-ittihad/" tabindex="-1" aria-hidden="true"><img src="projects/al-ittihad/home-640.webp" srcset="projects/al-ittihad/home-640.webp 640w, projects/al-ittihad/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/al-ittihad/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/al-ittihad/icon.webp"><img src="projects/al-ittihad/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/al-ittihad/">Al-Ittihad</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -516,9 +521,9 @@
         </article>
 
         <article class="work" data-tags="functionality theme" data-cat="home-building" data-title="Art of Fire" data-pop="24">
-          <a class="thumb" href="projects/art-of-fire/" tabindex="-1" aria-hidden="true"><img src="projects/art-of-fire/collection.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/art-of-fire/" tabindex="-1" aria-hidden="true"><img src="projects/art-of-fire/collection-640.webp" srcset="projects/art-of-fire/collection-640.webp 640w, projects/art-of-fire/collection.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/art-of-fire/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/art-of-fire/icon.webp"><img src="projects/art-of-fire/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/art-of-fire/">Art of Fire</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -532,9 +537,9 @@
         </article>
 
         <article class="work" data-tags="theme functionality" data-cat="sports-clubs" data-title="FC Zürich" data-pop="3">
-          <a class="thumb" href="projects/fc-zurich/" tabindex="-1" aria-hidden="true"><img src="projects/fc-zurich/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/fc-zurich/" tabindex="-1" aria-hidden="true"><img src="projects/fc-zurich/home-640.webp" srcset="projects/fc-zurich/home-640.webp 640w, projects/fc-zurich/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/fc-zurich/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/fc-zurich/icon.webp"><img src="projects/fc-zurich/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/fc-zurich/">FC Zürich</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -548,9 +553,9 @@
         </article>
 
         <article class="work" data-tags="functionality integration" data-cat="sports-clubs" data-title="FC St. Gallen 1879" data-pop="2">
-          <a class="thumb" href="projects/fc-st-gallen-1879/" tabindex="-1" aria-hidden="true"><img src="projects/fc-st-gallen-1879/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/fc-st-gallen-1879/" tabindex="-1" aria-hidden="true"><img src="projects/fc-st-gallen-1879/home-640.webp" srcset="projects/fc-st-gallen-1879/home-640.webp 640w, projects/fc-st-gallen-1879/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/fc-st-gallen-1879/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/fc-st-gallen-1879/icon.webp"><img src="projects/fc-st-gallen-1879/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/fc-st-gallen-1879/">FC St. Gallen 1879</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -565,9 +570,9 @@
         </article>
 
         <article class="work" data-tags="functionality" data-cat="specialist-retail" data-title="OSCARwash" data-pop="17">
-          <a class="thumb" href="projects/oscarwash/" tabindex="-1" aria-hidden="true"><img src="projects/oscarwash/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/oscarwash/" tabindex="-1" aria-hidden="true"><img src="projects/oscarwash/home-640.webp" srcset="projects/oscarwash/home-640.webp 640w, projects/oscarwash/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/oscarwash/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/oscarwash/icon.webp"><img src="projects/oscarwash/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/oscarwash/">OSCARwash</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -581,9 +586,9 @@
         </article>
 
         <article class="work" data-tags="app functionality" data-cat="specialist-retail" data-title="Revendo" data-pop="4">
-          <a class="thumb" href="projects/revendo/" tabindex="-1" aria-hidden="true"><img src="projects/revendo/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/revendo/" tabindex="-1" aria-hidden="true"><img src="projects/revendo/home-640.webp" srcset="projects/revendo/home-640.webp 640w, projects/revendo/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/revendo/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/revendo/icon.webp"><img src="projects/revendo/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/revendo/">Revendo</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -598,9 +603,9 @@
         </article>
 
         <article class="work" data-tags="functionality" data-cat="fashion-apparel" data-title="House of Jeans" data-pop="20">
-          <a class="thumb" href="projects/house-of-jeans/" tabindex="-1" aria-hidden="true"><img src="projects/house-of-jeans/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/house-of-jeans/" tabindex="-1" aria-hidden="true"><img src="projects/house-of-jeans/home-640.webp" srcset="projects/house-of-jeans/home-640.webp 640w, projects/house-of-jeans/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/house-of-jeans/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/house-of-jeans/icon.webp"><img src="projects/house-of-jeans/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/house-of-jeans/">House of Jeans</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -614,9 +619,9 @@
         </article>
 
         <article class="work" data-tags="functionality" data-cat="food-drink" data-title="Glory Bomb" data-pop="31">
-          <a class="thumb" href="projects/glory-bomb/" tabindex="-1" aria-hidden="true"><img src="projects/glory-bomb/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/glory-bomb/" tabindex="-1" aria-hidden="true"><img src="projects/glory-bomb/home-640.webp" srcset="projects/glory-bomb/home-640.webp 640w, projects/glory-bomb/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/glory-bomb/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/glory-bomb/icon.webp"><img src="projects/glory-bomb/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/glory-bomb/">Glory Bomb</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -630,9 +635,9 @@
         </article>
 
         <article class="work" data-tags="theme" data-cat="home-building" data-title="Sorenos" data-pop="34">
-          <a class="thumb" href="projects/sorenos/" tabindex="-1" aria-hidden="true"><img src="projects/sorenos/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/sorenos/" tabindex="-1" aria-hidden="true"><img src="projects/sorenos/home-640.webp" srcset="projects/sorenos/home-640.webp 640w, projects/sorenos/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/sorenos/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/sorenos/icon.webp"><img src="projects/sorenos/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/sorenos/">Sorenos</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -646,9 +651,9 @@
         </article>
 
         <article class="work" data-tags="theme" data-cat="health-beauty" data-title="Mediconsult" data-pop="22">
-          <a class="thumb" href="projects/mediconsult/" tabindex="-1" aria-hidden="true"><img src="projects/mediconsult/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/mediconsult/" tabindex="-1" aria-hidden="true"><img src="projects/mediconsult/home-640.webp" srcset="projects/mediconsult/home-640.webp 640w, projects/mediconsult/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/mediconsult/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/mediconsult/icon.webp"><img src="projects/mediconsult/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/mediconsult/">Mediconsult</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -662,9 +667,9 @@
         </article>
 
         <article class="work" data-tags="theme" data-cat="fashion-apparel" data-title="Nikin" data-pop="8">
-          <a class="thumb" href="projects/nikin/" tabindex="-1" aria-hidden="true"><img src="projects/nikin/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/nikin/" tabindex="-1" aria-hidden="true"><img src="projects/nikin/home-640.webp" srcset="projects/nikin/home-640.webp 640w, projects/nikin/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/nikin/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/nikin/icon.webp"><img src="projects/nikin/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/nikin/">Nikin</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -678,9 +683,9 @@
         </article>
 
         <article class="work" data-tags="theme integration" data-cat="home-building" data-title="Infrarotheizung" data-pop="26">
-          <a class="thumb" href="projects/infrarotheizung/" tabindex="-1" aria-hidden="true"><img src="projects/infrarotheizung/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/infrarotheizung/" tabindex="-1" aria-hidden="true"><img src="projects/infrarotheizung/home-640.webp" srcset="projects/infrarotheizung/home-640.webp 640w, projects/infrarotheizung/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/infrarotheizung/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/infrarotheizung/icon.webp"><img src="projects/infrarotheizung/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/infrarotheizung/">Infrarotheizung</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -694,9 +699,9 @@
         </article>
 
         <article class="work" data-tags="theme integration" data-cat="home-building" data-title="Luftentfeuchter" data-pop="21">
-          <a class="thumb" href="projects/luftentfeuchter/" tabindex="-1" aria-hidden="true"><img src="projects/luftentfeuchter/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/luftentfeuchter/" tabindex="-1" aria-hidden="true"><img src="projects/luftentfeuchter/home-640.webp" srcset="projects/luftentfeuchter/home-640.webp 640w, projects/luftentfeuchter/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/luftentfeuchter/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/luftentfeuchter/icon.webp"><img src="projects/luftentfeuchter/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/luftentfeuchter/">Luftentfeuchter</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -710,9 +715,9 @@
         </article>
 
         <article class="work" data-tags="theme" data-cat="home-building" data-title="Signvision" data-pop="27">
-          <a class="thumb" href="projects/signvision/" tabindex="-1" aria-hidden="true"><img src="projects/signvision/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/signvision/" tabindex="-1" aria-hidden="true"><img src="projects/signvision/home-640.webp" srcset="projects/signvision/home-640.webp 640w, projects/signvision/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/signvision/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/signvision/icon.webp"><img src="projects/signvision/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/signvision/">Signvision</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -726,9 +731,9 @@
         </article>
 
         <article class="work" data-tags="theme" data-cat="health-beauty" data-title="Lush Switzerland" data-pop="12">
-          <a class="thumb" href="projects/lush-switzerland/" tabindex="-1" aria-hidden="true"><img src="projects/lush-switzerland/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/lush-switzerland/" tabindex="-1" aria-hidden="true"><img src="projects/lush-switzerland/home-640.webp" srcset="projects/lush-switzerland/home-640.webp 640w, projects/lush-switzerland/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/lush-switzerland/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/lush-switzerland/icon.webp"><img src="projects/lush-switzerland/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/lush-switzerland/">Lush Switzerland</a></h3>
               <p class="meta">aiconomy AG &middot; Developer</p>
@@ -790,9 +795,9 @@
         </article>
 
         <article class="work" data-tags="theme" data-cat="print-personalised" data-title="Brand Depot" data-pop="30">
-          <a class="thumb" href="projects/brand-depot/" tabindex="-1" aria-hidden="true"><img src="projects/brand-depot/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/brand-depot/" tabindex="-1" aria-hidden="true"><img src="projects/brand-depot/home-640.webp" srcset="projects/brand-depot/home-640.webp 640w, projects/brand-depot/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/brand-depot/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/brand-depot/icon.webp"><img src="projects/brand-depot/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/brand-depot/">Brand Depot</a></h3>
               <p class="meta">WebGurus &middot; Developer</p>
@@ -806,9 +811,9 @@
         </article>
 
         <article class="work" data-tags="theme" data-cat="fashion-apparel" data-title="Cosmic Clothing" data-pop="28">
-          <a class="thumb" href="projects/cosmic-clothing/" tabindex="-1" aria-hidden="true"><img src="projects/cosmic-clothing/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/cosmic-clothing/" tabindex="-1" aria-hidden="true"><img src="projects/cosmic-clothing/home-640.webp" srcset="projects/cosmic-clothing/home-640.webp 640w, projects/cosmic-clothing/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/cosmic-clothing/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/cosmic-clothing/icon.webp"><img src="projects/cosmic-clothing/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/cosmic-clothing/">Cosmic Clothing</a></h3>
               <p class="meta">WebGurus &middot; Developer</p>
@@ -824,7 +829,7 @@
         <article class="work" data-tags="theme" data-cat="print-personalised" data-title="Tshirts.com" data-pop="36">
           <a class="thumb thumb-brand" href="projects/tshirts-com/" tabindex="-1" aria-hidden="true"><img class="thumb-logo" src="projects/tshirts-com/logo.png" alt="" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/tshirts-com/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/tshirts-com/icon.webp"><img src="projects/tshirts-com/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/tshirts-com/">Tshirts.com</a></h3>
               <p class="meta">WebGurus &middot; Theme developer</p>
@@ -838,9 +843,9 @@
         </article>
 
         <article class="work" data-tags="theme" data-cat="print-personalised" data-title="Photography.com" data-pop="29">
-          <a class="thumb" href="projects/photography-com/" tabindex="-1" aria-hidden="true"><img src="projects/photography-com/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/photography-com/" tabindex="-1" aria-hidden="true"><img src="projects/photography-com/home-640.webp" srcset="projects/photography-com/home-640.webp 640w, projects/photography-com/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/photography-com/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/photography-com/icon.webp"><img src="projects/photography-com/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/photography-com/">Photography.com</a></h3>
               <p class="meta">Shopify project</p>
@@ -870,9 +875,9 @@
         </article>
 
         <article class="work" data-tags="functionality" data-cat="home-building" data-title="Skypergola" data-pop="13">
-          <a class="thumb" href="projects/skypergola/" tabindex="-1" aria-hidden="true"><img src="projects/skypergola/home.webp" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
+          <a class="thumb" href="projects/skypergola/" tabindex="-1" aria-hidden="true"><img src="projects/skypergola/home-640.webp" srcset="projects/skypergola/home-640.webp 640w, projects/skypergola/home.webp 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/skypergola/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/skypergola/icon.webp"><img src="projects/skypergola/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/skypergola/">Skypergola</a></h3>
               <p class="meta">Shopify project</p>
@@ -889,7 +894,7 @@
         <article class="work" data-tags="theme" data-cat="specialist-retail" data-title="Pyrostar, Bugano &amp; Weco" data-pop="14">
           <a class="thumb thumb-brand" href="projects/pyrostar-bugano-and-weco/" tabindex="-1" aria-hidden="true"><img class="thumb-logo" src="projects/pyrostar-bugano-and-weco/logo.png" alt="" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/pyrostar-bugano-and-weco/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/pyrostar-bugano-and-weco/icon.webp"><img src="projects/pyrostar-bugano-and-weco/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/pyrostar-bugano-and-weco/">Pyrostar, Bugano &amp; Weco</a></h3>
               <p class="meta">Shopify project</p>
@@ -905,7 +910,7 @@
         <article class="work" data-tags="theme" data-cat="home-building" data-title="Konigs" data-pop="16">
           <a class="thumb thumb-brand" href="projects/konigs/" tabindex="-1" aria-hidden="true"><img class="thumb-logo" src="projects/konigs/logo.png" alt="" loading="lazy" decoding="async"></a>
           <div class="work-head">
-            <span class="brand brand-sm"><img src="projects/konigs/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></span>
+            <span class="brand brand-sm"><picture><source type="image/webp" srcset="projects/konigs/icon.webp"><img src="projects/konigs/icon.png" alt="" width="96" height="96" loading="lazy" decoding="async"></picture></span>
             <div>
               <h3><a href="projects/konigs/">Konigs</a></h3>
               <p class="meta">Shopify project</p>
@@ -1091,7 +1096,11 @@
 
   <dialog id="photo-view" class="photo-view" aria-label="Photo of Emanuel Rusu">
     <figure>
-      <img src="assets/img/emanuel-rusu-portrait.jpg" alt="Emanuel Rusu, Shopify developer, in a white shirt" width="597" height="896" loading="lazy" decoding="async">
+      <picture>
+        <source type="image/avif" srcset="assets/img/emanuel-rusu-portrait.avif">
+        <source type="image/webp" srcset="assets/img/emanuel-rusu-portrait.webp">
+        <img src="assets/img/emanuel-rusu-portrait.jpg" alt="Emanuel Rusu, Shopify developer, in a white shirt" width="597" height="896" loading="lazy" decoding="async">
+      </picture>
       <figcaption>Emanuel Rusu &middot; Shopify developer, Cluj-Napoca</figcaption>
     </figure>
     <button class="photo-close" type="button" aria-label="Close photo"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>

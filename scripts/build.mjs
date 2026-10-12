@@ -111,7 +111,9 @@ function brand(p, prefix, size = 'sm') {
   if (hasFile(p.slug, icon)) {
     const src = m(p).iconSource;
     const low = src && src < 64 ? ` brand-lowres" style="--src:${src}px` : '';
-    return `<span class="brand brand-${size}${m(p).iconTone === 'light' ? ' brand-dark' : ''}${low}"><img src="${prefix}${p.slug}/${icon}" alt="" width="96" height="96" loading="lazy" decoding="async"></span>`;
+    const webp = icon.replace(/\.png$/, '.webp');
+    const img = `<img src="${prefix}${p.slug}/${icon}" alt="" width="96" height="96" loading="lazy" decoding="async">`;
+    return `<span class="brand brand-${size}${m(p).iconTone === 'light' ? ' brand-dark' : ''}${low}">${webp !== icon && hasFile(p.slug, webp) ? `<picture><source type="image/webp" srcset="${prefix}${p.slug}/${webp}">${img}</picture>` : img}</span>`;
   }
   return `<span class="brand brand-${size} brand-initials" aria-hidden="true">${initials(p.title)}</span>`;
 }
@@ -119,7 +121,11 @@ function brand(p, prefix, size = 'sm') {
 function thumb(p, prefix) {
   const first = shots(p).find(s => !s.mobile);
   if (first) {
-    return `<a class="thumb" href="${prefix}${p.slug}/" tabindex="-1" aria-hidden="true"><img src="${prefix}${p.slug}/${first.file}" alt="" width="1280" height="800" loading="lazy" decoding="async"></a>`;
+    const small = first.file.replace(/\.\w+$/, '-640.webp');
+    const src = hasFile(p.slug, small)
+      ? `src="${prefix}${p.slug}/${small}" srcset="${prefix}${p.slug}/${small} 640w, ${prefix}${p.slug}/${first.file} 1280w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 1100px) 50vw, 380px"`
+      : `src="${prefix}${p.slug}/${first.file}"`;
+    return `<a class="thumb" href="${prefix}${p.slug}/" tabindex="-1" aria-hidden="true"><img ${src} alt="" width="1280" height="800" loading="lazy" decoding="async"></a>`;
   }
   const logo = m(p).logo;
   const inner = hasFile(p.slug, logo)
@@ -377,7 +383,7 @@ projects.forEach((p, i) => write(`public/projects/${p.slug}/index.html`, page(p,
 const ADSENSE = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>';
 // alternates: { en: url, de: url } for pages that exist in both languages (hreflang, x-default is English).
 const hreflang = alt => alt ? Object.entries(alt).map(([l, u]) => `\n<link rel="alternate" hreflang="${l}" href="${u}">`).join('') + `\n<link rel="alternate" hreflang="x-default" href="${alt.en}">` : '';
-const pageHead = ({ title, description, url, image, type, jsonLd, ads, lang = 'en', alternates }) => `${lang === 'en' ? head : head.replace('<html lang="en">', `<html lang="${lang}">`)}<title>${title}</title>
+const pageHead = ({ title, description, url, image, type, jsonLd, ads, lang = 'en', alternates, preload = '' }) => `${lang === 'en' ? head : head.replace('<html lang="en">', `<html lang="${lang}">`)}<title>${title}</title>
 <meta name="description" content="${description}">
 <meta name="theme-color" content="#1d5e6b">
 <meta property="og:title" content="${title}">
@@ -391,7 +397,8 @@ const pageHead = ({ title, description, url, image, type, jsonLd, ads, lang = 'e
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="${url}">${hreflang(alternates)}
 <link rel="icon" href="${favicon}" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">${preload ? `
+${preload}` : ''}
 <link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="alternate" type="application/rss+xml" title="Articles by Emanuel Rusu" href="/articles/feed.xml">
@@ -473,7 +480,7 @@ ${headerHtml}
       <p class="post-meta">${a.series ? `<span class="post-cat">Guide, part ${a.series.part}</span> &middot; ` : ''}${articleMeta(a)}</p>
       <h1>${a.title}</h1>
       <p class="lead">${a.summary}</p>
-      <p class="byline"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"> <span>Emanuel Rusu, Shopify developer</span></p>
+      <p class="byline"><picture><source type="image/avif" srcset="/assets/img/emanuel-rusu-80.avif"><source type="image/webp" srcset="/assets/img/emanuel-rusu-80.webp"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"></picture> <span>Emanuel Rusu, Shopify developer</span></p>
     </header>${seriesHtml}${tocHtml}
     <div class="article-body">
       ${body}${further}
@@ -703,7 +710,8 @@ function deHome() {
     { '@type': 'ProfessionalService', '@id': `${SITE}/#business`, name: 'REMTA Digital', legalName: 'REMTA S.R.L.', url: `${SITE}/`, email: 'emanuel@remtadigital.com',
       description: 'Freelance Shopify-Entwicklung: individuelle Themes, Shopify-Apps und Functions, Checkout-Erweiterungen und Anbindungen an ERP, PIM und Suche. Arbeitssprachen Englisch und Rumänisch.',
       knowsLanguage: ['en', 'ro'], address: { '@type': 'PostalAddress', addressLocality: 'Cluj-Napoca', addressCountry: 'RO' }, founder: { '@id': `${SITE}/#person` } } ] };
-  return `${pageHead({ lang: 'de', title: de.title, description: attr(de.description), url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd, alternates: { en: `${SITE}/`, de: url } })}
+  const preload = absAssets((index.match(/<link rel="preload" as="image"[^>]*>/) || [''])[0]);
+  return `${pageHead({ lang: 'de', title: de.title, description: attr(de.description), url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd, alternates: { en: `${SITE}/`, de: url }, preload })}
 <body id="top">
 <a class="skip" href="#main">Zum Inhalt springen</a>
 

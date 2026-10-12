@@ -53,6 +53,14 @@ cd scripts && node popularity.mjs && node regional.mjs && node build.mjs
 
 `popularity.mjs` fetches worldwide ranks from the [Tranco list](https://tranco-list.eu/). `regional.mjs` downloads the latest [Chrome UX Report](https://developer.chrome.com/docs/crux) country lists (via [zakird/crux-top-lists](https://github.com/zakird/crux-top-lists)) for every European country plus each store's home market, and records each domain's best rank band per country. In `data/popularity.json`, `markets` sets a store's home country when its domain doesn't say (`.com`), `extraDomains` adds a project's other stores, and `categories` holds hand-checked placings with their source (for example Curaprox against other oral-care brand sites in the Swiss list); a category `badge`, or a top-1,000 band in the home country, shows as a badge on the homepage card.
 
+Smaller image variants are made with [sharp](https://sharp.pixelplumbing.com/) (run after `capture.mjs` or after changing a photo; it skips variants that are already up to date):
+
+```bash
+cd scripts && node images.mjs
+```
+
+It writes AVIF and WebP versions of the profile photo (80, 136, 272 and 400 px) and the portrait, the two cover logos at twice their displayed size, a 192 px `icon.webp` next to every brand icon and a 640 px `<shot>-640.webp` next to every desktop screenshot. `build.mjs` uses a variant whenever its file exists and keeps the original as the fallback; `og.mjs` and `cv.mjs` keep using the originals. The homepage (and `/de/`) preloads the AVIF avatar with `fetchpriority="high"`; the portrait in the photo dialog is a lazy image inside a closed `<dialog>`, so it is only fetched when the dialog opens.
+
 Link previews and the CV are rendered with the local Chrome too:
 
 ```bash

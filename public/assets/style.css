@@ -457,3 +457,6 @@ h1 .headline{display:block;font-family:var(--sans);font-size:1.2rem;font-weight:
 .steps li{counter-increment:step;position:relative;padding-left:46px;min-height:32px}
 .steps li::before{content:counter(step);position:absolute;left:0;top:-1px;width:32px;height:32px;border-radius:50%;background:var(--accent-tint);color:var(--accent);font-weight:700;display:grid;place-items:center}
 .split{border-top:1px solid var(--line)}
+
+/* <picture> wrappers take no box of their own, so the img keeps its existing layout */
+.brand picture,.avatar-btn picture,.photo-view picture,.byline picture{display:contents}
