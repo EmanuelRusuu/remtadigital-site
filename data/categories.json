@@ -4,55 +4,103 @@
     "name": "Sports clubs",
     "seoTitle": "Shopify developer for sports clubs and fan shops",
     "intro": "Fan shops and club websites on Shopify for Swiss football and ice hockey clubs, and the shirt configurator for a Saudi football club: personalised jerseys, bundles that check out as one line, auctions, match content and customer-specific pricing.",
-    "projects": ["fc-basel-1893", "ev-zug", "fc-st-gallen-1879", "fc-zurich", "al-ittihad"]
+    "projects": ["fc-basel-1893", "ev-zug", "fc-st-gallen-1879", "fc-zurich", "al-ittihad"],
+    "de": {
+      "slug": "sportvereine",
+      "name": "Sportvereine",
+      "seoTitle": "Shopify-Entwickler für Sportvereine und Fanshops",
+      "intro": "Fanshops und Club-Websites auf Shopify für Schweizer Fussball- und Eishockeyclubs, dazu der Trikot-Konfigurator für einen saudi-arabischen Fussballclub: personalisierte Trikots, Bundles, die als eine Zeile durch den Checkout gehen, Auktionen, Matchinhalte und kundenspezifische Preise."
+    }
   },
   {
     "slug": "fashion-apparel",
     "name": "Fashion & apparel",
     "seoTitle": "Shopify developer for fashion, footwear and apparel brands",
     "intro": "Shopify work for fashion, footwear and apparel brands: six stores in three currencies for Nile, a Meilisearch search layer and a B2B showroom for Inuikii, gift cards for a jeans retailer, and theme work for Swiss and US clothing brands.",
-    "projects": ["nile", "inuikii", "nikin", "house-of-jeans", "cosmic-clothing"]
+    "projects": ["nile", "inuikii", "nikin", "house-of-jeans", "cosmic-clothing"],
+    "de": {
+      "slug": "mode-bekleidung",
+      "name": "Mode & Bekleidung",
+      "seoTitle": "Shopify-Entwickler für Mode-, Schuh- und Bekleidungsmarken",
+      "intro": "Shopify-Projekte für Mode-, Schuh- und Bekleidungsmarken: sechs Shops in drei Währungen für Nile, eine Meilisearch-Suche und ein B2B-Showroom für Inuikii, Geschenkkarten für einen Jeanshändler und Theme-Arbeit für Schweizer und amerikanische Modemarken."
+    }
   },
   {
     "slug": "food-drink",
     "name": "Food & drink",
     "seoTitle": "Shopify developer for food, confectionery and drinks brands",
     "intro": "Stores for Swiss confectioners and a German drinks brand: Sprüngli's design rebuilt on Dawn, allergen filters in three languages for Bruderer, and can deposit (Pfand) handling for Glory Bomb.",
-    "projects": ["confiserie-sprungli", "bruderer", "glory-bomb"]
+    "projects": ["confiserie-sprungli", "bruderer", "glory-bomb"],
+    "de": {
+      "slug": "lebensmittel-getraenke",
+      "name": "Lebensmittel & Getränke",
+      "seoTitle": "Shopify-Entwickler für Confiserien, Lebensmittel- und Getränkemarken",
+      "intro": "Shops für Schweizer Confiserien und eine deutsche Getränkemarke: das bestehende Design von Sprüngli auf Dawn neu umgesetzt, Allergenfilter in drei Sprachen für Bruderer und die Pfand-Abwicklung für Dosen bei Glory Bomb."
+    }
   },
   {
     "slug": "health-beauty",
     "name": "Health & beauty",
     "seoTitle": "Shopify developer for health, beauty and medical stores",
     "intro": "Oral care, cosmetics, natural remedies and medical supplies: the Curaprox redesign for Switzerland and the UAE, Lush Switzerland, Chrüterhüsli on Horizon, and Mediconsult's stores for ophthalmologists and opticians.",
-    "projects": ["curaprox", "lush-switzerland", "chruterhusli", "mediconsult"]
+    "projects": ["curaprox", "lush-switzerland", "chruterhusli", "mediconsult"],
+    "de": {
+      "slug": "gesundheit-beauty",
+      "name": "Gesundheit & Beauty",
+      "seoTitle": "Shopify-Entwickler für Gesundheits-, Beauty- und Medizinshops",
+      "intro": "Mundpflege, Kosmetik, Naturheilmittel und medizinischer Bedarf: das Redesign von Curaprox für die Schweiz und die Vereinigten Arabischen Emirate, Lush Schweiz, Chrüterhüsli auf Horizon und die Shops von Mediconsult für Augenärzte und Optiker."
+    }
   },
   {
     "slug": "home-building",
     "name": "Home & building",
     "seoTitle": "Shopify developer for home, heating and building products",
     "intro": "Heating, dehumidifiers, swim spas, pergolas, fireplaces, lighting, signage and window film: stores where products are large, configurable or installed, with credit checks, installation pricing and discount logic to match.",
-    "projects": ["ecofort", "spa-solutions", "skypergola", "infrarotheizung", "luftentfeuchter", "art-of-fire", "konigs", "sorenos", "signvision"]
+    "projects": ["ecofort", "spa-solutions", "skypergola", "infrarotheizung", "luftentfeuchter", "art-of-fire", "konigs", "sorenos", "signvision"],
+    "de": {
+      "slug": "haus-bau",
+      "name": "Haus & Bau",
+      "seoTitle": "Shopify-Entwickler für Heizung, Haus- und Bauprodukte",
+      "intro": "Heizungen, Luftentfeuchter, Swim-Spas, Pergolen, Cheminées, Leuchten, Beschriftungen und Fensterfolien: Shops mit grossen, konfigurierbaren oder zu installierenden Produkten, mit Bonitätsprüfung, Installationspreisen und passender Rabattlogik."
+    }
   },
   {
     "slug": "print-personalised",
     "name": "Print & personalised products",
     "seoTitle": "Shopify developer for print and personalised products",
     "intro": "Custom Shopify theme work for US stores that print and personalise: stationery and gifts, branded merchandise, custom t-shirts, photo wall art, and forms for dental and medical practices.",
-    "projects": ["american-stationery", "tshirts-com", "brand-depot", "photography-com", "topform-data"]
+    "projects": ["american-stationery", "tshirts-com", "brand-depot", "photography-com", "topform-data"],
+    "de": {
+      "slug": "druck-personalisierte-produkte",
+      "name": "Druck & personalisierte Produkte",
+      "seoTitle": "Shopify-Entwickler für Druck und personalisierte Produkte",
+      "intro": "Individuelle Theme-Arbeit für US-Shops, die drucken und personalisieren: Briefpapier und Geschenke, Werbeartikel mit Logo, bedruckte T-Shirts, Fotokunst für die Wand und Formulare für Zahnarzt- und Arztpraxen."
+    }
   },
   {
     "slug": "specialist-retail",
     "name": "Specialist retail & services",
     "seoTitle": "Shopify developer for specialist retailers and service businesses",
     "intro": "Refurbished electronics, fireworks and a car wash chain: a filter extension app for Revendo, stores for the fireworks retailers Pyrostar, Bugano and Weco, and customer account features for OSCARwash.",
-    "projects": ["revendo", "pyrostar-bugano-and-weco", "oscarwash"]
+    "projects": ["revendo", "pyrostar-bugano-and-weco", "oscarwash"],
+    "de": {
+      "slug": "fachhandel-dienstleistungen",
+      "name": "Fachhandel & Dienstleistungen",
+      "seoTitle": "Shopify-Entwickler für Fachhändler und Dienstleister",
+      "intro": "Refurbished-Elektronik, Feuerwerk und eine Kette von Autowaschanlagen: eine Filter-App für Revendo, Shops für die Feuerwerkshändler Pyrostar, Bugano und Weco und Funktionen im Kundenkonto für OSCARwash."
+    }
   },
   {
     "slug": "apps-tools",
     "name": "Apps & tools",
     "seoTitle": "Shopify app developer: admin apps and internal tools",
     "intro": "Shopify admin apps built for client projects: a PrestaShop to Shopify migration app that never emails a customer, and a content sync app that keeps metaobjects, menus and translations aligned across stores.",
-    "projects": ["prestashop-to-shopify-migration-app", "multi-store-content-sync"]
+    "projects": ["prestashop-to-shopify-migration-app", "multi-store-content-sync"],
+    "de": {
+      "slug": "apps-tools",
+      "name": "Apps & Tools",
+      "seoTitle": "Shopify-App-Entwickler: Admin-Apps und interne Tools",
+      "intro": "Shopify-Admin-Apps aus Kundenprojekten: eine Migrations-App von PrestaShop zu Shopify, die nie eine E-Mail an Kunden verschickt, und eine Sync-App, die Metaobjekte, Menüs und Übersetzungen über mehrere Shops hinweg abgleicht."
+    }
   }
 ]

@@ -16,6 +16,8 @@ data/categories.json           industry categories: name, SEO title, intro and t
                                build.mjs writes /industries/<slug>/ pages, the category dropdown and card labels
 data/articles/<slug>.html       one file per article: a JSON front block in an HTML comment, then the body;
                                build.mjs adds the table of contents, reading time, guide navigation and Further reading
+data/de.json                   German texts for /de/ (homepage) and /de/branchen/<slug>/ (industry pages);
+                               the German name, slug, title and intro of each industry are the "de" field in categories.json
 data/media.json                what capture found per project (Shopify or not, icon, logo, screenshots)
 data/popularity.json           traffic data for the "Most visited" sort and the project pages:
                                Tranco ranks, Chrome UX Report country bands, category placings
@@ -58,6 +60,12 @@ cd scripts && node cv.mjs   # public/emanuel-rusu-cv.pdf, one A4 page; keep it i
 ```
 
 Run `node capture.mjs` without arguments to refresh every project. Screenshots are only taken for sites that still run on Shopify, so a store that has moved to another platform never shows work that isn't mine. Commit the generated files; the deploy itself has no build step.
+
+## German pages
+
+`build.mjs` writes a German homepage (`/de/`) and one German page per industry (`/de/branchen/<slug>/`) from `data/de.json` and the `de` field in `data/categories.json`. Project pages and articles stay English; every link to them carries `hreflang="en"` and says "(Englisch)". Each German page opens with the note that I don't speak German and work in English (and Romanian), and repeats it in the contact section; keep it there. Use Swiss spelling (`ss`, never `ß`).
+
+Both language versions link to each other with `<link rel="alternate" hreflang="en|de|x-default">` (x-default is English), and the header has a language switch ("Deutsch" / "English") that points to the matching page where one exists. The hreflang lines on the English homepage are written by hand in `public/index.html`; the generated pages get them from `pageHead({ alternates })`.
 
 ## Search engines
 

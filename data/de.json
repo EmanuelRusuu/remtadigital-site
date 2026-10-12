@@ -1,0 +1,147 @@
+{
+  "_comment": "German texts for /de/ and /de/branchen/<slug>/ (build.mjs). Swiss spelling: ss, never the sharp s. Project pages and articles stay English; every link to them says so.",
+  "title": "Shopify-Entwickler und Freelancer für die Schweiz | Emanuel Rusu",
+  "description": "Freelance Shopify-Entwickler für Schweizer Shops: individuelle Themes, Apps, Shopify Functions und ERP-Anbindungen. Erfahrung mit FC Basel, Curaprox und Sprüngli. Arbeitssprache Englisch.",
+  "langNote": "<strong>Hinweis:</strong> Ich spreche kein Deutsch. Ich arbeite auf Englisch (und Rumänisch); Ihre Anfrage können Sie gern auf Deutsch schicken, ich antworte auf Englisch. An vielen Projekten für Kunden aus der Schweiz und dem deutschsprachigen Raum habe ich bereits auf Englisch gearbeitet.",
+  "nav": {
+    "projects": "Projekte",
+    "services": "Leistungen",
+    "industries": "Branchen",
+    "about": "Über mich",
+    "faq": "FAQ",
+    "cv": "CV",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "headline": "Freelance Shopify-Entwickler &middot; Gründer von REMTA Digital",
+    "location": "Cluj-Napoca, Rumänien &middot; ich arbeite remote auf Englisch und Rumänisch",
+    "open": "Offen für neue Projekte",
+    "email": "E-Mail schreiben",
+    "work": "Projekte ansehen",
+    "cv": "Lebenslauf (PDF, Englisch)",
+    "facts": [
+      ["{projects}", "Projekte auf dieser Website"],
+      ["2023", "mit Shopify seit"],
+      ["1", "Ansprechpartner: ich"]
+    ],
+    "nowTitle": "Aktuell",
+    "now": [
+      "<strong>Shopify-Entwickler bei aiconomy AG</strong> seit März 2025, für mehrsprachige Schweizer Shops mit ERP-Anbindung.",
+      "<strong>Eigene Projekte</strong> über REMTA Digital seit Dezember 2025.",
+      "<strong>Zuletzt gebaut:</strong> <a href=\"/projects/curaprox/\" hreflang=\"en\">Curaprox</a> (Projektseite auf Englisch), zwei Shops für die Schweiz und die Vereinigten Arabischen Emirate auf einem Horizon-Theme."
+    ],
+    "about": [
+      "Ich entwickle individuelle Shopify-Themes, Funktionen und Apps, vor allem für grössere Shops, die in mehreren Sprachen und Märkten verkaufen und mit einem ERP, PIM oder Suchdienst verbunden sind.",
+      "REMTA Digital ist meine eigene Firma, und das bin nur ich. Sie sprechen direkt mit der Person, die den Code schreibt, und ich sage Ihnen offen, was ich tun würde, wie lange es dauert und welche Vor- und Nachteile es gibt."
+    ]
+  },
+  "swiss": {
+    "title": "Erfahrung mit Schweizer Shops",
+    "text": [
+      "{swiss} der {projects} Projekte auf dieser Website sind Shops mit einer .ch-Adresse, vom FC Basel und FC Zürich über Confiserie Sprüngli bis Curaprox. Die meisten davon habe ich seit März 2025 als Entwickler bei aiconomy AG umgesetzt, die das jeweilige Projekt für ihren Kunden geführt hat. Die Zusammenarbeit lief dabei auf Englisch.",
+      "Shops in mehreren Sprachen und Währungen sind für mich der Normalfall. Die deutschen Texte im Shop kommen von Ihnen oder Ihrem Übersetzungsbüro; ich sorge dafür, dass sie sauber im Theme ankommen."
+    ]
+  },
+  "cases": {
+    "title": "Ausgewählte Projekte",
+    "note": "Vier Projekte aus meiner Zeit als Entwickler bei aiconomy AG. Die Projektseiten mit allen Details und Screenshots sind auf Englisch.",
+    "link": "Projekt ansehen",
+    "items": [
+      {
+        "slug": "ev-zug",
+        "meta": "aiconomy AG &middot; EV Zug, Schweizer Eishockeyclub",
+        "title": "Personalisierte Trikots, die als ein Artikel bezahlt werden",
+        "text": "Name, Nummer und Abzeichen eines Fans sind im Hintergrund eigene Produkte. Ich habe eine Cart Transform Function in TypeScript geschrieben, kompiliert zu WebAssembly, die sie im Warenkorb und im Checkout zu einer Zeile zusammenführt, ohne den Gesamtbetrag zu ändern. Dazu kamen die Live-Auktionsseite und die Bestell-E-Mails."
+      },
+      {
+        "slug": "prestashop-to-shopify-migration-app",
+        "meta": "aiconomy AG &middot; CURADEN AG (Curaprox)",
+        "title": "Kunden umziehen, ohne eine einzige E-Mail zu verschicken",
+        "text": "Wer die ganze Kunden- und Bestellhistorie in einen laufenden Shopify-Shop importiert, schickt normalerweise jedem Kunden eine Einladung und eine Bestellbestätigung. Ich habe die Migrations-App so gebaut, dass das nicht passieren kann: Bestellungen entstehen über einen einzigen Codepfad ohne Bestätigungen, und ein Test lässt den Build scheitern, sobald etwas anderes Mails senden könnte. Jeder Lauf beginnt als Probelauf."
+      },
+      {
+        "slug": "inuikii",
+        "meta": "aiconomy AG &middot; Inuikii, Schweizer Schuhmarke",
+        "title": "Eine Suche, die Farben und Märkte kennt",
+        "text": "Ich habe die native Shopify-Suche und die Kollektionsfilter durch eine Meilisearch-Schicht ersetzt, die Farbvarianten gruppiert, Preise je Markt anzeigt und schon während der Eingabe Ergebnisse liefert. Dazu kamen ein B2B-Showroom, ein Influencer-Shop und eine Checkout-App."
+      },
+      {
+        "slug": "curaprox",
+        "meta": "aiconomy AG &middot; CURADEN AG (Curaprox)",
+        "title": "Ein Theme für zwei Länder und eine viel leichtere Produktseite",
+        "text": "Die Shops für die Schweiz und die Vereinigten Arabischen Emirate teilen sich ein Horizon-Theme; die Inhalte kommen je nach Shop aus dem PIM. Vor dem Go-live habe ich die Produktseiten überarbeitet: passend skalierte Bilder, ein gemeinsames Sprite statt 36 Kopien derselben SVG-Grafik und Lieferzeiten, die mit dem Checkout übereinstimmen. Eine Produktseite mit Farbvarianten ging dadurch von 16,2 MB auf 4,5 MB zurück."
+      }
+    ]
+  },
+  "services": {
+    "title": "Was ich für Sie bauen kann",
+    "items": [
+      ["Individuelle Themes", "Ein neues Theme auf Basis von Dawn oder Horizon oder sorgfältige Arbeit an Ihrem bestehenden Theme, damit es schnell bleibt und Ihr Team es weiterhin selbst bearbeiten kann."],
+      ["Individuelle Funktionen", "Produktkonfiguratoren, Bundles, Treuepunkte, Geschenkkarten, Wunschlisten und eigene Rabattlogik: alles, was Shopify nicht von Haus aus kann."],
+      ["Integrationen", "Shopify verbunden mit Ihrem ERP, PIM, Suchdienst oder Newsletter-Tool, so gebaut, dass die Daten auf beiden Seiten übereinstimmen."],
+      ["Shopify-Apps", "Admin-Apps, Checkout-Erweiterungen und Shopify Functions auf Basis der Admin GraphQL API."],
+      ["Migrationen", "Kunden, Bestellungen und Inhalte von einer anderen Plattform übernommen, zuerst mit einem Probelauf und mit einem Protokoll für jede Zeile."],
+      ["Geschwindigkeit und Aufräumen", "Schwere Themes schneller und leichter wartbar machen, ohne den Shop offline zu nehmen."]
+    ]
+  },
+  "industries": {
+    "title": "Projekte nach Branche",
+    "note": "Jede Branchenseite listet die passenden Projekte. Die Projektseiten selbst sind auf Englisch.",
+    "all": "Alle {projects} Projekte mit Screenshots auf der englischen Startseite"
+  },
+  "about": {
+    "title": "Über mich",
+    "text": [
+      "Zur Webentwicklung bin ich 2022 und 2023 über einen Frontend-Kurs gekommen, 2023 bin ich zu Shopify gewechselt. Bei WebGurus habe ich individuelle Themes für US-Shops gebaut und umgebaut und nach und nach auch die Kundenseite von Projekten übernommen. Bei aiconomy AG arbeite ich an grossen, mehrsprachigen Schweizer Shops, die mit dem ERP des Unternehmens verbunden sind, von Sportclubs bis zu Mode- und Lebensmittelmarken.",
+      "Mit der Zeit ist die Arbeit über das Programmieren hinausgewachsen: Ich prüfe den Code von Kollegen, bespreche Lösungen mit Projektleitern und präsentiere Kunden den Fortschritt. Über REMTA Digital nehme ich jetzt eigene Projekte an."
+    ],
+    "timelineTitle": "Werdegang",
+    "timeline": [
+      ["Dez. 2025 &ndash; heute", "REMTA Digital", "Gründer und Shopify-Entwickler."],
+      ["März 2025 &ndash; heute", "aiconomy AG", "Shopify-Entwickler für mehrsprachige Schweizer Shops, verbunden mit dem Cloud-ERP, der Kasse und dem PIM von aico: Frontend, individuelle Funktionen, Rabattlogik und eigene Apps."],
+      ["Nov. 2023 &ndash; März 2025", "WebGurus", "Shopify-Entwickler für individuelle Themes von US-Kunden, nach dem Einstieg als Entwickler für mobile Apps und Full-Stack-Praktikant."],
+      ["2021 &ndash; 2024", "Babe&#537;-Bolyai-Universität", "Wirtschaftsinformatik."],
+      ["2023", "IT School", "Zertifikat in Front-End-Webentwicklung."]
+    ],
+    "quoteNote": "Trufelea Laura, Kollegin bei aiconomy AG, in einer LinkedIn-Empfehlung (auf Englisch)"
+  },
+  "faq": {
+    "title": "Häufige Fragen",
+    "items": [
+      ["Sprechen Sie Deutsch?", "Nein. Ich arbeite auf Englisch und Rumänisch. Sie können mir gern auf Deutsch schreiben; ich antworte auf Englisch. Bei aiconomy AG arbeite ich seit März 2025 an Schweizer Projekten, und die Zusammenarbeit läuft dort auf Englisch."],
+      ["Ist REMTA Digital eine Shopify-Agentur?", "Nein. Es ist mein Ein-Personen-Unternehmen, Sie arbeiten also direkt mit mir. Bei grösseren Projekten arbeite ich gern mit Ihrem internen Team oder Ihrer Agentur zusammen."],
+      ["Können Sie an unserem bestehenden Theme arbeiten?", "Ja. Ich kann Ihr bestehendes Theme erweitern oder aufräumen oder ein neues bauen, wenn das der bessere Weg ist."],
+      ["Arbeiten Sie mit Shopify Plus und mehreren Märkten?", "Ja. Die meisten Shops, an denen ich gearbeitet habe, verkaufen in mehreren Sprachen und Währungen, auch in Setups, in denen sich mehrere Shops ein Theme teilen."],
+      ["Können Sie Shopify mit unserem ERP verbinden?", "In der Regel ja. Schreiben Sie mir, welches System Sie nutzen und was synchronisiert werden soll, und ich erkläre Ihnen, wie ich vorgehen würde."]
+    ]
+  },
+  "articles": "Meine Artikel zu Shopify (auf Englisch)",
+  "contact": {
+    "title": "Erzählen Sie mir von Ihrem Shop",
+    "lead": "Schreiben Sie mir kurz, worum es geht und was Sie bauen möchten.",
+    "cv": "Lebenslauf herunterladen (Englisch)",
+    "linkedin": "Oder finden Sie mich auf LinkedIn"
+  },
+  "industryPage": {
+    "crumb": "Branchen",
+    "count": ["Projekt", "Projekte"],
+    "note": "Die meisten davon habe ich als Entwickler bei aiconomy AG oder WebGurus umgesetzt. Auf jeder Projektseite (auf Englisch) steht, welche Teile ich selbst gebaut habe.",
+    "articles": "Artikel zu diesen Projekten (auf Englisch)",
+    "others": "Weitere Branchen",
+    "contact": "Soll ich etwas Ähnliches für Ihren Shop bauen?"
+  },
+  "roles": {
+    "Lead contributor": "Hauptentwickler im Team",
+    "Main developer": "Hauptentwickler",
+    "Sole developer": "Alleiniger Entwickler",
+    "Developer": "Entwickler",
+    "Theme developer": "Theme-Entwickler"
+  },
+  "projectLink": "Projekt ansehen",
+  "english": "(Englisch)",
+  "footer": [
+    "&copy; <span id=\"year\">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Rumänien.",
+    "REMTA Digital ist ein unabhängiges Unternehmen. Shopify ist eine Marke von Shopify Inc.; ich bin weder mit Shopify verbunden noch von Shopify empfohlen. Namen und Logos von Kunden gehören ihren Inhabern und dienen nur zur Beschreibung meiner bisherigen Arbeit.",
+    "<a href=\"/privacy/\" hreflang=\"en\">Datenschutz (Englisch)</a>"
+  ]
+}

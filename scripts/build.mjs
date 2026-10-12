@@ -375,7 +375,9 @@ projects.forEach((p, i) => write(`public/projects/${p.slug}/index.html`, page(p,
 // ---- articles
 // Google AdSense (auto ads) runs on article pages only; the portfolio and CV stay ad-free.
 const ADSENSE = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>';
-const pageHead = ({ title, description, url, image, type, jsonLd, ads }) => `${head}<title>${title}</title>
+// alternates: { en: url, de: url } for pages that exist in both languages (hreflang, x-default is English).
+const hreflang = alt => alt ? Object.entries(alt).map(([l, u]) => `\n<link rel="alternate" hreflang="${l}" href="${u}">`).join('') + `\n<link rel="alternate" hreflang="x-default" href="${alt.en}">` : '';
+const pageHead = ({ title, description, url, image, type, jsonLd, ads, lang = 'en', alternates }) => `${lang === 'en' ? head : head.replace('<html lang="en">', `<html lang="${lang}">`)}<title>${title}</title>
 <meta name="description" content="${description}">
 <meta name="theme-color" content="#1d5e6b">
 <meta property="og:title" content="${title}">
@@ -384,9 +386,10 @@ const pageHead = ({ title, description, url, image, type, jsonLd, ads }) => `${h
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${image}">
 <meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:height" content="630">${lang === 'de' ? `
+<meta property="og:locale" content="de_CH">` : ''}
 <meta name="twitter:card" content="summary_large_image">
-<link rel="canonical" href="${url}">
+<link rel="canonical" href="${url}">${hreflang(alternates)}
 <link rel="icon" href="${favicon}" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -562,11 +565,11 @@ function industryPage(c) {
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
       { '@type': 'ListItem', position: 2, name: 'Projects', item: `${SITE}/#work` },
       { '@type': 'ListItem', position: 3, name: c.name, item: url } ] } ] };
-  return `${pageHead({ title: `${c.seoTitle} | Emanuel Rusu`, description: attr(c.intro), url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd: crumbs })}
+  return `${pageHead({ title: `${c.seoTitle} | Emanuel Rusu`, description: attr(c.intro), url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd: crumbs, alternates: { en: url, de: `${SITE}/de/branchen/${c.de.slug}/` } })}
 <body class="industry-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
 
-${headerHtml}
+${headerHtml.replace('href="/de/"', `href="/de/branchen/${c.de.slug}/"`)}
 
 <main id="main">
   <section class="industry-hero">
@@ -600,6 +603,285 @@ ${contactSection('Want something like this for your store?')}
 ${pageEnd}`;
 }
 categories.forEach(c => write(`public/industries/${c.slug}/index.html`, industryPage(c)));
+
+// ---- German pages: /de/ and /de/branchen/<slug>/, texts from data/de.json and the "de" field of each
+// category. Project pages and articles stay English; links to them carry hreflang="en" and say so.
+const de = readJson('data/de.json', null);
+const deIndustryUrl = c => `/de/branchen/${c.de.slug}/`;
+// Replace a piece of copied English markup, failing loudly if the source changed.
+const must = (html, from, to) => { if (!html.includes(from)) throw new Error(`German page: "${from}" not found in index.html`); return html.split(from).join(to); };
+const absAssets = html => html.replace(/(["\s,])assets\//g, '$1/assets/');
+const swissCount = projects.filter(p => p.url && new URL(p.url).host.endsWith('.ch')).length;
+const deText = s => s.replace(/\{projects\}/g, projects.length).replace(/\{swiss\}/g, swissCount);
+const logoSvg = (headerHtml.match(/<svg class="logo-mark"[\s\S]*?<\/svg>/) || [''])[0];
+const deEn = `<span class="lang-tag">${de ? de.english : ''}</span>`;
+
+const deHeader = enHref => `<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/de/" aria-label="REMTA Digital, Startseite">${logoSvg}<span class="logo-word"><b>REMTA</b> <span>Digital</span></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Menü ein- und ausblenden">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Hauptmenü">
+      <a href="/de/#projekte">${de.nav.projects}</a>
+      <a href="/de/#leistungen">${de.nav.services}</a>
+      <a href="/de/#branchen">${de.nav.industries}</a>
+      <a href="/de/#ueber-mich">${de.nav.about}</a>
+      <a href="/de/#faq">${de.nav.faq}</a>
+      <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>${de.nav.cv}</a>
+      <a class="nav-cta" href="/de/#kontakt">${de.nav.contact}</a>
+      <a class="nav-lang" href="${enHref}" hreflang="en" lang="en">English</a>
+    </nav>
+  </div>
+</header>`;
+const deLangNote = () => `
+  <div class="wrap">
+    <aside class="lang-note" aria-label="Sprache">
+      <p>${de.langNote}</p>
+    </aside>
+  </div>`;
+const deContact = heading => `
+  <section id="kontakt">
+    <div class="wrap narrow center">
+      <h2>${heading}</h2>
+      <p class="lead">${de.contact.lead}</p>
+      <aside class="lang-note" aria-label="Sprache"><p>${de.langNote}</p></aside>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>${de.contact.cv}</a></p>
+      <p class="links"><a href="https://www.linkedin.com/in/emanuel-rusu/" target="_blank" rel="noopener noreferrer">${de.contact.linkedin}</a></p>
+    </div>
+  </section>`;
+const dePageEnd = () => `
+</main>
+
+<footer>
+  <div class="wrap foot">
+    ${de.footer.map(f => `<p>${f}</p>`).join('\n    ')}
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>
+`;
+const deMeta = p => p.company ? `${p.company} &middot; ${de.roles[p.role] || p.role}` : (p.role === 'Theme developer' ? 'Individuelles Theme' : 'Shopify-Projekt');
+const deCard = p => `
+        <article class="work">
+          ${thumb(p, '/projects/').replace('href="/projects/', 'hreflang="en" href="/projects/')}
+          <div class="work-head">
+            ${brand(p, '/projects/')}
+            <div>
+              <h3><a href="/projects/${p.slug}/" hreflang="en">${p.title}</a></h3>
+              <p class="meta">${deMeta(p)}</p>
+            </div>
+          </div>
+          <ul class="tags">${p.tech.map(t => `<li>${t}</li>`).join('')}</ul>
+          <div class="work-links"><a class="case-link" href="/projects/${p.slug}/" hreflang="en">${de.projectLink} ${deEn}</a>${p.url ? `<a class="out" href="${p.url}" target="_blank" rel="noopener noreferrer">${hostLabel(p)}</a>` : ''}</div>
+        </article>
+`;
+
+function deHome() {
+  const url = `${SITE}/de/`;
+  // The avatar and the photo dialog are copied from the English homepage, so image changes apply to both.
+  const avatar = must(absAssets(index.match(/<button class="avatar-btn"[\s\S]*?<\/button>/)[0]),
+    'aria-label="View a larger photo of Emanuel Rusu"', 'aria-label="Grösseres Foto von Emanuel Rusu anzeigen"');
+  let dialog = absAssets(index.match(/<dialog id="photo-view"[\s\S]*?<\/dialog>/)[0]);
+  dialog = must(dialog, 'aria-label="Photo of Emanuel Rusu"', 'aria-label="Foto von Emanuel Rusu"');
+  dialog = must(dialog, 'alt="Emanuel Rusu, Shopify developer, in a white shirt"', 'alt="Emanuel Rusu, Shopify-Entwickler, im weissen Hemd"');
+  dialog = must(dialog, 'Emanuel Rusu &middot; Shopify developer, Cluj-Napoca', 'Emanuel Rusu &middot; Shopify-Entwickler, Cluj-Napoca');
+  dialog = must(dialog, 'aria-label="Close photo"', 'aria-label="Foto schliessen"');
+  const cover = must(absAssets(index.match(/<ul class="cover-logos"[\s\S]*?<\/ul>/)[0]), 'aria-label="Where I studied and worked"', 'aria-label="Wo ich studiert und gearbeitet habe"')
+    .replace(/ title="[^"]*"/g, '');
+  const quote = index.match(/<figure class="quote">[\s\S]*?<\/figure>/)[0]
+    .replace('<blockquote>', '<blockquote lang="en">').replace(/<figcaption>[\s\S]*?<\/figcaption>/, `<figcaption>${de.about.quoteNote}</figcaption>`);
+  const jsonLd = { '@context': 'https://schema.org', '@graph': [
+    { '@type': 'WebPage', '@id': `${url}#webpage`, url, name: strip(de.title), description: strip(de.description), inLanguage: 'de',
+      isPartOf: { '@id': `${SITE}/#website` }, about: { '@id': `${SITE}/#business` } },
+    { '@type': 'ProfessionalService', '@id': `${SITE}/#business`, name: 'REMTA Digital', legalName: 'REMTA S.R.L.', url: `${SITE}/`, email: 'emanuel@remtadigital.com',
+      description: 'Freelance Shopify-Entwicklung: individuelle Themes, Shopify-Apps und Functions, Checkout-Erweiterungen und Anbindungen an ERP, PIM und Suche. Arbeitssprachen Englisch und Rumänisch.',
+      knowsLanguage: ['en', 'ro'], address: { '@type': 'PostalAddress', addressLocality: 'Cluj-Napoca', addressCountry: 'RO' }, founder: { '@id': `${SITE}/#person` } } ] };
+  return `${pageHead({ lang: 'de', title: de.title, description: attr(de.description), url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd, alternates: { en: `${SITE}/`, de: url } })}
+<body id="top">
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+${deHeader('/')}
+
+<main id="main">
+${deLangNote()}
+
+  <section class="intro">
+    <div class="wrap">
+      <div class="profile">
+        <div class="profile-cover">
+          ${cover}
+        </div>
+        <div class="profile-top">
+          ${avatar}
+          <div class="profile-main">
+            <h1><span class="h1-name">Emanuel Rusu</span> <span class="headline">${de.hero.headline}</span></h1>
+            <p class="location">${de.hero.location}</p>
+            <p class="open"><span class="dot" aria-hidden="true"></span>${de.hero.open}</p>
+            <div class="cta-row">
+              <a class="btn" href="mailto:emanuel@remtadigital.com">${de.hero.email}</a>
+              <a class="btn btn-outline" href="#projekte">${de.hero.work}</a>
+              <a class="btn btn-text" href="https://www.linkedin.com/in/emanuel-rusu/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a class="btn btn-text" href="/emanuel-rusu-cv.pdf" download>${de.hero.cv}</a>
+            </div>
+          </div>
+          <dl class="profile-facts">
+            ${de.hero.facts.map(([n, t]) => `<div><dt>${deText(n)}</dt><dd>${t}</dd></div>`).join('\n            ')}
+          </dl>
+        </div>
+        <div class="profile-about">
+          <div>
+            ${de.hero.about.map(t => `<p>${t}</p>`).join('\n            ')}
+          </div>
+          <aside class="now" aria-labelledby="now-title">
+            <h2 id="now-title">${de.hero.nowTitle}</h2>
+            <ul>
+              ${de.hero.now.map(t => `<li>${t}</li>`).join('\n              ')}
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projekte">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>${de.swiss.title}</h2>
+        ${de.swiss.text.map(t => `<p class="note">${deText(t)}</p>`).join('\n        ')}
+      </div>
+      <h3 class="tools-title">${de.cases.title}</h3>
+      <p class="note cases-note">${de.cases.note}</p>
+      <div class="cases">${de.cases.items.map(c => `
+        <article class="case">
+          <p class="meta">${c.meta}</p>
+          <h3>${c.title}</h3>
+          <p>${c.text}</p>
+          <a class="case-link" href="/projects/${c.slug}/" hreflang="en">${de.cases.link} ${deEn}</a>
+        </article>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section id="leistungen" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>${de.services.title}</h2>
+      </div>
+      <div class="services">${de.services.items.map(([h, t]) => `
+        <div class="service">
+          <h3>${h}</h3>
+          <p>${t}</p>
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section id="branchen">
+    <div class="wrap">
+      <nav class="industries industries-top" aria-labelledby="branchen-title">
+        <h2 id="branchen-title">${de.industries.title}</h2>
+        <p class="note">${de.industries.note}</p>
+        <ul>
+          ${categories.map(c => `<li><a href="${deIndustryUrl(c)}">${catName(c.de)} <span>${c.projects.length}</span></a></li>`).join('\n          ')}
+        </ul>
+      </nav>
+      <p class="all-posts"><a class="case-link" href="/#work" hreflang="en">${deText(de.industries.all)}</a></p>
+      <p class="all-posts"><a class="case-link" href="/articles/" hreflang="en">${de.articles}</a></p>
+    </div>
+  </section>
+
+  <section id="ueber-mich" class="alt">
+    <div class="wrap about-grid">
+      <div>
+        <h2>${de.about.title}</h2>
+        ${de.about.text.map(t => `<p>${t}</p>`).join('\n        ')}
+      </div>
+      <div>
+        <div class="panel">
+          <h3>${de.about.timelineTitle}</h3>
+          <ol class="timeline">
+            ${de.about.timeline.map(([w, n, t]) => `<li><span class="when">${w}</span><strong>${n}</strong><span>${t}</span></li>`).join('\n            ')}
+          </ol>
+        </div>
+        ${quote}
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap narrow">
+      <div class="sec-head">
+        <h2>${de.faq.title}</h2>
+      </div>
+      ${de.faq.items.map(([q, a]) => `<details>
+        <summary>${q}</summary>
+        <p>${a}</p>
+      </details>`).join('\n      ')}
+    </div>
+  </section>
+${deContact(de.contact.title)}
+
+  ${dialog}
+${dePageEnd()}`;
+}
+
+function deIndustryPage(c) {
+  const url = `${SITE}${deIndustryUrl(c)}`;
+  const list = c.projects.map(s => projects.find(p => p.slug === s)).filter(Boolean);
+  const related = articles.filter(a => c.projects.includes(a.project));
+  const jsonLd = { '@context': 'https://schema.org', '@graph': [
+    { '@type': 'CollectionPage', name: c.de.seoTitle, description: c.de.intro, url, inLanguage: 'de', about: c.de.name,
+      hasPart: list.map(p => ({ '@type': 'CreativeWork', name: strip(p.title), url: `${SITE}/projects/${p.slug}/`, inLanguage: 'en' })) },
+    { '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Startseite', item: `${SITE}/de/` },
+      { '@type': 'ListItem', position: 2, name: de.industryPage.crumb, item: `${SITE}/de/#branchen` },
+      { '@type': 'ListItem', position: 3, name: c.de.name, item: url } ] } ] };
+  return `${pageHead({ lang: 'de', title: `${c.de.seoTitle} | Emanuel Rusu`, description: attr(c.de.intro), url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd, alternates: { en: `${SITE}/industries/${c.slug}/`, de: url } })}
+<body class="industry-page" id="top">
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+${deHeader(`/industries/${c.slug}/`)}
+
+<main id="main">
+${deLangNote()}
+  <section class="industry-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Brotkrumen"><a href="/de/#branchen">${de.industryPage.crumb}</a> <span aria-hidden="true">/</span> <span>${catName(c.de)}</span></nav>
+      <h1>${c.de.seoTitle}</h1>
+      <p class="lead">${c.de.intro}</p>
+      <p class="note">${list.length} ${de.industryPage.count[list.length === 1 ? 0 : 1]}. ${de.industryPage.note}</p>
+    </div>
+  </section>
+  <section class="industry-list">
+    <div class="wrap">
+      <div class="work-grid">${list.map(p => deCard(p)).join('')}</div>
+    </div>
+  </section>${related.length ? `
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>${de.industryPage.articles}</h2>
+      <ul class="plain post-links">${related.map(a => `<li><a href="/articles/${a.slug}/" hreflang="en" lang="en">${a.title}</a></li>`).join('')}</ul>
+    </div>
+  </section>` : ''}
+  <section class="other-industries">
+    <div class="wrap">
+      <nav class="industries" aria-label="${de.industryPage.others}">
+        <h3>${de.industryPage.others}</h3>
+        <ul>${categories.filter(x => x !== c).map(x => `<li><a href="${deIndustryUrl(x)}">${catName(x.de)}</a></li>`).join('')}</ul>
+      </nav>
+    </div>
+  </section>
+${deContact(de.industryPage.contact)}
+${dePageEnd()}`;
+}
+
+if (de) {
+  write('public/de/index.html', deHome());
+  categories.forEach(c => write(`public/de/branchen/${c.de.slug}/index.html`, deIndustryPage(c)));
+}
 
 // ---- 404 page (served by the Worker for any unknown path, with status 404)
 write('public/404.html', `${pageHead({ title: 'Page not found | REMTA Digital', description: 'This page does not exist.', url: `${SITE}/404.html`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' }).replace('content="index, follow, max-image-preview:large"', 'content="noindex"')}
@@ -648,7 +930,8 @@ ${articles.map(a => `  <item>
 const today = new Date().toISOString().slice(0, 10);
 const entries = [[`${SITE}/`, today], ...projects.map(p => [`${SITE}/projects/${p.slug}/`, today]),
   ...(articles.length ? [[`${SITE}/articles/`, today], ...articles.map(a => [`${SITE}/articles/${a.slug}/`, a.updated || a.date])] : []),
-  ...categories.map(c => [`${SITE}/industries/${c.slug}/`, today]), [`${SITE}/privacy/`, today]];
+  ...categories.map(c => [`${SITE}/industries/${c.slug}/`, today]), [`${SITE}/privacy/`, today],
+  ...(de ? [[`${SITE}/de/`, today], ...categories.map(c => [`${SITE}${deIndustryUrl(c)}`, today])] : [])];
 const urls = entries.map(e => e[0]);
 write('public/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
