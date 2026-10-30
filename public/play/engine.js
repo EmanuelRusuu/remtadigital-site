@@ -30,6 +30,7 @@ function poisson(s, l) {
   return Math.max(0, Math.round(l + Math.sqrt(l) * gauss(s)));
 }
 export const fmt = n => Math.round(n).toLocaleString('en-US');
+export const eur = n => `${n < 0 ? '−' : ''}€${fmt(Math.abs(n))}`;
 const priceEnding = x => x < 100 ? Math.max(1.9, Math.round(x) - 0.1) : x < 1000 ? Math.round(x / 10) * 10 - 1 : Math.round(x / 100) * 100 - 10;
 
 export function calendar(day) {
@@ -61,7 +62,7 @@ export const CATEGORIES = {
   outdoor: { name: 'Outdoor', ret: .05, adj: ['Ultralight', 'Summit', 'Weatherproof', 'Basecamp', 'Explorer', 'Lakeside'] },
   big: { name: 'Home improvement', ret: .03, adj: ['Premium', 'Swiss-made', 'Panorama', 'Family', 'Eco', 'Deluxe'] },
 };
-// name, emoji, category, season, lowest and highest unit cost (CHF), handling effort per unit
+// name, emoji, category, season, lowest and highest unit cost (€), handling effort per unit
 const TYPES = [
   ['Socks', '🧦', 'acc', 'gift', 2.5, 4.5, 1], ['Cap', '🧢', 'acc', 'summer', 3, 6, 1], ['Tote Bag', '👜', 'acc', 'flat', 3, 7, 1], ['Sunglasses', '🕶️', 'acc', 'summer', 5, 14, 1], ['Scarf', '🧣', 'acc', 'winter', 6, 15, 1], ['Wallet', '👛', 'acc', 'gift', 8, 20, 1], ['Watch', '⌚', 'acc', 'gift', 25, 80, 1],
   ['Candle', '🕯️', 'home', 'gift', 3, 7, 1], ['Mug', '☕', 'home', 'gift', 3, 6, 2], ['Cushion', '🛋️', 'home', 'flat', 8, 16, 2], ['Plant Pot', '🪴', 'home', 'summer', 4, 10, 2], ['Throw Blanket', '🧶', 'home', 'winter', 12, 30, 2], ['Desk Lamp', '💡', 'home', 'flat', 15, 35, 3],
@@ -119,40 +120,45 @@ export const APPS = {
   booster: { name: 'Speed Booster Pro', icon: '🚀', price: 9, perf: 7, hidden: true, text: 'Promises a faster store. Adds three more scripts to every page.' },
 };
 
-// Each level: [cost in CHF, working days]. need: the plan each level requires, if any.
+// Emanuel bills by the hour, 8 hours a working day: €35 an hour for routine work, up to €50 for
+// the most complex builds. Each level: [working days, € an hour]. need: the plan each level
+// requires, if any. links: real stores where I did this work (every slug is in the sitemap).
+export const HOURS_PER_DAY = 8, RATE_MIN = 35, RATE_MAX = 50;
+export const quote = ([days, rate]) => ({ days, rate, hours: days * HOURS_PER_DAY, cost: days * HOURS_PER_DAY * rate });
 export const PROJECTS = [
-  { id: 'design', icon: '🎨', name: 'Custom theme design', levels: [[2000, 10], [6500, 14], [14000, 20]], effect: ['+25 design, +5 trust', '+20 design, +5 trust', '+15 design, +5 trust'],
-    text: 'A theme built around your brand instead of a free template.', link: ['/articles/football-club-website-on-one-shopify-theme/', 'A football club\'s whole website on one theme'] },
-  { id: 'speed', icon: '⚡', name: 'Speed optimisation', levels: [[1000, 4], [3500, 7], [8000, 10]], effect: ['+15 speed', '+12 speed', '+8 speed'],
-    text: 'Smaller images, fewer and later scripts, faster pages.', link: ['/articles/from-16-mb-to-4-mb-product-page/', 'From 16 MB to 4 MB on one product page'] },
-  { id: 'seo', icon: '🔎', name: 'SEO foundations', levels: [[1200, 5], [4000, 8], [9000, 12]], effect: ['+18 SEO', '+14 SEO', '+10 SEO'],
-    text: 'Clean titles and headings, structured data, sitemaps and pages Google can crawl.', link: ['/articles/six-stores-one-theme/', 'Structured data across six stores'] },
-  { id: 'search', icon: '🧭', name: 'Search and filters', levels: [[3000, 7], [8000, 10]], effect: ['Halves the big-catalogue penalty, +4% conversion', 'Removes the big-catalogue penalty, +4% conversion'],
-    text: 'Fast search that forgives typos, and filters by colour, size and price.', link: ['/articles/meilisearch-for-shopify-colours-and-markets/', 'Meilisearch for colours and markets'] },
-  { id: 'cart', icon: '🛒', name: 'Cart and upsells', levels: [[2000, 5], [5000, 8]], effect: ['+10% items per order', '+10% items per order'],
-    text: 'A cart drawer with add-ons and bundles that never drift out of sync.', link: ['/articles/one-jersey-one-cart-line/', 'One jersey, one cart line'] },
-  { id: 'consent', icon: '🍪', name: 'Consent-friendly tracking', levels: [[1500, 3]], effect: ['+6 speed, +3 trust, and a cookie banner can no longer break the theme'],
-    text: 'Tracking loads only after consent, and the theme code keeps working when a script is blocked.', link: ['/articles/when-a-cookie-banner-breaks-your-theme-javascript/', 'When a cookie banner breaks your theme'] },
-  { id: 'fallback', icon: '🛟', name: 'Checkout safety net', levels: [[2000, 4]], effect: ['A payment outage no longer stops checkout'],
-    text: 'When a payment or credit check fails, customers see a clear message and another way to pay.', link: ['/articles/when-a-credit-check-outage-looks-like-a-decline/', 'When a credit check outage looks like a decline'] },
-  { id: 'markets', icon: '🌍', name: 'Languages and markets', levels: [[4000, 8], [6000, 8], [8000, 8]], need: [null, 'grow', 'advanced'], effect: ['German: +35% visitors', 'French: +35% visitors', 'Italian: +35% visitors'],
-    text: 'Properly translated pages, prices and SEO for each language.', link: ['/articles/one-allergen-three-languages/', 'One allergen, three languages'] },
-  { id: 'wishlist', icon: '❤️', name: 'Wishlist', levels: [[1800, 4]], effect: ['+25% returning visitors'],
-    text: 'A wishlist that survives the reload and follows customers into their account.', link: ['/articles/a-wishlist-that-survives-the-reload/', 'A wishlist that survives the reload'] },
-  { id: 'giftcards', icon: '🎁', name: 'Gift cards', levels: [[3500, 7]], effect: ['+5% items per order, and a stronger December'],
-    text: 'Gift cards that work online and in the shop.', link: ['/articles/gift-cards-from-the-shop-till-redeemed-online/', 'Gift cards from the shop till'] },
-  { id: 'accounts', icon: '🧾', name: 'Customer accounts and invoices', levels: [[2500, 5]], effect: ['+8 trust, +15% returning visitors'],
-    text: 'Order history and PDF invoices in the customer account.', link: ['/articles/pdf-invoices-in-the-shopify-customer-account/', 'PDF invoices in the customer account'] },
-  { id: 'pricing', icon: '🏷️', name: 'Installation and bundle pricing', levels: [[4000, 7]], effect: ['High-ticket products convert 30% better'],
-    text: 'Installation options and bundles priced by discount logic, so the cart always shows the right total.', link: ['/articles/pricing-a-swim-spa-with-shopify-discounts/', 'Pricing a swim spa'] },
-  { id: 'apps', icon: '🧹', name: 'Replace apps with theme code', levels: [[5000, 9]], effect: ['Apps slow the store 65% less'],
-    text: 'What your apps do, rebuilt inside the theme without their extra scripts.', link: ['/articles/tabs-that-hide-themselves/', 'Rebuilding a design on Dawn'] },
-  { id: 'erp', icon: '🔄', name: 'ERP and stock sync', levels: [[12000, 20]], need: ['advanced'], effect: ['Supplier lead times −40%, cheaper fulfilment and storage'],
-    text: 'Stock, prices and orders synced with an ERP, so restocks happen on time.', link: ['/projects/ev-zug/', 'ERP-driven prices at EV Zug'] },
-  { id: 'checkout', icon: '💳', name: 'Checkout extensions', levels: [[9000, 10]], need: ['plus'], effect: ['+6% conversion, +5% items per order'],
+  { id: 'design', icon: '🎨', name: 'Custom theme design', levels: [[8, 35], [14, 40], [22, 50]], effect: ['+25 design, +5 trust', '+20 design, +5 trust', '+15 design, +5 trust'],
+    text: 'A theme built around your brand instead of a free template.', links: [['/articles/football-club-website-on-one-shopify-theme/', 'A football club\'s whole website on one theme']] },
+  { id: 'speed', icon: '⚡', name: 'Speed optimisation', levels: [[4, 35], [8, 40], [12, 50]], effect: ['+15 speed', '+12 speed', '+8 speed'],
+    text: 'Smaller images, fewer and later scripts, faster pages.', links: [['/articles/from-16-mb-to-4-mb-product-page/', 'From 16 MB to 4 MB on one product page'], ['/articles/two-football-club-stores-faster/', 'Two football club stores, faster']] },
+  { id: 'seo', icon: '🔎', name: 'SEO foundations', levels: [[5, 35], [9, 40], [14, 45]], effect: ['+18 SEO', '+14 SEO', '+10 SEO'],
+    text: 'Clean titles and headings, structured data, sitemaps and pages Google can crawl.', links: [['/articles/six-stores-one-theme/', 'Structured data across six stores']] },
+  { id: 'search', icon: '🧭', name: 'Search and filters', levels: [[8, 40], [14, 50]], effect: ['Halves the big-catalogue penalty, +4% conversion', 'Removes the big-catalogue penalty, +4% conversion'],
+    text: 'Fast search that forgives typos, and filters by colour, size and price.', links: [['/articles/meilisearch-for-shopify-colours-and-markets/', 'Meilisearch for colours and markets']] },
+  { id: 'cart', icon: '🛒', name: 'Cart and upsells', levels: [[6, 35], [10, 45]], effect: ['+10% items per order', '+10% items per order'],
+    text: 'A cart drawer with add-ons and bundles that never drift out of sync.', links: [['/articles/one-jersey-one-cart-line/', 'One jersey, one cart line']] },
+  { id: 'consent', icon: '🍪', name: 'Consent-friendly tracking', levels: [[4, 40]], effect: ['+6 speed, +3 trust, and a cookie banner can no longer break the theme'],
+    text: 'Tracking loads only after consent, and the theme code keeps working when a script is blocked.', links: [['/articles/when-a-cookie-banner-breaks-your-theme-javascript/', 'When a cookie banner breaks your theme'], ['/articles/load-the-google-tag-only-after-consent-on-shopify/', 'The Google tag, only after consent']] },
+  { id: 'fallback', icon: '🛟', name: 'Checkout safety net', levels: [[5, 45]], effect: ['A payment outage no longer stops checkout'],
+    text: 'When a payment or credit check fails, customers see a clear message and another way to pay.', links: [['/articles/when-a-credit-check-outage-looks-like-a-decline/', 'When a credit check outage looks like a decline']] },
+  { id: 'markets', icon: '🌍', name: 'Languages and markets', levels: [[10, 40], [10, 45], [10, 50]], need: [null, 'grow', 'advanced'], effect: ['German: +35% visitors', 'French: +35% visitors', 'Italian: +35% visitors'],
+    text: 'Properly translated pages, prices and SEO for each language.', links: [['/articles/one-allergen-three-languages/', 'One allergen, three languages']] },
+  { id: 'wishlist', icon: '❤️', name: 'Wishlist', levels: [[5, 35]], effect: ['+25% returning visitors'],
+    text: 'A wishlist that survives the reload and follows customers into their account.', links: [['/articles/a-wishlist-that-survives-the-reload/', 'A wishlist that survives the reload']] },
+  { id: 'giftcards', icon: '🎁', name: 'Gift cards', levels: [[8, 40]], effect: ['+5% items per order, and a stronger December'],
+    text: 'Gift cards that work online and in the shop.', links: [['/articles/gift-cards-from-the-shop-till-redeemed-online/', 'Gift cards from the shop till']] },
+  { id: 'accounts', icon: '🧾', name: 'Customer accounts and invoices', levels: [[6, 40]], effect: ['+8 trust, +15% returning visitors'],
+    text: 'Order history and PDF invoices in the customer account.', links: [['/articles/pdf-invoices-in-the-shopify-customer-account/', 'PDF invoices in the customer account']] },
+  { id: 'pricing', icon: '🏷️', name: 'Installation and bundle pricing', levels: [[8, 45]], effect: ['High-ticket products convert 30% better'],
+    text: 'Installation options and bundles priced by discount logic, so the cart always shows the right total.', links: [['/articles/pricing-a-swim-spa-with-shopify-discounts/', 'Pricing a swim spa']] },
+  { id: 'apps', icon: '🧹', name: 'Replace apps with theme code', levels: [[10, 45]], effect: ['Apps slow the store 65% less'],
+    text: 'What your apps do, rebuilt inside the theme without their extra scripts.', links: [['/articles/tabs-that-hide-themselves/', 'Rebuilding a design on Dawn']] },
+  { id: 'erp', icon: '🔄', name: 'ERP and stock sync', levels: [[25, 50]], need: ['advanced'], effect: ['Supplier lead times −40%, cheaper fulfilment and storage'],
+    text: 'Stock, prices and orders synced with an ERP, so restocks happen on time.', links: [['/projects/ev-zug/', 'ERP-driven prices at EV Zug']] },
+  { id: 'checkout', icon: '💳', name: 'Checkout extensions', levels: [[12, 50]], need: ['plus'], effect: ['+6% conversion, +5% items per order'],
     text: 'Delivery dates, upsells and trust signals right inside the checkout.' },
 ];
 export const project = id => PROJECTS.find(p => p.id === id);
+const RUSH = quote([1, RATE_MAX]); // the emergency fix when a cookie banner breaks the store
 
 export const listFee = p => Math.round(60 + Math.sqrt(p.msrp) * 6);
 export const POST_COST = 250, POST_LIMIT = 20;
@@ -161,11 +167,11 @@ export const SALE_DAYS = 4, SALE_COOLDOWN = 21, CAMPAIGN_COOLDOWN = 7;
 // ---- a new store
 export function newGame(name, seed = (Date.now() ^ Math.floor(Math.random() * 1e9)) >>> 0) {
   const s = {
-    v: 1, name, seed, rng: seed, day: 0, cash: 5000, plan: 'basic', apps: {}, done: {}, dev: [], ads: 0,
+    v: 2, name, seed, rng: seed, day: 0, cash: 5000, plan: 'basic', apps: {}, done: {}, dev: [], ads: 0,
     list: 0, customers: 0, rating: 0, reviews: 0, posts: 0, lastPost: -99, seoShift: 0, effects: [],
     campaign: { until: -1, last: -99 }, sale: { pct: 0, until: -1, last: -99 }, pending: null, lastEvent: 0, seen: {},
     history: [], log: [], news: [], totals: { revenue: 0, profit: 0, orders: 0, visitors: 0 }, got: {}, flags: {},
-    redDays: 0, over: false, last: null, lastOrders: 0, best: 0,
+    redDays: 0, over: false, last: null, lastOrders: 0, best: 0, spent: 0,
   };
   s.products = makeHub(s);
   const first = s.products[0];
@@ -320,8 +326,8 @@ export function simulateDay(s) {
   // demand drifts: some products warm up, others cool down
   for (const p of s.products) p.trend = clamp(p.trend + (1 - p.trend) * .04 + (rand(s) - .5) * .09, .55, 1.7);
 
-  s.last = { d: s.day, ch, visitors, orders, units, lost, revenue, profit, cogs, fulfil, fees, refunds, holding, fixed, ads, interest: interestPaid, cpc, adRev: revenue * adShare, conv: visitors ? orders / visitors : 0, top: top.sort((a, b) => b[1] - a[1]).slice(0, 3) };
-  s.history.push({ d: s.day, v: visitors, o: orders, r: Math.round(revenue), p: Math.round(profit), c: Math.round(s.cash) });
+  s.last = { d: s.day, ch, visitors, orders, units, lost, revenue, profit, cogs, fulfil, fees, refunds, holding, fixed, ads, interest: interestPaid, cpc, adRev: revenue * adShare, conv: visitors ? orders / visitors : 0, sale: salePct, sold: top.sort((a, b) => b[1] - a[1]) };
+  s.history.push({ d: s.day, v: visitors, o: orders, u: units, l: lost, r: Math.round(revenue), p: Math.round(profit), c: Math.round(s.cash) });
   if (s.history.length > 400) s.history.shift();
   const t = s.totals;
   t.revenue += revenue; t.profit += profit; t.orders += orders; t.visitors += visitors;
@@ -341,10 +347,10 @@ export function simulateDay(s) {
 function money(s) {
   s.redDays = s.cash < 0 ? s.redDays + 1 : 0;
   if (s.redDays === 1) note(s, 'Your account is in overdraft. You pay interest every day, and ads stop until you are back in credit.', 'warn');
-  if (s.redDays === 30) note(s, 'A month in overdraft. After 45 days, or below CHF −8,000, the bank closes the account.', 'warn');
+  if (s.redDays === 30) note(s, 'A month in overdraft. After 45 days, or below −€8,000, the bank closes the account.', 'warn');
   if (s.cash < -8000 || s.redDays > 45) {
     s.over = true;
-    s.pending = { id: 'over', title: 'The bank closed your account', text: `After ${s.day} days, ${s.name} ran out of money. Revenue so far: CHF ${fmt(s.totals.revenue)} from ${fmt(s.totals.orders)} orders.`, choices: [{ label: 'Open a new store' }] };
+    s.pending = { id: 'over', title: 'The bank closed your account', text: `After ${s.day} days, ${s.name} ran out of money. Revenue so far: ${eur(s.totals.revenue)} from ${fmt(s.totals.orders)} orders.`, choices: [{ label: 'Open a new store' }] };
   }
 }
 
@@ -403,10 +409,10 @@ const EVENTS = [
   { id: 'cookie', w: 1.5, min: 25, cool: 90, ok: s => !s.done.consent,
     make() {
       return { title: '🍪 The cookie banner broke your store', text: 'A consent manager update now blocks one of your theme\'s script files. For many visitors the search, cart drawer and sliders stopped working, and conversion dropped by 40%.',
-        choices: [{ label: 'Emergency fix by Emanuel, done tomorrow', cost: 900 }, { label: 'Wait for the app vendor (about a week)' }], link: ['/articles/when-a-cookie-banner-breaks-your-theme-javascript/', 'This happened on a real store'] };
+        choices: [{ label: `Emergency fix by Emanuel: ${RUSH.hours} hours at €${RUSH.rate}, done tomorrow`, cost: RUSH.cost }, { label: 'Wait for the app vendor (about a week)' }], link: ['/articles/when-a-cookie-banner-breaks-your-theme-javascript/', 'This happened on a real store'] };
     },
     resolve(s, d, c) {
-      if (c === 0) { s.cash -= 900; addEffect(s, { kind: 'conv', mul: .6, until: s.day }); return 'Emanuel guarded the theme code: everything works again tomorrow.'; }
+      if (c === 0) { s.cash -= RUSH.cost; addEffect(s, { kind: 'conv', mul: .6, until: s.day }); return 'Emanuel guarded the theme code: everything works again tomorrow.'; }
       addEffect(s, { kind: 'conv', mul: .6, until: s.day + 6 });
       return 'Waiting for the consent app vendor.';
     } },
@@ -421,7 +427,7 @@ const EVENTS = [
     make(s) {
       const v = s.last ? s.last.visitors : 100;
       const cost = Math.round(clamp(v * .9, 300, 9000) / 50) * 50;
-      return { title: '🤳 An influencer wants to feature your store', text: `A creator with a big following offers three days of posts about your store for CHF ${fmt(cost)}. Some of these deals bring a rush of visitors, some bring almost nothing.`,
+      return { title: '🤳 An influencer wants to feature your store', text: `A creator with a big following offers three days of posts about your store for ${eur(cost)}. Some of these deals bring a rush of visitors, some bring almost nothing.`,
         data: { cost, hit: rand(s) < .6 }, choices: [{ label: 'Book the posts', cost }, { label: 'No, thanks' }] };
     },
     resolve(s, d, c) {
@@ -442,8 +448,8 @@ const EVENTS = [
       const qty = Math.min(Math.floor(p.stock * .6), Math.round(between(s, 20, 200)));
       const off = s.plan === 'plus' ? .1 : .18;
       const price = Math.round(p.price * (1 - off) * qty);
-      return { title: '🏢 A company wants to order in bulk', text: `A company asks for ${qty} × ${p.emoji} ${p.name} for its staff, at ${Math.round(off * 100)}% off: CHF ${fmt(price)} in one order.`,
-        data: { pid: p.id, qty, price }, choices: [{ label: `Accept, CHF ${fmt(price)}` }, { label: 'Decline' }] };
+      return { title: '🏢 A company wants to order in bulk', text: `A company asks for ${qty} × ${p.emoji} ${p.name} for its staff, at ${Math.round(off * 100)}% off: ${eur(price)} in one order.`,
+        data: { pid: p.id, qty, price }, choices: [{ label: `Accept, ${eur(price)}` }, { label: 'Decline' }] };
     },
     resolve(s, d, c) {
       const p = s.products[d.pid];
@@ -451,17 +457,17 @@ const EVENTS = [
       if (p.stock < d.qty) return `Not enough ${p.name} left to fill the bulk order.`;
       p.stock -= d.qty; p.sold += d.qty; p.revenue += d.price; s.cash += d.price;
       s.totals.revenue += d.price; s.totals.profit += d.price - d.qty * p.cost; s.totals.orders += 1;
-      return `Bulk order shipped: ${d.qty} × ${p.name} for CHF ${fmt(d.price)}.`;
+      return `Bulk order shipped: ${d.qty} × ${p.name} for ${eur(d.price)}.`;
     } },
   { id: 'chargeback', w: 1, min: 30, cool: 50, ok: s => s.totals.orders > 30,
     make(s) {
       const amount = Math.round(between(s, 40, 300) * (1 + s.day / 200));
-      return { title: '🧾 A chargeback', text: `A customer disputed a payment of CHF ${fmt(amount)} with their bank, and the bank sided with them.`, data: { amount }, choices: [{ label: 'OK' }] };
+      return { title: '🧾 A chargeback', text: `A customer disputed a payment of ${eur(amount)} with their bank, and the bank sided with them.`, data: { amount }, choices: [{ label: 'OK' }] };
     },
-    resolve(s, d) { s.cash -= d.amount; return `Chargeback: −CHF ${fmt(d.amount)}.`; } },
+    resolve(s, d) { s.cash -= d.amount; return `Chargeback: ${eur(-d.amount)}.`; } },
   { id: 'booster', w: 2, min: 15, cool: 9999, ok: s => !s.apps.booster,
     make() {
-      return { title: '🚀 "Make your store 3× faster!"', text: 'An email offers Speed Booster Pro for CHF 9 a month: "One click and your store loads three times faster."', choices: [{ label: 'Install it' }, { label: 'Delete the email' }] };
+      return { title: '🚀 "Make your store 3× faster!"', text: 'An email offers Speed Booster Pro for €9 a month: "One click and your store loads three times faster."', choices: [{ label: 'Install it' }, { label: 'Delete the email' }] };
     },
     resolve(s, d, c) {
       if (c !== 0) return 'You deleted the speed booster email.';
@@ -485,7 +491,7 @@ const EVENTS = [
       const p = pick(s, listedOf(s).filter(p => avgDemand(p) > 0));
       const qty = Math.max(p.moq, Math.ceil(avgDemand(p) * 28));
       const cost = Math.round(qty * p.cost * .85);
-      return { title: '🤝 A supplier offers a discount', text: `Your supplier of ${p.emoji} ${p.name} offers 15% off an order of ${qty} units (about four weeks of sales): CHF ${fmt(cost)}.`,
+      return { title: '🤝 A supplier offers a discount', text: `Your supplier of ${p.emoji} ${p.name} offers 15% off an order of ${qty} units (about four weeks of sales): ${eur(cost)}.`,
         data: { pid: p.id, qty, cost }, choices: [{ label: 'Buy', cost }, { label: 'Not now' }] };
     },
     resolve(s, d, c) {
@@ -525,7 +531,7 @@ function scheduled(s) {
   if (doy === 0 && s.day > 0) {
     const year = s.day / YEAR, worth = netWorth(s);
     s.best = Math.max(s.best || 0, worth);
-    s.pending = { id: 'year', title: `🎉 Year ${year} is over`, text: `${s.name} made CHF ${fmt(s.totals.revenue)} in revenue from ${fmt(s.totals.orders)} orders. Profit: CHF ${fmt(s.totals.profit)}. Net worth (cash plus stock): CHF ${fmt(worth)}.`,
+    s.pending = { id: 'year', title: `🎉 Year ${year} is over`, text: `${s.name} made ${eur(s.totals.revenue)} in revenue from ${fmt(s.totals.orders)} orders. Profit: ${eur(s.totals.profit)}. Net worth (cash plus stock): ${eur(worth)}.`,
       data: { worth }, choices: [{ label: 'Keep playing' }, { label: 'Open a new store' }] };
   }
 }
@@ -536,9 +542,9 @@ const MILESTONES = [
   ['o100', '100 orders', s => s.totals.orders >= 100],
   ['o1k', '1,000 orders', s => s.totals.orders >= 1000],
   ['o10k', '10,000 orders', s => s.totals.orders >= 10000],
-  ['r10k', 'CHF 10,000 in revenue', s => s.totals.revenue >= 1e4],
-  ['r100k', 'CHF 100,000 in revenue', s => s.totals.revenue >= 1e5],
-  ['r1m', 'CHF 1 million in revenue', s => s.totals.revenue >= 1e6],
+  ['r10k', '€10,000 in revenue', s => s.totals.revenue >= 1e4],
+  ['r100k', '€100,000 in revenue', s => s.totals.revenue >= 1e5],
+  ['r1m', '€1 million in revenue', s => s.totals.revenue >= 1e6],
   ['p10', '10 products in the store', s => listedOf(s).length >= 10],
   ['p40', 'The whole supplier hub in your store', s => listedOf(s).length >= 40],
   ['stars', '4.8 stars from 50+ reviews', s => s.reviews >= 50 && s.rating >= 4.8],
@@ -560,7 +566,7 @@ export function addProduct(s, id) {
   if (!p || p.listed) return;
   if (p.everListed) { p.listed = true; note(s, `${p.emoji} ${p.name} is back in the store.`); return; }
   const cost = listFee(p) + p.moq * p.cost;
-  if (s.cash < cost) return `You need CHF ${fmt(cost)} for photos, a product page and a first order.`;
+  if (s.cash < cost) return `You need ${eur(cost)} for photos, a product page and a first order.`;
   s.cash -= listFee(p);
   buy(s, p, p.moq);
   p.listed = p.everListed = true;
@@ -572,7 +578,7 @@ export function toggleAuto(s, id) { const p = s.products[id]; if (p) p.auto = !p
 export function orderStock(s, id, qty) {
   const p = s.products[id];
   if (!p || !(qty > 0)) return;
-  if (!buy(s, p, qty)) return `Not enough cash for ${qty} units (CHF ${fmt(qty * p.cost)}).`;
+  if (!buy(s, p, qty)) return `Not enough cash for ${qty} units (${eur(qty * p.cost)}).`;
 }
 export const restockSuggestion = (s, p) => Math.max(p.moq, Math.ceil(Math.max(avgDemand(p), .5) * (leadOf(s, p) + 14)));
 
@@ -585,7 +591,7 @@ export function sendCampaign(s) {
   note(s, `✉️ Newsletter sent to ${fmt(s.list)} subscribers.`);
 }
 export function writePost(s) {
-  if (s.cash < POST_COST) return `A blog post costs CHF ${POST_COST}.`;
+  if (s.cash < POST_COST) return `A blog post costs ${eur(POST_COST)}.`;
   if (s.day - s.lastPost < 3) return 'One post every three days: good posts take time.';
   s.cash -= POST_COST; s.posts++; s.lastPost = s.day;
   note(s, s.posts <= POST_LIMIT ? `📝 Blog post ${s.posts} published (+1.2 SEO).` : '📝 Blog post published. Google has enough of your posts; more no longer move your SEO.');
@@ -600,17 +606,19 @@ export function projectState(s, P) {
   const done = lv(s, P.id), queued = s.dev.filter(j => j.id === P.id).length, next = done + queued;
   const max = P.levels.length;
   const need = next < max && P.need ? P.need[next] : null;
-  return { done, queued, next, max, cost: next < max ? P.levels[next][0] : 0, days: next < max ? P.levels[next][1] : 0, need: need && PLAN_ORDER.indexOf(s.plan) < PLAN_ORDER.indexOf(need) ? need : null };
+  const q = next < max ? quote(P.levels[next]) : { days: 0, rate: 0, hours: 0, cost: 0 };
+  return { done, queued, next, max, ...q, need: need && PLAN_ORDER.indexOf(s.plan) < PLAN_ORDER.indexOf(need) ? need : null };
 }
 export function bookProject(s, id) {
   const P = project(id), ps = projectState(s, P);
   if (ps.next >= ps.max) return;
   if (ps.need) return `This needs the ${PLANS[ps.need].name} plan.`;
   if (s.dev.length >= 3) return 'Emanuel\'s queue is full. He works on one project at a time.';
-  if (s.cash < ps.cost) return `You need CHF ${fmt(ps.cost)}.`;
+  if (s.cash < ps.cost) return `You need ${eur(ps.cost)}.`;
   s.cash -= ps.cost;
+  s.spent = (s.spent || 0) + ps.cost;
   s.dev.push({ id, level: ps.next + 1, left: ps.days, total: ps.days });
-  note(s, `${P.icon} Booked Emanuel: ${P.name}${ps.max > 1 ? ` (level ${ps.next + 1})` : ''}.`);
+  note(s, `${P.icon} Booked Emanuel: ${P.name}${ps.max > 1 ? ` (level ${ps.next + 1})` : ''}, ${ps.hours} hours at €${ps.rate} an hour.`);
 }
 export function installApp(s, id) {
   if (!APPS[id] || s.apps[id]) return;
@@ -629,7 +637,7 @@ export function advice(s) {
   if (last && last.lost > Math.max(3, last.units * .2)) tips.push(`You couldn't fill ${fmt(last.lost)} units yesterday. Restock sooner, or buy bigger batches.`);
   const doy = st.cal.doy;
   if (doy >= BLACK_FRIDAY - 35 && doy < BLACK_FRIDAY) tips.push(`Black Friday is in ${BLACK_FRIDAY - doy} days. Stock up early: lead times are long and visitors nearly double.`);
-  if (last && s.ads > 0 && last.adRev < s.ads * 1.5) tips.push(`Ads brought about CHF ${fmt(last.adRev)} in sales for CHF ${fmt(s.ads)}. Raise conversion before you buy more traffic.`);
+  if (last && s.ads > 0 && last.adRev < s.ads * 1.5) tips.push(`Ads brought about ${eur(last.adRev)} in sales for ${eur(s.ads)}. Raise conversion before you buy more traffic.`);
   if (st.design < 40 && s.day > 3) tips.push('Your store still runs on a free template. A custom design lifts both conversion and trust.');
   if (st.perf < 50) tips.push(`Pages take ${st.loadTime.toFixed(1)} s to load. Every app adds scripts. Speed work, or fewer apps, wins back buyers.`);
   if (st.n > 12 && lv(s, 'search') < 2) tips.push(`${st.n} products without good search: visitors give up looking. Search and filters fix that.`);

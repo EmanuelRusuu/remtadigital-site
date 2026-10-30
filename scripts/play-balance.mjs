@@ -70,7 +70,7 @@ function play(name, bot, seed, days = 365) {
         seo: Math.round(st.seo), spd: Math.round(st.perf), des: Math.round(st.design), tru: Math.round(st.trust), proj: Object.values(s.done).reduce((t, x) => t + x, 0), plan: s.plan, ads: s.ads });
     }
   }
-  console.log(`\n${name}, seed ${seed}${s.over ? `: BANKRUPT on day ${s.day}` : ''}. Year revenue CHF ${G.fmt(s.totals.revenue)}, profit ${G.fmt(s.totals.profit)}, orders ${G.fmt(s.totals.orders)}`);
+  console.log(`\n${name}, seed ${seed}${s.over ? `: BANKRUPT on day ${s.day}` : ''}. Year revenue ${G.eur(s.totals.revenue)}, profit ${G.eur(s.totals.profit)}, orders ${G.fmt(s.totals.orders)}, paid Emanuel ${G.eur(s.spent)}`);
   console.table(rows);
 }
 
