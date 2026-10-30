@@ -25,7 +25,7 @@
 <link rel="stylesheet" href="/assets/style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://remtadigital.com/"},{"@type":"ListItem","position":2,"name":"Projects","item":"https://remtadigital.com/#work"},{"@type":"ListItem","position":3,"name":"Glory Bomb","item":"https://remtadigital.com/projects/glory-bomb/"}]}</script>
 </head>
-<body class="project-page" id="top">
+<body class="project-page" id="top" data-nav="work">
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="site-header">
@@ -35,17 +35,14 @@
       <span></span><span></span><span></span>
     </button>
     <nav id="nav" aria-label="Main">
-      <a href="/#cases">Case studies</a>
-      <a href="/#work">Work</a>
-      <a href="/articles/">Articles</a>
-      <a href="/#services">Services</a>
-      <a href="/#working-together">Working together</a>
-      <a href="/#about">About</a>
-      <a href="/#faq">FAQ</a>
-      <a class="nav-play" href="/play/">Play</a>
+      <a href="/#cases" data-key="work">Work</a>
+      <a href="/#services" data-key="services">Services</a>
+      <a href="/articles/" data-key="articles">Articles</a>
+      <a href="/#about" data-key="about">About</a>
+      <a class="nav-play" href="/play/" data-key="play">Play</a>
       <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
       <a class="nav-cta" href="/#contact">Contact</a>
-      <a class="nav-lang" href="/de/" hreflang="de" lang="de">Deutsch</a>
+      <a class="nav-lang" href="/de/" hreflang="de" lang="de"><span class="lang-short" aria-hidden="true">DE</span><span class="lang-long">Deutsch</span></a>
     </nav>
   </div>
 </header>
@@ -134,9 +131,38 @@
 
 <footer>
   <div class="wrap foot">
-    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania.</p>
-    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
-    <p><a href="/privacy/">Privacy</a></p>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <p class="foot-name"><b>REMTA</b> Digital</p>
+        <p>Freelance Shopify development by Emanuel Rusu, from Cluj-Napoca, Romania. I work in English and Romanian.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Site">
+        <p class="foot-title">On this site</p>
+        <ul>
+          <li><a href="/#cases">Case studies</a></li>
+          <li><a href="/#work">Projects</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/#working-together">How we work</a></li>
+          <li><a href="/articles/">Articles</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/play/">Storefront game</a></li>
+        </ul>
+      </nav>
+      <div class="foot-nav">
+        <p class="foot-title">Get in touch</p>
+        <ul>
+          <li><a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a></li>
+          <li><a href="https://www.linkedin.com/in/emanuel-rusu/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="/emanuel-rusu-cv.pdf" download>CV (PDF)</a></li>
+          <li><a href="/de/" hreflang="de" lang="de">Deutsch</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania &middot; <a href="/privacy/">Privacy</a></p>
+      <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
+    </div>
   </div>
 </footer>
 

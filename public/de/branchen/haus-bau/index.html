@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="/assets/style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"CollectionPage","name":"Shopify-Entwickler für Heizung, Haus- und Bauprodukte","description":"Heizungen, Luftentfeuchter, Swim-Spas, Pergolen, Cheminées, Leuchten, Beschriftungen und Fensterfolien: Shops mit grossen, konfigurierbaren oder zu installierenden Produkten, mit Bonitätsprüfung, Installationspreisen und passender Rabattlogik.","url":"https://remtadigital.com/de/branchen/haus-bau/","inLanguage":"de","about":"Haus & Bau","hasPart":[{"@type":"CreativeWork","name":"Ecofort","url":"https://remtadigital.com/projects/ecofort/","inLanguage":"en"},{"@type":"CreativeWork","name":"Spa Solutions","url":"https://remtadigital.com/projects/spa-solutions/","inLanguage":"en"},{"@type":"CreativeWork","name":"Skypergola","url":"https://remtadigital.com/projects/skypergola/","inLanguage":"en"},{"@type":"CreativeWork","name":"Infrarotheizung","url":"https://remtadigital.com/projects/infrarotheizung/","inLanguage":"en"},{"@type":"CreativeWork","name":"Luftentfeuchter","url":"https://remtadigital.com/projects/luftentfeuchter/","inLanguage":"en"},{"@type":"CreativeWork","name":"Art of Fire","url":"https://remtadigital.com/projects/art-of-fire/","inLanguage":"en"},{"@type":"CreativeWork","name":"Konigs","url":"https://remtadigital.com/projects/konigs/","inLanguage":"en"},{"@type":"CreativeWork","name":"Sorenos","url":"https://remtadigital.com/projects/sorenos/","inLanguage":"en"},{"@type":"CreativeWork","name":"Signvision","url":"https://remtadigital.com/projects/signvision/","inLanguage":"en"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://remtadigital.com/de/"},{"@type":"ListItem","position":2,"name":"Branchen","item":"https://remtadigital.com/de/#branchen"},{"@type":"ListItem","position":3,"name":"Haus & Bau","item":"https://remtadigital.com/de/branchen/haus-bau/"}]}]}</script>
 </head>
-<body class="industry-page" id="top">
+<body class="industry-page" id="top" data-nav="industries">
 <a class="skip" href="#main">Zum Inhalt springen</a>
 
 <header class="site-header">
@@ -40,16 +40,14 @@
       <span></span><span></span><span></span>
     </button>
     <nav id="nav" aria-label="Hauptmenü">
-      <a href="/de/#projekte">Projekte</a>
-      <a href="/de/#leistungen">Leistungen</a>
-      <a href="/de/#zusammenarbeit">Zusammenarbeit</a>
-      <a href="/de/#branchen">Branchen</a>
-      <a href="/de/#ueber-mich">Über mich</a>
-      <a href="/de/#faq">FAQ</a>
-      <a class="nav-play" href="/play/" hreflang="en">Shop-Spiel</a>
+      <a href="/de/#projekte" data-key="projects">Projekte</a>
+      <a href="/de/#leistungen" data-key="services">Leistungen</a>
+      <a href="/de/#branchen" data-key="industries">Branchen</a>
+      <a href="/de/#ueber-mich" data-key="about">Über mich</a>
+      <a class="nav-play" href="/play/" hreflang="en" data-key="play">Shop-Spiel</a>
       <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
       <a class="nav-cta" href="/de/#kontakt">Kontakt</a>
-      <a class="nav-lang" href="/industries/home-building/" hreflang="en" lang="en">English</a>
+      <a class="nav-lang" href="/industries/home-building/" hreflang="en" lang="en"><span class="lang-short" aria-hidden="true">EN</span><span class="lang-long">English</span></a>
     </nav>
   </div>
 </header>
@@ -206,7 +204,7 @@
     </div>
   </section>
 
-  <section id="kontakt">
+  <section id="kontakt" data-map="Kontakt">
     <div class="wrap narrow center">
       <h2>Soll ich etwas Ähnliches für Ihren Shop bauen?</h2>
       <p class="lead">Schreiben Sie mir kurz, worum es geht und was Sie bauen möchten.</p>
@@ -220,9 +218,38 @@
 
 <footer>
   <div class="wrap foot">
-    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Rumänien.</p>
-    <p>REMTA Digital ist ein unabhängiges Unternehmen. Shopify ist eine Marke von Shopify Inc.; ich bin weder mit Shopify verbunden noch von Shopify empfohlen. Namen und Logos von Kunden gehören ihren Inhabern und dienen nur zur Beschreibung meiner bisherigen Arbeit.</p>
-    <p><a href="/privacy/" hreflang="en">Datenschutz (Englisch)</a></p>
+    <div class="foot-top">
+      <div class="foot-brand">
+        <p class="foot-name"><b>REMTA</b> Digital</p>
+        <p>Freelance Shopify-Entwicklung von Emanuel Rusu aus Cluj-Napoca, Rumänien. Arbeitssprachen: Englisch und Rumänisch.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Auf dieser Website">
+        <p class="foot-title">Auf dieser Website</p>
+        <ul>
+          <li><a href="/de/#projekte">Projekte</a></li>
+          <li><a href="/de/#leistungen">Leistungen</a></li>
+          <li><a href="/de/#zusammenarbeit">Zusammenarbeit</a></li>
+          <li><a href="/de/#branchen">Branchen</a></li>
+          <li><a href="/de/#ueber-mich">Über mich</a></li>
+          <li><a href="/de/#faq">FAQ</a></li>
+          <li><a href="/articles/" hreflang="en">Artikel (Englisch)</a></li>
+          <li><a href="/play/" hreflang="en">Shop-Spiel</a></li>
+        </ul>
+      </nav>
+      <div class="foot-nav">
+        <p class="foot-title">Kontakt</p>
+        <ul>
+          <li><a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a></li>
+          <li><a href="https://www.linkedin.com/in/emanuel-rusu/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="/emanuel-rusu-cv.pdf" download>Lebenslauf (PDF, Englisch)</a></li>
+          <li><a href="/" hreflang="en" lang="en">English</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Rumänien &middot; <a href="/privacy/" hreflang="en">Datenschutz (Englisch)</a></p>
+      <p>REMTA Digital ist ein unabhängiges Unternehmen. Shopify ist eine Marke von Shopify Inc.; ich bin weder mit Shopify verbunden noch von Shopify empfohlen. Namen und Logos von Kunden gehören ihren Inhabern und dienen nur zur Beschreibung meiner bisherigen Arbeit.</p>
+    </div>
   </div>
 </footer>
 
