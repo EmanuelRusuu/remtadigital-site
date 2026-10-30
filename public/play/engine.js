@@ -120,45 +120,44 @@ export const APPS = {
   booster: { name: 'Speed Booster Pro', icon: '🚀', price: 9, perf: 7, hidden: true, text: 'Promises a faster store. Adds three more scripts to every page.' },
 };
 
-// Emanuel bills by the hour: €35 an hour for routine work, up to €50 for the most complex builds.
-// Each level: [fewest hours, most hours, € an hour], the estimate a client gets. The player pays
-// the top of the estimate when booking; how many hours the work really takes is settled then, and
-// the hours not needed come back when the project is done. Emanuel spends HOURS_PER_DAY hours a
-// game day on the store. need: the plan each level requires, if any. links: real stores where I
-// did this work (every slug is in the sitemap).
-export const HOURS_PER_DAY = 3, RATE_MIN = 35, RATE_MAX = 50;
+// Emanuel bills by the hour, 8 hours a working day: €35 an hour for routine work, up to €50 for the
+// most complex builds. Every project comes in two or three scopes, from a quick fix to the full
+// job: [name, hours in total, what the store gets]. A bigger scope costs more and does more; the
+// player can start small and upgrade later, paying only for the hours that are left. The effects
+// themselves live in stats() and simulateDay(), one value per scope. need: the plan each scope
+// requires, if any. links: real stores where I did this work (every slug is in the sitemap).
+export const HOURS_PER_DAY = 8, RATE_MIN = 35, RATE_MAX = 50;
 const daysFor = hours => Math.max(1, Math.ceil(hours / HOURS_PER_DAY));
-export const quote = ([lo, hi, rate]) => ({ lo, hi, rate, costLo: lo * rate, cost: hi * rate, daysLo: daysFor(lo), days: daysFor(hi) });
 export const PROJECTS = [
-  { id: 'design', icon: '🎨', name: 'Custom theme design', levels: [[24, 40, 35], [60, 90, 40], [120, 180, 50]], effect: ['+25 design, +5 trust', '+20 design, +5 trust', '+15 design, +5 trust'],
+  { id: 'design', icon: '🎨', name: 'Custom theme design', rate: 40, scopes: [['Brand styling', 24, '+25 design, +5 trust'], ['Custom sections', 80, '+45 design, +10 trust'], ['Full custom theme', 160, '+60 design, +15 trust']],
     text: 'A theme built around your brand instead of a free template.', links: [['/articles/football-club-website-on-one-shopify-theme/', 'A football club\'s whole website on one theme']] },
-  { id: 'speed', icon: '⚡', name: 'Speed optimisation', levels: [[8, 16, 35], [16, 32, 40], [32, 56, 50]], effect: ['+15 speed', '+12 speed', '+8 speed'],
+  { id: 'speed', icon: '⚡', name: 'Speed optimisation', rate: 40, scopes: [['Quick wins', 8, '+15 speed'], ['Scripts and fonts', 24, '+27 speed'], ['Full performance pass', 48, '+35 speed']],
     text: 'Smaller images, fewer and later scripts, faster pages.', links: [['/articles/from-16-mb-to-4-mb-product-page/', 'From 16 MB to 4 MB on one product page'], ['/articles/two-football-club-stores-faster/', 'Two football club stores, faster']] },
-  { id: 'seo', icon: '🔎', name: 'SEO foundations', levels: [[8, 16, 35], [16, 28, 40], [28, 48, 45]], effect: ['+18 SEO', '+14 SEO', '+10 SEO'],
+  { id: 'seo', icon: '🔎', name: 'SEO foundations', rate: 35, scopes: [['Titles and headings', 8, '+18 SEO'], ['Structured data', 24, '+32 SEO'], ['Full technical SEO', 48, '+42 SEO']],
     text: 'Clean titles and headings, structured data, sitemaps and pages Google can crawl.', links: [['/articles/six-stores-one-theme/', 'Structured data across six stores']] },
-  { id: 'search', icon: '🧭', name: 'Search and filters', levels: [[16, 28, 40], [40, 64, 50]], effect: ['Halves the big-catalogue penalty, +4% conversion', 'Removes the big-catalogue penalty, +4% conversion'],
+  { id: 'search', icon: '🧭', name: 'Search and filters', rate: 45, scopes: [['Filters', 16, 'Halves the big-catalogue penalty, +4% conversion'], ['Search that forgives typos', 48, 'No big-catalogue penalty, +8% conversion']],
     text: 'Fast search that forgives typos, and filters by colour, size and price.', links: [['/articles/meilisearch-for-shopify-colours-and-markets/', 'Meilisearch for colours and markets']] },
-  { id: 'cart', icon: '🛒', name: 'Cart and upsells', levels: [[12, 24, 35], [24, 40, 45]], effect: ['+10% items per order', '+10% items per order'],
+  { id: 'cart', icon: '🛒', name: 'Cart and upsells', rate: 40, scopes: [['Cart drawer with add-ons', 16, '+10% items per order'], ['Bundles that stay in sync', 40, '+20% items per order']],
     text: 'A cart drawer with add-ons and bundles that never drift out of sync.', links: [['/articles/one-jersey-one-cart-line/', 'One jersey, one cart line']] },
-  { id: 'consent', icon: '🍪', name: 'Consent-friendly tracking', levels: [[6, 12, 40]], effect: ['+6 speed, +3 trust, and a cookie banner can no longer break the theme'],
+  { id: 'consent', icon: '🍪', name: 'Consent-friendly tracking', rate: 40, scopes: [['Google tag after consent', 4, '+3 speed, +3 trust'], ['Theme code that survives blocked scripts', 12, '+6 speed, +3 trust, and a cookie banner can no longer break the store']],
     text: 'Tracking loads only after consent, and the theme code keeps working when a script is blocked.', links: [['/articles/when-a-cookie-banner-breaks-your-theme-javascript/', 'When a cookie banner breaks your theme'], ['/articles/load-the-google-tag-only-after-consent-on-shopify/', 'The Google tag, only after consent']] },
-  { id: 'fallback', icon: '🛟', name: 'Checkout safety net', levels: [[8, 16, 45]], effect: ['A payment outage no longer stops checkout'],
+  { id: 'fallback', icon: '🛟', name: 'Checkout safety net', rate: 45, scopes: [['A clear message when payment fails', 8, 'A payment outage costs a quarter of your sales instead of half'], ['Another way to pay', 16, 'A payment outage no longer stops checkout']],
     text: 'When a payment or credit check fails, customers see a clear message and another way to pay.', links: [['/articles/when-a-credit-check-outage-looks-like-a-decline/', 'When a credit check outage looks like a decline']] },
-  { id: 'markets', icon: '🌍', name: 'Languages and markets', levels: [[16, 32, 40], [16, 32, 45], [16, 32, 50]], need: [null, 'grow', 'advanced'], effect: ['German: +35% visitors', 'French: +35% visitors', 'Italian: +35% visitors'],
+  { id: 'markets', icon: '🌍', name: 'Languages and markets', rate: 40, need: [null, 'grow', 'advanced'], scopes: [['German', 24, '+35% visitors'], ['German and French', 48, '+70% visitors'], ['German, French and Italian', 72, '+105% visitors']],
     text: 'Properly translated pages, prices and SEO for each language.', links: [['/articles/one-allergen-three-languages/', 'One allergen, three languages']] },
-  { id: 'wishlist', icon: '❤️', name: 'Wishlist', levels: [[12, 20, 35]], effect: ['+25% returning visitors'],
+  { id: 'wishlist', icon: '❤️', name: 'Wishlist', rate: 35, scopes: [['Wishlist on the device', 12, '+12% returning visitors'], ['Wishlist in the customer account', 24, '+25% returning visitors']],
     text: 'A wishlist that survives the reload and follows customers into their account.', links: [['/articles/a-wishlist-that-survives-the-reload/', 'A wishlist that survives the reload']] },
-  { id: 'giftcards', icon: '🎁', name: 'Gift cards', levels: [[20, 32, 40]], effect: ['+5% items per order, and a stronger December'],
+  { id: 'giftcards', icon: '🎁', name: 'Gift cards', rate: 40, scopes: [['Online gift cards', 16, '+3% items per order'], ['Online and in the shop', 32, '+5% items per order, and a stronger December']],
     text: 'Gift cards that work online and in the shop.', links: [['/articles/gift-cards-from-the-shop-till-redeemed-online/', 'Gift cards from the shop till']] },
-  { id: 'accounts', icon: '🧾', name: 'Customer accounts and invoices', levels: [[16, 24, 40]], effect: ['+8 trust, +15% returning visitors'],
+  { id: 'accounts', icon: '🧾', name: 'Customer accounts and invoices', rate: 40, scopes: [['Order history', 12, '+4 trust, +8% returning visitors'], ['Order history and PDF invoices', 24, '+8 trust, +15% returning visitors']],
     text: 'Order history and PDF invoices in the customer account.', links: [['/articles/pdf-invoices-in-the-shopify-customer-account/', 'PDF invoices in the customer account']] },
-  { id: 'pricing', icon: '🏷️', name: 'Installation and bundle pricing', levels: [[24, 40, 45]], effect: ['High-ticket products convert 30% better'],
+  { id: 'pricing', icon: '🏷️', name: 'Installation and bundle pricing', rate: 45, scopes: [['Installation options', 16, 'High-ticket products convert 15% better'], ['Installation and bundles', 40, 'High-ticket products convert 30% better']],
     text: 'Installation options and bundles priced by discount logic, so the cart always shows the right total.', links: [['/articles/pricing-a-swim-spa-with-shopify-discounts/', 'Pricing a swim spa']] },
-  { id: 'apps', icon: '🧹', name: 'Replace apps with theme code', levels: [[24, 48, 45]], effect: ['Apps slow the store 65% less'],
+  { id: 'apps', icon: '🧹', name: 'Replace apps with theme code', rate: 45, scopes: [['The heaviest app', 16, 'Apps slow the store 35% less'], ['All of them', 40, 'Apps slow the store 65% less']],
     text: 'What your apps do, rebuilt inside the theme without their extra scripts.', links: [['/articles/tabs-that-hide-themselves/', 'Rebuilding a design on Dawn']] },
-  { id: 'erp', icon: '🔄', name: 'ERP and stock sync', levels: [[80, 160, 50]], need: ['advanced'], effect: ['Supplier lead times −40%, cheaper fulfilment and storage'],
+  { id: 'erp', icon: '🔄', name: 'ERP and stock sync', rate: 50, need: ['advanced', 'advanced'], scopes: [['Stock sync', 40, 'Supplier lead times −20%, storage 20% cheaper'], ['Stock, prices and orders', 100, 'Supplier lead times −40%, fulfilment 20% and storage 40% cheaper']],
     text: 'Stock, prices and orders synced with an ERP, so restocks happen on time.', links: [['/projects/ev-zug/', 'ERP-driven prices at EV Zug']] },
-  { id: 'checkout', icon: '💳', name: 'Checkout extensions', levels: [[32, 56, 50]], need: ['plus'], effect: ['+6% conversion, +5% items per order'],
+  { id: 'checkout', icon: '💳', name: 'Checkout extensions', rate: 50, need: ['plus', 'plus'], scopes: [['Delivery dates and trust badges', 16, '+3% conversion'], ['Dates, badges and upsells', 40, '+6% conversion, +5% items per order']],
     text: 'Delivery dates, upsells and trust signals right inside the checkout.' },
 ];
 export const project = id => PROJECTS.find(p => p.id === id);
@@ -171,7 +170,7 @@ export const SALE_DAYS = 4, SALE_COOLDOWN = 21, CAMPAIGN_COOLDOWN = 7;
 // ---- a new store
 export function newGame(name, seed = (Date.now() ^ Math.floor(Math.random() * 1e9)) >>> 0) {
   const s = {
-    v: 2, name, seed, rng: seed, day: 0, cash: 5000, plan: 'basic', apps: {}, done: {}, dev: [], ads: 0,
+    v: 3, name, seed, rng: seed, day: 0, cash: 5000, plan: 'basic', apps: {}, done: {}, dev: [], ads: 0,
     list: 0, customers: 0, rating: 0, reviews: 0, posts: 0, lastPost: -99, seoShift: 0, effects: [],
     campaign: { until: -1, last: -99 }, sale: { pct: 0, until: -1, last: -99 }, pending: null, lastEvent: 0, seen: {},
     history: [], log: [], news: [], totals: { revenue: 0, profit: 0, orders: 0, visitors: 0 }, got: {}, flags: {},
@@ -198,24 +197,26 @@ const addEffect = (s, e) => s.effects.push(e);
 
 const lv = (s, id) => s.done[id] || 0;
 const levelSum = (s, id, arr) => sum(arr.slice(0, lv(s, id)));
+// One value per scope, the first for a project not done yet: tier(s, 'erp', [1, .8, .6])
+const tier = (s, id, arr) => arr[Math.min(lv(s, id), arr.length - 1)];
 export const onOrder = p => sum(p.incoming.map(x => x.qty));
 export const avgDemand = p => mean(p.demand7);
-export const leadOf = (s, p) => Math.max(2, Math.round(p.lead * (s.done.erp ? .6 : 1)));
+export const leadOf = (s, p) => Math.max(2, Math.round(p.lead * tier(s, 'erp', [1, .8, .6])));
 export const stockValue = s => sum(s.products.map(p => (p.stock + onOrder(p)) * p.cost));
 export const netWorth = s => s.cash + stockValue(s);
 
 // ---- the store's scores, worked out from what has been built and installed
 export function stats(s) {
-  const d = s.done, a = s.apps;
+  const a = s.apps;
   const listed = s.products.filter(p => p.listed);
   const n = listed.length;
-  const appPerf = sum(Object.keys(a).map(k => APPS[k].perf)) * (d.apps ? .35 : 1);
+  const appPerf = sum(Object.keys(a).map(k => APPS[k].perf)) * tier(s, 'apps', [1, .65, .35]);
   const seo = clamp(8 + levelSum(s, 'seo', [18, 14, 10]) + Math.min(POST_LIMIT, s.posts) * 1.2 + s.seoShift, 0, 100);
-  const perf = clamp(55 + levelSum(s, 'speed', [15, 12, 8]) + (d.consent ? 6 : 0) - appPerf + addEff(s, 'perf'), 5, 100);
+  const perf = clamp(55 + levelSum(s, 'speed', [15, 12, 8]) + levelSum(s, 'consent', [3, 3]) - appPerf + addEff(s, 'perf'), 5, 100);
   const design = clamp(15 + levelSum(s, 'design', [25, 20, 15]) + (a.builder ? 10 : 0) - (a.upsell ? 3 : 0), 0, 100);
   const ratingBonus = s.reviews ? (s.rating - 4) * 30 : 0;
   const reviewBonus = Math.min(20, Math.log10(1 + s.reviews) * 7);
-  const trust = clamp(8 + design * .15 + lv(s, 'design') * 5 + (a.reviews ? 10 : 0) + (d.consent ? 3 : 0) + (d.accounts ? 8 : 0) + ratingBonus + reviewBonus + addEff(s, 'trust'), 0, 100);
+  const trust = clamp(8 + design * .15 + lv(s, 'design') * 5 + (a.reviews ? 10 : 0) + tier(s, 'consent', [0, 3, 3]) + tier(s, 'accounts', [0, 4, 8]) + ratingBonus + reviewBonus + addEff(s, 'trust'), 0, 100);
   const loadTime = .8 + (100 - perf) * .075;
   const catalogPenalty = n > 12 ? Math.min(.3, (n - 12) * .012) * (1 - lv(s, 'search') / 2) : 0;
   const parts = {
@@ -223,10 +224,10 @@ export function stats(s) {
     speed: clamp(1.22 - .09 * loadTime, .45, 1.15),
     trust: .65 + .5 * trust / 100,
     catalogue: (1 - catalogPenalty) * (1 + .04 * lv(s, 'search')),
-    extras: PLANS[s.plan].conv * (a.chat ? 1.05 : 1) * (a.popup ? .97 : 1) * (d.checkout ? 1.06 : 1),
+    extras: PLANS[s.plan].conv * (a.chat ? 1.05 : 1) * (a.popup ? .97 : 1) * tier(s, 'checkout', [1, 1.03, 1.06]),
   };
   const conv = parts.design * parts.speed * parts.trust * parts.catalogue * parts.extras;
-  const items = 1.25 + (a.upsell ? .08 : 0) + .1 * lv(s, 'cart') + (d.giftcards ? .05 : 0) + (d.checkout ? .05 : 0);
+  const items = 1.25 + (a.upsell ? .08 : 0) + .1 * lv(s, 'cart') + tier(s, 'giftcards', [0, .03, .05]) + tier(s, 'checkout', [0, 0, .05]);
   return { seo, perf, design, trust, loadTime, conv, parts, items, markets: 1 + .35 * lv(s, 'markets'), n, listed, catalogPenalty, appPerf, cal: calendar(s.day) };
 }
 
@@ -242,18 +243,18 @@ export function simulateDay(s) {
 
   // visitors by channel
   const n = st.n;
-  const organic = (50 + 1100 * (st.seo / 100) ** 2) * (1 + .06 * Math.max(0, n - 1) ** .8) * st.markets
+  const organic = (32 + 700 * (st.seo / 100) ** 2) * (1 + .06 * Math.max(0, n - 1) ** .8) * st.markets
     * (s.apps.translate && !s.done.markets ? 1.12 : 1) * mulEff(s, 'organic');
   const ads = s.cash > 0 ? s.ads : 0;
   const cpc = .38 * (bf ? 1.7 : 1) * (m >= 10 ? 1.25 : 1) * (1 + ads / 1500) ** .6;
-  const season = TRAFFIC_SEASON[m] * (bf ? 1.9 : 1) * (doy >= 359 ? .8 : 1) * (s.done.giftcards && m === 11 ? 1.1 : 1);
+  const season = TRAFFIC_SEASON[m] * (bf ? 1.9 : 1) * (doy >= 359 ? .8 : 1) * (m === 11 ? tier(s, 'giftcards', [1, 1, 1.1]) : 1);
   const tmul = season * mulEff(s, 'traffic') * between(s, .9, 1.1);
   const ch = {
     organic: organic * tmul,
-    launch: s.day < 45 ? 200 * (1 - s.day / 45) * tmul : 0,
+    launch: s.day < 45 ? 125 * (1 - s.day / 45) * tmul : 0,
     ads: ads / cpc * between(s, .95, 1.05),
     email: s.list * (.012 + (s.campaign.until >= s.day ? .07 : 0)) * tmul,
-    returning: s.customers * .003 * (s.apps.loyalty ? 1.4 : 1) * (s.done.wishlist ? 1.25 : 1) * (s.done.accounts ? 1.15 : 1) * tmul,
+    returning: s.customers * .003 * (s.apps.loyalty ? 1.4 : 1) * tier(s, 'wishlist', [1, 1.12, 1.25]) * tier(s, 'accounts', [1, 1.08, 1.15]) * tmul,
     social: s.lastOrders * Math.max(0, s.rating - 3.8) * tmul,
   };
   let visitors = 0, weighted = 0;
@@ -269,7 +270,7 @@ export function simulateDay(s) {
   let revenue = 0, cogs = 0, orders = 0, units = 0, handling = 0, refunds = 0, lost = 0, wanted = 0, score = 0;
   const top = [];
   st.listed.forEach((p, i) => {
-    const itemConv = .035 * (20 / p.msrp) ** .5 * (p.cat === 'big' && s.done.pricing ? 1.3 : 1);
+    const itemConv = .035 * (20 / p.msrp) ** .5 * (p.cat === 'big' ? tier(s, 'pricing', [1, 1.15, 1.3]) : 1);
     const o = poisson(s, weighted * interest[i] / totalInterest * catF * itemConv * convDay);
     const want = o ? Math.max(o, poisson(s, o * st.items)) : 0;
     const sold = Math.min(want, p.stock);
@@ -292,9 +293,9 @@ export function simulateDay(s) {
 
   // money. Stock is paid for when it is ordered, so cogs counts for profit but not for cash.
   const plan = PLANS[s.plan];
-  const fulfil = (orders * 1.2 + handling) * (s.done.erp ? .8 : 1);
+  const fulfil = (orders * 1.2 + handling) * tier(s, 'erp', [1, 1, .8]);
   const fees = revenue * plan.rate + orders * .3;
-  const holding = stockValue(s) * .0004 * (s.done.erp ? .6 : 1);
+  const holding = stockValue(s) * .0004 * tier(s, 'erp', [1, .8, .6]);
   const fixed = (plan.price + sum(Object.keys(s.apps).map(k => APPS[k].price))) / 30.4;
   const interestPaid = s.cash < 0 ? -s.cash * .0006 : 0;
   const costs = fulfil + fees + refunds + holding + fixed + ads + interestPaid;
@@ -324,10 +325,11 @@ export function simulateDay(s) {
   if (s.dev.length && --s.dev[0].left <= 0) {
     const job = s.dev.shift(), P = project(job.id);
     s.done[job.id] = job.level;
-    // Hours not needed come back. Jobs booked before estimates had ranges carry no hours.
-    const back = job.hours ? job.paid - job.hours * job.rate : 0;
+    // Jobs booked while estimates were ranges (paid the top, carry a rate) get unused hours back.
+    const back = job.paid && job.rate ? job.paid - job.hours * job.rate : 0;
     if (back > 0) { s.cash += back; s.spent -= back; }
-    note(s, `${P.icon} Emanuel finished ${P.name}${P.levels.length > 1 ? ` (level ${job.level})` : ''}${job.hours ? ` in ${job.hours} hours` : ''}: ${P.effect[job.level - 1]}.${back > 0 ? ` ${eur(back)} of the estimate comes back to you.` : ''}`, 'good');
+    const [scope, , effect] = P.scopes[job.level - 1];
+    note(s, `${P.icon} Emanuel finished ${P.name} (${scope}): ${effect}.${back > 0 ? ` ${eur(back)} of the estimate comes back to you.` : ''}`, 'good');
   }
 
   // demand drifts: some products warm up, others cool down
@@ -413,7 +415,7 @@ const EVENTS = [
       addEffect(s, { kind: 'organic', mul: d.good ? 1.15 : .85, until: s.day + 30 });
       return d.good ? 'Google update: rankings up.' : 'Google update: rankings down.';
     } },
-  { id: 'cookie', w: 1.5, min: 25, cool: 90, ok: s => !s.done.consent,
+  { id: 'cookie', w: 1.5, min: 25, cool: 90, ok: s => lv(s, 'consent') < 2,
     make() {
       return { title: '🍪 The cookie banner broke your store', text: 'A consent manager update now blocks one of your theme\'s script files. For many visitors the search, cart drawer and sliders stopped working, and conversion dropped by 40%.',
         choices: [{ label: `Emergency fix by Emanuel: ${RUSH.hours} hours at €${RUSH.rate}, done tomorrow`, cost: RUSH.cost }, { label: 'Wait for the app vendor (about a week)' }], link: ['/articles/when-a-cookie-banner-breaks-your-theme-javascript/', 'This happened on a real store'] };
@@ -425,11 +427,18 @@ const EVENTS = [
     } },
   { id: 'payment', w: 1.2, min: 30, cool: 100, ok: () => true,
     make(s) {
-      const safe = !!s.done.fallback;
-      return { title: '💳 A payment provider went down', text: safe ? 'An invoice and credit-check provider failed for two days. Your checkout safety net showed customers a clear message and another way to pay, so almost nobody noticed.' : 'An invoice and credit-check provider failed for two days. Customers saw what looked like a declined payment and left. Conversion halves until it is back.',
-        data: { safe }, choices: [{ label: 'OK' }], link: ['/articles/when-a-credit-check-outage-looks-like-a-decline/', 'This happened on a real store'] };
+      const net = lv(s, 'fallback'), mul = [.5, .75, 1][net];
+      const text = ['Customers saw what looked like a declined payment and left. Conversion halves until it is back.',
+        'Your checkout showed customers a clear message, so fewer of them gave up: conversion drops by a quarter until it is back.',
+        'Your checkout safety net showed customers a clear message and another way to pay, so almost nobody noticed.'][net];
+      return { title: '💳 A payment provider went down', text: `An invoice and credit-check provider failed for two days. ${text}`,
+        data: { mul }, choices: [{ label: 'OK' }], link: ['/articles/when-a-credit-check-outage-looks-like-a-decline/', 'This happened on a real store'] };
     },
-    resolve(s, d) { if (!d.safe) addEffect(s, { kind: 'conv', mul: .5, until: s.day + 1 }); return d.safe ? 'Payment outage: the safety net held.' : 'Payment outage: two weak days.'; } },
+    resolve(s, d) {
+      const mul = d.mul ?? (d.safe ? 1 : .5); // events saved before scopes carry safe instead of mul
+      if (mul < 1) addEffect(s, { kind: 'conv', mul, until: s.day + 1 });
+      return mul === 1 ? 'Payment outage: the safety net held.' : 'Payment outage: two weak days.';
+    } },
   { id: 'influencer', w: 2, min: 20, cool: 45, ok: s => listedOf(s).length >= 2,
     make(s) {
       const v = s.last ? s.last.visitors : 100;
@@ -486,7 +495,7 @@ const EVENTS = [
     resolve(s) { addEffect(s, { kind: 'traffic', mul: 1.8, until: s.day + 2 }); return 'Featured on a design blog.'; } },
   { id: 'appupdate', w: 1.2, min: 30, cool: 60, ok: s => Object.keys(s.apps).length >= 2,
     make(s) {
-      const hit = s.done.apps ? 3 : 10;
+      const hit = tier(s, 'apps', [10, 6, 3]);
       return { title: '🐢 An app update slowed the store', text: `One of your apps shipped an update that loads a 600 KB script on every page. Speed score −${hit} for ten days.`, data: { hit }, choices: [{ label: 'OK' }] };
     },
     resolve(s, d) { addEffect(s, { kind: 'perf', add: -d.hit, until: s.day + 9 }); return `An app update cost ${d.hit} speed points.`; } },
@@ -557,7 +566,7 @@ const MILESTONES = [
   ['stars', '4.8 stars from 50+ reviews', s => s.reviews >= 50 && s.rating >= 4.8],
   ['fast', 'Speed score 90 or more', s => stats(s).perf >= 90],
   ['plus', 'On the Plus plan', s => s.plan === 'plus'],
-  ['all', 'Every project with Emanuel finished', s => PROJECTS.every(P => lv(s, P.id) === P.levels.length)],
+  ['all', 'Every project with Emanuel finished in full', s => PROJECTS.every(P => lv(s, P.id) === P.scopes.length)],
 ];
 function award(s, id, name) {
   if (s.got[id] !== undefined) return;
@@ -609,25 +618,40 @@ export function startSale(s, pct) {
   note(s, `🏷️ ${Math.round(pct * 100)}% sale on everything for ${SALE_DAYS} days.`);
 }
 
+// A project's scopes as the player sees them: done, booked, or open with the hours and price left to
+// get there. The hours already done or booked are never charged twice.
 export function projectState(s, P) {
-  const done = lv(s, P.id), queued = s.dev.filter(j => j.id === P.id).length, next = done + queued;
-  const max = P.levels.length;
-  const need = next < max && P.need ? P.need[next] : null;
-  const q = next < max ? quote(P.levels[next]) : { lo: 0, hi: 0, rate: 0, costLo: 0, cost: 0, daysLo: 0, days: 0 };
-  return { done, queued, next, max, ...q, need: need && PLAN_ORDER.indexOf(s.plan) < PLAN_ORDER.indexOf(need) ? need : null };
+  const done = lv(s, P.id), jobs = s.dev.filter(j => j.id === P.id);
+  const next = Math.max(done, ...jobs.map(j => j.level)), max = P.scopes.length;
+  const options = P.scopes.map(([name, total, effect], i) => {
+    const level = i + 1, hours = level > next ? total - (next ? P.scopes[next - 1][1] : 0) : 0, need = P.need && P.need[i];
+    return { level, name, total, effect, hours, days: hours ? daysFor(hours) : 0, cost: hours * P.rate,
+      state: level <= done ? 'done' : level <= next ? 'booked' : 'open', need: need && PLAN_ORDER.indexOf(s.plan) < PLAN_ORDER.indexOf(need) ? need : null };
+  });
+  const up = options[next]; // the next scope up, for the balance check
+  return { done, queued: jobs.length, next, max, rate: P.rate, options, cost: up ? up.cost : 0, need: up ? up.need : null };
 }
-export function bookProject(s, id) {
-  const P = project(id), ps = projectState(s, P);
-  if (ps.next >= ps.max) return;
-  if (ps.need) return `This needs the ${PLANS[ps.need].name} plan.`;
+export function bookProject(s, id, level) {
+  const P = project(id), ps = projectState(s, P), o = ps.options[(level || ps.next + 1) - 1];
+  if (!o || o.state !== 'open') return;
+  if (o.need) return `This needs the ${PLANS[o.need].name} plan.`;
   if (s.dev.length >= 3) return 'Emanuel\'s queue is full. He works on one project at a time.';
-  if (s.cash < ps.cost) return `You need ${eur(ps.cost)}.`;
-  s.cash -= ps.cost;
-  s.spent = (s.spent || 0) + ps.cost;
-  // The real hours land somewhere in the estimate, most often near the middle.
-  const hours = Math.round(ps.lo + (ps.hi - ps.lo) * (rand(s) + rand(s)) / 2), days = daysFor(hours);
-  s.dev.push({ id, level: ps.next + 1, left: days, total: days, hours, rate: ps.rate, paid: ps.cost });
-  note(s, `${P.icon} Booked Emanuel: ${P.name}${ps.max > 1 ? ` (level ${ps.next + 1})` : ''}, estimated ${ps.lo}–${ps.hi} hours at €${ps.rate} an hour.`);
+  if (s.cash < o.cost) return `You need ${eur(o.cost)}.`;
+  s.cash -= o.cost;
+  s.spent = (s.spent || 0) + o.cost;
+  s.dev.push({ id, level: o.level, left: o.days, total: o.days, hours: o.hours });
+  note(s, `${P.icon} Booked Emanuel: ${P.name} (${o.name}), ${o.hours} hours at €${P.rate} an hour.`);
+}
+// Saves from before scopes: projects that had a single level then are the full scope now.
+export function upgradeSave(s) {
+  if (s.v === 2) {
+    for (const id of ['consent', 'fallback', 'wishlist', 'giftcards', 'accounts', 'pricing', 'apps', 'erp', 'checkout']) {
+      if (s.done[id] === 1) s.done[id] = 2;
+      for (const j of s.dev) if (j.id === id && j.level === 1) j.level = 2;
+    }
+    s.v = 3;
+  }
+  return s;
 }
 export function installApp(s, id) {
   if (!APPS[id] || s.apps[id]) return;

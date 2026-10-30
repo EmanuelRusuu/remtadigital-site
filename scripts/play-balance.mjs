@@ -13,8 +13,9 @@ const idle = () => {};
 const adsOnly = s => { if (s.day === 0) G.setAds(s, 150); };
 
 // A careful player: fixes the store before buying traffic, grows the catalogue as search allows.
-const ORDER = ['design', 'speed', 'seo', 'consent', 'cart', 'seo', 'design', 'search', 'speed', 'markets', 'wishlist', 'accounts', 'search', 'giftcards', 'fallback',
-  'markets', 'seo', 'design', 'apps', 'pricing', 'speed', 'cart', 'markets', 'erp', 'checkout'];
+// Each mention of a project books its next scope up.
+const ORDER = ['design', 'speed', 'seo', 'consent', 'cart', 'seo', 'design', 'search', 'speed', 'consent', 'markets', 'wishlist', 'accounts', 'search', 'giftcards', 'fallback',
+  'markets', 'seo', 'wishlist', 'accounts', 'fallback', 'design', 'apps', 'pricing', 'speed', 'cart', 'giftcards', 'apps', 'markets', 'pricing', 'erp', 'checkout', 'erp', 'checkout'];
 function careful(s) {
   const st = G.stats(s), last = s.last, month = avg(s.history, 'r', 30) * 30;
   const reserve = 300 + s.day * 2;

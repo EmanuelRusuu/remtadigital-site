@@ -42,7 +42,7 @@ const $ = sel => root.querySelector(sel);
 
 function store(fn) { try { return fn(); } catch (e) { return null; } }
 const save = () => store(() => localStorage.setItem(KEY, JSON.stringify(s)));
-const load = () => store(() => { const x = JSON.parse(localStorage.getItem(KEY)); return x && x.v === 2 && Array.isArray(x.products) && Array.isArray(x.history) ? x : null; });
+const load = () => store(() => { const x = JSON.parse(localStorage.getItem(KEY)); return x && (x.v === 2 || x.v === 3) && Array.isArray(x.products) && Array.isArray(x.history) ? G.upgradeSave(x) : null; });
 const best = () => Number(store(() => localStorage.getItem(BEST))) || 0;
 
 const svg = (d, cls = '', box = '0 0 20 20') => `<svg viewBox="${box}" aria-hidden="true"${cls ? ` class="${cls}"` : ''}>${d}</svg>`;
@@ -186,7 +186,7 @@ const PANELS = {
           <div class="sf-total"><dt>Net worth</dt><dd>${eur(G.netWorth(s))}</dd></div>
           <div><dt>Rating</dt><dd>${s.reviews ? `★ ${s.rating.toFixed(1)} <small>(${G.fmt(s.reviews)})</small>` : '<small>No reviews yet</small>'}</dd></div>
         </dl></section>
-        <section class="sf-card"><h3>Emanuel</h3>${dev ? `<p><strong>${P.icon} ${P.name}</strong>${P.levels.length > 1 ? `, level ${dev.level}` : ''}</p><div class="sf-bar sf-progress"><i style="width:${(1 - dev.left / dev.total) * 100}%"></i></div><p class="sf-sub">${plural(dev.left, 'day', 'days')} to go${s.dev.length > 1 ? `, then ${s.dev.slice(1).map(j => G.project(j.id).name).join(' and ')}` : ''}.</p>`
+        <section class="sf-card"><h3>Emanuel</h3>${dev ? `<p><strong>${P.icon} ${P.name}</strong>, ${P.scopes[dev.level - 1][0].toLowerCase()}</p><div class="sf-bar sf-progress"><i style="width:${(1 - dev.left / dev.total) * 100}%"></i></div><p class="sf-sub">${plural(dev.left, 'day', 'days')} to go${s.dev.length > 1 ? `, then ${s.dev.slice(1).map(j => G.project(j.id).name).join(' and ')}` : ''}.</p>`
           : `<p class="sf-muted">Not working on anything for you right now.</p><button type="button" class="sf-btn sf-btn-sm sf-btn-outline" data-act="go" data-page="emanuel">See projects</button>`}</section>
         <section class="sf-card"><h3>Milestones</h3><ul class="sf-miles">${G.milestoneList().map(([id, name]) => `<li class="${s.got[id] !== undefined ? 'is-got' : ''}">${s.got[id] !== undefined ? '🏆' : '○'} ${name}</li>`).join('')}</ul></section>
       </div>
@@ -269,7 +269,7 @@ const PANELS = {
   },
 
   customers() {
-    const L = s.last, queued = id => s.dev.some(j => j.id === id);
+    const L = s.last, built = id => s.done[id] ? G.project(id).scopes[s.done[id] - 1][0] : s.dev.some(j => j.id === id) ? 'Booked' : false;
     const lever = (name, how, on, go, label) => `<tr><td><strong>${name}</strong><span class="sf-sub">${how}</span></td><td>${on ? badge(on === true ? 'On' : on, 'success') : badge('Not yet')}</td>
       <td class="sf-num">${on ? '' : `<button type="button" class="sf-link" data-act="go" data-page="${go}">${label}</button>`}</td></tr>`;
     return `${head('Customers', 'People who bought before come back by themselves; subscribers come when you send a newsletter.')}
@@ -282,8 +282,8 @@ const PANELS = {
     <div class="sf-cols">
       <section class="sf-card is-flush"><h3>What brings customers back</h3><table class="sf-table"><tbody>
         ${lever('Loyalty points', 'App: +40% returning customers', !!s.apps.loyalty, 'apps', 'Apps')}
-        ${lever('Wishlist', 'Project with Emanuel: +25% returning visitors', s.done.wishlist ? 'Built' : queued('wishlist') ? 'Booked' : false, 'emanuel', 'Book')}
-        ${lever('Customer accounts and invoices', 'Project with Emanuel: +15% returning visitors, +8 trust', s.done.accounts ? 'Built' : queued('accounts') ? 'Booked' : false, 'emanuel', 'Book')}
+        ${lever('Wishlist', 'Project with Emanuel: up to +25% returning visitors', built('wishlist'), 'emanuel', 'Book')}
+        ${lever('Customer accounts and invoices', 'Project with Emanuel: up to +15% returning visitors, +8 trust', built('accounts'), 'emanuel', 'Book')}
         ${lever('Email pop-up', 'App: five times more subscribers', !!s.apps.popup, 'apps', 'Apps')}
         ${lever('Newsletter', 'Free: a burst of visitors who buy more often', s.campaign.last >= 0 ? `Sent ${G.calendar(s.campaign.last).label}` : false, 'marketing', 'Marketing')}
       </tbody></table></section>
@@ -372,28 +372,31 @@ const PANELS = {
   },
 
   emanuel() {
-    const queue = s.dev.map((j, i) => { const P = G.project(j.id); return `<li>${P.icon} <strong>${P.name}</strong>${P.levels.length > 1 ? `, level ${j.level}` : ''} · ${i === 0 ? `${plural(j.left, 'day', 'days')} left` : `waiting, ${plural(j.total, 'day', 'days')}`}</li>`; }).join('');
+    const queue = s.dev.map((j, i) => { const P = G.project(j.id); return `<li>${P.icon} <strong>${P.name}</strong>, ${P.scopes[j.level - 1][0].toLowerCase()} · ${i === 0 ? `${plural(j.left, 'day', 'days')} left` : `waiting, ${plural(j.total, 'day', 'days')}`}</li>`; }).join('');
     return `${head('Hire Emanuel', 'Projects take longer than apps and cost more up front, but they are built into the theme.')}
     <section class="sf-card sf-me">
       <picture><source type="image/avif" srcset="/assets/img/emanuel-rusu-136.avif"><source type="image/webp" srcset="/assets/img/emanuel-rusu-136.webp"><img src="/assets/img/emanuel-rusu.jpg" alt="Emanuel Rusu" width="68" height="68"></picture>
-      <div><h3>Hire me for your store</h3><p>I bill by the hour: €${G.RATE_MIN} an hour for routine work, up to €${G.RATE_MAX} for the most complex builds. Every project comes with an estimate in hours. You pay the top of the estimate when you book, and the hours I don't need come back to you when I finish. I spend about ${['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'][G.HOURS_PER_DAY - 1]} hours a day on your store, next to other clients, and take one project at a time. You can book up to three; I start the next as soon as one is finished.</p>
+      <div><h3>Hire me for your store</h3><p>I bill by the hour, €${G.RATE_MIN} for routine work up to €${G.RATE_MAX} for the most complex builds, and a working day is eight hours. Every project comes in scopes: a quick fix that helps a little, or the full job that helps the most. Start small and upgrade later; you only pay for the hours that are left. You pay the quote when you book. I take one project at a time, and you can book up to three.</p>
       <dl class="sf-me-facts"><div><dt>Rate</dt><dd>€${G.RATE_MIN}–${G.RATE_MAX} an hour</dd></div><div><dt>Queue</dt><dd>${s.dev.length} of 3</dd></div><div><dt>Paid so far</dt><dd>${eur(s.spent || 0)}</dd></div></dl>
       ${queue ? `<ol class="sf-queue">${queue}</ol>` : ''}</div>
     </section>
     <div class="sf-projects">${G.PROJECTS.map(P => {
-      const ps = G.projectState(s, P), full = ps.next >= ps.max, working = s.dev[0] && s.dev[0].id === P.id;
-      const reason = full ? '' : ps.need ? `Needs the ${G.PLANS[ps.need].name} plan` : s.dev.length >= 3 ? 'Queue is full' : s.cash < ps.cost ? `You need ${eur(ps.cost)}` : '';
-      const state = ps.done === ps.max ? badge('Done', 'success') : working ? badge('In progress', 'info') : ps.queued ? badge('Booked', 'warning') : ps.done ? badge(`Level ${ps.done} of ${ps.max}`, 'success') : '';
-      const pips = ps.max > 1 ? `<span class="sf-pips" aria-label="Level ${ps.done} of ${ps.max}">${Array.from({ length: ps.max }, (_, i) => `<i class="${i < ps.done ? 'is-done' : i < ps.next ? 'is-queued' : ''}"></i>`).join('')}</span>` : '';
+      const ps = G.projectState(s, P), working = s.dev[0] && s.dev[0].id === P.id;
+      const state = ps.done === ps.max ? badge('Full scope', 'success') : working ? badge('In progress', 'info') : ps.queued ? badge('Booked', 'warning') : '';
+      const pips = `<span class="sf-pips" aria-label="${ps.done} of ${ps.max} scopes done">${ps.options.map(o => `<i class="${o.state === 'done' ? 'is-done' : o.state === 'booked' ? 'is-queued' : ''}"></i>`).join('')}</span>`;
+      const scope = o => {
+        const reason = o.need ? `Needs the ${G.PLANS[o.need].name} plan` : s.dev.length >= 3 ? 'Queue is full' : s.cash < o.cost ? `You have ${eur(s.cash)}` : '';
+        const upgrade = o.state === 'open' && o.hours < o.total;
+        return `<li class="sf-scope is-${o.state}"><div class="sf-scope-main"><strong>${o.name}</strong><span class="sf-effect">${o.effect}</span>
+          <span class="sf-sub">${o.state === 'done' ? 'Done' : o.state === 'booked' ? 'Booked' : `${upgrade ? 'Upgrade: ' : ''}${o.hours} hours · ${plural(o.days, 'day', 'days')}${reason ? ` · ${reason}` : ''}`}</span></div>
+          <div class="sf-scope-buy">${o.state === 'open' ? `<strong>${eur(o.cost)}</strong><button type="button" class="sf-btn sf-btn-sm${o.level < ps.max ? ' sf-btn-outline' : ''}" data-act="book" data-id="${P.id}" data-level="${o.level}" data-key="bk${P.id}${o.level}" ${reason ? 'disabled' : ''} aria-label="Book ${esc(P.name)}, ${esc(o.name)}, ${eur(o.cost)}">Book</button>` : o.state === 'done' ? badge('Done', 'success') : badge('Booked', 'warning')}</div></li>`;
+      };
       return `<article class="sf-project${ps.done === ps.max ? ' is-done' : ''}">
         <div class="sf-item-top"><span class="sf-thumb" aria-hidden="true">${P.icon}</span><span class="sf-row">${pips}${state}</span></div>
         <h4>${P.name}</h4>
-        <p>${P.text}</p>
-        <p class="sf-effect">${full ? `${ps.done === ps.max ? 'Done' : 'Booked'}${ps.max > 1 ? `: all ${ps.max} levels` : ''}.` : `${ps.max > 1 ? `Level ${ps.next + 1}: ` : ''}${P.effect[ps.next]}`}</p>
-        ${full ? '' : `<dl class="sf-quote"><div><dt>Estimate</dt><dd>${ps.lo}–${ps.hi} hours</dd></div><div><dt>Rate</dt><dd>€${ps.rate} an hour</dd></div>
-          <div><dt>Takes</dt><dd>${ps.daysLo === ps.days ? plural(ps.days, 'day', 'days') : `${ps.daysLo}–${ps.days} days`}</dd></div><div class="sf-total"><dt>Price</dt><dd>${eur(ps.costLo)}–${G.fmt(ps.cost)}</dd></div></dl>`}
-        <div class="sf-foot">${full ? '' : `<button type="button" class="sf-btn sf-btn-sm" data-act="book" data-id="${P.id}" data-key="bk${P.id}" ${reason ? 'disabled' : ''}>Book Emanuel · pay ${eur(ps.cost)}</button>${reason ? `<p class="sf-sub">${reason}.</p>` : ''}`}
-          ${realLinks(P)}</div>
+        <p>${P.text} <span class="sf-rate">€${P.rate} an hour</span></p>
+        <ul class="sf-scopes">${ps.options.map(scope).join('')}</ul>
+        ${realLinks(P)}
       </article>`;
     }).join('')}</div>`;
   },
@@ -565,7 +568,7 @@ const ACTIONS = {
   campaign: () => G.sendCampaign(s),
   post: () => G.writePost(s),
   sale: b => G.startSale(s, +b.dataset.pct),
-  book: b => G.bookProject(s, b.dataset.id),
+  book: b => G.bookProject(s, b.dataset.id, +b.dataset.level),
   install: b => G.installApp(s, b.dataset.id),
   uninstall: b => G.removeApp(s, b.dataset.id),
   plan: b => G.setPlan(s, b.dataset.id),
