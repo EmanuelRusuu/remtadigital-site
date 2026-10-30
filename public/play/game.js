@@ -1,8 +1,8 @@
 // Storefront: the page around the engine. Draws the store, runs the clock and saves the game in
 // this browser's localStorage. Nothing is sent anywhere.
-// The game lives in a shadow root: the page carries AdSense auto ads, and auto ads must never be
-// placed inside a panel that is redrawn every game day. The how-to above and the notes below are
-// plain text, so an ad next to the game stays well clear of its buttons.
+// The game lives in a shadow root, so no ad (auto ads are excluded on /play/ in AdSense, but just
+// in case) can ever be placed inside a panel that is redrawn every game day. The how-to above and
+// the notes below are plain text, so the ad unit under the game stays well clear of its buttons.
 import * as G from './engine.js';
 
 const KEY = 'storefront-v1', BEST = 'storefront-best';

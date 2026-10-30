@@ -379,7 +379,7 @@ ${footerHtml}
 projects.forEach((p, i) => write(`public/projects/${p.slug}/index.html`, page(p, i)));
 
 // ---- articles
-// Google AdSense (auto ads) runs on article pages and the game page; the portfolio and CV stay ad-free.
+// Google AdSense runs on article pages (auto ads) and the game page (one manual unit); the portfolio and CV stay ad-free.
 const ADSENSE = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>';
 // alternates: { en: url, de: url } for pages that exist in both languages (hreflang, x-default is English).
 const hreflang = alt => alt ? Object.entries(alt).map(([l, u]) => `\n<link rel="alternate" hreflang="${l}" href="${u}">`).join('') + `\n<link rel="alternate" hreflang="x-default" href="${alt.en}">` : '';
@@ -562,9 +562,9 @@ ${pageEnd}`);
 
 // ---- Storefront, the store simulator game. The game itself is hand-written in public/play/
 // (engine.js, game.js, game.css); this only builds the page around it.
-// Ads: game.js draws the game inside a shadow root, so auto ads can never be placed inside the game
-// (which redraws every game day), and puts the notes below and the how-to above it, so any ad
-// next to the game sits at least 150 px from its controls, as AdSense asks for game pages.
+// Ads: /play/ is excluded from auto ads in AdSense (no anchor or side rails over the game); one
+// manual unit sits below the game's notes, at least 150 px from its controls as AdSense asks for
+// game pages. game.js also draws the game inside a shadow root, so no ad can ever end up inside it.
 write('public/play/index.html', `${pageHead({ title: 'Storefront: a Shopify store simulator game | Emanuel Rusu', description: 'Run a Shopify store for a year: pick products from a supplier hub of 40, set prices, keep stock, buy ads and hire a developer to make the store faster and better at selling. Free, in your browser.', url: `${SITE}/play/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', ads: true, preload: '<link rel="preload" href="/play/game.css" as="style">' })}
 <body class="play-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
@@ -592,6 +592,12 @@ ${headerHtml}
         </section>
       </template>
     </div>
+  </div>
+  <div class="wrap play-ad">
+    <p class="play-ad-label">Advertisement</p>
+    <!-- AdSense unit "Storefront game - below the game"; auto ads are excluded on /play/ in AdSense -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2728164635897891" data-ad-slot="9979168961" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 ${contactSection('Want this for a real store?')}
   <script type="module" src="/play/game.js"></script>
