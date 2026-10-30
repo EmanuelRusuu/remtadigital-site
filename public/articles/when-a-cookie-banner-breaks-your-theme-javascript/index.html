@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="google-adsense-account" content="ca-pub-2728164635897891">
+<title>When a cookie banner breaks your theme's JavaScript | Emanuel Rusu</title>
+<meta name="description" content="On a Swiss store the header search stopped suggesting products for some visitors. The cause was a consent manager blocking one script bundle, and one long jQuery ready handler that fell over at its first line. How I found it, and why I used feature checks instead of try/catch.">
+<meta name="theme-color" content="#1d5e6b">
+<meta property="og:title" content="When a cookie banner breaks your theme's JavaScript | Emanuel Rusu">
+<meta property="og:description" content="On a Swiss store the header search stopped suggesting products for some visitors. The cause was a consent manager blocking one script bundle, and one long jQuery ready handler that fell over at its first line. How I found it, and why I used feature checks instead of try/catch.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://remtadigital.com/articles/when-a-cookie-banner-breaks-your-theme-javascript/">
+<meta property="og:image" content="https://remtadigital.com/articles/when-a-cookie-banner-breaks-your-theme-javascript/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://remtadigital.com/articles/when-a-cookie-banner-breaks-your-theme-javascript/">
+<link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="alternate" type="application/rss+xml" title="Articles by Emanuel Rusu" href="/articles/feed.xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"When a cookie banner breaks your theme's JavaScript","description":"On a Swiss store the header search stopped suggesting products for some visitors. The cause was a consent manager blocking one script bundle, and one long jQuery ready handler that fell over at its first line. How I found it, and why I used feature checks instead of try/catch.","datePublished":"2026-10-30","dateModified":"2026-10-30","articleSection":"Guide","keywords":"JavaScript, Consent, Debugging, Themes","image":"https://remtadigital.com/articles/when-a-cookie-banner-breaks-your-theme-javascript/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/when-a-cookie-banner-breaks-your-theme-javascript/","inLanguage":"en","author":{"@type":"Person","@id":"https://remtadigital.com/#person","name":"Emanuel Rusu","url":"https://remtadigital.com/"},"publisher":{"@type":"Organization","@id":"https://remtadigital.com/#business","name":"REMTA Digital","logo":{"@type":"ImageObject","url":"https://remtadigital.com/assets/img/apple-touch-icon.png"}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://remtadigital.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://remtadigital.com/articles/"},{"@type":"ListItem","position":3,"name":"When a cookie banner breaks your theme's JavaScript","item":"https://remtadigital.com/articles/when-a-cookie-banner-breaks-your-theme-javascript/"}]}]}</script>
+</head>
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="REMTA Digital, home"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1d5e6b"/><path d="M18 48V16h12a9 9 0 0 1 0 18H18m10 0 10 14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="44" y="16" width="5" height="32" rx="2.5" fill="#8fd0d8"/></svg><span class="logo-word"><b>REMTA</b> <span>Digital</span></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Main">
+      <a href="/#cases">Case studies</a>
+      <a href="/#work">Work</a>
+      <a href="/articles/">Articles</a>
+      <a href="/#services">Services</a>
+      <a href="/#working-together">Working together</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+      <a class="nav-lang" href="/de/" hreflang="de" lang="de">Deutsch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>Article</span></nav>
+    <header class="article-head">
+      <p class="post-meta"><time datetime="2026-10-30">30 October 2026</time> &middot; 3 min read</p>
+      <h1>When a cookie banner breaks your theme's JavaScript</h1>
+      <p class="lead">On a Swiss store the header search stopped suggesting products for some visitors. The cause was a consent manager blocking one script bundle, and one long jQuery ready handler that fell over at its first line. How I found it, and why I used feature checks instead of try/catch.</p>
+      <p class="byline"><picture><source type="image/avif" srcset="/assets/img/emanuel-rusu-80.avif"><source type="image/webp" srcset="/assets/img/emanuel-rusu-80.webp"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"></picture> <span>Emanuel Rusu, Shopify developer</span></p>
+    </header>
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#what-was-going-on">What was going on</a></li><li><a href="#reproduce-it-before-fixing-it">Reproduce it before fixing it</a></li><li><a href="#why-not-one-big-try-catch">Why not one big try/catch</a></li><li><a href="#worth-checking-in-your-own-theme">Worth checking in your own theme</a></li><li><a href="#further-reading">Further reading</a></li></ol>
+    </nav>
+    <div class="article-body">
+      <p>The report was short: the search box in the header no longer suggests products. Not for everyone, and not on every visit. On a Swiss B2B store I maintain, this turned out to be a cookie banner, a script bundle and a single line of JavaScript, and the fix took more thinking than code.</p>
+
+<h2 id="what-was-going-on">What was going on</h2>
+<p>The theme loads its third-party libraries (a slider, a lightbox, a scroll helper and a polyfill) in one bundle, <code>vendors.js</code>. Its own code lives in <code>app.js</code>, which starts with one long jQuery ready handler: about 800 lines that set up the header, the search suggestions, the cart, the sliders and everything else.</p>
+<p>The store's consent manager runs in automatic blocking mode: it holds back scripts it thinks may set cookies until the visitor agrees. When it held back <code>vendors.js</code>, jQuery itself was still there, because the theme loads it inline, so the ready handler ran as usual. Right at the top, it patched the slider library:</p>
+<pre><code>var oldCreate = window.Flickity.prototype._create;</code></pre>
+<p><code>window.Flickity</code> did not exist, the line threw a <code>TypeError</code>, and JavaScript skipped the rest of the handler. In my test, with the bundle blocked only one initialiser out of 26 still ran. The search suggestions were just the most visible of the 25 that did not.</p>
+
+<h2 id="reproduce-it-before-fixing-it">Reproduce it before fixing it</h2>
+<p>"Sometimes broken" bugs get much easier once you can switch them on. Chrome DevTools can block a single request: right-click <code>vendors.js</code> in the Network tab and choose <em>Block request URL</em>, then reload. The error appeared every time, and the search went quiet.</p>
+<p>I then tested four cases and wrote the results down, checking something you can see on the page (the search suggestion wrapper appearing in the DOM), not just the console:</p>
+<ul>
+  <li>bundle loaded, before the fix: no errors, 26 initialisers, suggestions work;</li>
+  <li>bundle blocked, before the fix: <code>TypeError</code>, 1 initialiser, no suggestions;</li>
+  <li>bundle loaded, after the fix: no errors, 26, suggestions work;</li>
+  <li>bundle blocked, after the fix: no errors, 26, suggestions work.</li>
+</ul>
+
+<h2 id="why-not-one-big-try-catch">Why not one big try/catch</h2>
+<p>Wrapping the whole handler in <code>try/catch</code> would have silenced the error, and every future error with it. Instead I went through the handler and found every place that used something from the bundle. It was not one place but six: the slider patch, the polyfill call, the lightbox defaults, the lightbox plugin, the scroll helper and the slider's jQuery plugin. Each got a check for exactly the library it needs:</p>
+<pre><code>// Flickity comes from vendors.js, which a consent manager can block.
+if (window.Flickity) {
+  var oldCreate = window.Flickity.prototype._create;
+  // ...patch as before
+}
+
+if ($.fn.fancybox) {
+  $('.lightbox[rel="gallery"]').fancybox();
+}</code></pre>
+<p class="code-note">Shortened. One call further down needed no guard, because it only runs when the lightbox is already open, which cannot happen if the lightbox never loaded.</p>
+<p>The comment matters as much as the check. The next developer who sees <code>if (window.Flickity)</code> should know why it is there, so they do not tidy it away.</p>
+
+<h2 id="worth-checking-in-your-own-theme">Worth checking in your own theme</h2>
+<ul>
+  <li><strong>Does your consent tool block scripts automatically?</strong> If so, block each of your theme's script files in DevTools, one at a time, and see what still works.</li>
+  <li><strong>Is there one giant ready or init function?</strong> One missing dependency at the top takes down everything below it. Independent features should start independently.</li>
+  <li><strong>Guard by feature, not by error.</strong> A check that names the library it protects keeps real bugs visible.</li>
+</ul>
+      <section class="further">
+        <h2 id="further-reading">Further reading</h2>
+        <ul><li><a class="out" href="https://support.cookiebot.com/hc/en-us/articles/11438730619804-How-does-auto-blocking-work" target="_blank" rel="noopener noreferrer">Cookiebot: how does auto blocking work</a></li><li><a class="out" href="https://api.jquery.com/ready/" target="_blank" rel="noopener noreferrer">jQuery .ready()</a></li><li><a class="out" href="https://developer.chrome.com/docs/devtools/network-request-blocking" target="_blank" rel="noopener noreferrer">Chrome DevTools: block network requests</a></li></ul>
+      </section>
+    </div>
+    <div class="article-foot">
+      
+      <ul class="tags"><li>JavaScript</li><li>Consent</li><li>Debugging</li><li>Themes</li></ul>
+      
+    </div>
+  </article>
+
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>More articles</h2>
+      <div class="posts">
+        <article class="post">
+          <p class="post-meta"><span class="post-cat">Guide, part 1</span> &middot; <time datetime="2026-10-12">12 October 2026</time> &middot; 4 min read</p>
+          <h3><a href="/articles/editing-shopify-themes-1-theme-editor/">Editing a Shopify theme, part 1: the theme editor, safely</a></h3>
+          <p>There are four ways to change a Shopify theme, from clicking in the theme editor to a full Git workflow. Part 1 covers the one every store owner should master first, and the habit that makes all the others safe.</p>
+          <a class="case-link" href="/articles/editing-shopify-themes-1-theme-editor/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><span class="post-cat">Guide, part 2</span> &middot; <time datetime="2026-10-12">12 October 2026</time> &middot; 3 min read</p>
+          <h3><a href="/articles/editing-shopify-themes-2-code-editor/">Editing a Shopify theme, part 2: the code editor in the admin</a></h3>
+          <p>The quickest way into a theme's code needs nothing but a browser. Where to find it, what each folder does, a small section you can build in five minutes, and how to undo a file you broke.</p>
+          <a class="case-link" href="/articles/editing-shopify-themes-2-code-editor/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><span class="post-cat">Guide, part 3</span> &middot; <time datetime="2026-10-12">12 October 2026</time> &middot; 3 min read</p>
+          <h3><a href="/articles/editing-shopify-themes-3-shopify-cli/">Editing a Shopify theme, part 3: working locally with Shopify CLI</a></h3>
+          <p>Shopify CLI gives you the theme on your own computer, your own editor and a live preview that reloads as you type. Installing it, the commands that matter, and the one mistake that wipes a merchant's changes.</p>
+          <a class="case-link" href="/articles/editing-shopify-themes-3-shopify-cli/">Read the article</a>
+        </article>
+</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap narrow center">
+      <h2>Want something like this for your store?</h2>
+      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania.</p>
+    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
+    <p><a href="/privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>

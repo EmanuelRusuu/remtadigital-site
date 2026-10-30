@@ -1,0 +1,48 @@
+<!--
+{
+  "title": "Gift cards from the shop till, redeemed in the Shopify cart",
+  "summary": "House of Jeans sells gift cards in its Swiss stores, and customers wanted to spend them online too. How the cart checks a card against the till system, splits several cards over one order, checks them again on every page load, and still lets the shopper pay if something fails.",
+  "date": "2026-10-30",
+  "order": 43,
+  "category": "Case note",
+  "project": "house-of-jeans",
+  "tags": ["Gift cards", "Cart", "Draft orders", "JavaScript"],
+  "links": [
+    { "title": "DraftOrder object (Admin GraphQL API)", "url": "https://shopify.dev/docs/api/admin-graphql/latest/objects/DraftOrder" },
+    { "title": "Cart API: GET /cart.js", "url": "https://shopify.dev/docs/api/ajax/reference/cart" },
+    { "title": "Window.sessionStorage (MDN)", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage" },
+    { "title": "Custom elements (MDN)", "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements" }
+  ]
+}
+-->
+<p><a href="/projects/house-of-jeans/">House of Jeans</a> is a Swiss jeans retailer with physical stores and a Shopify store. Its gift cards are sold at the till, and they live in the till system, not in Shopify. Customers who had one in their wallet wanted to spend it online as well. I built the storefront side of that: a gift card field in the cart drawer and on the cart page, with the whole flow in German.</p>
+
+<h2>One balance, one place</h2>
+<p>The tempting shortcut is to copy the cards into Shopify. That creates two balances for the same card, and the day a customer spends half of it in a store, the online copy is wrong. So the till system stays the only source of truth. The theme never decides whether a card is valid; it asks a small backend service, which asks the till system and answers with three things: is the card valid, what is left on it, and if not, why.</p>
+<p>The answers map to short messages a customer understands: the card does not exist, it has expired, it has already been added, or it could not be checked right now and they should try again. A network problem is never reported as "invalid card".</p>
+
+<h2>Several cards, one order</h2>
+<p>Gift cards are often small, so a customer may bring two or three. The cart applies them in the order they were added, and each card covers as much of what is still open as its balance allows:</p>
+<pre><code>let remaining = cartTotal;
+for (const card of giftCards) {
+  card.applied = Math.min(card.balance, remaining);
+  remaining -= card.applied;
+}</code></pre>
+<p class="code-note">The idea in its simplest form. A card that is not needed, because the earlier ones already cover the order, is applied with zero and keeps its whole balance.</p>
+<p>When the cart changes, for example a quantity goes up or an item is removed, the split is calculated again, so the amounts in the drawer always match the cart.</p>
+
+<h2>Checked again on every page load</h2>
+<p>The added cards are kept in <code>sessionStorage</code>, so they survive moving between pages in the same tab and disappear when the tab is closed. That alone is not enough, because the card can change while it sits in the online cart: it can be spent in a store in the meantime.</p>
+<p>So every time a page loads, the cart asks again for each stored card. A card that is no longer valid, or has nothing left on it, is dropped and the totals are recalculated. If the check itself fails, for example because the connection drops for a moment, the card stays: a customer should not lose a gift card because of a network hiccup.</p>
+
+<h2>Checkout with a price the cart promised</h2>
+<p>Shopify's checkout knows nothing about cards from the till system. When a customer with gift cards presses the checkout button, the theme stops the normal submit and sends the cart contents and the amount taken from each card to the backend. The backend creates a draft order with the reduced total and sends back a checkout link for it, and the browser goes there. The price at checkout is the price the cart showed.</p>
+<p>If that request fails, the theme falls back to the normal checkout. The gift card is then not applied, but the customer can still buy. A checkout button that does nothing is the worst outcome of all, so the code avoids it on purpose.</p>
+
+<h2>What I would keep from this</h2>
+<ul>
+  <li>Leave the balance where it is managed, and ask for it each time instead of copying it.</li>
+  <li>Check stored state again when a page loads; a cart can sit open for hours.</li>
+  <li>Tell "this card is not valid" apart from "I could not check right now".</li>
+  <li>Every step that can fail at checkout needs a path that still lets the customer pay.</li>
+</ul>

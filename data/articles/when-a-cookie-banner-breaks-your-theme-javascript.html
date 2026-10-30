@@ -1,0 +1,53 @@
+<!--
+{
+  "title": "When a cookie banner breaks your theme's JavaScript",
+  "summary": "On a Swiss store the header search stopped suggesting products for some visitors. The cause was a consent manager blocking one script bundle, and one long jQuery ready handler that fell over at its first line. How I found it, and why I used feature checks instead of try/catch.",
+  "date": "2026-10-30",
+  "order": 45,
+  "category": "Guide",
+  "tags": ["JavaScript", "Consent", "Debugging", "Themes"],
+  "links": [
+    { "title": "Cookiebot: how does auto blocking work", "url": "https://support.cookiebot.com/hc/en-us/articles/11438730619804-How-does-auto-blocking-work" },
+    { "title": "jQuery .ready()", "url": "https://api.jquery.com/ready/" },
+    { "title": "Chrome DevTools: block network requests", "url": "https://developer.chrome.com/docs/devtools/network-request-blocking" }
+  ]
+}
+-->
+<p>The report was short: the search box in the header no longer suggests products. Not for everyone, and not on every visit. On a Swiss B2B store I maintain, this turned out to be a cookie banner, a script bundle and a single line of JavaScript, and the fix took more thinking than code.</p>
+
+<h2>What was going on</h2>
+<p>The theme loads its third-party libraries (a slider, a lightbox, a scroll helper and a polyfill) in one bundle, <code>vendors.js</code>. Its own code lives in <code>app.js</code>, which starts with one long jQuery ready handler: about 800 lines that set up the header, the search suggestions, the cart, the sliders and everything else.</p>
+<p>The store's consent manager runs in automatic blocking mode: it holds back scripts it thinks may set cookies until the visitor agrees. When it held back <code>vendors.js</code>, jQuery itself was still there, because the theme loads it inline, so the ready handler ran as usual. Right at the top, it patched the slider library:</p>
+<pre><code>var oldCreate = window.Flickity.prototype._create;</code></pre>
+<p><code>window.Flickity</code> did not exist, the line threw a <code>TypeError</code>, and JavaScript skipped the rest of the handler. In my test, with the bundle blocked only one initialiser out of 26 still ran. The search suggestions were just the most visible of the 25 that did not.</p>
+
+<h2>Reproduce it before fixing it</h2>
+<p>"Sometimes broken" bugs get much easier once you can switch them on. Chrome DevTools can block a single request: right-click <code>vendors.js</code> in the Network tab and choose <em>Block request URL</em>, then reload. The error appeared every time, and the search went quiet.</p>
+<p>I then tested four cases and wrote the results down, checking something you can see on the page (the search suggestion wrapper appearing in the DOM), not just the console:</p>
+<ul>
+  <li>bundle loaded, before the fix: no errors, 26 initialisers, suggestions work;</li>
+  <li>bundle blocked, before the fix: <code>TypeError</code>, 1 initialiser, no suggestions;</li>
+  <li>bundle loaded, after the fix: no errors, 26, suggestions work;</li>
+  <li>bundle blocked, after the fix: no errors, 26, suggestions work.</li>
+</ul>
+
+<h2>Why not one big try/catch</h2>
+<p>Wrapping the whole handler in <code>try/catch</code> would have silenced the error, and every future error with it. Instead I went through the handler and found every place that used something from the bundle. It was not one place but six: the slider patch, the polyfill call, the lightbox defaults, the lightbox plugin, the scroll helper and the slider's jQuery plugin. Each got a check for exactly the library it needs:</p>
+<pre><code>// Flickity comes from vendors.js, which a consent manager can block.
+if (window.Flickity) {
+  var oldCreate = window.Flickity.prototype._create;
+  // ...patch as before
+}
+
+if ($.fn.fancybox) {
+  $('.lightbox[rel="gallery"]').fancybox();
+}</code></pre>
+<p class="code-note">Shortened. One call further down needed no guard, because it only runs when the lightbox is already open, which cannot happen if the lightbox never loaded.</p>
+<p>The comment matters as much as the check. The next developer who sees <code>if (window.Flickity)</code> should know why it is there, so they do not tidy it away.</p>
+
+<h2>Worth checking in your own theme</h2>
+<ul>
+  <li><strong>Does your consent tool block scripts automatically?</strong> If so, block each of your theme's script files in DevTools, one at a time, and see what still works.</li>
+  <li><strong>Is there one giant ready or init function?</strong> One missing dependency at the top takes down everything below it. Independent features should start independently.</li>
+  <li><strong>Guard by feature, not by error.</strong> A check that names the library it protects keeps real bugs visible.</li>
+</ul>

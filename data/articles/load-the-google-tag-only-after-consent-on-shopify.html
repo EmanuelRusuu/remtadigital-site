@@ -1,0 +1,77 @@
+<!--
+{
+  "title": "Load the Google tag only after cookie consent on Shopify",
+  "summary": "A Google tag pasted into theme.liquid loads for every visitor, before the cookie banner has been answered. How to load gtag.js only once Shopify's Customer Privacy API says analytics is allowed, without losing data in regions that need no banner.",
+  "date": "2026-10-30",
+  "order": 44,
+  "category": "Guide",
+  "tags": ["Google tag", "Consent", "Customer Privacy API", "Performance"],
+  "links": [
+    { "title": "Customer Privacy API", "url": "https://shopify.dev/docs/api/customer-privacy" },
+    { "title": "Customer privacy settings (Shopify Help Center)", "url": "https://help.shopify.com/en/manual/privacy-and-security/privacy/customer-privacy-settings" },
+    { "title": "Set up the Google tag (gtag.js)", "url": "https://developers.google.com/tag-platform/gtagjs/install" },
+    { "title": "Google Consent Mode", "url": "https://developers.google.com/tag-platform/security/guides/consent" }
+  ]
+}
+-->
+<p>The usual way a Google tag ends up in a Shopify theme is the snippet from Google, pasted into <code>layout/theme.liquid</code> through the code editor. It works, and it loads <code>gtag.js</code> for every visitor on every page, before they have answered the cookie banner. On a Swiss store where I replaced such a snippet, Lighthouse counted about 1.2 MB of Google tag code and 631 ms of main-thread work, all of it before consent.</p>
+<p>Here is the version I wrote instead: the same tag, loaded only once Shopify says analytics is allowed.</p>
+
+<h2>Let Shopify answer the consent question</h2>
+<p>Most cookie banner apps for Shopify write the visitor's decision into Shopify's <strong>Customer Privacy API</strong>. That gives the theme one place to ask, whatever banner the store uses. The API also knows the store's privacy settings: in regions where the store does not require a banner, analytics counts as allowed right away, so those visitors are tracked exactly as before.</p>
+
+<h2>The snippet</h2>
+<pre><code>&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+
+  (function () {
+    var id = {{ settings.google_tag_id | json }};
+    var loaded = false;
+
+    function loadTag() {
+      if (loaded) return;
+      loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', id);
+    }
+
+    window.Shopify.loadFeatures(
+      [{ name: 'consent-tracking-api', version: '0.1' }],
+      function (error) {
+        var privacy = window.Shopify.customerPrivacy;
+        if (error || !privacy) return loadTag();
+        if (privacy.analyticsProcessingAllowed()) return loadTag();
+        document.addEventListener('visitorConsentCollected', function (event) {
+          if (event.detail &amp;&amp; event.detail.analyticsAllowed) loadTag();
+        });
+      }
+    );
+  })();
+&lt;/script&gt;</code></pre>
+<p class="code-note">Simplified from the version I shipped. Render it after <code>{{ content_for_header }}</code>, because that is what defines <code>Shopify.loadFeatures</code>.</p>
+
+<h2>Three decisions worth making on purpose</h2>
+<h3>Where the tag ID lives</h3>
+<p>I moved the ID out of the code and into a theme setting. When the marketing team switches to a combined Google tag container, or adds a new destination, they change one field in the theme editor, and nobody edits <code>theme.liquid</code> on a live store.</p>
+
+<h3>What happens if the privacy API never answers</h3>
+<p>On a Shopify storefront it should always load. If it does not, I chose to load the tag anyway (fail open) rather than silently lose all analytics and ads data on a live shop. A store with stricter legal requirements may prefer the opposite; either way, decide it in the code, not by accident.</p>
+
+<h3>Who sends Consent Mode signals</h3>
+<p>Many banner apps already send Google Consent Mode defaults and updates (<code>gtag('consent', ...)</code>). If yours does, do not push a second default from the theme; two scripts racing to set the same state is how you end up with data that nobody can explain. Check the app's settings first.</p>
+
+<h2>How to check it works</h2>
+<ol>
+  <li>Open the store in a private window from a region where your banner shows, and open the Network tab before answering it. Nothing should be requested from <code>googletagmanager.com</code>.</li>
+  <li>Accept analytics. The request appears, and Google Tag Assistant sees the tag.</li>
+  <li>Reload: with consent stored, the tag loads straight away.</li>
+  <li>Decline in a fresh private window: no Google requests at all.</li>
+</ol>
+
+<h2>One more thing to watch</h2>
+<p>Theme code is not the only place a Google tag can come from. Shopify's Google &amp; YouTube channel, apps and pixels can add their own. Before and after the change, look at the Network tab for every request to Google domains, so you know you replaced the tag rather than added a second one.</p>

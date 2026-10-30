@@ -146,5 +146,26 @@
     <pubDate>Mon, 12 Oct 2026 08:00:00 GMT</pubDate>
     <description>On Art of Fire the team hides the price of any product by adding a tag in the Shopify admin, with no code change. How tag-driven price visibility works in a theme, where it has to apply, and what it does not hide.</description>
   </item>
+  <item>
+    <title>Gift cards from the shop till, redeemed in the Shopify cart</title>
+    <link>https://remtadigital.com/articles/gift-cards-from-the-shop-till-redeemed-online/</link>
+    <guid>https://remtadigital.com/articles/gift-cards-from-the-shop-till-redeemed-online/</guid>
+    <pubDate>Fri, 30 Oct 2026 08:00:00 GMT</pubDate>
+    <description>House of Jeans sells gift cards in its Swiss stores, and customers wanted to spend them online too. How the cart checks a card against the till system, splits several cards over one order, checks them again on every page load, and still lets the shopper pay if something fails.</description>
+  </item>
+  <item>
+    <title>Load the Google tag only after cookie consent on Shopify</title>
+    <link>https://remtadigital.com/articles/load-the-google-tag-only-after-consent-on-shopify/</link>
+    <guid>https://remtadigital.com/articles/load-the-google-tag-only-after-consent-on-shopify/</guid>
+    <pubDate>Fri, 30 Oct 2026 08:00:00 GMT</pubDate>
+    <description>A Google tag pasted into theme.liquid loads for every visitor, before the cookie banner has been answered. How to load gtag.js only once Shopify's Customer Privacy API says analytics is allowed, without losing data in regions that need no banner.</description>
+  </item>
+  <item>
+    <title>When a cookie banner breaks your theme's JavaScript</title>
+    <link>https://remtadigital.com/articles/when-a-cookie-banner-breaks-your-theme-javascript/</link>
+    <guid>https://remtadigital.com/articles/when-a-cookie-banner-breaks-your-theme-javascript/</guid>
+    <pubDate>Fri, 30 Oct 2026 08:00:00 GMT</pubDate>
+    <description>On a Swiss store the header search stopped suggesting products for some visitors. The cause was a consent manager blocking one script bundle, and one long jQuery ready handler that fell over at its first line. How I found it, and why I used feature checks instead of try/catch.</description>
+  </item>
 </channel>
 </rss>

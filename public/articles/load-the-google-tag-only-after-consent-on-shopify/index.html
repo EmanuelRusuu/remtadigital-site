@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="google-adsense-account" content="ca-pub-2728164635897891">
+<title>Load the Google tag only after cookie consent on Shopify | Emanuel Rusu</title>
+<meta name="description" content="A Google tag pasted into theme.liquid loads for every visitor, before the cookie banner has been answered. How to load gtag.js only once Shopify's Customer Privacy API says analytics is allowed, without losing data in regions that need no banner.">
+<meta name="theme-color" content="#1d5e6b">
+<meta property="og:title" content="Load the Google tag only after cookie consent on Shopify | Emanuel Rusu">
+<meta property="og:description" content="A Google tag pasted into theme.liquid loads for every visitor, before the cookie banner has been answered. How to load gtag.js only once Shopify's Customer Privacy API says analytics is allowed, without losing data in regions that need no banner.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://remtadigital.com/articles/load-the-google-tag-only-after-consent-on-shopify/">
+<meta property="og:image" content="https://remtadigital.com/articles/load-the-google-tag-only-after-consent-on-shopify/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://remtadigital.com/articles/load-the-google-tag-only-after-consent-on-shopify/">
+<link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="alternate" type="application/rss+xml" title="Articles by Emanuel Rusu" href="/articles/feed.xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Load the Google tag only after cookie consent on Shopify","description":"A Google tag pasted into theme.liquid loads for every visitor, before the cookie banner has been answered. How to load gtag.js only once Shopify's Customer Privacy API says analytics is allowed, without losing data in regions that need no banner.","datePublished":"2026-10-30","dateModified":"2026-10-30","articleSection":"Guide","keywords":"Google tag, Consent, Customer Privacy API, Performance","image":"https://remtadigital.com/articles/load-the-google-tag-only-after-consent-on-shopify/og.jpg","mainEntityOfPage":"https://remtadigital.com/articles/load-the-google-tag-only-after-consent-on-shopify/","inLanguage":"en","author":{"@type":"Person","@id":"https://remtadigital.com/#person","name":"Emanuel Rusu","url":"https://remtadigital.com/"},"publisher":{"@type":"Organization","@id":"https://remtadigital.com/#business","name":"REMTA Digital","logo":{"@type":"ImageObject","url":"https://remtadigital.com/assets/img/apple-touch-icon.png"}}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://remtadigital.com/"},{"@type":"ListItem","position":2,"name":"Articles","item":"https://remtadigital.com/articles/"},{"@type":"ListItem","position":3,"name":"Load the Google tag only after cookie consent on Shopify","item":"https://remtadigital.com/articles/load-the-google-tag-only-after-consent-on-shopify/"}]}]}</script>
+</head>
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="logo" href="/" aria-label="REMTA Digital, home"><svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1d5e6b"/><path d="M18 48V16h12a9 9 0 0 1 0 18H18m10 0 10 14" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="44" y="16" width="5" height="32" rx="2.5" fill="#8fd0d8"/></svg><span class="logo-word"><b>REMTA</b> <span>Digital</span></span></a>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav" aria-label="Main">
+      <a href="/#cases">Case studies</a>
+      <a href="/#work">Work</a>
+      <a href="/articles/">Articles</a>
+      <a href="/#services">Services</a>
+      <a href="/#working-together">Working together</a>
+      <a href="/#about">About</a>
+      <a href="/#faq">FAQ</a>
+      <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>CV</a>
+      <a class="nav-cta" href="/#contact">Contact</a>
+      <a class="nav-lang" href="/de/" hreflang="de" lang="de">Deutsch</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <article class="article wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/articles/">Articles</a> <span aria-hidden="true">/</span> <span>Article</span></nav>
+    <header class="article-head">
+      <p class="post-meta"><time datetime="2026-10-30">30 October 2026</time> &middot; 3 min read</p>
+      <h1>Load the Google tag only after cookie consent on Shopify</h1>
+      <p class="lead">A Google tag pasted into theme.liquid loads for every visitor, before the cookie banner has been answered. How to load gtag.js only once Shopify's Customer Privacy API says analytics is allowed, without losing data in regions that need no banner.</p>
+      <p class="byline"><picture><source type="image/avif" srcset="/assets/img/emanuel-rusu-80.avif"><source type="image/webp" srcset="/assets/img/emanuel-rusu-80.webp"><img src="/assets/img/emanuel-rusu.jpg" alt="" width="40" height="40"></picture> <span>Emanuel Rusu, Shopify developer</span></p>
+    </header>
+    <nav class="toc" aria-label="On this page">
+      <p>On this page</p>
+      <ol><li><a href="#let-shopify-answer-the-consent-question">Let Shopify answer the consent question</a></li><li><a href="#the-snippet">The snippet</a></li><li><a href="#three-decisions-worth-making-on-purpose">Three decisions worth making on purpose</a></li><li><a href="#how-to-check-it-works">How to check it works</a></li><li><a href="#one-more-thing-to-watch">One more thing to watch</a></li><li><a href="#further-reading">Further reading</a></li></ol>
+    </nav>
+    <div class="article-body">
+      <p>The usual way a Google tag ends up in a Shopify theme is the snippet from Google, pasted into <code>layout/theme.liquid</code> through the code editor. It works, and it loads <code>gtag.js</code> for every visitor on every page, before they have answered the cookie banner. On a Swiss store where I replaced such a snippet, Lighthouse counted about 1.2 MB of Google tag code and 631 ms of main-thread work, all of it before consent.</p>
+<p>Here is the version I wrote instead: the same tag, loaded only once Shopify says analytics is allowed.</p>
+
+<h2 id="let-shopify-answer-the-consent-question">Let Shopify answer the consent question</h2>
+<p>Most cookie banner apps for Shopify write the visitor's decision into Shopify's <strong>Customer Privacy API</strong>. That gives the theme one place to ask, whatever banner the store uses. The API also knows the store's privacy settings: in regions where the store does not require a banner, analytics counts as allowed right away, so those visitors are tracked exactly as before.</p>
+
+<h2 id="the-snippet">The snippet</h2>
+<pre><code>&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+
+  (function () {
+    var id = {{ settings.google_tag_id | json }};
+    var loaded = false;
+
+    function loadTag() {
+      if (loaded) return;
+      loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', id);
+    }
+
+    window.Shopify.loadFeatures(
+      [{ name: 'consent-tracking-api', version: '0.1' }],
+      function (error) {
+        var privacy = window.Shopify.customerPrivacy;
+        if (error || !privacy) return loadTag();
+        if (privacy.analyticsProcessingAllowed()) return loadTag();
+        document.addEventListener('visitorConsentCollected', function (event) {
+          if (event.detail &amp;&amp; event.detail.analyticsAllowed) loadTag();
+        });
+      }
+    );
+  })();
+&lt;/script&gt;</code></pre>
+<p class="code-note">Simplified from the version I shipped. Render it after <code>{{ content_for_header }}</code>, because that is what defines <code>Shopify.loadFeatures</code>.</p>
+
+<h2 id="three-decisions-worth-making-on-purpose">Three decisions worth making on purpose</h2>
+<h3>Where the tag ID lives</h3>
+<p>I moved the ID out of the code and into a theme setting. When the marketing team switches to a combined Google tag container, or adds a new destination, they change one field in the theme editor, and nobody edits <code>theme.liquid</code> on a live store.</p>
+
+<h3>What happens if the privacy API never answers</h3>
+<p>On a Shopify storefront it should always load. If it does not, I chose to load the tag anyway (fail open) rather than silently lose all analytics and ads data on a live shop. A store with stricter legal requirements may prefer the opposite; either way, decide it in the code, not by accident.</p>
+
+<h3>Who sends Consent Mode signals</h3>
+<p>Many banner apps already send Google Consent Mode defaults and updates (<code>gtag('consent', ...)</code>). If yours does, do not push a second default from the theme; two scripts racing to set the same state is how you end up with data that nobody can explain. Check the app's settings first.</p>
+
+<h2 id="how-to-check-it-works">How to check it works</h2>
+<ol>
+  <li>Open the store in a private window from a region where your banner shows, and open the Network tab before answering it. Nothing should be requested from <code>googletagmanager.com</code>.</li>
+  <li>Accept analytics. The request appears, and Google Tag Assistant sees the tag.</li>
+  <li>Reload: with consent stored, the tag loads straight away.</li>
+  <li>Decline in a fresh private window: no Google requests at all.</li>
+</ol>
+
+<h2 id="one-more-thing-to-watch">One more thing to watch</h2>
+<p>Theme code is not the only place a Google tag can come from. Shopify's Google &amp; YouTube channel, apps and pixels can add their own. Before and after the change, look at the Network tab for every request to Google domains, so you know you replaced the tag rather than added a second one.</p>
+      <section class="further">
+        <h2 id="further-reading">Further reading</h2>
+        <ul><li><a class="out" href="https://shopify.dev/docs/api/customer-privacy" target="_blank" rel="noopener noreferrer">Customer Privacy API</a></li><li><a class="out" href="https://help.shopify.com/en/manual/privacy-and-security/privacy/customer-privacy-settings" target="_blank" rel="noopener noreferrer">Customer privacy settings (Shopify Help Center)</a></li><li><a class="out" href="https://developers.google.com/tag-platform/gtagjs/install" target="_blank" rel="noopener noreferrer">Set up the Google tag (gtag.js)</a></li><li><a class="out" href="https://developers.google.com/tag-platform/security/guides/consent" target="_blank" rel="noopener noreferrer">Google Consent Mode</a></li></ul>
+      </section>
+    </div>
+    <div class="article-foot">
+      
+      <ul class="tags"><li>Google tag</li><li>Consent</li><li>Customer Privacy API</li><li>Performance</li></ul>
+      
+    </div>
+  </article>
+
+  <section class="more-posts">
+    <div class="wrap">
+      <h2>More articles</h2>
+      <div class="posts">
+        <article class="post">
+          <p class="post-meta"><span class="post-cat">Guide, part 1</span> &middot; <time datetime="2026-10-12">12 October 2026</time> &middot; 4 min read</p>
+          <h3><a href="/articles/editing-shopify-themes-1-theme-editor/">Editing a Shopify theme, part 1: the theme editor, safely</a></h3>
+          <p>There are four ways to change a Shopify theme, from clicking in the theme editor to a full Git workflow. Part 1 covers the one every store owner should master first, and the habit that makes all the others safe.</p>
+          <a class="case-link" href="/articles/editing-shopify-themes-1-theme-editor/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><span class="post-cat">Guide, part 2</span> &middot; <time datetime="2026-10-12">12 October 2026</time> &middot; 3 min read</p>
+          <h3><a href="/articles/editing-shopify-themes-2-code-editor/">Editing a Shopify theme, part 2: the code editor in the admin</a></h3>
+          <p>The quickest way into a theme's code needs nothing but a browser. Where to find it, what each folder does, a small section you can build in five minutes, and how to undo a file you broke.</p>
+          <a class="case-link" href="/articles/editing-shopify-themes-2-code-editor/">Read the article</a>
+        </article>
+
+        <article class="post">
+          <p class="post-meta"><span class="post-cat">Guide, part 3</span> &middot; <time datetime="2026-10-12">12 October 2026</time> &middot; 3 min read</p>
+          <h3><a href="/articles/editing-shopify-themes-3-shopify-cli/">Editing a Shopify theme, part 3: working locally with Shopify CLI</a></h3>
+          <p>Shopify CLI gives you the theme on your own computer, your own editor and a live preview that reloads as you type. Installing it, the commands that matter, and the one mistake that wipes a merchant's changes.</p>
+          <a class="case-link" href="/articles/editing-shopify-themes-3-shopify-cli/">Read the article</a>
+        </article>
+</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap narrow center">
+      <h2>Want something like this for your store?</h2>
+      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
+      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <p>&copy; <span id="year">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Romania.</p>
+    <p>REMTA Digital is an independent company. Shopify is a trademark of Shopify Inc.; I'm not affiliated with or endorsed by Shopify. Client names and logos belong to their owners and are shown only to describe my past work.</p>
+    <p><a href="/privacy/">Privacy</a></p>
+  </div>
+</footer>
+
+<script src="/assets/main.js" defer></script>
+</body>
+</html>
