@@ -186,7 +186,7 @@ const PANELS = {
           <div class="sf-total"><dt>Net worth</dt><dd>${eur(G.netWorth(s))}</dd></div>
           <div><dt>Rating</dt><dd>${s.reviews ? `★ ${s.rating.toFixed(1)} <small>(${G.fmt(s.reviews)})</small>` : '<small>No reviews yet</small>'}</dd></div>
         </dl></section>
-        <section class="sf-card"><h3>Emanuel</h3>${dev ? `<p><strong>${P.icon} ${P.name}</strong>${P.levels.length > 1 ? `, level ${dev.level}` : ''}</p><div class="sf-bar sf-progress"><i style="width:${(1 - dev.left / dev.total) * 100}%"></i></div><p class="sf-sub">${plural(dev.left, 'working day', 'working days')} to go${s.dev.length > 1 ? `, then ${s.dev.slice(1).map(j => G.project(j.id).name).join(' and ')}` : ''}.</p>`
+        <section class="sf-card"><h3>Emanuel</h3>${dev ? `<p><strong>${P.icon} ${P.name}</strong>${P.levels.length > 1 ? `, level ${dev.level}` : ''}</p><div class="sf-bar sf-progress"><i style="width:${(1 - dev.left / dev.total) * 100}%"></i></div><p class="sf-sub">${plural(dev.left, 'day', 'days')} to go${s.dev.length > 1 ? `, then ${s.dev.slice(1).map(j => G.project(j.id).name).join(' and ')}` : ''}.</p>`
           : `<p class="sf-muted">Not working on anything for you right now.</p><button type="button" class="sf-btn sf-btn-sm sf-btn-outline" data-act="go" data-page="emanuel">See projects</button>`}</section>
         <section class="sf-card"><h3>Milestones</h3><ul class="sf-miles">${G.milestoneList().map(([id, name]) => `<li class="${s.got[id] !== undefined ? 'is-got' : ''}">${s.got[id] !== undefined ? '🏆' : '○'} ${name}</li>`).join('')}</ul></section>
       </div>
@@ -376,7 +376,7 @@ const PANELS = {
     return `${head('Hire Emanuel', 'Projects take longer than apps and cost more up front, but they are built into the theme.')}
     <section class="sf-card sf-me">
       <picture><source type="image/avif" srcset="/assets/img/emanuel-rusu-136.avif"><source type="image/webp" srcset="/assets/img/emanuel-rusu-136.webp"><img src="/assets/img/emanuel-rusu.jpg" alt="Emanuel Rusu" width="68" height="68"></picture>
-      <div><h3>Hire me for your store</h3><p>I bill by the hour: €${G.RATE_MIN} an hour for routine work, up to €${G.RATE_MAX} for the most complex builds, ${G.HOURS_PER_DAY} hours a working day. I work alone, so in the game, as in real life, I take one project at a time. You can book up to three; I start the next as soon as one is finished. You pay when you book.</p>
+      <div><h3>Hire me for your store</h3><p>I bill by the hour: €${G.RATE_MIN} an hour for routine work, up to €${G.RATE_MAX} for the most complex builds. Every project comes with an estimate in hours. You pay the top of the estimate when you book, and the hours I don't need come back to you when I finish. I spend about ${['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'][G.HOURS_PER_DAY - 1]} hours a day on your store, next to other clients, and take one project at a time. You can book up to three; I start the next as soon as one is finished.</p>
       <dl class="sf-me-facts"><div><dt>Rate</dt><dd>€${G.RATE_MIN}–${G.RATE_MAX} an hour</dd></div><div><dt>Queue</dt><dd>${s.dev.length} of 3</dd></div><div><dt>Paid so far</dt><dd>${eur(s.spent || 0)}</dd></div></dl>
       ${queue ? `<ol class="sf-queue">${queue}</ol>` : ''}</div>
     </section>
@@ -390,8 +390,9 @@ const PANELS = {
         <h4>${P.name}</h4>
         <p>${P.text}</p>
         <p class="sf-effect">${full ? `${ps.done === ps.max ? 'Done' : 'Booked'}${ps.max > 1 ? `: all ${ps.max} levels` : ''}.` : `${ps.max > 1 ? `Level ${ps.next + 1}: ` : ''}${P.effect[ps.next]}`}</p>
-        ${full ? '' : `<dl class="sf-quote"><div><dt>${ps.hours} hours × €${ps.rate}</dt><dd>${eur(ps.cost)}</dd></div><div><dt>Takes</dt><dd>${plural(ps.days, 'working day', 'working days')}</dd></div></dl>`}
-        <div class="sf-foot">${full ? '' : `<button type="button" class="sf-btn sf-btn-sm" data-act="book" data-id="${P.id}" data-key="bk${P.id}" ${reason ? 'disabled' : ''}>Book Emanuel · ${eur(ps.cost)}</button>${reason ? `<p class="sf-sub">${reason}.</p>` : ''}`}
+        ${full ? '' : `<dl class="sf-quote"><div><dt>Estimate</dt><dd>${ps.lo}–${ps.hi} hours</dd></div><div><dt>Rate</dt><dd>€${ps.rate} an hour</dd></div>
+          <div><dt>Takes</dt><dd>${ps.daysLo === ps.days ? plural(ps.days, 'day', 'days') : `${ps.daysLo}–${ps.days} days`}</dd></div><div class="sf-total"><dt>Price</dt><dd>${eur(ps.costLo)}–${G.fmt(ps.cost)}</dd></div></dl>`}
+        <div class="sf-foot">${full ? '' : `<button type="button" class="sf-btn sf-btn-sm" data-act="book" data-id="${P.id}" data-key="bk${P.id}" ${reason ? 'disabled' : ''}>Book Emanuel · pay ${eur(ps.cost)}</button>${reason ? `<p class="sf-sub">${reason}.</p>` : ''}`}
           ${realLinks(P)}</div>
       </article>`;
     }).join('')}</div>`;

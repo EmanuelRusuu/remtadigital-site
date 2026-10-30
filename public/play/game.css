@@ -277,6 +277,7 @@ kbd{display:inline-block;min-width:1.7em;padding:1px 6px;border:1px solid var(--
 .sf-quote div{display:flex;justify-content:space-between;gap:10px}
 .sf-quote dt{color:var(--muted)}
 .sf-quote dd{margin:0;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
+.sf-quote .sf-total{margin-top:3px;padding-top:4px;border-top:1px solid var(--sf-line)}
 .sf-real{font-size:.84rem;color:var(--muted)}
 .sf-real a{font-weight:600}
 
