@@ -379,7 +379,7 @@ ${footerHtml}
 projects.forEach((p, i) => write(`public/projects/${p.slug}/index.html`, page(p, i)));
 
 // ---- articles
-// Google AdSense (auto ads) runs on article pages only; the portfolio and CV stay ad-free.
+// Google AdSense (auto ads) runs on article pages and the game page; the portfolio and CV stay ad-free.
 const ADSENSE = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>';
 // alternates: { en: url, de: url } for pages that exist in both languages (hreflang, x-default is English).
 const hreflang = alt => alt ? Object.entries(alt).map(([l, u]) => `\n<link rel="alternate" hreflang="${l}" href="${u}">`).join('') + `\n<link rel="alternate" hreflang="x-default" href="${alt.en}">` : '';
@@ -529,7 +529,7 @@ ${pageEnd}`;
 }
 
 // ---- privacy page (required by AdSense; keep it in line with what the site actually loads)
-write('public/privacy/index.html', `${pageHead({ title: 'Privacy | REMTA Digital', description: 'What remtadigital.com collects: cookieless visit statistics from Cloudflare, a cookie-free daily count of CV downloads and email clicks, and Google AdSense ads on article pages only.', url: `${SITE}/privacy/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
+write('public/privacy/index.html', `${pageHead({ title: 'Privacy | REMTA Digital', description: 'What remtadigital.com collects: cookieless visit statistics from Cloudflare, a cookie-free daily count of CV downloads and email clicks, and Google AdSense ads on article pages and the game page only.', url: `${SITE}/privacy/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
 <body class="article-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
 
@@ -539,7 +539,7 @@ ${headerHtml}
   <article class="article wrap">
     <header class="article-head">
       <h1>Privacy</h1>
-      <p class="post-meta">Last updated 12 October 2026</p>
+      <p class="post-meta">Last updated 30 October 2026</p>
     </header>
     <div class="article-body">
       <p>This site belongs to REMTA S.R.L. (REMTA Digital), Cluj-Napoca, Romania. For any question about your data, write to <a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a>.</p>
@@ -548,14 +548,53 @@ ${headerHtml}
       <h2>CV and email counter</h2>
       <p>When you download my CV or click one of my email links, your browser sends a short signal to this site that says only which of the two it was. My server adds one to a count for that day. That is all it keeps: the date, the event ("cv" or "email") and the number. It stores no cookies, no IP address, no browser details and nothing that could tell one visitor from another, and it reads nothing from your device.</p>
       <p>Because nothing personal is stored and nothing is read from or saved on your device, this counter needs no consent banner. Like every request to this site, the signal passes through Cloudflare, which hosts the site.</p>
-      <h2>Ads on article pages</h2>
-      <p>The article pages show ads from Google AdSense. Google and its partners may use cookies to show and measure ads, and in the EU and UK you are asked for your consent first. You can read <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites that use its services</a> and change your ad settings at <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">My Ad Center</a>. The homepage, project pages and CV show no ads.</p>
+      <h2>Ads on article pages and the game</h2>
+      <p>The article pages and the Storefront game page show ads from Google AdSense. Google and its partners may use cookies to show and measure ads, and in the EU and UK you are asked for your consent first. You can read <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites that use its services</a> and change your ad settings at <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">My Ad Center</a>. The homepage, project pages and CV show no ads.</p>
+      <h2>The Storefront game</h2>
+      <p>The <a href="/play/">Storefront game</a> saves your store in your browser's local storage, so you can carry on where you stopped. The save stays on your device: it is never sent to me or anyone else, and clearing your browser data deletes it.</p>
       <h2>Email</h2>
       <p>If you email me, I use your message only to reply and keep it as long as our conversation or project needs it.</p>
       <h2>Your rights</h2>
       <p>Under the GDPR you can ask what I hold about you, have it corrected or deleted, and complain to the Romanian data protection authority (ANSPDCP).</p>
     </div>
   </article>
+${pageEnd}`);
+
+// ---- Storefront, the store simulator game. The game itself is hand-written in public/play/
+// (engine.js, game.js, game.css); this only builds the page around it.
+// Ads: game.js draws the game inside a shadow root, so auto ads can never be placed inside the game
+// (which redraws every game day), and puts the notes below and the how-to above it, so any ad
+// next to the game sits at least 150 px from its controls, as AdSense asks for game pages.
+write('public/play/index.html', `${pageHead({ title: 'Storefront: a Shopify store simulator game | Emanuel Rusu', description: 'Run a Shopify store for a year: pick products from a supplier hub of 40, set prices, keep stock, buy ads and hire a developer to make the store faster and better at selling. Free, in your browser.', url: `${SITE}/play/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', ads: true, preload: '<link rel="preload" href="/play/game.css" as="style">' })}
+<body class="play-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+${headerHtml}
+
+<main id="main">
+  <section class="play-hero">
+    <div class="wrap">
+      <h1>Storefront</h1>
+      <p class="lead">Run a Shopify store for a year. Start with one product, grow from a supplier hub of 40, and hire me to make the store faster, easier to find and better at selling. Every project in the game is work I do for real stores.</p>
+    </div>
+  </section>
+  <div class="wrap">
+    <div id="game" class="play-game">
+      <noscript><p>The game needs JavaScript.</p></noscript>
+      <template id="sf-notes">
+        <section class="sf-notes">
+          <h2>How the simulation works</h2>
+          <p>Each day, visitors arrive from Google, ads, your newsletter, returning customers and word of mouth. A share of them buy, and that share depends on your design, how fast the pages load, how much visitors trust you, and whether they can find what they want. Cheaper products sell more often; expensive ones earn more per order.</p>
+          <h3>Money</h3>
+          <p>You pay for stock when you order it, then for packing, card fees, refunds, storage, your plan and your apps as you sell. Run out of cash and you go into overdraft; stay there too long and the bank closes the store.</p>
+          <h3>Apps or code</h3>
+          <p>Apps give you a feature today for a monthly fee, and each one loads scripts that slow the store down. Projects take longer and cost more up front, but they are built into the theme. Real stores face the same choice.</p>
+        </section>
+      </template>
+    </div>
+  </div>
+${contactSection('Want this for a real store?')}
+  <script type="module" src="/play/game.js"></script>
 ${pageEnd}`);
 
 if (articles.length) {
@@ -639,6 +678,7 @@ const deHeader = enHref => `<header class="site-header">
       <a href="/de/#branchen">${de.nav.industries}</a>
       <a href="/de/#ueber-mich">${de.nav.about}</a>
       <a href="/de/#faq">${de.nav.faq}</a>
+      <a class="nav-play" href="/play/" hreflang="en">${de.nav.play}</a>
       <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>${de.nav.cv}</a>
       <a class="nav-cta" href="/de/#kontakt">${de.nav.contact}</a>
       <a class="nav-lang" href="${enHref}" hreflang="en" lang="en">English</a>
@@ -933,6 +973,7 @@ ${headerHtml}
         <li><a href="/articles/">Articles</a>: the theme editing guide and notes from projects</li>
         <li><a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a>: or just write to me</li>
       </ul>
+      <p>Or, since you are lost anyway: <a href="/play/">run a pretend Shopify store for a year</a>. Nobody gets a 404 there.</p>
     </div>
   </section>
 ${pageEnd}`);
@@ -962,7 +1003,7 @@ ${articles.map(a => `  <item>
 const today = new Date().toISOString().slice(0, 10);
 const entries = [[`${SITE}/`, today], ...projects.map(p => [`${SITE}/projects/${p.slug}/`, today]),
   ...(articles.length ? [[`${SITE}/articles/`, today], ...articles.map(a => [`${SITE}/articles/${a.slug}/`, a.updated || a.date])] : []),
-  ...categories.map(c => [`${SITE}/industries/${c.slug}/`, today]), [`${SITE}/privacy/`, today],
+  ...categories.map(c => [`${SITE}/industries/${c.slug}/`, today]), [`${SITE}/play/`, today], [`${SITE}/privacy/`, today],
   ...(de ? [[`${SITE}/de/`, today], ...categories.map(c => [`${SITE}${deIndustryUrl(c)}`, today])] : [])];
 const urls = entries.map(e => e[0]);
 write('public/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
