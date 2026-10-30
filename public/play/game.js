@@ -18,6 +18,7 @@ const HOW = [
   'You start with €5,000 and one product, the cheapest of 40 in the supplier hub.',
   'Add products, set prices, keep them in stock and buy ads.',
   `Hire me to improve design, speed, SEO and more, at €${G.RATE_MIN} to €${G.RATE_MAX} an hour. Every project changes the numbers.`,
+  'It\'s a game: prices, hours and results are simplified to keep it fair. They are not a quote for real work.',
   'At 1× a day takes three seconds. Pause, slow down or speed up to 8× whenever you like; the game saves in this browser.',
   'Keyboard: Space pauses, − and + change the speed, W skips a week.',
 ];
@@ -374,9 +375,10 @@ const PANELS = {
   emanuel() {
     const queue = s.dev.map((j, i) => { const P = G.project(j.id); return `<li>${P.icon} <strong>${P.name}</strong>, ${P.scopes[j.level - 1][0].toLowerCase()} · ${i === 0 ? `${plural(j.left, 'day', 'days')} left` : `waiting, ${plural(j.total, 'day', 'days')}`}</li>`; }).join('');
     return `${head('Hire Emanuel', 'Projects take longer than apps and cost more up front, but they are built into the theme.')}
+    <section class="sf-card sf-notice" role="note"><p><strong>This is a game.</strong> The hours, prices and results here are rough numbers that keep the game fair, not a quote. Real projects depend on the store, and with today's tools, AI included, I often get more done in less time: a real day of speed work can do far more than the game's +15. The speed, SEO and design scores are game points, not Lighthouse or Google scores. <a href="#contact">Ask me for a real estimate</a>.</p></section>
     <section class="sf-card sf-me">
       <picture><source type="image/avif" srcset="/assets/img/emanuel-rusu-136.avif"><source type="image/webp" srcset="/assets/img/emanuel-rusu-136.webp"><img src="/assets/img/emanuel-rusu.jpg" alt="Emanuel Rusu" width="68" height="68"></picture>
-      <div><h3>Hire me for your store</h3><p>I bill by the hour, €${G.RATE_MIN} for routine work up to €${G.RATE_MAX} for the most complex builds, and a working day is eight hours. Every project comes in scopes: a quick fix that helps a little, or the full job that helps the most. Start small and upgrade later; you only pay for the hours that are left. You pay the quote when you book. I take one project at a time, and you can book up to three.</p>
+      <div><h3>Hire me for your store</h3><p>In the game I bill by the hour, €${G.RATE_MIN} for routine work up to €${G.RATE_MAX} for the most complex builds, and a working day is eight hours. Every project comes in scopes: a quick fix that helps a little, or the full job that helps the most. Start small and upgrade later; you only pay for the hours that are left. You pay the quote when you book. I take one project at a time, and you can book up to three.</p>
       <dl class="sf-me-facts"><div><dt>Rate</dt><dd>€${G.RATE_MIN}–${G.RATE_MAX} an hour</dd></div><div><dt>Queue</dt><dd>${s.dev.length} of 3</dd></div><div><dt>Paid so far</dt><dd>${eur(s.spent || 0)}</dd></div></dl>
       ${queue ? `<ol class="sf-queue">${queue}</ol>` : ''}</div>
     </section>
