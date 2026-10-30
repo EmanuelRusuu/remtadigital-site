@@ -14,6 +14,11 @@
     "contact": "Kontakt",
     "play": "Shop-Spiel"
   },
+  "foot": {
+    "brand": "Freelance Shopify-Entwicklung von Emanuel Rusu aus Cluj-Napoca, Rumänien. Arbeitssprachen: Englisch und Rumänisch.",
+    "site": "Auf dieser Website",
+    "articles": "Artikel (Englisch)"
+  },
   "hero": {
     "headline": "Freelance Shopify-Entwickler &middot; Gründer von REMTA Digital",
     "location": "Cluj-Napoca, Rumänien &middot; ich arbeite remote auf Englisch und Rumänisch",
@@ -161,7 +166,7 @@
   "projectLink": "Projekt ansehen",
   "english": "(Englisch)",
   "footer": [
-    "&copy; <span id=\"year\">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Rumänien.",
+    "&copy; <span id=\"year\">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Rumänien",
     "REMTA Digital ist ein unabhängiges Unternehmen. Shopify ist eine Marke von Shopify Inc.; ich bin weder mit Shopify verbunden noch von Shopify empfohlen. Namen und Logos von Kunden gehören ihren Inhabern und dienen nur zur Beschreibung meiner bisherigen Arbeit.",
     "<a href=\"/privacy/\" hreflang=\"en\">Datenschutz (Englisch)</a>"
   ]

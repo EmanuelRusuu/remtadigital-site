@@ -187,7 +187,10 @@ const head = shared.slice(0, shared.indexOf('<title>'));
 const headerHtml = shared.slice(shared.indexOf('<header class="site-header"'), shared.indexOf('</header>') + 9)
   .replace(/href="#(cases|services|working-together|work|about|faq|contact)"/g, 'href="/#$1"')
   .replace('href="#top" aria-label="REMTA Digital, back to top"', 'href="/" aria-label="REMTA Digital, home"');
-const footerHtml = shared.slice(shared.indexOf('<footer>'), shared.indexOf('</footer>') + 9);
+const footerHtml = shared.slice(shared.indexOf('<footer>'), shared.indexOf('</footer>') + 9)
+  .replace(/href="#(cases|services|working-together|work|about|faq|contact)"/g, 'href="/#$1"');
+// The header link for the page you are on is marked as the current page.
+const currentNav = (html, href) => { if (!html.includes(`href="${href}" data-key=`)) throw new Error(`header has no link to ${href}`); return html.replace(`href="${href}" data-key=`, `href="${href}" aria-current="page" data-key=`); };
 const favicon = (shared.match(/<link rel="icon" href="([^"]*)"/) || [])[1];
 
 function page(p, i) {
@@ -311,7 +314,7 @@ function page(p, i) {
 <link rel="stylesheet" href="/assets/style.css">
 <script type="application/ld+json">${JSON.stringify(crumbs)}</script>
 </head>
-<body class="project-page" id="top">
+<body class="project-page" id="top" data-nav="work">
 <a class="skip" href="#main">Skip to content</a>
 
 ${headerHtml}
@@ -468,7 +471,7 @@ function articlePage(a) {
         { '@type': 'ListItem', position: 2, name: 'Articles', item: `${SITE}/articles/` },
         { '@type': 'ListItem', position: 3, name: strip(a.title), item: url } ] } ] },
   })}
-<body class="article-page" id="top">
+<body class="article-page" id="top" data-nav="articles">
 <a class="skip" href="#main">Skip to content</a>
 
 ${headerHtml}
@@ -505,10 +508,10 @@ ${pageEnd}`;
 function articlesIndex() {
   const url = `${SITE}/articles/`;
   return `${pageHead({ title: 'Shopify Guides and Project Notes | Emanuel Rusu, Shopify developer', description: 'A step-by-step guide to editing Shopify themes, and short notes from real Shopify projects: what the problem was, what I built and what changed.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', ads: true })}
-<body class="article-page" id="top">
+<body class="article-page" id="top" data-nav="articles">
 <a class="skip" href="#main">Skip to content</a>
 
-${headerHtml}
+${currentNav(headerHtml, '/articles/')}
 
 <main id="main">
   <section class="articles-hero">
@@ -566,10 +569,10 @@ ${pageEnd}`);
 // manual unit sits below the game's notes, at least 150 px from its controls as AdSense asks for
 // game pages. game.js also draws the game inside a shadow root, so no ad can ever end up inside it.
 write('public/play/index.html', `${pageHead({ title: 'Storefront: a Shopify store simulator game | Emanuel Rusu', description: 'Run a Shopify store for a year: pick products from a supplier hub of 40, set prices, keep stock, buy ads and hire a developer to make the store faster and better at selling. Free, in your browser.', url: `${SITE}/play/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', ads: true, preload: '<link rel="preload" href="/play/game.css" as="style">' })}
-<body class="play-page" id="top">
+<body class="play-page" id="top" data-nav="play">
 <a class="skip" href="#main">Skip to content</a>
 
-${headerHtml}
+${currentNav(headerHtml, '/play/')}
 
 <main id="main">
   <section class="play-hero">
@@ -621,7 +624,7 @@ function industryPage(c) {
       { '@type': 'ListItem', position: 2, name: 'Projects', item: `${SITE}/#work` },
       { '@type': 'ListItem', position: 3, name: c.name, item: url } ] } ] };
   return `${pageHead({ title: `${c.seoTitle} | Emanuel Rusu`, description: attr(c.intro), url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd: crumbs, alternates: { en: url, de: `${SITE}/de/branchen/${c.de.slug}/` } })}
-<body class="industry-page" id="top">
+<body class="industry-page" id="top" data-nav="work">
 <a class="skip" href="#main">Skip to content</a>
 
 ${headerHtml.replace('href="/de/"', `href="/de/branchen/${c.de.slug}/"`)}
@@ -678,16 +681,14 @@ const deHeader = enHref => `<header class="site-header">
       <span></span><span></span><span></span>
     </button>
     <nav id="nav" aria-label="Hauptmenü">
-      <a href="/de/#projekte">${de.nav.projects}</a>
-      <a href="/de/#leistungen">${de.nav.services}</a>
-      <a href="/de/#zusammenarbeit">${de.nav.together}</a>
-      <a href="/de/#branchen">${de.nav.industries}</a>
-      <a href="/de/#ueber-mich">${de.nav.about}</a>
-      <a href="/de/#faq">${de.nav.faq}</a>
-      <a class="nav-play" href="/play/" hreflang="en">${de.nav.play}</a>
+      <a href="/de/#projekte" data-key="projects">${de.nav.projects}</a>
+      <a href="/de/#leistungen" data-key="services">${de.nav.services}</a>
+      <a href="/de/#branchen" data-key="industries">${de.nav.industries}</a>
+      <a href="/de/#ueber-mich" data-key="about">${de.nav.about}</a>
+      <a class="nav-play" href="/play/" hreflang="en" data-key="play">${de.nav.play}</a>
       <a class="nav-cv" href="/emanuel-rusu-cv.pdf" download>${de.nav.cv}</a>
       <a class="nav-cta" href="/de/#kontakt">${de.nav.contact}</a>
-      <a class="nav-lang" href="${enHref}" hreflang="en" lang="en">English</a>
+      <a class="nav-lang" href="${enHref}" hreflang="en" lang="en"><span class="lang-short" aria-hidden="true">EN</span><span class="lang-long">English</span></a>
     </nav>
   </div>
 </header>`;
@@ -698,7 +699,7 @@ const deLangNote = () => `
     </aside>
   </div>`;
 const deContact = heading => `
-  <section id="kontakt">
+  <section id="kontakt" data-map="${de.nav.contact}">
     <div class="wrap narrow center">
       <h2>${heading}</h2>
       <p class="lead">${de.contact.lead}</p>
@@ -712,7 +713,38 @@ const dePageEnd = () => `
 
 <footer>
   <div class="wrap foot">
-    ${de.footer.map(f => `<p>${f}</p>`).join('\n    ')}
+    <div class="foot-top">
+      <div class="foot-brand">
+        <p class="foot-name"><b>REMTA</b> Digital</p>
+        <p>${de.foot.brand}</p>
+      </div>
+      <nav class="foot-nav" aria-label="${de.foot.site}">
+        <p class="foot-title">${de.foot.site}</p>
+        <ul>
+          <li><a href="/de/#projekte">${de.nav.projects}</a></li>
+          <li><a href="/de/#leistungen">${de.nav.services}</a></li>
+          <li><a href="/de/#zusammenarbeit">${de.nav.together}</a></li>
+          <li><a href="/de/#branchen">${de.nav.industries}</a></li>
+          <li><a href="/de/#ueber-mich">${de.nav.about}</a></li>
+          <li><a href="/de/#faq">${de.nav.faq}</a></li>
+          <li><a href="/articles/" hreflang="en">${de.foot.articles}</a></li>
+          <li><a href="/play/" hreflang="en">${de.nav.play}</a></li>
+        </ul>
+      </nav>
+      <div class="foot-nav">
+        <p class="foot-title">${de.nav.contact}</p>
+        <ul>
+          <li><a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a></li>
+          <li><a href="https://www.linkedin.com/in/emanuel-rusu/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="/emanuel-rusu-cv.pdf" download>${de.hero.cv}</a></li>
+          <li><a href="/" hreflang="en" lang="en">English</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <p>${de.footer[0]} &middot; ${de.footer[2]}</p>
+      <p>${de.footer[1]}</p>
+    </div>
   </div>
 </footer>
 
@@ -804,7 +836,7 @@ ${deLangNote()}
     </div>
   </section>
 
-  <section id="projekte">
+  <section id="projekte" data-map="${de.nav.projects}" data-key="projects">
     <div class="wrap">
       <div class="sec-head">
         <h2>${de.swiss.title}</h2>
@@ -823,7 +855,7 @@ ${deLangNote()}
     </div>
   </section>
 
-  <section id="leistungen" class="alt">
+  <section id="leistungen" class="alt" data-map="${de.nav.services}" data-key="services">
     <div class="wrap">
       <div class="sec-head">
         <h2>${de.services.title}</h2>
@@ -837,7 +869,7 @@ ${deLangNote()}
     </div>
   </section>
 
-  <section id="zusammenarbeit">
+  <section id="zusammenarbeit" data-map="${de.nav.together}" data-key="services">
     <div class="wrap">
       <div class="sec-head">
         <h2>${de.together.title}</h2>
@@ -857,7 +889,7 @@ ${deLangNote()}
     </div>
   </section>
 
-  <section id="branchen" class="alt">
+  <section id="branchen" class="alt" data-map="${de.nav.industries}" data-key="industries">
     <div class="wrap">
       <nav class="industries industries-top" aria-labelledby="branchen-title">
         <h2 id="branchen-title">${de.industries.title}</h2>
@@ -871,7 +903,7 @@ ${deLangNote()}
     </div>
   </section>
 
-  <section id="ueber-mich">
+  <section id="ueber-mich" data-map="${de.nav.about}" data-key="about">
     <div class="wrap about-grid">
       <div>
         <h2>${de.about.title}</h2>
@@ -889,7 +921,7 @@ ${deLangNote()}
     </div>
   </section>
 
-  <section id="faq" class="alt">
+  <section id="faq" class="alt" data-map="${de.nav.faq}">
     <div class="wrap narrow">
       <div class="sec-head">
         <h2>${de.faq.title}</h2>
@@ -918,7 +950,7 @@ function deIndustryPage(c) {
       { '@type': 'ListItem', position: 2, name: de.industryPage.crumb, item: `${SITE}/de/#branchen` },
       { '@type': 'ListItem', position: 3, name: c.de.name, item: url } ] } ] };
   return `${pageHead({ lang: 'de', title: `${c.de.seoTitle} | Emanuel Rusu`, description: attr(c.de.intro), url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd, alternates: { en: `${SITE}/industries/${c.slug}/`, de: url } })}
-<body class="industry-page" id="top">
+<body class="industry-page" id="top" data-nav="industries">
 <a class="skip" href="#main">Zum Inhalt springen</a>
 
 ${deHeader(`/industries/${c.slug}/`)}
