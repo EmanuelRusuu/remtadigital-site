@@ -222,7 +222,7 @@ const contactSection = heading => `
 // The note for agencies at the end of "How we work together". The German text is in data/de.json
 // (together.agency). data-enquiry pre-fills the contact form's message.
 const AGENCY = {
-  id: 'agencies', map: 'For agencies', title: 'For agencies and in-house teams', button: 'Talk about capacity',
+  id: 'agencies', map: 'For agencies', title: 'For agencies and in-house teams', button: 'Talk about capacity', more: 'What I offer agencies',
   enquiry: 'I am writing from an agency and would like to talk about extra development capacity.',
   text: 'I have spent three years as a developer inside agency teams, first at WebGurus and now at aiconomy AG, so your Git workflow, code reviews and project managers will feel familiar. I can join as an extra developer for 30–40 hours a week at €35–50 an hour, and work under your name: your client stays your client.',
 };
@@ -230,6 +230,7 @@ const agencyHtml = (a, href) => `<aside class="agency-note" id="${a.id}" data-ma
         <div>
           <h3>${a.title}</h3>
           <p>${a.text}</p>
+          <p class="agency-more"><a class="case-link" href="/agencies/" hreflang="en">${a.more}</a></p>
         </div>
         <a class="btn" href="${href}" data-enquiry="${a.enquiry}">${a.button}</a>
       </aside>`;
@@ -721,6 +722,87 @@ ${pageEnd}`;
 }
 categories.forEach(c => write(`public/industries/${c.slug}/index.html`, industryPage(c)));
 
+// ---- for agencies: one page to link to when writing to agencies (white-label work at the hourly rate).
+// The project counts come from data/projects.json; the six cards mix aiconomy and WebGurus work.
+function agenciesPage() {
+  const url = `${SITE}/agencies/`;
+  const at = name => projects.filter(p => p.company === name).length;
+  const agencyCount = at('aiconomy AG') + at('WebGurus');
+  const picks = ['curaprox', 'ev-zug', 'inuikii', 'fc-basel-1893', 'prestashop-to-shopify-migration-app', 'tshirts-com'].map(s => projects.find(p => p.slug === s)).filter(Boolean);
+  const crumbs = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+    { '@type': 'ListItem', position: 2, name: 'For agencies', item: url } ] };
+  const offer = [
+    ['Theme work', 'New themes on Dawn or Horizon, and sections and fixes on existing themes, built so your client&rsquo;s team can still edit them.'],
+    ['Custom functionality', 'Configurators, bundles, gift cards, wishlists and discount logic that Shopify doesn&rsquo;t do out of the box.'],
+    ['Functions and checkout', 'Shopify Functions in TypeScript, checkout UI extensions and admin apps on the Admin GraphQL API.'],
+    ['Integrations', 'ERP, PIM, search and newsletter tools connected to Shopify, so the data stays consistent on both sides.'],
+    ['Migrations', 'Customers, orders and content moved in from other platforms, starting with a dry run.'],
+    ['Speed and clean-up', 'Heavy themes made faster and easier to maintain, without taking the store offline.'],
+  ];
+  const steps = [
+    ['Your workflow.', 'I work in your Git repository and on development themes, through your pull requests and code reviews.'],
+    ['Your client stays yours.', 'I can work under your agency&rsquo;s name. You stay the client&rsquo;s contact, and I join calls when you want me there.'],
+    ['A clear estimate.', 'A written estimate per task or per block of hours before I start, and I bill the hours I actually work.'],
+    ['Nothing goes live without approval.', 'The client&rsquo;s live store stays untouched until you approve the changes.'],
+  ];
+  return `${pageHead({ title: 'Shopify Developer for Agencies, White-Label | Emanuel Rusu', description: 'A freelance Shopify developer for agencies: 30–40 hours a week at €35–50 an hour, in your repository and under your name. Themes, Shopify Functions, apps and integrations.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd: crumbs })}
+<body class="industry-page" id="top" data-nav="services">
+<a class="skip" href="#main">Skip to content</a>
+
+${headerHtml}
+
+<main id="main">
+  <section class="industry-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <span>For agencies</span></nav>
+      <h1>An extra Shopify developer for your agency</h1>
+      <p class="lead">When your team is full, I take on Shopify work for your clients: 30–40 hours a week, at €35 to €50 an hour depending on how complex the work is, in your repository and under your name.</p>
+      <p class="note">${agencyCount} of the ${projects.length} projects on this site I worked on inside agency teams: ${at('aiconomy AG')} at aiconomy AG and ${at('WebGurus')} at WebGurus. Each project page says which parts I built myself.</p>
+      <p class="cta-row agencies-cta"><a class="btn" href="#contact" data-enquiry="${AGENCY.enquiry}">Talk about capacity</a><a class="btn btn-outline" href="#agency-work">See the work</a></p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>What I take on</h2>
+      </div>
+      <div class="services">${offer.map(([h, t]) => `
+        <div class="service">
+          <h3>${h}</h3>
+          <p>${t}</p>
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>How I work with your team</h2>
+      </div>
+      <ol class="steps">
+        ${steps.map(([h, t]) => `<li><strong>${h}</strong> ${t}</li>`).join('\n        ')}
+      </ol>
+    </div>
+  </section>
+
+  <section id="agency-work" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Work from agency teams</h2>
+        <p class="note">A few of the projects I built at aiconomy AG and WebGurus. The projects and the client relationships were theirs; each page says exactly what I built.</p>
+      </div>
+      <div class="work-grid">${picks.map(p => card(p, '/')).join('')}</div>
+      <p class="all-posts"><a class="case-link" href="/#work">All ${projects.length} projects</a></p>
+    </div>
+  </section>
+${contactSection('Need an extra Shopify developer?')}
+${pageEnd}`;
+}
+write('public/agencies/index.html', agenciesPage());
+
 // ---- German pages: /de/ and /de/branchen/<slug>/, texts from data/de.json and the "de" field of each
 // category. Project pages and articles stay English; links to them carry hreflang="en" and say so.
 const deIndustryUrl = c => `/de/branchen/${c.de.slug}/`;
@@ -780,6 +862,7 @@ const dePageEnd = () => `
           <li><a href="/de/#ueber-mich">${de.nav.about}</a></li>
           <li><a href="/de/#faq">${de.nav.faq}</a></li>
           <li><a href="/articles/" hreflang="en">${de.foot.articles}</a></li>
+          <li><a href="/agencies/" hreflang="en">${de.foot.agencies}</a></li>
           <li><a href="/play/" hreflang="en">${de.nav.play}</a></li>
         </ul>
       </nav>
@@ -863,7 +946,7 @@ ${deLangNote()}
             <p class="location">${de.hero.location}</p>
             <p class="open"><span class="dot" aria-hidden="true"></span>${de.hero.open}</p>
             <div class="cta-row">
-              <a class="btn" href="mailto:emanuel@remtadigital.com">${de.hero.email}</a>
+              <a class="btn" href="#kontakt">${de.hero.email}</a>
               <a class="btn btn-outline" href="#projekte">${de.hero.work}</a>
               <a class="btn btn-text" href="https://www.linkedin.com/in/emanuel-rusu/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               <a class="btn btn-text" href="/emanuel-rusu-cv.pdf" download>${de.hero.cv}</a>
@@ -1126,7 +1209,7 @@ ${articles.map(a => `  <item>
 const today = new Date().toISOString().slice(0, 10);
 const entries = [[`${SITE}/`, today], ...projects.map(p => [`${SITE}/projects/${p.slug}/`, today]),
   ...(articles.length ? [[`${SITE}/articles/`, today], ...articles.map(a => [`${SITE}/articles/${a.slug}/`, a.updated || a.date])] : []),
-  ...categories.map(c => [`${SITE}/industries/${c.slug}/`, today]), [`${SITE}/play/`, today], [`${SITE}/privacy/`, today],
+  ...categories.map(c => [`${SITE}/industries/${c.slug}/`, today]), [`${SITE}/agencies/`, today], [`${SITE}/play/`, today], [`${SITE}/privacy/`, today],
   ...(de ? [[`${SITE}/de/`, today], ...categories.map(c => [`${SITE}${deIndustryUrl(c)}`, today])] : [])];
 const urls = entries.map(e => e[0]);
 write('public/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
