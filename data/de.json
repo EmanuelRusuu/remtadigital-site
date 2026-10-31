@@ -22,7 +22,7 @@
   "hero": {
     "headline": "Freelance Shopify-Entwickler &middot; Gründer von REMTA Digital",
     "location": "Cluj-Napoca, Rumänien &middot; ich arbeite remote auf Englisch und Rumänisch",
-    "open": "Offen für neue Projekte",
+    "open": "Offen für neue Projekte: ab sofort 30–40 Stunden pro Woche",
     "email": "E-Mail schreiben",
     "work": "Projekte ansehen",
     "cv": "Lebenslauf (PDF, Englisch)",
@@ -93,22 +93,28 @@
   },
   "together": {
     "title": "So arbeiten wir zusammen",
-    "note": "Drei Modelle für die Zusammenarbeit. Jedes Projekt ist anders, deshalb veröffentliche ich keine Preise: Sie erhalten vor Beginn ein schriftliches Angebot.",
-    "price": "Preis auf Anfrage:",
-    "ask": "per E-Mail anfragen",
+    "note": "Drei Modelle für die Zusammenarbeit, alle zu 35 bis 50 € pro Stunde, je nach Komplexität. Vor Beginn erhalten Sie eine schriftliche Schätzung.",
     "models": [
-      ["Festpreis pro Projekt", "Für Arbeiten mit klarem Umfang, etwa eine neue Funktion, ein Theme-Abschnitt oder eine Migration. Ich halte schriftlich fest, was enthalten ist, und nenne vor dem Start einen Preis.", "Festpreis-Projekt"],
-      ["Nach Aufwand", "Für kleinere Änderungen, Fehlerbehebungen und Arbeiten, deren Umfang noch offen ist. Ich erfasse meine Zeit und verrechne die tatsächlich geleisteten Stunden.", "Arbeit nach Aufwand"],
-      ["Monatliche Betreuung", "Ein festes Stundenkontingent pro Monat für Updates, kleine Änderungen und Fehlerbehebungen, damit Ihr Shop einen Entwickler hat, der ihn bereits kennt.", "Monatliche Betreuung"]
+      ["Festpreis pro Projekt", "Für Arbeiten mit klarem Umfang, etwa eine neue Funktion, ein Theme-Abschnitt oder eine Migration. Ich halte schriftlich fest, was enthalten ist, und nenne vor dem Start einen Preis.", "Ein Preis für das ganze Projekt: <a href=\"#kontakt\">Schätzung anfragen</a>"],
+      ["Nach Aufwand", "Für kleinere Änderungen, Fehlerbehebungen und Arbeiten, deren Umfang noch offen ist. Ich erfasse meine Zeit und verrechne die tatsächlich geleisteten Stunden.", "35–50 € pro Stunde, je nach Komplexität"],
+      ["Monatliche Betreuung", "Ein festes Stundenkontingent pro Monat für Updates, kleine Änderungen und Fehlerbehebungen, damit Ihr Shop einen Entwickler hat, der ihn bereits kennt.", "Ein festes Stundenkontingent zu 35–50 € pro Stunde"]
     ],
     "stepsTitle": "Ablauf eines Projekts",
     "steps": [
-      ["E-Mail.", "Schreiben Sie mir an <a href=\"mailto:emanuel@remtadigital.com\">emanuel@remtadigital.com</a>, gern auf Deutsch, mit ein paar Sätzen zu Ihrem Shop und Ihrem Vorhaben."],
+      ["E-Mail oder Formular.", "Schreiben Sie mir über das <a href=\"#kontakt\">Formular</a> oder an <a href=\"mailto:emanuel@remtadigital.com\">emanuel@remtadigital.com</a>, gern auf Deutsch, mit ein paar Sätzen zu Ihrem Shop und Ihrem Vorhaben."],
       ["Kurzes Gespräch.", "Wir besprechen in einem Call auf Englisch die Details und offene Fragen."],
       ["Schriftliche Schätzung.", "Umfang, Zeitplan, Preis und das passende Modell."],
       ["Umsetzung.", "Ich arbeite in einem GitHub-Repository und auf einem Entwicklungs-Theme. Ihr Live-Shop bleibt unverändert, bis Sie die Änderungen freigeben."],
       ["Übergabe.", "Der Code bleibt in Ihrem Repository, mit Notizen dazu, was sich geändert hat und wie Sie es bearbeiten."]
-    ]
+    ],
+    "agency": {
+      "id": "agenturen",
+      "map": "Für Agenturen",
+      "title": "Für Agenturen und interne Teams",
+      "button": "Kapazität besprechen",
+      "enquiry": "Ich schreibe von einer Agentur und möchte über zusätzliche Entwicklungskapazität sprechen.",
+      "text": "Ich habe drei Jahre als Entwickler in Agentur-Teams gearbeitet, zuerst bei WebGurus und jetzt bei aiconomy AG. Git-Workflow, Code-Reviews und Projektleitung sind mir also vertraut. Ich unterstütze Ihr Team mit 30–40 Stunden pro Woche zu 35–50 € pro Stunde und arbeite auf Wunsch unter Ihrem Namen: Ihr Kunde bleibt Ihr Kunde."
+    }
   },
   "industries": {
     "title": "Projekte nach Branche",
@@ -136,6 +142,7 @@
     "items": [
       ["Sprechen Sie Deutsch?", "Nein. Ich arbeite auf Englisch und Rumänisch. Sie können mir gern auf Deutsch schreiben; ich antworte auf Englisch. Bei aiconomy AG arbeite ich seit März 2025 an Schweizer Projekten, und die Zusammenarbeit läuft dort auf Englisch."],
       ["Ist REMTA Digital eine Shopify-Agentur?", "Nein. Es ist mein Ein-Personen-Unternehmen, Sie arbeiten also direkt mit mir. Bei grösseren Projekten arbeite ich gern mit Ihrem internen Team oder Ihrer Agentur zusammen."],
+      ["Was kostet die Zusammenarbeit?", "35 bis 50 € pro Stunde, je nach Komplexität. Festpreis-Projekte rechne ich auf derselben Grundlage, und Sie erhalten vor Beginn eine schriftliche Schätzung."],
       ["Können Sie an unserem bestehenden Theme arbeiten?", "Ja. Ich kann Ihr bestehendes Theme erweitern oder aufräumen oder ein neues bauen, wenn das der bessere Weg ist."],
       ["Arbeiten Sie mit Shopify Plus und mehreren Märkten?", "Ja. Die meisten Shops, an denen ich gearbeitet habe, verkaufen in mehreren Sprachen und Währungen, auch in Setups, in denen sich mehrere Shops ein Theme teilen."],
       ["Können Sie Shopify mit unserem ERP verbinden?", "In der Regel ja. Schreiben Sie mir, welches System Sie nutzen und was synchronisiert werden soll, und ich erkläre Ihnen, wie ich vorgehen würde."]
@@ -143,10 +150,7 @@
   },
   "articles": "Meine Artikel zu Shopify (auf Englisch)",
   "contact": {
-    "title": "Erzählen Sie mir von Ihrem Shop",
-    "lead": "Schreiben Sie mir kurz, worum es geht und was Sie bauen möchten.",
-    "cv": "Lebenslauf herunterladen (Englisch)",
-    "linkedin": "Oder finden Sie mich auf LinkedIn"
+    "title": "Erzählen Sie mir von Ihrem Shop"
   },
   "industryPage": {
     "crumb": "Branchen",
@@ -169,5 +173,40 @@
     "&copy; <span id=\"year\">2026</span> REMTA S.R.L. &middot; Emanuel Rusu &middot; Cluj-Napoca, Rumänien",
     "REMTA Digital ist ein unabhängiges Unternehmen. Shopify ist eine Marke von Shopify Inc.; ich bin weder mit Shopify verbunden noch von Shopify empfohlen. Namen und Logos von Kunden gehören ihren Inhabern und dienen nur zur Beschreibung meiner bisherigen Arbeit.",
     "<a href=\"/privacy/\" hreflang=\"en\">Datenschutz (Englisch)</a>"
-  ]
+  ],
+  "form": {
+    "lead": "Schreiben Sie mir kurz, worum es geht und was Sie bauen möchten. Ich antworte per E-Mail, mit Rückfragen oder einer ersten Schätzung.",
+    "facts": [
+      "<strong>Ab sofort verfügbar</strong>, 30–40 Stunden pro Woche",
+      "<strong>35–50 € pro Stunde</strong>, je nach Komplexität",
+      "<strong>Eine schriftliche Schätzung</strong> vor Beginn der Arbeit"
+    ],
+    "alt": "Lieber per E-Mail? Schreiben Sie an <a href=\"mailto:emanuel@remtadigital.com\">emanuel@remtadigital.com</a>. Sie können auch meinen <a href=\"/emanuel-rusu-cv.pdf\" download>Lebenslauf herunterladen (Englisch)</a> oder mich auf <a href=\"https://www.linkedin.com/in/emanuel-rusu/\" target=\"_blank\" rel=\"noopener noreferrer\">LinkedIn</a> finden.",
+    "name": "Ihr Name",
+    "email": "E-Mail",
+    "store": "Shop-Adresse",
+    "optional": "(optional)",
+    "storeHint": "ihrshop.ch",
+    "message": "Was brauchen Sie?",
+    "messageHint": "Ein paar Sätze zu Ihrem Shop und dazu, was Sie ändern oder bauen möchten. Gern auf Deutsch.",
+    "budget": "Budget",
+    "budgets": [
+      "Noch offen",
+      "Unter 1'000 €",
+      "1'000 bis 3'000 €",
+      "3'000 bis 10'000 €",
+      "Über 10'000 €"
+    ],
+    "send": "Nachricht senden",
+    "note": "Ich nutze Ihre Angaben nur, um Ihnen zu antworten. <a href=\"/privacy/\" hreflang=\"en\">Datenschutz (Englisch)</a>",
+    "sending": "Wird gesendet …",
+    "sent": "Danke, Ihre Nachricht ist unterwegs. Ich antworte per E-Mail auf Englisch.",
+    "invalid": "Bitte prüfen Sie Name, E-Mail-Adresse und Nachricht.",
+    "unavailable": "Das Formular funktioniert gerade nicht. Bitte schreiben Sie mir an emanuel@remtadigital.com.",
+    "hp": "Dieses Feld leer lassen"
+  },
+  "thanks": {
+    "title": "Danke, Ihre Nachricht ist unterwegs",
+    "lead": "Ich antworte per E-Mail auf Englisch. Bis dahin finden Sie meine <a href=\"/de/#projekte\">Projekte</a> und die <a href=\"/de/#branchen\">Branchen</a> auf dieser Website."
+  }
 }

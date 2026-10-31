@@ -113,11 +113,33 @@
     <a href="/projects/cosmic-clothing/"><span>Next</span>Cosmic Clothing</a>
   </nav>
 
+
   <section id="contact">
-    <div class="wrap narrow center">
-      <h2>Want something like this for your store?</h2>
-      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
-      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
+    <div class="wrap contact-grid">
+      <div class="contact-intro">
+        <h2>Want something like this for your store?</h2>
+        <p class="lead">Tell me a little about your store and what you need. I reply by email with questions or a first estimate.</p>
+        <ul class="contact-facts">
+          <li><strong>Available now</strong> for 30–40 hours a week</li>
+          <li><strong>€35–50 an hour</strong>, depending on how complex the work is</li>
+          <li><strong>A written estimate</strong> before any work starts</li>
+        </ul>
+        <p class="contact-alt">Prefer email? Write to <a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a>. You can also <a href="/emanuel-rusu-cv.pdf" download>download my CV</a> or find me on <a href="https://www.linkedin.com/in/emanuel-rusu/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</p>
+      </div>
+      <form class="contact-form" action="/api/contact" method="post" data-sending="Sending…" data-sent="Thank you, your message is on its way. I will reply by email." data-invalid="Please check your name, email address and message." data-unavailable="The form is not working right now. Please email me at emanuel@remtadigital.com.">
+        <input type="hidden" name="lang" value="en">
+        <div class="hp" aria-hidden="true"><label>Leave this field empty <input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="form-row">
+          <label><span>Your name</span> <input name="name" required maxlength="100" autocomplete="name"></label>
+          <label><span>Email</span> <input type="email" name="email" required maxlength="200" autocomplete="email"></label>
+        </div>
+        <label><span>Store address <small>(optional)</small></span> <input name="store" maxlength="200" placeholder="yourstore.com" autocomplete="url"></label>
+        <label><span>What do you need?</span> <textarea name="message" required minlength="10" maxlength="5000" rows="5" placeholder="A few lines about the store and what you would like to change or build."></textarea></label>
+        <label><span>Budget</span> <select name="budget"><option value="unsure">Not sure yet</option><option value="under-1k">Under €1,000</option><option value="1k-3k">€1,000 to €3,000</option><option value="3k-10k">€3,000 to €10,000</option><option value="over-10k">Over €10,000</option></select></label>
+        <button class="btn btn-lg" type="submit">Send message</button>
+        <p class="form-note">I use your details only to reply to you. <a href="/privacy/">Privacy</a></p>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </section>
 

@@ -18,6 +18,8 @@ const media = readJson('data/media.json', {});
 const popularity = readJson('data/popularity.json', { ranks: {}, aliases: {} });
 const articles = loadArticles(ROOT);
 const categories = readJson('data/categories.json', []);
+// German texts for /de/ (see the German pages below) and the German contact form.
+const de = readJson('data/de.json', null);
 const catOf = p => categories.find(c => c.projects.includes(p.slug));
 const catName = c => c.name.replace(/&/g, '&amp;');
 
@@ -164,6 +166,74 @@ function card(p, root = '') {
 `;
 }
 
+// ---- contact: the same block (intro, facts and a short form) wherever a page has a contact section.
+// The form posts to /api/contact (src/worker.js), which emails it through Cloudflare Email Routing.
+// main.js sends it with fetch and shows the result in place; without JavaScript the Worker redirects
+// to /thanks/ (or /de/danke/). The budget values are fixed; the Worker turns them into English labels.
+const BUDGETS = ['unsure', 'under-1k', '1k-3k', '3k-10k', 'over-10k'];
+const FORM = {
+  en: {
+    lead: 'Tell me a little about your store and what you need. I reply by email with questions or a first estimate.',
+    facts: ['<strong>Available now</strong> for 30–40 hours a week', '<strong>€35–50 an hour</strong>, depending on how complex the work is', '<strong>A written estimate</strong> before any work starts'],
+    alt: 'Prefer email? Write to <a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a>. You can also <a href="/emanuel-rusu-cv.pdf" download>download my CV</a> or find me on <a href="https://www.linkedin.com/in/emanuel-rusu/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.',
+    name: 'Your name', email: 'Email', store: 'Store address', optional: '(optional)', storeHint: 'yourstore.com',
+    message: 'What do you need?', messageHint: 'A few lines about the store and what you would like to change or build.',
+    budget: 'Budget', budgets: ['Not sure yet', 'Under €1,000', '€1,000 to €3,000', '€3,000 to €10,000', 'Over €10,000'],
+    send: 'Send message', note: 'I use your details only to reply to you. <a href="/privacy/">Privacy</a>',
+    sending: 'Sending…', sent: 'Thank you, your message is on its way. I will reply by email.',
+    invalid: 'Please check your name, email address and message.', unavailable: 'The form is not working right now. Please email me at emanuel@remtadigital.com.',
+    hp: 'Leave this field empty',
+  },
+  de: de && de.form,
+};
+function contactInner(lang, heading) {
+  const t = FORM[lang];
+  return `<div class="wrap contact-grid">
+      <div class="contact-intro">
+        <h2>${heading}</h2>
+        <p class="lead">${t.lead}</p>${lang === 'de' ? `
+        <aside class="lang-note" aria-label="Sprache"><p>${de.langNote}</p></aside>` : ''}
+        <ul class="contact-facts">
+          ${t.facts.map(f => `<li>${f}</li>`).join('\n          ')}
+        </ul>
+        <p class="contact-alt">${t.alt}</p>
+      </div>
+      <form class="contact-form" action="/api/contact" method="post" data-sending="${t.sending}" data-sent="${t.sent}" data-invalid="${t.invalid}" data-unavailable="${t.unavailable}">
+        <input type="hidden" name="lang" value="${lang}">
+        <div class="hp" aria-hidden="true"><label>${t.hp} <input name="website" tabindex="-1" autocomplete="off"></label></div>
+        <div class="form-row">
+          <label><span>${t.name}</span> <input name="name" required maxlength="100" autocomplete="name"></label>
+          <label><span>${t.email}</span> <input type="email" name="email" required maxlength="200" autocomplete="email"></label>
+        </div>
+        <label><span>${t.store} <small>${t.optional}</small></span> <input name="store" maxlength="200" placeholder="${t.storeHint}" autocomplete="url"></label>
+        <label><span>${t.message}</span> <textarea name="message" required minlength="10" maxlength="5000" rows="5" placeholder="${t.messageHint}"></textarea></label>
+        <label><span>${t.budget}</span> <select name="budget">${BUDGETS.map((v, i) => `<option value="${v}">${t.budgets[i]}</option>`).join('')}</select></label>
+        <button class="btn btn-lg" type="submit">${t.send}</button>
+        <p class="form-note">${t.note}</p>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>`;
+}
+const contactSection = heading => `
+  <section id="contact">
+    ${contactInner('en', heading)}
+  </section>`;
+
+// The note for agencies at the end of "How we work together". The German text is in data/de.json
+// (together.agency). data-enquiry pre-fills the contact form's message.
+const AGENCY = {
+  id: 'agencies', map: 'For agencies', title: 'For agencies and in-house teams', button: 'Talk about capacity',
+  enquiry: 'I am writing from an agency and would like to talk about extra development capacity.',
+  text: 'I have spent three years as a developer inside agency teams, first at WebGurus and now at aiconomy AG, so your Git workflow, code reviews and project managers will feel familiar. I can join as an extra developer for 30–40 hours a week at €35–50 an hour, and work under your name: your client stays your client.',
+};
+const agencyHtml = (a, href) => `<aside class="agency-note" id="${a.id}" data-map="${a.map}" data-key="services">
+        <div>
+          <h3>${a.title}</h3>
+          <p>${a.text}</p>
+        </div>
+        <a class="btn" href="${href}" data-enquiry="${a.enquiry}">${a.button}</a>
+      </aside>`;
+
 // ---- homepage cards
 let index = read('public/index.html');
 const start = '<!-- projects:start -->', end = '<!-- projects:end -->';
@@ -178,6 +248,8 @@ const fill = (html, name, inner) => {
 };
 index = fill(index, 'cats', '\n' + categories.map(c => `              <option value="${c.slug}">${catName(c)} (${c.projects.length})</option>`).join('\n') + '\n              ');
 index = fill(index, 'industries', '\n' + categories.map(c => `          <li><a href="industries/${c.slug}/">${catName(c)} <span>${c.projects.length}</span></a></li>`).join('\n') + '\n          ');
+index = fill(index, 'contact', '\n    ' + contactInner('en', 'Let\'s talk about your store') + '\n    ');
+index = fill(index, 'agency', '\n      ' + agencyHtml(AGENCY, '#contact') + '\n      ');
 index = index.replace(/<dt>\d+<\/dt><dd>projects on this page<\/dd>/, `<dt>${projects.length}</dt><dd>projects on this page</dd>`);
 write('public/index.html', index);
 
@@ -361,13 +433,7 @@ ${results}${gallery}
     <a href="/projects/${next.slug}/"><span>Next</span>${next.title}</a>
   </nav>
 
-  <section id="contact">
-    <div class="wrap narrow center">
-      <h2>Want something like this for your store?</h2>
-      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
-      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
-    </div>
-  </section>
+${contactSection('Want something like this for your store?')}
 
 </main>
 
@@ -409,14 +475,6 @@ ${preload}` : ''}
 ${ADSENSE}` : ''}${jsonLd ? `
 <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}
 </head>`;
-const contactSection = heading => `
-  <section id="contact">
-    <div class="wrap narrow center">
-      <h2>${heading}</h2>
-      <p class="lead">Send me a short message about your store and what you'd like to build.</p>
-      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>Download my CV</a></p>
-    </div>
-  </section>`;
 const pageEnd = `
 </main>
 
@@ -532,7 +590,7 @@ ${pageEnd}`;
 }
 
 // ---- privacy page (required by AdSense; keep it in line with what the site actually loads)
-write('public/privacy/index.html', `${pageHead({ title: 'Privacy | REMTA Digital', description: 'What remtadigital.com collects: cookieless visit statistics from Cloudflare, a cookie-free daily count of CV downloads and email clicks, and Google AdSense ads on article pages and the game page only.', url: `${SITE}/privacy/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
+write('public/privacy/index.html', `${pageHead({ title: 'Privacy | REMTA Digital', description: 'What remtadigital.com collects: cookieless visit statistics from Cloudflare, a cookie-free daily count of CV downloads, email clicks and contact form messages, the messages you send with the form, and Google AdSense ads on article pages and the game page only.', url: `${SITE}/privacy/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
 <body class="article-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
 
@@ -542,21 +600,22 @@ ${headerHtml}
   <article class="article wrap">
     <header class="article-head">
       <h1>Privacy</h1>
-      <p class="post-meta">Last updated 30 October 2026</p>
+      <p class="post-meta">Last updated 31 October 2026</p>
     </header>
     <div class="article-body">
       <p>This site belongs to REMTA S.R.L. (REMTA Digital), Cluj-Napoca, Romania. For any question about your data, write to <a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a>.</p>
       <h2>Visit statistics</h2>
       <p>I use Cloudflare Web Analytics to count visits and page views. It sets no cookies and does not identify you; I only see totals such as pages viewed, countries, browsers and referring sites.</p>
-      <h2>CV and email counter</h2>
-      <p>When you download my CV or click one of my email links, your browser sends a short signal to this site that says only which of the two it was. My server adds one to a count for that day. That is all it keeps: the date, the event ("cv" or "email") and the number. It stores no cookies, no IP address, no browser details and nothing that could tell one visitor from another, and it reads nothing from your device.</p>
+      <h2>CV, email and form counter</h2>
+      <p>When you download my CV or click one of my email links, your browser sends a short signal to this site that says only which of the two it was, and when a contact form message is sent, the server notes that too. My server adds one to a count for that day. That is all it keeps: the date, the event ("cv", "email" or "form") and the number. It stores no cookies, no IP address, no browser details and nothing that could tell one visitor from another, and it reads nothing from your device.</p>
       <p>Because nothing personal is stored and nothing is read from or saved on your device, this counter needs no consent banner. Like every request to this site, the signal passes through Cloudflare, which hosts the site.</p>
       <h2>Ads on article pages and the game</h2>
       <p>The article pages and the Storefront game page show ads from Google AdSense. Google and its partners may use cookies to show and measure ads, and in the EU and UK you are asked for your consent first. You can read <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites that use its services</a> and change your ad settings at <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">My Ad Center</a>. The homepage, project pages and CV show no ads.</p>
       <h2>The Storefront game</h2>
       <p>The <a href="/play/">Storefront game</a> saves your store in your browser's local storage, so you can carry on where you stopped. The save stays on your device: it is never sent to me or anyone else, and clearing your browser data deletes it.</p>
-      <h2>Email</h2>
+      <h2>Email and the contact form</h2>
       <p>If you email me, I use your message only to reply and keep it as long as our conversation or project needs it.</p>
+      <p>The contact form works the same way. What you type in it (your name, email address, store address, budget and message), the language of the page and the address of the page you sent it from are passed by Cloudflare, which hosts this site, to my inbox as an email. The site itself does not store the message. I use it only to reply to you and keep it like any other email.</p>
       <h2>Your rights</h2>
       <p>Under the GDPR you can ask what I hold about you, have it corrected or deleted, and complain to the Romanian data protection authority (ANSPDCP).</p>
     </div>
@@ -664,7 +723,6 @@ categories.forEach(c => write(`public/industries/${c.slug}/index.html`, industry
 
 // ---- German pages: /de/ and /de/branchen/<slug>/, texts from data/de.json and the "de" field of each
 // category. Project pages and articles stay English; links to them carry hreflang="en" and say so.
-const de = readJson('data/de.json', null);
 const deIndustryUrl = c => `/de/branchen/${c.de.slug}/`;
 // Replace a piece of copied English markup, failing loudly if the source changed.
 const must = (html, from, to) => { if (!html.includes(from)) throw new Error(`German page: "${from}" not found in index.html`); return html.split(from).join(to); };
@@ -700,13 +758,7 @@ const deLangNote = () => `
   </div>`;
 const deContact = heading => `
   <section id="kontakt" data-map="${de.nav.contact}">
-    <div class="wrap narrow center">
-      <h2>${heading}</h2>
-      <p class="lead">${de.contact.lead}</p>
-      <aside class="lang-note" aria-label="Sprache"><p>${de.langNote}</p></aside>
-      <p class="cta-row center-row"><a class="btn btn-lg" href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a><a class="btn btn-lg btn-outline" href="/emanuel-rusu-cv.pdf" download>${de.contact.cv}</a></p>
-      <p class="links"><a href="https://www.linkedin.com/in/emanuel-rusu/" target="_blank" rel="noopener noreferrer">${de.contact.linkedin}</a></p>
-    </div>
+    ${contactInner('de', heading)}
   </section>`;
 const dePageEnd = () => `
 </main>
@@ -787,7 +839,7 @@ function deHome() {
       isPartOf: { '@id': `${SITE}/#website` }, about: { '@id': `${SITE}/#business` } },
     { '@type': 'ProfessionalService', '@id': `${SITE}/#business`, name: 'REMTA Digital', legalName: 'REMTA S.R.L.', url: `${SITE}/`, email: 'emanuel@remtadigital.com',
       description: 'Freelance Shopify-Entwicklung: individuelle Themes, Shopify-Apps und Functions, Checkout-Erweiterungen und Anbindungen an ERP, PIM und Suche. Arbeitssprachen Englisch und Rumänisch.',
-      knowsLanguage: ['en', 'ro'], address: { '@type': 'PostalAddress', addressLocality: 'Cluj-Napoca', addressCountry: 'RO' }, founder: { '@id': `${SITE}/#person` } } ] };
+      knowsLanguage: ['en', 'ro'], priceRange: '€35–50 pro Stunde', address: { '@type': 'PostalAddress', addressLocality: 'Cluj-Napoca', addressCountry: 'RO' }, founder: { '@id': `${SITE}/#person` } } ] };
   const preload = absAssets((index.match(/<link rel="preload" as="image"[^>]*>/) || [''])[0]);
   return `${pageHead({ lang: 'de', title: de.title, description: attr(de.description), url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd, alternates: { en: `${SITE}/`, de: url }, preload })}
 <body id="top">
@@ -875,17 +927,18 @@ ${deLangNote()}
         <h2>${de.together.title}</h2>
         <p class="note">${de.together.note}</p>
       </div>
-      <div class="models">${de.together.models.map(([h, t, subject]) => `
+      <div class="models">${de.together.models.map(([h, t, price]) => `
         <article class="model">
           <h3>${h}</h3>
           <p>${t}</p>
-          <p class="price">${de.together.price} <a href="mailto:emanuel@remtadigital.com?subject=${encodeURIComponent(subject)}">${de.together.ask}</a></p>
+          <p class="price">${price}</p>
         </article>`).join('')}
       </div>
       <h3 class="tools-title">${de.together.stepsTitle}</h3>
       <ol class="steps">
         ${de.together.steps.map(([h, t]) => `<li><strong>${h}</strong> ${t}</li>`).join('\n        ')}
       </ol>
+      ${agencyHtml(de.together.agency, '#kontakt')}
     </div>
   </section>
 
@@ -992,6 +1045,38 @@ if (de) {
   write('public/de/index.html', deHome());
   categories.forEach(c => write(`public/de/branchen/${c.de.slug}/index.html`, deIndustryPage(c)));
 }
+
+// ---- after the contact form: where the Worker sends visitors whose browser posted the form without
+// JavaScript (with JavaScript the form says "sent" in place). Not indexed and not in the sitemap.
+const noindex = html => html.replace('content="index, follow, max-image-preview:large"', 'content="noindex"');
+write('public/thanks/index.html', `${noindex(pageHead({ title: 'Message sent | REMTA Digital', description: 'Your message is on its way.', url: `${SITE}/thanks/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' }))}
+<body class="article-page" id="top">
+<a class="skip" href="#main">Skip to content</a>
+
+${headerHtml}
+
+<main id="main">
+  <section class="articles-hero">
+    <div class="wrap narrow">
+      <h1>Thank you, your message is on its way</h1>
+      <p class="lead">I will reply by email. Until then, you can look through <a href="/#cases">my work</a> or read <a href="/articles/">an article</a>.</p>
+    </div>
+  </section>
+${pageEnd}`);
+if (de) write('public/de/danke/index.html', `${noindex(pageHead({ lang: 'de', title: `${de.thanks.title} | REMTA Digital`, description: de.thanks.title, url: `${SITE}/de/danke/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' }))}
+<body class="article-page" id="top">
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+${deHeader('/thanks/')}
+
+<main id="main">
+  <section class="articles-hero">
+    <div class="wrap narrow">
+      <h1>${de.thanks.title}</h1>
+      <p class="lead">${de.thanks.lead}</p>
+    </div>
+  </section>
+${dePageEnd()}`);
 
 // ---- 404 page (served by the Worker for any unknown path, with status 404)
 write('public/404.html', `${pageHead({ title: 'Page not found | REMTA Digital', description: 'This page does not exist.', url: `${SITE}/404.html`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' }).replace('content="index, follow, max-image-preview:large"', 'content="noindex"')}

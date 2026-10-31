@@ -248,4 +248,35 @@
     if (catSelect && !q) state.cat = catSelect.value;
     apply();
   }
+
+  // Contact form: sent with fetch so the answer shows in place (the texts are on the form's data-*
+  // attributes, in the page's language). Without JavaScript the browser posts it and the Worker
+  // redirects to a thank-you page.
+  Array.prototype.forEach.call(document.querySelectorAll('.contact-form'), function (form) {
+    var status = form.querySelector('.form-status');
+    var send = form.querySelector('button[type="submit"]');
+    form.addEventListener('submit', function (e) {
+      if (!window.fetch || !window.FormData) return;
+      e.preventDefault();
+      form.classList.remove('is-sent', 'is-error');
+      status.textContent = form.getAttribute('data-sending');
+      send.disabled = true;
+      var done = function (ok, error) {
+        form.classList.add(ok ? 'is-sent' : 'is-error');
+        status.textContent = form.getAttribute(ok ? 'data-sent' : error === 'invalid' ? 'data-invalid' : 'data-unavailable');
+        send.disabled = false;
+        if (ok) form.reset();
+      };
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (res) { done(!!res.ok, res.error); }, function () { done(false, 'unavailable'); });
+    });
+  });
+
+  // The button on the agency note fills in the start of the message.
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest ? e.target.closest('[data-enquiry]') : null;
+    var message = document.querySelector('.contact-form textarea[name="message"]');
+    if (link && message && !message.value.trim()) message.value = link.getAttribute('data-enquiry') + '\n\n';
+  });
 })();
