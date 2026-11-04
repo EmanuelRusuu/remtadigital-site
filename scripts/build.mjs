@@ -174,7 +174,7 @@ const BUDGETS = ['unsure', 'under-1k', '1k-3k', '3k-10k', 'over-10k'];
 const FORM = {
   en: {
     lead: 'Tell me a little about your store and what you need. I reply by email with questions or a first estimate.',
-    facts: ['<strong>Available now</strong> for 30–40 hours a week', '<strong>€35–50 an hour</strong>, depending on how complex the work is', '<strong>A written estimate</strong> before any work starts'],
+    facts: ['<strong>Available now</strong>, full time', '<strong>€35–50 an hour</strong>, depending on how complex the work is', '<strong>A written estimate</strong> before any work starts'],
     alt: 'Prefer email? Write to <a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a>. You can also <a href="/emanuel-rusu-cv.pdf" download>download my CV</a> or find me on <a href="https://www.linkedin.com/in/emanuel-rusu/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.',
     name: 'Your name', email: 'Email', store: 'Store address', optional: '(optional)', storeHint: 'yourstore.com',
     message: 'What do you need?', messageHint: 'A few lines about the store and what you would like to change or build.',
@@ -224,7 +224,7 @@ const contactSection = heading => `
 const AGENCY = {
   id: 'agencies', map: 'For agencies', title: 'For agencies and in-house teams', button: 'Talk about capacity', more: 'What I offer agencies',
   enquiry: 'I am writing from an agency and would like to talk about extra development capacity.',
-  text: 'I have spent three years as a developer inside agency teams, first at WebGurus and now at aiconomy AG, so your Git workflow, code reviews and project managers will feel familiar. I can join as an extra developer for 30–40 hours a week at €35–50 an hour, and work under your name: your client stays your client.',
+  text: 'I have spent three years as a developer inside agency teams, first at WebGurus and now at aiconomy AG, so your Git workflow, code reviews and project managers will feel familiar. I can join full time as an extra developer at €35–50 an hour, and work under your name: your client stays your client.',
 };
 const agencyHtml = (a, href) => `<aside class="agency-note" id="${a.id}" data-map="${a.map}" data-key="services">
         <div>
@@ -746,7 +746,7 @@ function agenciesPage() {
     ['A clear estimate.', 'A written estimate per task or per block of hours before I start, and I bill the hours I actually work.'],
     ['Nothing goes live without approval.', 'The client&rsquo;s live store stays untouched until you approve the changes.'],
   ];
-  return `${pageHead({ title: 'Shopify Developer for Agencies, White-Label | Emanuel Rusu', description: 'A freelance Shopify developer for agencies: 30–40 hours a week at €35–50 an hour, in your repository and under your name. Themes, Shopify Functions, apps and integrations.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd: crumbs })}
+  return `${pageHead({ title: 'Shopify Developer for Agencies, White-Label | Emanuel Rusu', description: 'A freelance Shopify developer for agencies: available full time at €35–50 an hour, in your repository and under your name. Themes, Shopify Functions, apps and integrations.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', jsonLd: crumbs })}
 <body class="industry-page" id="top" data-nav="services">
 <a class="skip" href="#main">Skip to content</a>
 
@@ -757,7 +757,7 @@ ${headerHtml}
     <div class="wrap">
       <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <span>For agencies</span></nav>
       <h1>An extra Shopify developer for your agency</h1>
-      <p class="lead">When your team is full, I take on Shopify work for your clients: 30–40 hours a week, at €35 to €50 an hour depending on how complex the work is, in your repository and under your name.</p>
+      <p class="lead">When your team is full, I can take on Shopify work for your clients full time, at €35 to €50 an hour depending on how complex the work is, in your repository and under your name.</p>
       <p class="note">${agencyCount} of the ${projects.length} projects on this site I worked on inside agency teams: ${at('aiconomy AG')} at aiconomy AG and ${at('WebGurus')} at WebGurus. Each project page says which parts I built myself.</p>
       <p class="cta-row agencies-cta"><a class="btn" href="#contact" data-enquiry="${AGENCY.enquiry}">Talk about capacity</a><a class="btn btn-outline" href="#agency-work">See the work</a></p>
     </div>

@@ -23,7 +23,7 @@
   "hero": {
     "headline": "Freelance Shopify-Entwickler &middot; Gründer von REMTA Digital",
     "location": "Cluj-Napoca, Rumänien &middot; ich arbeite remote auf Englisch und Rumänisch",
-    "open": "Offen für neue Projekte: ab sofort 30–40 Stunden pro Woche",
+    "open": "Offen für neue Projekte: ab sofort in Vollzeit",
     "email": "Kontakt aufnehmen",
     "work": "Projekte ansehen",
     "cv": "Lebenslauf (PDF, Englisch)",
@@ -34,7 +34,7 @@
     ],
     "nowTitle": "Aktuell",
     "now": [
-      "<strong>Shopify-Entwickler bei aiconomy AG</strong> seit März 2025, für mehrsprachige Schweizer Shops mit ERP-Anbindung. Daneben habe ich <strong>30–40 Stunden pro Woche frei für neue Projekte</strong>.",
+      "<strong>Shopify-Entwickler bei aiconomy AG</strong> seit März 2025, für mehrsprachige Schweizer Shops mit ERP-Anbindung. Für neue Projekte bin ich <strong>in Vollzeit verfügbar</strong>.",
       "<strong>Eigene Projekte</strong> über REMTA Digital seit Dezember 2025.",
       "<strong>Zuletzt gebaut:</strong> <a href=\"/projects/curaprox/\" hreflang=\"en\">Curaprox</a> (Projektseite auf Englisch), zwei Shops für die Schweiz und die Vereinigten Arabischen Emirate auf einem Horizon-Theme."
     ],
@@ -115,7 +115,7 @@
       "button": "Kapazität besprechen",
       "more": "Mehr für Agenturen (auf Englisch)",
       "enquiry": "Ich schreibe von einer Agentur und möchte über zusätzliche Entwicklungskapazität sprechen.",
-      "text": "Ich habe drei Jahre als Entwickler in Agentur-Teams gearbeitet, zuerst bei WebGurus und jetzt bei aiconomy AG. Git-Workflow, Code-Reviews und Projektleitung sind mir also vertraut. Ich unterstütze Ihr Team mit 30–40 Stunden pro Woche zu 35–50 € pro Stunde und arbeite auf Wunsch unter Ihrem Namen: Ihr Kunde bleibt Ihr Kunde."
+      "text": "Ich habe drei Jahre als Entwickler in Agentur-Teams gearbeitet, zuerst bei WebGurus und jetzt bei aiconomy AG. Git-Workflow, Code-Reviews und Projektleitung sind mir also vertraut. Ich unterstütze Ihr Team in Vollzeit zu 35–50 € pro Stunde und arbeite auf Wunsch unter Ihrem Namen: Ihr Kunde bleibt Ihr Kunde."
     }
   },
   "industries": {
@@ -179,7 +179,7 @@
   "form": {
     "lead": "Schreiben Sie mir kurz, worum es geht und was Sie bauen möchten. Ich antworte per E-Mail, mit Rückfragen oder einer ersten Schätzung.",
     "facts": [
-      "<strong>Ab sofort verfügbar</strong>, 30–40 Stunden pro Woche",
+      "<strong>Ab sofort verfügbar</strong>, in Vollzeit",
       "<strong>35–50 € pro Stunde</strong>, je nach Komplexität",
       "<strong>Eine schriftliche Schätzung</strong> vor Beginn der Arbeit"
     ],
