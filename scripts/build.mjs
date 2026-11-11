@@ -449,11 +449,9 @@ ${footerHtml}
 projects.forEach((p, i) => write(`public/projects/${p.slug}/index.html`, page(p, i)));
 
 // ---- articles
-// Google AdSense runs on article pages (auto ads) and the game page (one manual unit); the portfolio and CV stay ad-free.
-const ADSENSE = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2728164635897891" crossorigin="anonymous"></script>';
 // alternates: { en: url, de: url } for pages that exist in both languages (hreflang, x-default is English).
 const hreflang = alt => alt ? Object.entries(alt).map(([l, u]) => `\n<link rel="alternate" hreflang="${l}" href="${u}">`).join('') + `\n<link rel="alternate" hreflang="x-default" href="${alt.en}">` : '';
-const pageHead = ({ title, description, url, image, type, jsonLd, ads, lang = 'en', alternates, preload = '' }) => `${lang === 'en' ? head : head.replace('<html lang="en">', `<html lang="${lang}">`)}<title>${title}</title>
+const pageHead = ({ title, description, url, image, type, jsonLd, lang = 'en', alternates, preload = '' }) => `${lang === 'en' ? head : head.replace('<html lang="en">', `<html lang="${lang}">`)}<title>${title}</title>
 <meta name="description" content="${description}">
 <meta name="theme-color" content="#1d5e6b">
 <meta property="og:title" content="${title}">
@@ -472,8 +470,7 @@ ${preload}` : ''}
 <link rel="preload" href="/assets/fonts/source-sans-3-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/source-serif-4-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="alternate" type="application/rss+xml" title="Articles by Emanuel Rusu" href="/articles/feed.xml">
-<link rel="stylesheet" href="/assets/style.css">${ads ? `
-${ADSENSE}` : ''}${jsonLd ? `
+<link rel="stylesheet" href="/assets/style.css">${jsonLd ? `
 <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>` : ''}
 </head>`;
 const pageEnd = `
@@ -519,7 +516,7 @@ function articlePage(a) {
   const others = [...articles.filter(x => x !== a && !parts.includes(x) && x.category === a.category), ...articles.filter(x => x !== a && !parts.includes(x) && x.category !== a.category)].slice(0, 3);
   const source = p ? `From my work on <a href="/projects/${p.slug}/">${p.title}</a>${p.company ? `, built as a developer at ${p.company}, which ran the project for its client` : ''}.` : '';
   return `${pageHead({
-    title: `${attr(a.title)} | Emanuel Rusu`, description: attr(a.summary), url, image, type: 'article', ads: true,
+    title: `${attr(a.title)} | Emanuel Rusu`, description: attr(a.summary), url, image, type: 'article',
     jsonLd: { '@context': 'https://schema.org', '@graph': [
       { '@type': 'BlogPosting', headline: strip(a.title), description: strip(a.summary), datePublished: a.date, dateModified: a.updated || a.date, articleSection: a.category,
         keywords: (a.tags || []).join(', '), image, mainEntityOfPage: url, inLanguage: 'en',
@@ -566,7 +563,7 @@ ${pageEnd}`;
 
 function articlesIndex() {
   const url = `${SITE}/articles/`;
-  return `${pageHead({ title: 'Shopify Guides and Project Notes | Emanuel Rusu, Shopify developer', description: 'A step-by-step guide to editing Shopify themes, and short notes from real Shopify projects: what the problem was, what I built and what changed.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', ads: true })}
+  return `${pageHead({ title: 'Shopify Guides and Project Notes | Emanuel Rusu, Shopify developer', description: 'A step-by-step guide to editing Shopify themes, and short notes from real Shopify projects: what the problem was, what I built and what changed.', url, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
 <body class="article-page" id="top" data-nav="articles">
 <a class="skip" href="#main">Skip to content</a>
 
@@ -590,8 +587,8 @@ ${contactSection('Let&rsquo;s talk about your store')}
 ${pageEnd}`;
 }
 
-// ---- privacy page (required by AdSense; keep it in line with what the site actually loads)
-write('public/privacy/index.html', `${pageHead({ title: 'Privacy | REMTA Digital', description: 'What remtadigital.com collects: cookieless visit statistics from Cloudflare, a cookie-free daily count of CV downloads, email clicks and contact form messages, the messages you send with the form, and Google AdSense ads on article pages and the game page only.', url: `${SITE}/privacy/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
+// ---- privacy page (keep it in line with what the site actually loads)
+write('public/privacy/index.html', `${pageHead({ title: 'Privacy | REMTA Digital', description: 'What remtadigital.com collects: cookieless visit statistics from Cloudflare, a cookie-free daily count of CV downloads, email clicks and contact form messages, and the messages you send with the form.', url: `${SITE}/privacy/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website' })}
 <body class="article-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
 
@@ -601,7 +598,7 @@ ${headerHtml}
   <article class="article wrap">
     <header class="article-head">
       <h1>Privacy</h1>
-      <p class="post-meta">Last updated 31 October 2026</p>
+      <p class="post-meta">Last updated 9 November 2026</p>
     </header>
     <div class="article-body">
       <p>This site belongs to REMTA S.R.L. (REMTA Digital), Cluj-Napoca, Romania. For any question about your data, write to <a href="mailto:emanuel@remtadigital.com">emanuel@remtadigital.com</a>.</p>
@@ -610,8 +607,6 @@ ${headerHtml}
       <h2>CV, email and form counter</h2>
       <p>When you download my CV or click one of my email links, your browser sends a short signal to this site that says only which of the two it was, and when a contact form message is sent, the server notes that too. My server adds one to a count for that day. That is all it keeps: the date, the event ("cv", "email" or "form") and the number. It stores no cookies, no IP address, no browser details and nothing that could tell one visitor from another, and it reads nothing from your device.</p>
       <p>Because nothing personal is stored and nothing is read from or saved on your device, this counter needs no consent banner. Like every request to this site, the signal passes through Cloudflare, which hosts the site.</p>
-      <h2>Ads on article pages and the game</h2>
-      <p>The article pages and the Storefront game page show ads from Google AdSense. Google and its partners may use cookies to show and measure ads, and in the EU and UK you are asked for your consent first. You can read <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">how Google uses information from sites that use its services</a> and change your ad settings at <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">My Ad Center</a>. The homepage, project pages and CV show no ads.</p>
       <h2>The Storefront game</h2>
       <p>The <a href="/play/">Storefront game</a> saves your store in your browser's local storage, so you can carry on where you stopped. The save stays on your device: it is never sent to me or anyone else, and clearing your browser data deletes it.</p>
       <h2>Email and the contact form</h2>
@@ -625,10 +620,7 @@ ${pageEnd}`);
 
 // ---- Storefront, the store simulator game. The game itself is hand-written in public/play/
 // (engine.js, game.js, game.css); this only builds the page around it.
-// Ads: /play/ is excluded from auto ads in AdSense (no anchor or side rails over the game); one
-// manual unit sits below the game's notes, at least 150 px from its controls as AdSense asks for
-// game pages. game.js also draws the game inside a shadow root, so no ad can ever end up inside it.
-write('public/play/index.html', `${pageHead({ title: 'Storefront: a Shopify store simulator game | Emanuel Rusu', description: 'Run a Shopify store for a year: pick products from a supplier hub of 40, set prices, keep stock, buy ads and hire a developer to make the store faster and better at selling. Free, in your browser.', url: `${SITE}/play/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', ads: true, preload: '<link rel="preload" href="/play/game.css" as="style">' })}
+write('public/play/index.html', `${pageHead({ title: 'Storefront: a Shopify store simulator game | Emanuel Rusu', description: 'Run a Shopify store for a year: pick products from a supplier hub of 40, set prices, keep stock, buy ads and hire a developer to make the store faster and better at selling. Free, in your browser.', url: `${SITE}/play/`, image: `${SITE}/assets/img/og-home.jpg`, type: 'website', preload: '<link rel="preload" href="/play/game.css" as="style">' })}
 <body class="play-page" id="top" data-nav="play">
 <a class="skip" href="#main">Skip to content</a>
 
@@ -655,12 +647,6 @@ ${currentNav(headerHtml, '/play/')}
         </section>
       </template>
     </div>
-  </div>
-  <div class="wrap play-ad">
-    <p class="play-ad-label">Advertisement</p>
-    <!-- AdSense unit "Storefront game - below the game"; auto ads are excluded on /play/ in AdSense -->
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2728164635897891" data-ad-slot="9979168961" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 ${contactSection('Want this for a real store?')}
   <script type="module" src="/play/game.js"></script>

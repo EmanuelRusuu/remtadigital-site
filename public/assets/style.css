@@ -484,10 +484,6 @@ h1 .headline{display:block;font-family:var(--sans);font-size:1.2rem;font-weight:
 .play-game{min-height:600px;margin-bottom:24px}
 /* On phones the game's admin runs edge to edge, like an app; its how-to and notes keep the margins */
 @media (max-width:640px){.play-game{margin-inline:-20px}}
-.play-ad{margin-bottom:24px}
-.play-ad-label{margin:0 0 4px;font-size:.8rem;color:var(--muted);text-align:center}
-/* AdSense marks an ad it could not fill; hide the empty block and its label */
-.play-ad:has(ins[data-ad-status="unfilled"]){display:none}
 #nav .nav-play{display:inline-flex;align-items:center;gap:6px;color:var(--accent)}
 #nav .nav-play::before{content:"";width:1.25em;height:1.25em;background:currentColor;-webkit-mask:var(--pad) center/contain no-repeat;mask:var(--pad) center/contain no-repeat;transition:transform .2s}
 #nav .nav-play:hover::before{transform:rotate(-12deg) scale(1.1)}
